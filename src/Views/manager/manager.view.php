@@ -21,7 +21,7 @@
                 <a href="" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Revisions</a>
                 <!-- Dropdown -->
                 <div class="relative inline-block text-left">
-                    <button id="dropdown-toggle" type="button" class="font-inter p-[8px] w-[90%] mr-[65px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal">
+                    <button id="dropdown-toggle" type="button" class="font-inter p-[8px] w-[90%] mr-[65px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
                     Administrador
                     </button>
 
@@ -48,7 +48,7 @@
                     <p class="font-monserrat pt-[15px] pl-[10px] pb-[15px] text-[20px] font-bold text-black">Gestiona els productes</p>
                     <p class="font-inter pt-[10px] pl-[10px] pb-[15px] pr-[20px] text-[16px] font-normal text-black text-justify">Permet afegir, editar, eliminar i visualitzar productes de manera eficient. A més, inclou una funció de cerca per trobar ràpidament els productes desitjats, facilitant així la seva gestió i organització.</p>
                     <div class="flex justify-center">
-                        <a class="font-inter p-[8px] w-[90%] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-light text-center" href="/productmanager">Gestiona'ls</a>
+                        <a class="font-inter p-[8px] w-[90%] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-light text-center hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200" href="/productmanager">Gestiona'ls</a>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                     <p class="font-monserrat pt-[15px] pl-[10px] pb-[15px] text-[20px] font-bold text-black">Gestiona les receptes</p>
                     <p class="font-inter pt-[10px] pl-[10px] pb-[15px] pr-[20px] text-[16px] font-normal text-black text-justify">Permet afegir, editar, eliminar i visualitzar receptes de manera fàcil i eficient. A més, inclou una funció de cerca per trobar ràpidament les receptes desitjades, facilitant així la seva organització i accés.</p>
                     <div class="flex justify-center">
-                        <button class="font-inter p-[8px] w-[90%] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-light text-center">
+                        <button class="font-inter p-[8px] w-[90%] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-light text-center hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
                             Gestiona'ls
                         </button>
                     </div>
@@ -74,7 +74,7 @@
                     <p class="font-monserrat pt-[15px] pl-[10px] pb-[15px] text-[20px] font-bold text-black">Gestiona els establiments</p>
                     <p class="font-inter pt-[10px] pl-[10px] pb-[15px] pr-[20px] text-[16px] font-normal text-black text-justify">Permet afegir, editar, eliminar i visualitzar productes de manera fàcil i eficient. A més, inclou una funció de cerca per trobar ràpidament els productes desitjats, facilitant així la seva organització i gestió.</p>
                     <div class="flex justify-center">
-                        <button class="font-inter p-[8px] w-[90%] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-light text-center">
+                        <button class="font-inter p-[8px] w-[90%] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-light text-center hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
                             Gestiona'ls
                         </button>
                     </div>

@@ -48,8 +48,8 @@ class ProductRepository{
 
     function showlimit(){
         $allproducts = [];
-        $sql = $this->db->prepare("SELECT id, name, SUBSTRING(description, 1, 20) AS description_short, SUBSTRING(ingredients, 1, 20) AS ingredients_short, 
-                                    SUBSTRING(nutritionalinformation, 1, 20) AS nutritionalinformation_short, price, brand, weight, state, idsubcategory FROM products");
+        $sql = $this->db->prepare("SELECT id, name, SUBSTRING(description, 1, 19) AS description_short, SUBSTRING(ingredients, 1, 19) AS ingredients_short, 
+                                    SUBSTRING(nutritionalinformation, 1, 19) AS nutritionalinformation_short, price, brand, weight, state, idsubcategory FROM products");
         $sql->execute();
         $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
         foreach($result as $fila){
