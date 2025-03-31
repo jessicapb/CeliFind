@@ -1,0 +1,14 @@
+/node_modules
+/vendor
+.env
+*.sql
+composer.json
+composer.lock
+package-lock.json
+package.json
+tailwind.config.js
+activartailwind.txt
+activartailwind.text
+guardarproductes.txt
+/src/input.css
+/src/output.css
