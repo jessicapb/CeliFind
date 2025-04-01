@@ -69,46 +69,57 @@
                         <td class="border border-[#FCB666] p-[9px]">
                             <?php echo $product->getId();?>
                         </td>
+                        <!-- Name -->
                         <td class="border border-[#FCB666] p-[9px]">
                             <?php echo $product->getName();?>
                         </td>
+                        <!-- Description -->
                         <td class="border border-[#FCB666] p-[9px]">
-                            <?php echo $product->getDescription();?> ...
+                            <?php echo $product->getDescription();?> 
                         </td>
+                        <!-- Ingredients -->
                         <td class="border border-[#FCB666] p-[9px]">
-                            <?php echo $product->getIngredients(); ?> ...
+                            <?php echo $product->getIngredients(); ?> 
                         </td>
+                        <!-- Nutritional Information -->
                         <td class="border border-[#FCB666] p-[9px]">
-                            <?php echo $product->getNutritionalInformation();?> ...
+                            <?php echo $product->getNutritionalInformation();?>
                         </td>
+                        <!-- Price -->
                         <td class="border border-[#FCB666] p-[9px]">
                             <?php echo $product->getPrice();?>
                         </td>
+                        <!-- Brand -->
                         <td class="border border-[#FCB666] p-[9px]">
                             <?php echo $product->getBrand();?>
                         </td>
+                        <!-- State -->
                         <td class="border border-[#FCB666] p-[9px]">
                             <?php echo $product->getState();?>
                         </td>
+                        <!-- SubcategoryId -->
                         <td class="border border-[#FCB666] p-[9px]">
                             <?php echo $product->getSubCategoryId();?>
                         </td>
+                        <!-- Edit button -->
                         <td class=" font-inter bg-[#FCB666] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
                             <a href="" class="flex items-center">
                                 <p class="mr-[5px] ml-[5px]">Editar</p>
                                 <img class="mr-[10px] w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
                             </a>
                         </td>
+                        <!-- Delete button -->
                         <td class="font-inter bg-[#FCB666] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
                             <a href="" class="flex items-center">
                                 <p class="mr-[5px] ml-[5px]">Eliminar</p>
-                                <img class="mr-[10px] w-[20px] h-[20px]" src="../../img/delete/eliminar.png" alt="delete">
+                                <img class="mr-[10px] w-[20px] h-[20px]" src="../../img/delete/delete.png" alt="delete">
                             </a>
                         </td>
+                        <!-- Show button -->
                         <td class="font-inter bg-[#FCB666] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
                             <a href="" class="flex items-center">
                                 <p class="mr-[5px] ml-[5px]">Veure</p>
-                                <img class="mr-[10px] w-[20px] h-[20px]" src="../../img/delete/eliminar.png" alt="delete">
+                                <img class="mr-[10px] w-[20px] h-[20px]" src="../../img/show/show.png" alt="delete">
                             </a>
                         </td>
                     </tr>

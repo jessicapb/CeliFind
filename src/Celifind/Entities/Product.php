@@ -55,8 +55,9 @@ class Product{
         }
         $this->subcategory_id = $subcategory_id;
         if (!empty($_SESSION['errors'])) {
-            throw new BuildExceptions("It is not possible to create the product. Check errors.");
+            throw new BuildExceptions($errorMessage);
         }
+        
     }
     
     // Name
@@ -105,6 +106,11 @@ class Product{
             return $errorWord;
         }
         
+        $errorNotNumber = ChecksProduct::validateProductNotNumber($description);
+        if($errorNotNumber !=0){
+            return $errorNotNumber;
+        }
+        
         /*$errorRandom = ChecksProduct::RepeatedWord($description);
         if($errorRandom !=0){
             return $errorRandom;
@@ -144,7 +150,7 @@ class Product{
     }
     
     public function setNutritionalInformation(string $nutritionalinformation):int {
-        $errorNull = Checks::minMax($nutritionalinformation, 4, 1060);
+        $errorNull = ChecksProduct::minMaxNull($nutritionalinformation, 4, 1060);
         if($errorNull != 0){
             return $errorNull; 
         }
@@ -159,6 +165,12 @@ class Product{
             return $errorRandom;
         }*/
         
+        $errorNotNumber = ChecksProduct::validateProductNotNumber($nutritionalinformation);
+        if($errorNotNumber !=0){
+            return $errorNotNumber;
+        }
+        
+
         $this->nutritionalinformation = $nutritionalinformation;
         return 0;
     }
@@ -207,11 +219,6 @@ class Product{
         $errorNotNumber = ChecksProduct::validateProductNotNumber($brand);
         if($errorNotNumber !=0){
             return $errorNotNumber;
-        }
-        
-        $errorPhrase = ChecksProduct::validatStructure($brand);
-        if($errorPhrase !=0){
-            return $errorPhrase;
         }
         
         $this->brand = $brand;
