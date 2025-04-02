@@ -4,7 +4,6 @@ namespace App\Controller\Product;
 use App\Infrastructure\Persistence\ProductRepository;
 use App\Celifind\Entities\Product;
 use App\Celifind\Exceptions\BuildExceptions;
-use App\Celifind\Checks\Product\ValidationForm;
 
 class ProductSaveBDController{
     private \PDO $db;
@@ -30,22 +29,19 @@ class ProductSaveBDController{
             $brand = filter_input(INPUT_POST, 'brand');
             $weight = filter_input(INPUT_POST, 'weight');
             $state = filter_input(INPUT_POST, 'state');
+            
             // Upload image
-            /*$folder = '/home/linux/CeliFind/img/upload/product';
-
-            $imageName = $_FILES['imagen']['name'];
-            $imageRoute = $folder . $imageName;
-
-            if (move_uploaded_file($_FILES['image']['tmp_name'], $imageRoute)) {
-                $imageRoute = '/img/upload/product/' . $imageName; 
+            // Comprobamos si hay un campo image y si se ha subido correctamente la imagen
+            // Si funciona correctamente guarda la imagen dentro de $imagenData
+            // Se pone tmp_name porque cuando subimos la imagen temporalmente se guarda en la carpeta tmp
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                $imageData = file_get_contents($_FILES['image']['tmp_name']);
             } else {
-                $_SESSION['errors']['image'] = "Ha fallat la pujada de la imatge.";
-                header('Location: /productadd');
-                exit;
-            }*/
+                $imageData = '';
+            }
             try{
                 // Create the product
-                $product = new Product(null,$name, $description, $ingredients,$nutritionalinformation,$price, $brand, $weight, $state);
+                $product = new Product(null,$name, $description, $ingredients,$nutritionalinformation,$price, $brand, $imageData, $weight, $state);
                 
                 // Validate if the name exists
                 if ($this->ProductRepository->exists($name)) {

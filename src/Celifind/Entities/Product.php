@@ -13,12 +13,12 @@ class Product{
     protected string $nutritionalinformation;
     protected string $price;
     protected string $brand;
+    protected string $image;
     protected string $weight;
     protected int $state;
     protected ?int $subcategory_id = null;
 
-    public function __construct(?int $id = null, string $name, string $description, string $ingredients, string $nutritionalinformation, string $price, string $brand, string $weight, int $state, ?int $subcategory_id = null){
-        $message = "";
+    public function __construct(?int $id = null, string $name, string $description, string $ingredients, string $nutritionalinformation, string $price, string $brand, string $image, string $weight, int $state, ?int $subcategory_id = null){
         $error = 0;
 
         $this->id = $id;
@@ -46,6 +46,10 @@ class Product{
             $_SESSION['errors']['brand'] = ChecksProduct::getErrorMessage($error);
         }
         
+        if(($error = $this->setImage($image)) !=0){
+            $_SESSION['errors']['image'] = ChecksProduct::getErrorMessage($error);
+        }
+        
         if(($error = $this->setWeight($weight)) !=0){
             $_SESSION['errors']['weight'] = ChecksProduct::getErrorMessage($error);
         }
@@ -54,10 +58,11 @@ class Product{
             $_SESSION['errors']['state'] = ChecksProduct::getErrorMessage($error);
         }
         $this->subcategory_id = $subcategory_id;
+
         if (!empty($_SESSION['errors'])) {
+            $errorMessage = json_encode($_SESSION['errors']);
             throw new BuildExceptions($errorMessage);
         }
-        
     }
     
     // Name
@@ -75,11 +80,6 @@ class Product{
         if($errorWord !=0){
             return $errorWord;
         }
-        
-        /*$errorRandom = ChecksProduct::RepeatedWord($name);
-        if($errorRandom !=0){
-            return $errorRandom;
-        }*/
         
         $errorNotNumber = ChecksProduct::validateProductNotNumber($name);
         if($errorNotNumber !=0){
@@ -111,10 +111,6 @@ class Product{
             return $errorNotNumber;
         }
         
-        /*$errorRandom = ChecksProduct::RepeatedWord($description);
-        if($errorRandom !=0){
-            return $errorRandom;
-        }*/
         $this->description = $description;
         return 0; 
     }
@@ -134,11 +130,6 @@ class Product{
         if($errorWord !=0){
             return $errorWord;
         }
-        
-        /*$errorRandom = ChecksProduct::RepeatedWord($ingredients);
-        if($errorRandom !=0){
-            return $errorRandom;
-        }*/
         
         $this->ingredients = $ingredients;
         return 0;
@@ -160,21 +151,15 @@ class Product{
             return $errorWord;
         }
         
-        /*$errorRandom = ChecksProduct::RepeatedWord($nutritionalinformation);
-        if($errorRandom !=0){
-            return $errorRandom;
-        }*/
-        
         $errorNotNumber = ChecksProduct::validateProductNotNumber($nutritionalinformation);
         if($errorNotNumber !=0){
             return $errorNotNumber;
         }
         
-
         $this->nutritionalinformation = $nutritionalinformation;
         return 0;
     }
-
+    
     // Price
     public function getPrice(): string{
         return $this->price;
@@ -211,17 +196,26 @@ class Product{
             return $errorWord;
         }
         
-        /*$errorRandom = ChecksProduct::RepeatedWord($brand);
-        if($errorRandom !=0){
-            return $errorRandom;
-        }*/
-        
         $errorNotNumber = ChecksProduct::validateProductNotNumber($brand);
         if($errorNotNumber !=0){
             return $errorNotNumber;
         }
         
         $this->brand = $brand;
+        return 0;
+    }
+    
+    // Image
+    public function getImage(){
+        return $this->image;
+    }
+    
+    public function setImage($image){
+        $errorNull = ChecksProduct::notNullNotEmptyTrimmed($image);
+        if ($errorNull != 0) {
+            return $errorNull;
+        }
+        $this->image = $image;
         return 0;
     }
     
@@ -250,6 +244,10 @@ class Product{
     }
     
     public function setState(int $state):int {
+        $errorNull = ChecksProduct::notNullNotEmptyTrimmed($state);
+        if ($errorNull != 0) {
+            return $errorNull;
+        }
         $this->state = $state;
         return 0;
     }
@@ -272,5 +270,18 @@ class Product{
     public function setSubategoryId(?int $subcategory_id): int {
         $this->subcategory_id = $subcategory_id;
         return 0;
+    }
+    
+    // Con esta función convierto la imagen a base64
+    // Después la convertimos en una ruta
+    // Si NO hay imagen, mensaje de error
+    public function getBase64() {        
+        if ($this->image) {
+            $base64Image = base64_encode($this->image);
+            $imageType = 'image/*'; 
+            echo '<img src="data:' . $imageType . ';base64,' . $base64Image . '" />';
+        } else {
+            echo "Imatge no trobada";
+        }
     }
 }

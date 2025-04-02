@@ -72,25 +72,25 @@
             </div>
 
             <!-- Image-->
-            <!-- <div class="flex flex-col mb-[15px]">
-                <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Imatge</label> -->
-
+            <div class="flex flex-col mb-[15px]">
+                <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Imatge</label>
                 <!-- No mostrar l'input -->
-                <!--- <input id="image" type="file" accept=".jpg, .jpeg, .png" name="image" class="hidden" onchange="previewImage()">
-                <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]"  id="error-image"></p> -->
+                <input id="image" type="file" accept=".jpg, .jpeg, .png" name="image" class="hidden" onchange="previewImage()">
                 
                 <!-- Serveix per seleccionar la imatge-->
-                <!-- <div id="image-trigger" class="relative p-[8px] border border-[#fcb666] rounded-[9px] flex items-center justify-center cursor-pointer">
+                <div id="image-trigger" class="relative p-[8px] border border-[#fcb666] rounded-[9px] flex items-center justify-center cursor-pointer">
                     <img src="../../img/uploadimage/imageupload.png" alt="upload" class="w-[12%] h-[12%]">    
                     <span class="pl-[5px] text-black text-[16px] font-inter font-normal">Clica per seleccionar una imatge</span>
-                </div> -->
+                </div>
                 
                 <!-- Mostrarà la imatge amb el seu nom -->
-                <!-- <div id="image-preview" class="mt-[10px] flex items-center hidden">
+                <div id="image-preview" class="mt-[10px] flex items-center hidden">
                     <img id="preview-img" src="../../img/uploadimage/imageupload.png" alt="imatge" class="w-[50px] h-[50px] object-cover rounded-[5px] mr-[10px]">
                     <span id="image-name" class="text-black text-[16px] font-normal"></span>
                 </div>
-            </div> -->
+                <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]" id="error-image"></p> 
+            </div>
+
             <!-- Weight -->
             <div class="flex flex-col  mb-[15px]">
                 <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Pes</label>
@@ -107,7 +107,7 @@
                 </select>
                 <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]"  id="error-state"></p>
             </div> 
-
+            
             <!-- Button -->
             <div class="flex flex-col mb-[15px]">
                 <button class="font-inter bg-[#FCB666] text-[#f5f5f5] text-[16px] font-medium p-[8px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
@@ -116,10 +116,10 @@
             </div>
         </div>
     </form>
-
+    
     <!-- Show images -->
     <script src="../../js/showimage/showimage.js"></script>
-
+    
     <!-- Start the session to catch the errors -->
     <?php
         session_start();
@@ -130,11 +130,14 @@
             $serverErrors = [];
         }
     ?>
-
+    
     <script>
         var serverErrors = <?php echo json_encode($serverErrors); ?>;
     </script>
-
+    
+    <!-- Show images -->
+    <script src="../../js/showimage/showimage.js"></script>
+    
     <!-- File errors -->
     <script src="../../js/product/error-product.js"></script>
 </body>

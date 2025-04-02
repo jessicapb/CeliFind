@@ -27,7 +27,7 @@ class ProductRepository{
 
     function save(Product $product){
         try {
-            $sql = $this->db->prepare("INSERT INTO products(id, name, description, ingredients, nutritionalinformation, price, brand, weight, state, idsubcategory) VALUES(:id,:name, :description, :ingredients, :nutritionalinformation, :price, :brand, :weight, :state, :idsubcategory)");
+            $sql = $this->db->prepare("INSERT INTO products(id, name, description, ingredients, nutritionalinformation, price, brand, image, weight, state, idsubcategory) VALUES(:id,:name, :description, :ingredients, :nutritionalinformation, :price, :brand, :image, :weight, :state, :idsubcategory)");
             $sql->execute([
                 'id' => $product->getId(),
                 'name' => $product->getName(),
@@ -36,6 +36,7 @@ class ProductRepository{
                 'nutritionalinformation' => $product->getNutritionalInformation(),
                 'price' => $product->getPrice(),
                 'brand' => $product->getBrand(),
+                'image' => $product->getImage(),
                 'weight' => $product->getWeight(),
                 'state' => $product->getState(),
                 'idsubcategory' => $product->getSubCategoryId(),
@@ -52,12 +53,11 @@ class ProductRepository{
                                     SUBSTRING(nutritionalinformation, 1, 30) AS nutritionalinformation_short, price, brand, weight, state, idsubcategory FROM products");
         $sql->execute();
         $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
-        //dd($result);
-        foreach($result as $fila){
-            $products = new Product($fila['id'], $fila['name_short'], $fila['description_short'], $fila['ingredients_short'], $fila['nutritionalinformation_short'], $fila['price'], $fila['brand'], $fila['weight'], $fila['state'], $fila['idsubcategory']);
-            $allproducts [] = $products;
+        if (count($result) != 0) {
+            return $result;
+        } else {
+            return [];
         }
-        return $allproducts;
     }
 
     function findById(int $id): ?object{
@@ -72,4 +72,29 @@ class ProductRepository{
             return null;
         }
     }
+
+    function updateProduct(Product $product){
+        try {
+            $sql = $this->db->prepare("UPDATE ");
+        } catch (\PDOException $e) {
+            throw new BuildExceptions("Error saving product:" . $e->getMessage());
+        }
+    }
+
+    function deleteProduct(int $id): bool {
+        $sql = $this->db->prepare("DELETE FROM products WHERE id = :id");
+        return $sql->execute([
+            ':id' => $id
+        ]);
+    }
+
+    function searchproduct(string $name) {
+        try {
+            $sql = $this->db->prepare("SELECT * FROM products WHERE name LIKE '% . $name .%' ORDER BY name");
+            $sql->execute();
+            dd($sql);
+        } catch (\PDOException $e) {
+            throw new BuildExceptions("Error searching product:" . $e->getMessage());
+        }
+    }    
 }

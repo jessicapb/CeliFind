@@ -10,9 +10,11 @@ use App\Controller\Manager\ManagerController;
 use App\Controller\Product\ProductManagerController;
 use App\Controller\Product\ProductAddController;
 use App\Controller\Product\ProductToSubcategoryController;
+use App\Controller\Product\ProductSearchController;
 
 //Controller
 use App\Controller\Product\ProductSaveBDController;
+use App\Controller\Product\ProductSearchBDController;
 
 //Database
 use App\Infrastructure\Database\DatabaseConnection;
@@ -45,6 +47,9 @@ $showlimitproduct = new ProductManagerController($productRepository);
 // Show the product id and name
 $showidandnameproduct = new ProductToSubcategoryController($productRepository);
 
+// Search the product
+$controllersearchproduct = new ProductSearchBDController($db);
+
 // Routes the show the views
 $router = new Router();
 $router 
@@ -64,4 +69,10 @@ $router
     ->addRoute('POST', '/saveproduct', [$controllerproduct, 'saveproduct'])
     
     // Go to the assign product to category
-    ->addRoute('GET','/producttocategory', [$showidandnameproduct, 'producttocategory']);
+    ->addRoute('GET','/producttocategory', [$showidandnameproduct, 'producttocategory'])
+    
+    // Go to the search product
+    ->addRoute('GET','/productsearch',[new ProductSearchController(),'productsearch'])
+    
+    // Search the product
+    ->addRoute('POST','/searchproduct',[$controllersearchproduct,'searchproduct']);
