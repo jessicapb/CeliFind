@@ -40,9 +40,9 @@
 
     <section>
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center pt-[26px] font-bold">Benvingut <span class="text-[#96c368] opacity-[100%]">administrador</span></h1>
-        <div class="flex justify-center mt-[26px]">
+        <div class="flex justify-center mt-[26px] mb-[20px]">
             <!-- Products -->
-            <div class="mr-[26px] shadow-lg w-[368px] h-[527px] rounded-[21px]">
+            <div class="mr-[26px] shadow-lg w-[368px] h-[527px] rounded-[21px] bg-white">
                 <img  src="../../img/producte/productes.png" alt="">
                 <div class="flex flex-col justify-between ">
                     <p class="font-monserrat pt-[15px] pl-[10px] pb-[15px] text-[20px] font-bold text-black">Gestiona els productes</p>
@@ -54,7 +54,7 @@
             </div>
 
             <!-- Recipes -->
-            <div class="mr-[26px] shadow-lg w-[368px] h-[527px] rounded-[21px]">
+            <div class="mr-[26px] shadow-lg w-[368px] h-[527px] rounded-[21px] bg-white">
                 <img src="../../img/recepte/receptes.png" alt="">
                 <div class="flex flex-col justify-between ">
                     <p class="font-monserrat pt-[15px] pl-[10px] pb-[15px] text-[20px] font-bold text-black">Gestiona les receptes</p>
@@ -68,7 +68,7 @@
             </div>
 
             <!-- Establishments -->
-            <div class="mr-[26px] shadow-lg w-[368px] h-[527px] rounded-[21px]">
+            <div class="mr-[26px] shadow-lg w-[368px] h-[527px] rounded-[21px] bg-white">
                 <img  src="../../img/lloc/llocs.png" alt="">
                 <div class="flex flex-col justify-between ">
                     <p class="font-monserrat pt-[15px] pl-[10px] pb-[15px] text-[20px] font-bold text-black">Gestiona els establiments</p>

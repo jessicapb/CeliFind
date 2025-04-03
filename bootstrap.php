@@ -15,6 +15,8 @@ use App\Controller\Product\ProductSearchController;
 //Controller
 use App\Controller\Product\ProductSaveBDController;
 use App\Controller\Product\ProductSearchBDController;
+use App\Controller\Product\ProductShowImageController;
+use App\Controller\Product\ProductDeleteBDController;
 
 //Database
 use App\Infrastructure\Database\DatabaseConnection;
@@ -44,11 +46,17 @@ $controllerproduct = new ProductSaveBDController($db);
 // Show the product
 $showlimitproduct = new ProductManagerController($productRepository);
 
+// Show the image of the product
+$showimageproduct = new ProductShowImageController($productRepository);
+
 // Show the product id and name
 $showidandnameproduct = new ProductToSubcategoryController($productRepository);
 
 // Search the product
 $controllersearchproduct = new ProductSearchBDController($db);
+
+// Delete the product
+$controllerdeleteproduct = new ProductDeleteBDController($db);
 
 // Routes the show the views
 $router = new Router();
@@ -62,6 +70,9 @@ $router
     //Go to the manager product
     ->addRoute('GET','/productmanager',[$showlimitproduct,'productmanager'])
     
+    //Go to the image view
+    ->addRoute('GET','/productshowimage',[$showimageproduct,'productshowimage'])
+
     // Go to the add product
     ->addRoute('GET','/productadd',[new ProductAddController(),'productadd'])
 
@@ -75,4 +86,7 @@ $router
     ->addRoute('GET','/productsearch',[new ProductSearchController(),'productsearch'])
     
     // Search the product
-    ->addRoute('POST','/searchproduct',[$controllersearchproduct,'searchproduct']);
+    ->addRoute('POST','/searchproduct',[$controllersearchproduct,'searchproduct'])
+    
+    // Delete the product
+    ->addRoute('POST','/deleteproduct',[$controllerdeleteproduct,'deleteproduct']);

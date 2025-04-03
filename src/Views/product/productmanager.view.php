@@ -17,7 +17,7 @@
             </a>
             <div class="p-1 space-y-0.5">
                 <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/manager">
-                    <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="">
+                    <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="home">
                     Tornar al gestor
                 </a>
             </div>
@@ -31,7 +31,7 @@
             <div class="w-[50%]">
                 <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/productadd">Afegir productes</a>
                 <a class="font-inter bg-[#96c368] text-[#f5f5f5] text-[16px] font-medium p-[9px]  rounded-[9px] text-center transition-all focus:shadow-none active:bg-[#88c24d] hover:focus:bg-[#88c24d]  hover:bg-[#88c24d] disabled:pointer-events-none disabled:opacity-50" href="/producttocategory">Assignar producte a subcategoria</a>
-                <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/productadd">Veure imatges</a>
+                <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/productshowimage">Veure imatges</a>
             </div>
             
             <!-- Search part -->
@@ -109,35 +109,53 @@
                             <?php echo $product->getSubCategoryId();?>
                         </td>
                         <!-- Edit button -->
-                        <td class="font-inter bg-[#FCB666] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
-                            <a href="" class="flex items-center">
-                                <p class="mr-[5px] ml-[5px]">Editar</p>
-                                <img class="mr-[10px] w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
-                            </a>
+                        <td class="font-inter bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
+                            <div class="flex justify-center">
+                                <a href="" class="flex items-center">
+                                    <p class="mr-[5px]">Editar</p>
+                                    <img class="w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
+                                </a>
+                            </div>
                         </td>
                         <!-- Delete button -->
-                        <td class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover:bg-[#ef9b3b]">
-                            <button class="openmodal flex items-center cursor-pointer">
-                                <p class="mr-[5px] ml-[5px]">Eliminar</p>
-                                <img class="mr-[10px] w-[20px] h-[20px]" src="../../img/delete/delete.png" alt="delete">
-                            </button>
+                        <td class="font-inter bg-[#FCB666] p-[9px] text-white text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover:bg-[#ef9b3b]">
+                            <div class="flex justify-center">
+                                <button class="openmodal flex items-center cursor-pointer">
+                                    <p class="mr-[5px]">Eliminar</p>
+                                    <img class="w-[20px] h-[20px]" src="../../img/delete/delete.png" alt="delete">
+                                </button>
+                            </div>
                         </td>
                         <!-- Modal delete -->
                         <div class="deletemodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50 hidden">
                             <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
-                                <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Vols eliminar el producte <?php echo $product->getName() ?>?</h2>
+                                <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Vols eliminar el producte <?php echo $product->getName() ?> ?</h2>
                                 <p class="font-inter text-black- font-medium text-[16px] text-center">Un cop sigui eliminat no es podrà desfer l'operació.</p>
                                 <div class="flex justify-center">
-                                    <a href="/deleteproduct.php?id=<?php echo $product->getId(); ?>" class="font-inter bg-[#FCB666] mt-[10px] mr-[15px] text-[white] text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">Eliminar</a>
+                                    <form action="/deleteproduct" method="POST">
+                                        <input type="hidden" name="id" value="<?php echo $product->getId(); ?>">
+                                        <button type="submit" class="font-inter bg-[#FCB666] mt-[10px] mr-[15px] text-[white] text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">Eliminar</button>
+                                    </form>
                                     <button class="closemodal font-inter bg-[#96c368] text-[#f5f5f5] text-[16px] font-medium p-[9px] mt-[10px] rounded-[9px] text-center transition-all focus:shadow-none active:bg-[#88c24d] hover:focus:bg-[#88c24d]  hover:bg-[#88c24d] disabled:pointer-events-none disabled:opacity-50">Cancelar</button>
                                 </div>
                             </div>
                         </div>
+                        <!-- Modal delete correct -->
+                        <?php if ($_GET['deleted'] == 'true'): ?>
+                            <div class="deletemodal fixed inset-0 flex justify-center items-center bg-[#FCB666] bg-opacity-50 z-50">
+                                <div class="bg-white p-6 rounded-lg shadow-md w-[25%]">
+                                    <h2 class="text-black font-inter text-[21px] font-light mb-[10px] text-center">Producte eliminat correctament</h2>
+                                    <div class="flex justify-center">
+                                        <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/productmanager">Tancar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                         <!-- Show button -->
-                        <td class="font-inter bg-[#FCB666] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
+                        <td class="font-inter flex justify-center bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
                             <a href="" class="flex items-center">
-                                <p class="mr-[5px] ml-[5px]">Veure</p>
-                                <img class="mr-[10px] w-[20px] h-[20px]" src="../../img/show/show.png" alt="delete">
+                                <p class="mr-[5px]">Veure</p>
+                                <img class="w-[20px] h-[20px]" src="../../img/show/show.png" alt="delete">
                             </a>
                         </td>
                     </tr>
@@ -150,4 +168,3 @@
     <script src="../../js/product/deletemodal.js"></script>
 </body>
 </html>
-

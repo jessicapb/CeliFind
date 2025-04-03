@@ -101,7 +101,7 @@
             <!-- State -->
             <div class="flex flex-col  mb-[15px]">
                 <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Estat</label>
-                <select class="bg-white border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="state" id="">
+                <select class="bg-white border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="state">
                     <option value="0">0</option>
                     <option value="1">1</option>
                 </select>

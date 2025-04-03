@@ -1,22 +1,52 @@
-<?php
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor dels productes</title>
+    <link href="./src/output.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/manager">
+                <img class="pl-[20px] pt-[20px] w-[9%] h-[9%]" src="../../img/logo/logo.png" alt="">
+            </a>
+            <div class="p-1 space-y-0.5">
+                <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/productmanager">
+                    <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="home">
+                    Tornar al panel de control
+                </a>
+            </div>
+        </nav>
+    </header>
 
-namespace App\Controller\Product;
-
-use App\Infrastructure\Persistence\ProductRepository;
-use App\Celifind\Entities\Product;
-
-class ProductManagerController {
-    private $productRepository;
-    
-    public function __construct(ProductRepository $productRepository) {
-        $this->productRepository = $productRepository;
-    }
-    function productmanager(){
-        $products = $this->productRepository->showlimit();
-        $allproduct = [];
-        foreach($products as $fila){
-            $allproducts [] = new Product($fila['id'], $fila['name_short'], $fila['description_short'], $fila['ingredients_short'], $fila['nutritionalinformation_short'], $fila['price'], $fila['brand'], $fila['image'], $fila['weight'], $fila['state'], $fila['idsubcategory']);
-        }
-        echo view('product/productmanager',['products'=>$allproducts]);
-    }
-}
+    <section>
+        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center pt-[26px] font-bold">Veure <span class="text-[#96c368] opacity-[100%]">imatges</span></h1>
+        <div class="grid grid-cols-5 gap-[14px] justify-center mt-[26px] mb-[20px]">
+            <?php foreach ($products as $product) { ?>
+                <div class="shadow-lg w-[300px] h-[310px] rounded-[21px] bg-white p-[10px] mx-auto flex flex-col items-center">
+                    <div class="w-full flex justify-center mb-3">
+                        <div class="w-[180px] h-[180px] flex items-center justify-center">
+                            <img src="<?php echo $product->getBase64(); ?>" alt="image_bd" class="object-contain w-full h-full">
+                        </div>
+                    </div>
+                    <div class="w-full text-left mt-[10px]">
+                        <div class="flex">
+                            <p class="font-inter pl-[10px] text-[19px] font-bold text-black">Id:</p>
+                            <p class="font-inter pl-[5px] text-[19px] font-medium text-black"><?php echo $product->getId(); ?></p>
+                        </div>
+                        <div class="flex">
+                            <p class="font-inter pl-[10px] text-[19px] font-bold text-black">Nom:</p>
+                            <p class="font-inter pl-[5px] text-[19px] font-medium text-black"><?php echo $product->getName(); ?></p>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </section>
+</body>
+</html>

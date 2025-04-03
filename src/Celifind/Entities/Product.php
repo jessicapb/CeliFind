@@ -71,7 +71,7 @@ class Product{
     }
     
     public function setName(string $name):int {
-        $errorNull = ChecksProduct::minMax($name, 3, 50);
+        $errorNull = ChecksProduct::minMax($name, 3, 150);
         if($errorNull !=0){
             return $errorNull;       
         }
@@ -244,10 +244,6 @@ class Product{
     }
     
     public function setState(int $state):int {
-        $errorNull = ChecksProduct::notNullNotEmptyTrimmed($state);
-        if ($errorNull != 0) {
-            return $errorNull;
-        }
         $this->state = $state;
         return 0;
     }
@@ -278,8 +274,8 @@ class Product{
     public function getBase64() {        
         if ($this->image) {
             $base64Image = base64_encode($this->image);
-            $imageType = 'image/*'; 
-            echo '<img src="data:' . $imageType . ';base64,' . $base64Image . '" />';
+            $imageType = 'image/png';
+            return "data:$imageType;base64,$base64Image";
         } else {
             echo "Imatge no trobada";
         }
