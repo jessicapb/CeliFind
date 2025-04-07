@@ -10,7 +10,7 @@ class ProductDeleteBDController{
     
     public function __construct(\PDO $db) {
         $this->db = $db;
-        $this->ProductRepository = new ProductRepository($db);
+        $this->productRepository = new ProductRepository($db);
     }
 
     function deleteproduct(){

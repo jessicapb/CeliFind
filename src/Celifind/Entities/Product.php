@@ -1,7 +1,6 @@
 <?php
 namespace App\Celifind\Entities;
 
-use App\Celifind\Checks\Checks;
 use App\Celifind\Checks\ChecksProduct;
 use App\Celifind\Exceptions\BuildExceptions;
 

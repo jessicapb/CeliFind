@@ -11,6 +11,7 @@ class ProductRepository{
         $this->db = $db;
     }
 
+    // Exists
     function exists(string $name): bool{
         try {
             $stmt = $this->db->prepare("SELECT * FROM products WHERE name = :name");
@@ -25,6 +26,7 @@ class ProductRepository{
         }
     }
 
+    // Insert 
     function save(Product $product){
         try {
             $sql = $this->db->prepare("INSERT INTO products(id, name, description, ingredients, nutritionalinformation, price, brand, image, weight, state, idsubcategory) VALUES(:id,:name, :description, :ingredients, :nutritionalinformation, :price, :brand, :image, :weight, :state, :idsubcategory)");
@@ -41,12 +43,12 @@ class ProductRepository{
                 'state' => $product->getState(),
                 'idsubcategory' => $product->getSubCategoryId(),
             ]);
-            
         } catch (\PDOException $e) {
             throw new BuildExceptions("Error saving product:" . $e->getMessage());
         }
     }
 
+    // Select limit
     function showlimit(){
         $allproducts = [];
         $sql = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
@@ -60,6 +62,7 @@ class ProductRepository{
         }
     }
 
+    // Select with id 
     function findById(int $id): ?object{
         $sql = $this->db->prepare("SELECT * FROM products WHERE id = :id");
         $sql->execute([
@@ -73,14 +76,28 @@ class ProductRepository{
         }
     }
 
+    // Update
     function updateProduct(Product $product){
         try {
-            $sql = $this->db->prepare("UPDATE ");
+            $sql = $this->db->prepare("UPDATE products SET name = :name, description = :description, price = :price, ingredients = :ingredients, nutritionalinformation = :nutritionalinformation, brand = :brand, image = :image, weight = :weight, state = :state WHERE id = :id");
+            $sql->execute([
+                'id' => $product->getId(),
+                'name' => $product->getName(),
+                'description' => $product->getDescription(),
+                'ingredients' => $product->getIngredients(),
+                'nutritionalinformation' => $product->getNutritionalInformation(),
+                'price' => $product->getPrice(),
+                'brand' => $product->getBrand(),
+                'image' => $product->getImage(),
+                'weight' => $product->getWeight(),
+                'state' => $product->getState(),
+            ]);
         } catch (\PDOException $e) {
             throw new BuildExceptions("Error saving product:" . $e->getMessage());
         }
     }
 
+    // Delete
     function deleteProduct(int $id): bool {
         $sql = $this->db->prepare("DELETE FROM products WHERE id = :id");
         return $sql->execute([
@@ -88,6 +105,7 @@ class ProductRepository{
         ]);
     }
 
+    // Search 
     function searchproduct(string $name) {
         try {
             $sql = $this->db->prepare("SELECT * FROM products WHERE name LIKE '% . $name .%' ORDER BY name");

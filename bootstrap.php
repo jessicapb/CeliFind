@@ -4,19 +4,23 @@ require __DIR__ . '/vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-//Views
-// Product
+//ViewsProduct
 use App\Controller\Manager\ManagerController;
 use App\Controller\Product\ProductManagerController;
 use App\Controller\Product\ProductAddController;
 use App\Controller\Product\ProductToSubcategoryController;
 use App\Controller\Product\ProductSearchController;
 
-//Controller
+//ControllerProduct
 use App\Controller\Product\ProductSaveBDController;
 use App\Controller\Product\ProductSearchBDController;
 use App\Controller\Product\ProductShowImageController;
 use App\Controller\Product\ProductDeleteBDController;
+use App\Controller\Product\ProductUpdateController;
+use App\Controller\Product\ProductUpdateBDController;
+
+//ViewsRecipes
+use App\Controller\Recipes\RecipesManagerController;
 
 //Database
 use App\Infrastructure\Database\DatabaseConnection;
@@ -55,8 +59,14 @@ $showidandnameproduct = new ProductToSubcategoryController($productRepository);
 // Search the product
 $controllersearchproduct = new ProductSearchBDController($db);
 
+// Update the product
+$controllerupdateproduct = new ProductUpdateBDController($db);
+
 // Delete the product
 $controllerdeleteproduct = new ProductDeleteBDController($db);
+
+// Show the form for update the product
+$showformupdate = new ProductUpdateController($db);
 
 // Routes the show the views
 $router = new Router();
@@ -89,4 +99,12 @@ $router
     ->addRoute('POST','/searchproduct',[$controllersearchproduct,'searchproduct'])
     
     // Delete the product
-    ->addRoute('POST','/deleteproduct',[$controllerdeleteproduct,'deleteproduct']);
+    ->addRoute('POST','/deleteproduct',[$controllerdeleteproduct,'deleteproduct'])
+    
+    // Form to update
+    ->addRoute('POST','/productupdate',[$showformupdate,'productupdate'])
+    
+    // Update the product
+    ->addRoute('POST','/updateproduct',[$controllerupdateproduct,'updateproduct'])
+    // Go to the manager recipes
+    ->addRoute('GET','/recipesmanager',[new RecipesManagerController(),'recipesmanager']);

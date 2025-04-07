@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestor dels productes</title>
+    <title>Veure imatges</title>
     <link href="./src/output.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
 
     <section>
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center pt-[26px] font-bold">Veure <span class="text-[#96c368] opacity-[100%]">imatges</span></h1>
-        <div class="grid grid-cols-5 gap-[14px] justify-center mt-[26px] mb-[20px]">
+        <div class="grid grid-cols-4 gap-[14px] justify-center mt-[26px] mb-[20px]">
             <?php foreach ($products as $product) { ?>
                 <div class="shadow-lg w-[300px] h-[310px] rounded-[21px] bg-white p-[10px] mx-auto flex flex-col items-center">
                     <div class="w-full flex justify-center mb-3">
