@@ -5,7 +5,7 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 //ControllerHome
-use App\Controller\HomeController;
+use App\Controller\Home\HomeController;
 
 // View Manager
 use App\Controller\Manager\ManagerController;
