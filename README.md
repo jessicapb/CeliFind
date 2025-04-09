@@ -6,7 +6,7 @@
 </div>
 
 <h2>📖 Description of the project</h2>
-<p>CeliFin is a page for celiacs where we highlight restaurants, products and recipes. It also has an information section and who we are.</p>
+<p>CeliFind is a page for celiacs where we highlight restaurants, products and recipes. It also has an information section and who we are.</p>
 
 <h2>📁 Project access</h2>
 <p></p>
