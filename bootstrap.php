@@ -4,6 +4,9 @@ require __DIR__ . '/vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
+//ControllerHome
+use App\Controller\HomeController;
+
 // View Manager
 use App\Controller\Manager\ManagerController;
 
@@ -88,8 +91,11 @@ $saverecipes = new RecipesSaveBDController($db);
 $router = new Router();
 $router 
     // Open the principal (index)
-    ->addRoute('GET','/',[new ManagerController(),'manager'])
-    
+    ->addRoute('GET','/',[new HomeController(),'home'])
+
+    // Go to the home page
+    ->addRoute('GET','/home',[new HomeController(),'home'])
+        
     // Go to the manager page
     ->addRoute('GET','/manager',[new ManagerController(),'manager'])
     
