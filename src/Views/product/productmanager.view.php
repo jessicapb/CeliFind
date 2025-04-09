@@ -145,11 +145,11 @@
                         </div>
                         <!-- Modal delete correct -->
                         <?php if ($_GET['deleted'] == 'true'): ?>
-                            <div class="deletemodal fixed inset-0 flex justify-center items-center bg-[#FCB666] bg-opacity-50 z-50">
-                                <div class="bg-white p-6 rounded-lg shadow-md w-[25%]">
-                                    <h2 class="text-black font-inter text-[21px] font-light mb-[10px] text-center">Producte eliminat correctament</h2>
+                            <div class="deletemodal fixed inset-0 flex justify-center items-center bg-opacity-50 z-50">
+                                <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
+                                    <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Eliminat el producte</h2>
                                     <div class="flex justify-center">
-                                        <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/productmanager">Tancar</a>
+                                        <a href="/productmanager" class="font-inter bg-[#FCB666] mt-[10px] mr-[15px] text-[white] text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">Tancar</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller\Product;
 
 use App\Infrastructure\Persistence\ProductRepository;
@@ -39,6 +40,7 @@ class ProductSaveBDController{
             } else {
                 $imageData = '';
             }
+            
             try{
                 // Create the product
                 $product = new Product(null,$name, $description, $ingredients,$nutritionalinformation,$price, $brand, $imageData, $weight, $state);
@@ -54,9 +56,9 @@ class ProductSaveBDController{
                 $this->ProductRepository->save($product);  
                 header('Location: /productmanager');
             }catch (BuildExceptions $e) {
-                    $_SESSION['error'] = $e->getMessage();
-                    header('Location: /productadd');
-                    exit;
+                $_SESSION['error'] = $e->getMessage();
+                header('Location: /productadd');
+                exit;
             }
         }
     }

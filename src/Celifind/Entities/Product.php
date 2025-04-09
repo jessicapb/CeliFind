@@ -70,7 +70,7 @@ class Product{
     }
     
     public function setName(string $name):int {
-        $errorNull = ChecksProduct::minMax($name, 3, 150);
+        $errorNull = ChecksProduct::minMaxLength($name, 3, 150);
         if($errorNull !=0){
             return $errorNull;       
         }
@@ -95,7 +95,7 @@ class Product{
     }
     
     public function setDescription(string $description):int {
-        $errorNull = ChecksProduct::minMax($description, 4, 1060);
+        $errorNull = ChecksProduct::minMaxLength($description, 4, 1060);
         if($errorNull !=0){
             return $errorNull;       
         }
@@ -120,7 +120,7 @@ class Product{
     }
     
     public function setIngredients(string $ingredients):int {
-        $errorNull = ChecksProduct::minMax($ingredients, 4, 1060);
+        $errorNull = ChecksProduct::minMaxLength($ingredients, 4, 1060);
         if($errorNull !=0){
             return $errorNull;       
         }
@@ -165,7 +165,7 @@ class Product{
     }
     
     public function setPrice(string $price):int {
-        $errorminmax = ChecksProduct::minMax($price, 2, 8);
+        $errorminmax = ChecksProduct::minMaxLength($price, 2, 8);
         if($errorminmax != 0){
             return $errorminmax;
         }
@@ -185,7 +185,7 @@ class Product{
     }
     
     public function setBrand(string $brand):int {
-        $errorNull = ChecksProduct::minMax($brand, 2, 140);
+        $errorNull = ChecksProduct::minMaxLength($brand, 2, 140);
         if ($errorNull != 0) {
             return $errorNull; 
         }
@@ -210,7 +210,7 @@ class Product{
     }
     
     public function setImage($image){
-        $errorNull = ChecksProduct::notNullNotEmptyTrimmed($image);
+        $errorNull = ChecksProduct::notNull($image);
         if ($errorNull != 0) {
             return $errorNull;
         }
@@ -224,7 +224,7 @@ class Product{
     }
     
     public function setWeight(string $weight):int{
-        $errorNull = ChecksProduct::minMax($weight, 2, 5);
+        $errorNull = ChecksProduct::minMaxLength($weight, 2, 5);
         if ($errorNull != 0) {
             return $errorNull;
         }

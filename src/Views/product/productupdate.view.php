@@ -29,6 +29,7 @@
     
     <form class="flex justify-center" action="/updateproduct" method="POST" enctype="multipart/form-data">
         <?php $product = $product; ?>
+        <input type="hidden" name="id" value="<?php echo $product->getId(); ?>">
         <div class="w-[18%]">
             <!-- Name -->
             <div class="flex flex-col  mb-[15px]">

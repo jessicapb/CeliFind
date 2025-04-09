@@ -1,8 +1,8 @@
-let image = document.getElementById('image');
-let previewimg = document.getElementById('preview-img');
-let imagename = document.getElementById('image-name');
-let imagepreview = document.getElementById('image-preview')
-let imagetrigger = document.getElementById('image-trigger');
+const image = document.getElementById('image');
+const previewimg = document.getElementById('preview-img');
+const imagename = document.getElementById('image-name');
+const imagepreview = document.getElementById('image-preview')
+const imagetrigger = document.getElementById('image-trigger');
 
 function previewImage() {
     const input = image; // Agafar la imatge
