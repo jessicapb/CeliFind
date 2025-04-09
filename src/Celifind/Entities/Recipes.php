@@ -129,7 +129,7 @@ class Recipes{
     }
     
     public function setPeople($people):int{
-        $errorNull = ChecksProduct::minMaxLength($people, 4, 30);
+        $errorNull = ChecksProduct::minMaxLength($people, 2, 30);
         if($errorNull !=0){
             return $errorNull;       
         }
@@ -149,7 +149,7 @@ class Recipes{
     }
     
     public function setDuration($duration):int{
-        $errorNull = ChecksProduct::minMaxLength($duration, 4, 20);
+        $errorNull = ChecksProduct::minMaxLength($duration, 2, 20);
         if($errorNull !=0){
             return $errorNull;       
         }

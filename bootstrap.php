@@ -31,6 +31,18 @@ use App\Controller\Recipes\RecipesAddController;
 // ControllerRecipes
 use App\Controller\Recipes\RecipesSaveBDController;
 
+// ControllerCategory
+use App\Controller\Category\CategoryShowBDController;
+use App\Controller\Category\CategoryAddBDController;
+use App\Controller\Category\CategorySaveBDController;
+use App\Controller\Category\CategoryDeleteBDController;
+
+// ControllerSubcategory
+use App\Controller\Subcategory\SubcategoryShowBDController;
+use App\Controller\Subcategory\SubcategoryAddBDController;
+use App\Controller\Subcategory\SubcategorySaveBDController;
+use App\Controller\Subcategory\SubcategoryDeleteBDController;
+
 //Database
 use App\Infrastructure\Database\DatabaseConnection;
 
@@ -42,6 +54,12 @@ $db=DatabaseConnection::getConnection();
 $services=new Services();
 $services->addServices('db',fn()=>$db);
 $db=$services->getService('db');
+
+// RepositoryCategory
+use App\Infrastructure\Persistence\CategoryRepository;
+
+// RepositorySubcategory
+use App\Infrastructure\Persistence\SubcategoryRepository;
 
 // RepositoryProduct
 use  App\Infrastructure\Persistence\ProductRepository;
@@ -86,6 +104,14 @@ $recipesRepository = $services->getService('recipesRepository');
 
 // Save the recipes
 $saverecipes = new RecipesSaveBDController($db);
+
+// Routes Category Repository
+$services->addServices('categoryRepository', fn() => new CategoryRepository($db));
+$categoryRepository = $services->getService('categoryRepository');
+
+// Routes Subcategory Repository
+$services->addServices('subcategoryRepository', fn() => new SubcategoryRepository($db));
+$subcategoryRepository = $services->getService('subcategoryRepository');
 
 // Routes to show the views
 $router = new Router();
@@ -136,4 +162,22 @@ $router
     ->addRoute('GET','/recipesadd',[new RecipesAddController(),'recipesadd'])
     
     // Save a recipe to the database or display errors
-    ->addRoute('POST', '/saverecipes', [$saverecipes, 'saverecipes']);
+    ->addRoute('POST', '/saverecipes', [$saverecipes, 'saverecipes'])
+    
+    // Go to the show categories
+    ->addRoute('GET', '/category', [new CategoryShowBDController($db), 'showcategory'])
+    
+    ->addRoute('GET', '/categoryadd', [new CategoryAddBDController(), 'categoryadd'])
+    
+    ->addRoute('POST', '/savecategory', [new CategorySaveBDController($db), 'savecategory'])
+    
+    ->addRoute('POST', '/deletecategory', [new CategoryDeleteBDController($db), 'deletecategory'])
+    
+    // Go to the show subcategories
+    ->addRoute('GET', '/subcategory', [new SubcategoryShowBDController($db), 'showsubcategory'])
+    
+    ->addRoute('GET', '/addsubcategory', [new SubcategoryAddBDController($db), 'addsubcategory'])
+    
+    ->addRoute('POST', '/savesubcategory', [new SubcategorySaveBDController($db), 'savesubcategory'])
+    
+    ->addRoute('POST', '/deletesubcategory', [new SubcategoryDeleteBDController($db), 'deletesubcategory']);

@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" class="h-18" href="../../img/logo/logo.png" type="image/x-icon">
+
 </head>
 <body>
     <header >
@@ -17,7 +19,8 @@
                 <img src="../../img/logo/logo.png" alt="logoimg">
             </a>
             <div class="flex items-center">
-                <a href="" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Categories</a>
+                <a href="/category" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Categories</a>
+                <a href="/subcategory" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Subcategories</a>
                 <a href="" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Revisions</a>
                 <!-- Dropdown -->
                 <div class="relative inline-block text-left">
@@ -40,9 +43,9 @@
 
     <section>
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center pt-[26px] font-bold">Benvingut <span class="text-[#96c368] opacity-[100%]">administrador</span></h1>
-        <div class="flex justify-center mt-[26px] mb-[20px]">
+        <div class="flex justify-center mt-[26px]">
             <!-- Products -->
-            <div class="mr-[26px] shadow-lg w-[368px] h-[527px] rounded-[21px] bg-white">
+            <div class="mr-[26px] shadow-lg w-[368px] h-[527px] rounded-[21px]">
                 <img  src="../../img/producte/productes.png" alt="">
                 <div class="flex flex-col justify-between ">
                     <p class="font-monserrat pt-[15px] pl-[10px] pb-[15px] text-[20px] font-bold text-black">Gestiona els productes</p>
@@ -54,7 +57,7 @@
             </div>
 
             <!-- Recipes -->
-            <div class="mr-[26px] shadow-lg w-[368px] h-[527px] rounded-[21px] bg-white">
+            <div class="mr-[26px] shadow-lg w-[368px] h-[527px] rounded-[21px]">
                 <img src="../../img/recepte/receptes.png" alt="">
                 <div class="flex flex-col justify-between ">
                     <p class="font-monserrat pt-[15px] pl-[10px] pb-[15px] text-[20px] font-bold text-black">Gestiona les receptes</p>
@@ -66,7 +69,7 @@
             </div>
 
             <!-- Establishments -->
-            <div class="mr-[26px] shadow-lg w-[368px] h-[527px] rounded-[21px] bg-white">
+            <div class="mr-[26px] shadow-lg w-[368px] h-[527px] rounded-[21px]">
                 <img  src="../../img/lloc/llocs.png" alt="">
                 <div class="flex flex-col justify-between ">
                     <p class="font-monserrat pt-[15px] pl-[10px] pb-[15px] text-[20px] font-bold text-black">Gestiona els establiments</p>

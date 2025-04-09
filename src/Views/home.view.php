@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CeliFind</title>
     <link href="./src/output.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
 <body>
     <header class="p-4">
         <nav class="flex justify-between">
-        <a href="">
+        <a href="/">
             <img class="w-32" src="../img/logo/logo.png" alt="">
         </a>
         <div class="flex">
@@ -40,7 +40,6 @@
             </div>
         </div>
 
-
         <!--Adejectives section!-->
         <section class="flex bg-[url('../img/home/fondo2.png')] bg-no-repeat bg-cover">
             <div class="pt-5 pb-5 flex-row lg:flex md:flex-row sm:flex-col justify-center items-center text-center">
@@ -49,7 +48,7 @@
                         <img class="w-28" src="../img/home/handshake.png" alt="love-icon-celifind">
                     </div>
                     <div class="pt-6">
-                        <h1 class="text-4xl font-calistoga text-white">Salud</h1>
+                        <h1 class="text-4xl font-calistoga text-white">Salut</h1>
                         <p class="mt-5 text-[17px]">Oferim productes i receptes seleccionades per garantir que cada mos sigui un somriure, ple de sabor i sense preocupacions. Celebrem la llibertat de gaudir de la vida amb salut i gust.</p>
                     </div>
                 </div>
@@ -269,7 +268,9 @@
         <div class="grid grid-cols-1 max-w-screen-xl mx-auto md:grid-cols-5 text-center lg:text-start md:text-start gap-8 text-sm justify-center">
             
             <div class="md:col-span-1 flex flex-col space-y-2">
-                <img src="../img/logo/logo.png" alt="CeliFind logo" class="w-36">
+                <a href="/">
+                    <img src="../img/logo/logo.png" alt="CeliFind logo" class="w-36">
+                </a>
             </div>
 
             <div>
