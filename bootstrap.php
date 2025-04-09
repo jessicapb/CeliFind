@@ -136,5 +136,4 @@ $router
     ->addRoute('GET','/recipesadd',[new RecipesAddController(),'recipesadd'])
     
     // Save a recipe to the database or display errors
-    ->addRoute('POST', '/saverecipes', [$saverecipes, 'saverecipes'])
     ->addRoute('POST', '/saverecipes', [$saverecipes, 'saverecipes']);
