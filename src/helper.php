@@ -9,7 +9,7 @@ function dd(){
         die;
 }
 
-function view(string $template,array $data=null){
+function view(string $template,?array $data=null){
     if($data){
         extract($data,EXTR_OVERWRITE);
     }

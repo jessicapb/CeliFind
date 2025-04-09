@@ -9,7 +9,7 @@
                 return self::$db;
             }else{
                 $db_info=[
-                    'dsn'=>"mysql:host=".$_ENV['DB_HOST'].";dbname=".$_ENV['DB_NAME'],
+                    'dsn'=>"mysql:host=".$_ENV['DB_HOST'].";port=3307;dbname=".$_ENV['DB_NAME'],
                     'dbuser'=>$_ENV['DB_USER'],
                     'dbpassword'=>$_ENV['DB_PASSWORD']    
                 ];

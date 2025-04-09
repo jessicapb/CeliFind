@@ -91,10 +91,10 @@ $saverecipes = new RecipesSaveBDController($db);
 $router = new Router();
 $router 
     // Open the principal (index)
-    ->addRoute('GET','/',[new HomeController(),'home'])
+    //->addRoute('GET','/',[new HomeController(),'home'])
 
     // Go to the home page
-    ->addRoute('GET','/home',[new HomeController(),'home'])
+    //->addRoute('GET','/home',[new HomeController(),'home'])
         
     // Go to the manager page
     ->addRoute('GET','/manager',[new ManagerController(),'manager'])
