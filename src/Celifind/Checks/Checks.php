@@ -3,7 +3,9 @@
 namespace App\Celifind\Checks;
 
 // Los códigos bueno son el 1, y los malos son el 0
-abstract class Checks{
+abstract class Checks
+{
+
     public static function notNull($value)
     {
         if ($value === null) {
@@ -64,6 +66,7 @@ abstract class Checks{
             -2 => "El camp no pot estar buit.",
             -3 => "El camp ha de complir un mínim de caràcters.",
             -4 => "Heu superat el límit de caràcters.",
+            -102 => "El codi postal no es valid",
             default => "Error desconegut",
         };
     }
