@@ -13,23 +13,23 @@
 <body>
     <header class="p-4">
         <nav class="flex justify-between">
-        <a href="/">
-            <img class="w-32" src="../img/logo/logo.png" alt="">
-        </a>
-        <div class="flex">
-            <ul class="list-none p-4m hidden lg:flex items-center">
-                <li class="ml-8"><a href="#">Productes</a></li>
-                <li class="ml-8"><a href="#">Receptes</a></li>
-                <li class="ml-8"><a href="#">Qui som ?</a></li>
-                <li class="ml-8"><a href="#">informacio</a></li>
-            </ul>
-            <div class="flex items-center gap-5 ml-16">
-                <a href="#" class="font-inter p-2 px-5 text-[16px] text-black border-[#96c368] border-2 rounded-[50px] font-normal hover:bg-[rgb(150,195,104)] hover:text-white transition duration-200">Registre</a>
-                <a href="#" class="font-inter p-2 px-9 text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-white transition duration-200">Iniciar Sessió</a>
+            <a href="/">
+                <img class="w-32" src="../img/logo/logo.png" alt="">
+            </a>
+            <div class="flex">
+                <ul class="list-none p-4m hidden lg:flex items-center">
+                    <li class="ml-8"><a href="/productview">Productes</a></li>
+                    <li class="ml-8"><a href="#">Receptes</a></li>
+                    <li class="ml-8"><a href="#">Qui som ?</a></li>
+                    <li class="ml-8"><a href="#">informacio</a></li>
+                </ul>
+                <div class="flex items-center gap-5 ml-16">
+                    <a href="#" class="font-inter p-2 px-5 text-[16px] text-black border-[#96c368] border-2 rounded-[50px] font-normal hover:bg-[rgb(150,195,104)] hover:text-white transition duration-200">Registre</a>
+                    <a href="#" class="font-inter p-2 px-9 text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-white transition duration-200">Iniciar Sessió</a>
+                </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
     <main>
         <div class="flex justify-center flex-col text-center bg-[url('../img/home/Celifind.png')] object-cover h-[700px] bg-no-repeat bg-cover">
             <h1 class="text-[26px] font-calistoga font-bold">Menjar sense gluten Barcelona<h1>

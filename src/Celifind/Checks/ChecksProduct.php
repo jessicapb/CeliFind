@@ -79,13 +79,6 @@ class ChecksProduct extends Checks{
         return 0;
     }
     
-    /*public static function validateNotOnlySpaces($string) {
-        if (!preg_match('/^\s+$/', $string)) {
-            return -11; 
-        }
-        return 0; 
-    }*/
-    
     public static function getErrorMessage($e) {
         $word = '';
         if (isset($_SESSION['forbidden_word'])) {
@@ -103,7 +96,6 @@ class ChecksProduct extends Checks{
             -8 => "L'estructura del camp és incorrecta. Exemple: 125g.",
             -9 => "L'estructura del camp és incorrecta. Exemple: 8 persones o 15 persones",
             -10 => "L'estructura del camp és incorrecta. Exemple: 115-120min o 30min",
-            -11 => "El camp no pot tindrà comes i espais",
             default => "Error desconegut",
         };
     }

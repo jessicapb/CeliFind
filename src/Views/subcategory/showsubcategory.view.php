@@ -120,5 +120,5 @@
 
         </section>
     </section>
-    <script src="../../js/subcategory/deletemodal.js"></script>
+    <script src="../../js/modals/deletemodal.js"></script>
 </body>

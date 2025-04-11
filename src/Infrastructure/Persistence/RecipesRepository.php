@@ -45,4 +45,18 @@ class RecipesRepository{
             throw new BuildExceptions("Error saving recipes:" . $e->getMessage());
         }
     }
+
+    // Select limit
+    function showlimit(){
+        $allrecipes = [];
+        $sql = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
+                                    people, duration, SUBSTRING(instruction, 1, 8) AS instruction_short, image FROM recipes");
+        $sql->execute();
+        $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
+        if (count($result) != 0) {
+            return $result;
+        } else {
+            return [];
+        }
+    }
 }

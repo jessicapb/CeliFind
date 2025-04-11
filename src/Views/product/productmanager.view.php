@@ -49,7 +49,7 @@
         </div>
 
         <!-- Table part -->
-        <table class="w-full mt-[50px] table-auto text-center border-separate border-spacing-[20px]">
+        <table class="w-[95%] mt-[50px] table-auto text-center border-separate border-spacing-[20px]">
             <thead>
                 <tr>
                     <th class="text-black font-calistoga text-[24px] pl-[10px] font-bold pr-[10px]">Id</th>
@@ -168,6 +168,6 @@
     </section> 
     
     <!-- File show modal delete -->
-    <script src="../../js/product/deletemodal.js"></script>
+    <script src="../../js/modals/deletemodal.js"></script>
 </body>
 </html>

@@ -119,5 +119,5 @@
         </section>
     </section>
     <script src="../../../js/category/category.js"></script>
-    <script src="../../../js/category/deletemodal.js"></script>
+    <script src="../../../js/modals/deletemodal.js"></script>
 </body>

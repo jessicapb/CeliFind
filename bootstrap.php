@@ -17,6 +17,7 @@ use App\Controller\Product\ProductToSubcategoryController;
 use App\Controller\Product\ProductSearchController;
 use App\Controller\Product\ProductShowImageController;
 use App\Controller\Product\ProductUpdateController;
+use App\Controller\Product\ProductViewController;
 
 //ControllerProduct
 use App\Controller\Product\ProductSaveBDController;
@@ -104,6 +105,7 @@ $recipesRepository = $services->getService('recipesRepository');
 
 // Save the recipes
 $saverecipes = new RecipesSaveBDController($db);
+$showlimitrecipes = new RecipesManagerController($recipesRepository);
 
 // Routes Category Repository
 $services->addServices('categoryRepository', fn() => new CategoryRepository($db));
@@ -155,8 +157,11 @@ $router
     // Update the product
     ->addRoute('POST','/updateproduct',[$controllerupdateproduct,'updateproduct'])
     
+    // View of the product
+    ->addRoute('GET','/productview',[new ProductViewController(),'productview'])
+    
     // Go to the manager recipes
-    ->addRoute('GET','/recipesmanager',[new RecipesManagerController(),'recipesmanager'])
+    ->addRoute('GET','/recipesmanager',[$showlimitrecipes,'recipesmanager'])
     
     // Go to the add recipes
     ->addRoute('GET','/recipesadd',[new RecipesAddController(),'recipesadd'])

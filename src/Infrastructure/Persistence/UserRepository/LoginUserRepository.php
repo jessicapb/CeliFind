@@ -3,11 +3,11 @@ namespace App\Controller\User;
     
 class LoginUserController{
     private \PDO $db;
-
+    
     function __construct(\PDO $db){
         $this->db = $db;
     }
-
+    
     // Start session
     session_start();
     

@@ -189,7 +189,7 @@ class Recipes{
     }
     
     public function setImage($image):int{
-        $errorNull = ChecksProduct::notNull($image);
+        $errorNull = ChecksProduct::notEmpty($image);
         if ($errorNull != 0) {
             return $errorNull;
         }
