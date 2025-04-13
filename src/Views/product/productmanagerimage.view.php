@@ -31,7 +31,7 @@
                 <div class="shadow-lg w-[300px] h-[310px] rounded-[21px] bg-white p-[10px] mx-auto flex flex-col items-center">
                     <div class="w-full flex justify-center mb-3">
                         <div class="w-[180px] h-[180px] flex items-center justify-center">
-                            <img src="<?php echo $product->getBase64(); ?>" alt="image_bd" class="object-contain w-full h-full">
+                        <img src="<?php echo $product->getImage() ?>" alt="image_bd" class="object-contain w-full h-full">
                         </div>
                     </div>
                     <div class="w-full text-left mt-[10px]">
