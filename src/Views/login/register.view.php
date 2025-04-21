@@ -6,43 +6,50 @@
     <title>Registre</title>
     <link href="/src/output.css" rel="stylesheet">
 </head>
-<body class="bg-gray-900 flex items-center justify-center min-h-screen">
-    <form action="/userregister" method="POST" class="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h2 class="text-2xl font-bold mb-6 text-center">Registra't</h2>
+<body class="bg-[#f5f5f5] flex items-center justify-center min-h-screen">
+    <form action="/userregister" method="POST" class="bg-white p-6 rounded-[30px] shadow-lg w-full max-w-md border-2 border-[#fcb666] max-h-[600px] overflow-y-auto">
+        <div class="flex justify-center mb-4">
+            <img src="/img/logo/logo.png" alt="Logo" class="w-16 h-16">
+        </div>
+        <h2 class="text-xl font-bold mb-4 text-center text-[#fcb666] font-calistoga">Registre</h2>
         <?php if (!empty($_SESSION['errors'])): ?>
-            <ul class="mb-4 text-red-600 text-sm">
+            <ul class="mb-2 text-red-600 text-sm text-center">
                 <?php foreach ($_SESSION['errors'] as $error): ?>
                     <li><?= $error ?></li>
                 <?php endforeach; unset($_SESSION['errors']); ?>
             </ul>
         <?php endif; ?>
-        <div class="mb-4">
-            <label class="block mb-1 text-gray-700" for="name">Nom</label>
-            <input class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300" type="text" name="name" id="name" required>
+        <div class="mb-2">
+            <label class="block mb-1 text-gray-700 font-inter" for="name">Nom</label>
+            <div class="relative">
+                <input class="w-full px-3 py-1.5 border rounded-[20px] focus:outline-none focus:ring focus:border-[#fcb666] pl-10 text-sm" type="text" name="name" id="name" required>
+                <img src="/img/login/login.svg" alt="User Icon" class="absolute left-2 top-1.5 w-5 h-5 opacity-60">
+            </div>
+        </div>
+        <div class="mb-2">
+            <label class="block mb-1 text-gray-700 font-inter" for="email">Correu electrònic</label>
+            <div class="relative">
+                <input class="w-full px-3 py-1.5 border rounded-[20px] focus:outline-none focus:ring focus:border-[#fcb666] pl-10 text-sm" type="email" name="email" id="email" required>
+                <img src="/img/login/login.svg" alt="Email Icon" class="absolute left-2 top-1.5 w-5 h-5 opacity-60">
+            </div>
+        </div>
+        <div class="mb-2">
+            <label class="block mb-1 text-gray-700 font-inter" for="postalcode">Codi postal</label>
+            <div class="relative">
+                <input class="w-full px-3 py-1.5 border rounded-[20px] focus:outline-none focus:ring focus:border-[#fcb666] pl-10 text-sm" type="text" name="postalcode" id="postalcode" required>
+                <img src="/img/login/login.svg" alt="Postal Icon" class="absolute left-2 top-1.5 w-5 h-5 opacity-60">
+            </div>
         </div>
         <div class="mb-4">
-            <label class="block mb-1 text-gray-700" for="surname">Cognoms</label>
-            <input class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300" type="text" name="surname" id="surname" required>
+            <label class="block mb-1 text-gray-700 font-inter" for="password">Contrasenya</label>
+            <div class="relative">
+                <input class="w-full px-3 py-1.5 border rounded-[20px] focus:outline-none focus:ring focus:border-[#fcb666] pl-10 text-sm" type="password" name="password" id="password" required>
+                <img src="/img/login/password.svg" alt="Password Icon" class="absolute left-2 top-1.5 w-5 h-5 opacity-60">
+            </div>
         </div>
-        <div class="mb-4">
-            <label class="block mb-1 text-gray-700" for="email">Correu electrònic</label>
-            <input class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300" type="email" name="email" id="email" required>
-        </div>
-        <div class="mb-4">
-            <label class="block mb-1 text-gray-700" for="city">Ciutat</label>
-            <input class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300" type="text" name="city" id="city" required>
-        </div>
-        <div class="mb-4">
-            <label class="block mb-1 text-gray-700" for="postalcode">Codi postal</label>
-            <input class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300" type="text" name="postalcode" id="postalcode" required>
-        </div>
-        <div class="mb-6">
-            <label class="block mb-1 text-gray-700" for="password">Contrasenya</label>
-            <input class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300" type="password" name="password" id="password" required>
-        </div>
-        <button class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition" type="submit">Registrar-se</button>
-        <p class="mt-4 text-center text-sm text-gray-600">
-            Ja tens compte? <a href="/login" class="text-blue-600 hover:underline">Inicia sessió</a>
+        <button class="w-full bg-[#fcb666] text-white py-2 rounded-[20px] hover:bg-[#e0a04f] transition font-inter font-semibold text-sm" type="submit">Registrar-se</button>
+        <p class="mt-3 text-center text-xs text-gray-600 font-inter">
+            Ja tens compte? <a href="/login" class="text-[#fcb666] hover:underline">Inicia sessió</a>
         </p>
     </form>
 </body>

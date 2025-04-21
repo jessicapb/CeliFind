@@ -29,9 +29,7 @@ class UserRegisterController
             $_SESSION['errors'] = [];
 
             $name = filter_input(INPUT_POST, 'name');
-            $surname = filter_input(INPUT_POST, 'surname');
             $email = filter_input(INPUT_POST, 'email');
-            $city = filter_input(INPUT_POST, 'city');
             $postalcode = filter_input(INPUT_POST, 'postalcode');
             $password = filter_input(INPUT_POST, 'password');
 
@@ -42,7 +40,8 @@ class UserRegisterController
                     exit;
                 }
 
-                $user = new User($name, $surname, $email, $city, $postalcode, $password);
+                // surname y city a null
+                $user = new User($name, null, $email, null, $postalcode, $password);
                 $this->userRepository->save($user);
 
                 header('Location: /login');

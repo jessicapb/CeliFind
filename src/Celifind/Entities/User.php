@@ -11,29 +11,35 @@ class User
     // The others fields shouldnt even being created due to database handling
     protected ?int $id = null;
     public $name;
-    public $surname;
+    public $surname = null;
     public $email;
-    public $city;
+    public $city = null;
     public $postalcode;
     public $password;
 
     /**
      * Constructor para crear un usuario nuevo (valida los datos)
      */
-    public function __construct($name, $surname, $email, $city, $postalcode, $password)
+    public function __construct($name, $surname = null, $email, $city = null, $postalcode, $password)
     {
         $error = 0;
         if (($error = $this->setName($name)) != 0) {
             $_SESSION['errors']['name'] = Checks::getErrorMessage($error);
         }
-        if (($error = $this->setSurname($surname)) != 0) {
+        // surname puede ser null
+        if ($surname !== null && ($error = $this->setSurname($surname)) != 0) {
             $_SESSION['errors']['surname'] = Checks::getErrorMessage($error);
+        } else if ($surname === null) {
+            $this->surname = null;
         }
         if (($error = $this->setEmail($email)) != 0) {
             $_SESSION['errors']['email'] = ChecksUser::getErrorMessage($error);
         }
-        if (($error = $this->setCity($city)) != 0) {
+        // city puede ser null
+        if ($city !== null && ($error = $this->setCity($city)) != 0) {
             $_SESSION['errors']['city'] = Checks::getErrorMessage($error);
+        } else if ($city === null) {
+            $this->city = null;
         }
         if (($error = $this->setPostalCode($postalcode)) != 0) {
             $_SESSION['errors']['postalcode'] = ChecksUser::getErrorMessage($error);
@@ -50,14 +56,8 @@ class User
      * Crea un usuario a partir de los datos de la base de datos (sin validar)
      */
     public static function fromDbRow($id, $name, $surname, $email, $city, $postalcode, $password) {
-        $user = new self('__skip__', '__skip__', '__skip__', '__skip__', '__skip__', '__skip__');
+        $user = new self($name, $surname, $email, $city, $postalcode, $password);
         $user->id = $id;
-        $user->name = $name;
-        $user->surname = $surname;
-        $user->email = $email;
-        $user->city = $city;
-        $user->postalcode = $postalcode;
-        $user->password = $password;
         return $user;
     }
 
