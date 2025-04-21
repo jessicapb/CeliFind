@@ -2,7 +2,7 @@
 
 namespace App\Celifind\Checks;
 
-// Los códigos bueno son el 1, y los malos son el 0
+// Los códigos buenos son el 0, y los negativos no valen
 abstract class Checks
 {
 
@@ -15,10 +15,11 @@ abstract class Checks
         }
     }
 
-    public static function notEmpty($value) {
-        // Asumimos que notNull devuelve 0 si NO es null, y otro código (ej: -1) si ES null.
+    public static function notEmpty($value)
+    {
+        // Asumimos que notNull devuelve 0 si NO es null, y otro código (-1) si ES null.
         $error = Checks::notNull($value);
-    
+
         if ($error === 0) { // Si $value NO es null
             // Comprobar si está vacío después de quitar espacios
             if (strlen(trim((string)$value)) === 0) {
@@ -27,14 +28,15 @@ abstract class Checks
                 return 0; // Éxito: NO es null Y NO está vacío
             }
         } else { // Si $value ES null
-            return $error; // Devolver el código de error de notNull (ej: -1)
+            return $error; // Devolver el código de error de notNull
         }
     }
 
     //The correct option for 👇this word is when it ends with "TH".
-    public static function minLength($value, $min) {
+    public static function minLength($value, $min)
+    {
         $error = Checks::notEmpty($value);
-    
+
         if ($error === 0) { // Si $value NO es null y NO está vacío
             // Ahora sí, comprobar la longitud
             if (strlen((string)$value) < $min) { // Comparamos la LONGITUD
@@ -50,10 +52,10 @@ abstract class Checks
     //The correct option for 👇this word is when it ends with "TH".
     public static function minMaxLength($string, $min, $max)
     {
-        $result = Checks::minLength($string,$min);
+        $result = Checks::minLength($string, $min);
         if ($result === 0) {
-            return strlen($string)>$max? -4 : 0; 
-        }else{
+            return strlen($string) > $max ? -4 : 0;
+        } else {
             return $result;
         }
     }
@@ -66,7 +68,8 @@ abstract class Checks
             -2 => "El camp no pot estar buit.",
             -3 => "El camp ha de complir un mínim de caràcters.",
             -4 => "Heu superat el límit de caràcters.",
-            -102 => "El codi postal no es valid",
+            -102 => "El codi postal no és vàlid.",
+            -103 => "El correu electrònic no és vàlid.",
             default => "Error desconegut",
         };
     }

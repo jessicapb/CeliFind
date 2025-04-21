@@ -37,6 +37,11 @@ use App\Infrastructure\Database\DatabaseConnection;
 // Services
 use App\Celifind\Services\Services;
 
+// User controllers
+use App\Controller\User\UserLoginController;
+use App\Controller\User\UserRegisterController;
+use App\Controller\User\LogoutController;
+
 // Services and connection to database
 $db=DatabaseConnection::getConnection();
 $services=new Services();
@@ -87,6 +92,11 @@ $recipesRepository = $services->getService('recipesRepository');
 // Save the recipes
 $saverecipes = new RecipesSaveBDController($db);
 
+// User controllers
+$userLoginController = new UserLoginController($db);
+$userRegisterController = new UserRegisterController($db);
+$logoutController = new LogoutController();
+
 // Routes to show the views
 $router = new Router();
 $router 
@@ -136,4 +146,17 @@ $router
     ->addRoute('GET','/recipesadd',[new RecipesAddController(),'recipesadd'])
     
     // Save a recipe to the database or display errors
-    ->addRoute('POST', '/saverecipes', [$saverecipes, 'saverecipes']);
+    ->addRoute('POST', '/saverecipes', [$saverecipes, 'saverecipes'])
+
+
+
+    // Go to the login page
+    ->addRoute('GET','/login',[$userLoginController,'showLogin'])
+    // Go to the register page
+    ->addRoute('GET','/register',[$userRegisterController,'showRegister'])
+    // Handle login POST
+    ->addRoute('POST','/userlogin',[$userLoginController,'login'])
+    // Handle register POST
+    ->addRoute('POST','/userregister',[$userRegisterController,'register'])
+    // Handle logout GET
+    ->addRoute('GET','/logout',[$logoutController,'logout']);

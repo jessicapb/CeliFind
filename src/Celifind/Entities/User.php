@@ -9,15 +9,17 @@ use App\Celifind\Exceptions\BuildExceptions;
 class User
 {
     // The others fields shouldnt even being created due to database handling
-    protected $name;
-    protected $surname;
-    protected $email;
-    protected $city;
-    protected $postalcode;
-    protected $password;
+    protected ?int $id = null;
+    public $name;
+    public $surname;
+    public $email;
+    public $city;
+    public $postalcode;
+    public $password;
 
-
-
+    /**
+     * Constructor para crear un usuario nuevo (valida los datos)
+     */
     public function __construct($name, $surname, $email, $city, $postalcode, $password)
     {
         $error = 0;
@@ -44,31 +46,29 @@ class User
         }
     }
 
+    /**
+     * Crea un usuario a partir de los datos de la base de datos (sin validar)
+     */
+    public static function fromDbRow($id, $name, $surname, $email, $city, $postalcode, $password) {
+        $user = new self('__skip__', '__skip__', '__skip__', '__skip__', '__skip__', '__skip__');
+        $user->id = $id;
+        $user->name = $name;
+        $user->surname = $surname;
+        $user->email = $email;
+        $user->city = $city;
+        $user->postalcode = $postalcode;
+        $user->password = $password;
+        return $user;
+    }
+
     // Getters
-    public function getName()
-    {
-        return $this->name;
-    }
-    public function getSurname()
-    {
-        return $this->surname;
-    }
-    public function getEmail()
-    {
-        return $this->email;
-    }
-    public function getCity()
-    {
-        return $this->city;
-    }
-    public function getPostalcode()
-    {
-        return $this->postalcode;
-    }
-    public function getPassword()
-    {
-        return $this->password;
-    }
+    public function getId(){return $this->id;}
+    public function getName(){return $this->name;}
+    public function getSurname(){return $this->surname;}
+    public function getEmail(){return $this->email;}
+    public function getCity(){return $this->city;}
+    public function getPostalcode(){return $this->postalcode;}
+    public function getPassword(){return $this->password;}
 
     // Setters
     public function setName($name)
@@ -96,6 +96,7 @@ class User
     public function setEmail($email)
     {
         $this->email = $email;
+        return 0;
     }
 
     public function setCity($city)
@@ -114,6 +115,7 @@ class User
         $error = ChecksUser::correctPostalCode($postalcode);
         if($error ===0){
             $this->postalcode = $postalcode;
+            return 0;
         }else{
             return $error;
         }
