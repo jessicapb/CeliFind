@@ -31,13 +31,18 @@ class ProductSaveBDController{
             $weight = filter_input(INPUT_POST, 'weight');
             $state = filter_input(INPUT_POST, 'state');
             
-            // Upload image
-            // Comprobamos si hay un campo image y si se ha subido correctamente la imagen
-            // Si funciona correctamente guarda la imagen dentro de $imagenData
-            // Se pone tmp_name porque cuando subimos la imagen temporalmente se guarda en la carpeta tmp
-            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                $imageData = file_get_contents($_FILES['image']['tmp_name']);
-            } else {
+            if (!empty($_FILES['image']['name'])) {
+                $folder = '/home/linux/CeliFind/img/producte/imagesbd/';
+                $fileName = $_FILES['image']['name'];
+                $destination = $folder . $fileName;
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
+                    $imageData = '/img/producte/imagesbd/' . $fileName;
+                } else {
+                    $_SESSION['errors']['image'] = "No s'ha pogut guardar la imatge.";
+                    header('Location: /productadd');
+                    exit;
+                }
+            }else{
                 $imageData = '';
             }
             

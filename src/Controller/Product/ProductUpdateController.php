@@ -7,7 +7,6 @@ use App\Celifind\Entities\Product;
 
 class ProductUpdateController{
     private $productRepository;
-    private \PDO $db;
     
     public function __construct(\PDO $db) {
         $this->db = $db;

@@ -34,7 +34,7 @@ class ChecksUser extends Checks
             } else {
                 return -102; // Invalid postal code
             }
-        }else{
+        } else {
             return $error; // Error from notEmpty
         }
     }
@@ -51,5 +51,15 @@ class ChecksUser extends Checks
         } else {
             return $error; // Error de notEmpty
         }
+    }
+
+    public static function getErrorMessage($e)
+    {
+        return match ($e) {
+            0 => $e,
+            -102 => "El codi postal no és vàlid.",
+            -103 => "El correu electrònic no és vàlid.",
+            default => "Error desconegut",
+        };
     }
 }

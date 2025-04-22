@@ -11,6 +11,7 @@ class ProductManagerController {
     public function __construct(ProductRepository $productRepository) {
         $this->productRepository = $productRepository;
     }
+    
     function productmanager(){
         $products = $this->productRepository->showlimit();
         $allproduct = [];

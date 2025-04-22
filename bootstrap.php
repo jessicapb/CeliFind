@@ -17,6 +17,7 @@ use App\Controller\Product\ProductToSubcategoryController;
 use App\Controller\Product\ProductSearchController;
 use App\Controller\Product\ProductShowImageController;
 use App\Controller\Product\ProductUpdateController;
+use App\Controller\Product\ProductViewController;
 
 //ControllerProduct
 use App\Controller\Product\ProductSaveBDController;
@@ -31,22 +32,40 @@ use App\Controller\Recipes\RecipesAddController;
 // ControllerRecipes
 use App\Controller\Recipes\RecipesSaveBDController;
 
-//Database
-use App\Infrastructure\Database\DatabaseConnection;
+// ControllerCategory
+use App\Controller\Category\CategoryShowBDController;
+use App\Controller\Category\CategoryAddBDController;
+use App\Controller\Category\CategorySaveBDController;
+use App\Controller\Category\CategoryDeleteBDController;
 
-// Services
-use App\Celifind\Services\Services;
+// ControllerSubcategory
+use App\Controller\Subcategory\SubcategoryShowBDController;
+use App\Controller\Subcategory\SubcategoryAddBDController;
+use App\Controller\Subcategory\SubcategorySaveBDController;
+use App\Controller\Subcategory\SubcategoryDeleteBDController;
 
 // User controllers
 use App\Controller\User\UserLoginController;
 use App\Controller\User\UserRegisterController;
 use App\Controller\User\LogoutController;
 
+//Database
+use App\Infrastructure\Database\DatabaseConnection;
+
+// Services
+use App\Celifind\Services\Services;
+
 // Services and connection to database
 $db=DatabaseConnection::getConnection();
 $services=new Services();
 $services->addServices('db',fn()=>$db);
 $db=$services->getService('db');
+
+// RepositoryCategory
+use App\Infrastructure\Persistence\CategoryRepository;
+
+// RepositorySubcategory
+use App\Infrastructure\Persistence\SubcategoryRepository;
 
 // RepositoryProduct
 use  App\Infrastructure\Persistence\ProductRepository;
@@ -85,26 +104,37 @@ $controllerdeleteproduct = new ProductDeleteBDController($db);
 // Show the form for update the product
 $showformupdate = new ProductUpdateController($db);
 
+// User controllers
+$userLoginController = new UserLoginController($db);
+$userRegisterController = new UserRegisterController($db);
+$logoutController = new LogoutController();
+
 // Routes recipesrepository
 $services->addServices('recipesRepository', fn() => new RecipesRepository($db));
 $recipesRepository = $services->getService('recipesRepository');
 
 // Save the recipes
 $saverecipes = new RecipesSaveBDController($db);
+$showlimitrecipes = new RecipesManagerController($recipesRepository);
 
-// User controllers
-$userLoginController = new UserLoginController($db);
-$userRegisterController = new UserRegisterController($db);
-$logoutController = new LogoutController();
+// Routes Category Repository
+$services->addServices('categoryRepository', fn() => new CategoryRepository($db));
+$categoryRepository = $services->getService('categoryRepository');
+
+// Routes Subcategory Repository
+$services->addServices('subcategoryRepository', fn() => new SubcategoryRepository($db));
+$subcategoryRepository = $services->getService('subcategoryRepository');
+
+
 
 // Routes to show the views
 $router = new Router();
 $router 
     // Open the principal (index)
-    //->addRoute('GET','/',[new HomeController(),'home'])
+    ->addRoute('GET','/',[new HomeController(),'home'])
 
     // Go to the home page
-    //->addRoute('GET','/home',[new HomeController(),'home'])
+    ->addRoute('GET','/home',[new HomeController(),'home'])
         
     // Go to the manager page
     ->addRoute('GET','/manager',[new ManagerController(),'manager'])
@@ -139,24 +169,47 @@ $router
     // Update the product
     ->addRoute('POST','/updateproduct',[$controllerupdateproduct,'updateproduct'])
     
+    // View of the product
+    ->addRoute('GET','/productview',[new ProductViewController(),'productview'])
+    
     // Go to the manager recipes
-    ->addRoute('GET','/recipesmanager',[new RecipesManagerController(),'recipesmanager'])
+    ->addRoute('GET','/recipesmanager',[$showlimitrecipes,'recipesmanager'])
     
     // Go to the add recipes
     ->addRoute('GET','/recipesadd',[new RecipesAddController(),'recipesadd'])
     
     // Save a recipe to the database or display errors
     ->addRoute('POST', '/saverecipes', [$saverecipes, 'saverecipes'])
-
-
+    
+    // Go to the show categories
+    ->addRoute('GET', '/category', [new CategoryShowBDController($db), 'showcategory'])
+    
+    ->addRoute('GET', '/categoryadd', [new CategoryAddBDController(), 'categoryadd'])
+    
+    ->addRoute('POST', '/savecategory', [new CategorySaveBDController($db), 'savecategory'])
+    
+    ->addRoute('POST', '/deletecategory', [new CategoryDeleteBDController($db), 'deletecategory'])
+    
+    // Go to the show subcategories
+    ->addRoute('GET', '/subcategory', [new SubcategoryShowBDController($db), 'showsubcategory'])
+    
+    ->addRoute('GET', '/addsubcategory', [new SubcategoryAddBDController($db), 'addsubcategory'])
+    
+    ->addRoute('POST', '/savesubcategory', [new SubcategorySaveBDController($db), 'savesubcategory'])
+    
+    ->addRoute('POST', '/deletesubcategory', [new SubcategoryDeleteBDController($db), 'deletesubcategory'])
 
     // Go to the login page
     ->addRoute('GET','/login',[$userLoginController,'showLogin'])
+
     // Go to the register page
     ->addRoute('GET','/register',[$userRegisterController,'showRegister'])
+
     // Handle login POST
     ->addRoute('POST','/userlogin',[$userLoginController,'login'])
+
     // Handle register POST
     ->addRoute('POST','/userregister',[$userRegisterController,'register'])
+    
     // Handle logout GET
     ->addRoute('GET','/logout',[$logoutController,'logout']);

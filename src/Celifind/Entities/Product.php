@@ -205,12 +205,16 @@ class Product{
     }
     
     // Image
-    public function getImage(){
-        return $this->image;
+    public function getImage() {
+        if (!empty($this->image)) {
+            return $this->image;
+        } else {
+            return '/img/default.png';
+        }
     }
     
     public function setImage($image){
-        $errorNull = ChecksProduct::notNull($image);
+        $errorNull = ChecksProduct::notEmpty($image);
         if ($errorNull != 0) {
             return $errorNull;
         }
@@ -265,18 +269,5 @@ class Product{
     public function setSubategoryId(?int $subcategory_id): int {
         $this->subcategory_id = $subcategory_id;
         return 0;
-    }
-    
-    // Con esta función convierto la imagen a base64
-    // Después la convertimos en una ruta
-    // Si NO hay imagen, mensaje de error
-    public function getBase64() {        
-        if ($this->image) {
-            $base64Image = base64_encode($this->image);
-            $imageType = 'image/png';
-            return "data:$imageType;base64,$base64Image";
-        } else {
-            echo "Imatge no trobada";
-        }
     }
 }

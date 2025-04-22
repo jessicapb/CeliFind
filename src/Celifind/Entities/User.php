@@ -48,7 +48,8 @@ class User
             $_SESSION['errors']['password'] = ChecksUser::getErrorMessage($error);
         }
         if (!empty($_SESSION['errors'])) {
-            throw new BuildExceptions("It is not possible to create the user. Check errors.");
+            $errorMessage = json_encode($_SESSION['errors']);
+            throw new BuildExceptions($errorMessage);
         }
     }
 

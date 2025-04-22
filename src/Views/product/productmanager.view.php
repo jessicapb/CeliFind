@@ -168,6 +168,6 @@
     </section> 
     
     <!-- File show modal delete -->
-    <script src="../../js/product/deletemodal.js"></script>
+    <script src="../../js/modals/deletemodal.js"></script>
 </body>
 </html>

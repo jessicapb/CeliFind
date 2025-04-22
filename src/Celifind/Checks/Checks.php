@@ -68,8 +68,6 @@ abstract class Checks
             -2 => "El camp no pot estar buit.",
             -3 => "El camp ha de complir un mínim de caràcters.",
             -4 => "Heu superat el límit de caràcters.",
-            -102 => "El codi postal no és vàlid.",
-            -103 => "El correu electrònic no és vàlid.",
             default => "Error desconegut",
         };
     }

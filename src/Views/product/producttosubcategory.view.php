@@ -59,21 +59,16 @@
 
     <!-- Show images -->
     <script src="../../js/showimage/showimage.js"></script>
-    <script>
-        <?php 
-        session_start(); 
-        if (isset($_SESSION['error'])) { 
-        ?>
-            const serverError = <?= json_encode($_SESSION['error']); ?>;
-            <?php unset($_SESSION['error']);?>
-        <?php
+    <!-- Start the session to catch the errors -->
+    <?php
+        session_start();
+        if (!empty($_SESSION['errors'])) {
+            $serverErrors = $_SESSION['errors'];
+            unset($_SESSION['errors']);
         } else {
-        ?>
-            const serverError = null;
-        <?php
+            $serverErrors = [];
         }
-        ?>
-    </script>
+    ?>
 
     <!-- File errors -->
     <script src="../../js/product/error-product.js"></script>
