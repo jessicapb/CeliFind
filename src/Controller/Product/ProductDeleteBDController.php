@@ -7,6 +7,7 @@ use App\Celifind\Entities\Product;
 
 class ProductDeleteBDController{
     private ProductRepository $productRepository;
+    private $db;
     
     public function __construct(\PDO $db) {
         $this->db = $db;
