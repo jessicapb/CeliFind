@@ -13,7 +13,7 @@ class ProductViewController {
     }
     
     function productview(){
-        $products  = $this->productservices->showlimit();
+        $products  = $this->productservices->stateone();
         echo view('product/viewproduct',['products'=>$products]);
     }
 }

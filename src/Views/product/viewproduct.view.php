@@ -166,23 +166,42 @@
                     </div>
                 </form>
                 <div>
-                    <div class="grid grid-cols-4 gap-[14px] mt-[26px] mb-[20px]">
+                    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 px-10 pt-10 pb-20">
                         <?php foreach ($products as $product) { ?>
-                            <div class="shadow-lg w-[300px] h-[310px] rounded-[21px] bg-white p-[10px] mr-[30px] mx-auto flex flex-col items-center">
+                            
+                            <div class="shadow-lg w-[400px] h-[5l10px] rounded-[21px] bg-white p-[10px] mr-[30px] mx-auto flex flex-col items-center">
+                                <!-- Image -->
                                 <div class="w-full flex justify-center mb-3">
-                                    <div class="w-[180px] h-[180px] flex items-center justify-center">
-                                    <img src="<?php echo $product->getImage() ?>" alt="image_bd" class="object-contain w-full h-full">                                    </div>
+                                    <div class="w-[180px] h-[180px] flex mt-[15px] items-center justify-center">
+                                        <img src="<?php echo $product->getImage() ?>" alt="image_bd" class="object-contain w-full h-full">                                    
+                                    </div>
                                 </div>
+                                
+                                <!-- Name -->
                                 <div class="w-full text-left mt-[10px]">
                                     <div class="flex">
-                                        <p class="font-inter pl-[10px] text-[19px] font-bold text-black">Id:</p>
-                                        <p class="font-inter pl-[5px] text-[19px] font-medium text-black"><?php echo $product->getId(); ?></p>
+                                        <p class="font-inter pl-[10px] text-[17px] font-bold text-black"><?php echo $product->getName(); ?></p>
                                     </div>
+                                </div>
+                                
+                                <!-- Weight -->
+                                <div class="w-full text-left mt-[10px]">
                                     <div class="flex">
-                                        <p class="font-inter pl-[10px] text-[19px] font-bold text-black">Nom:</p>
-                                        <p class="font-inter pl-[5px] text-[19px] font-medium text-black"><?php echo $product->getName(); ?></p>
+                                        <p class="font-inter pl-[10px] text-[17px] font-medium text-black"><?php echo $product->getWeight(); ?></p>
                                     </div>
-                                    <button>Llegir més</button>
+                                </div>
+                                
+                                <!-- Description -->
+                                <div class="w-full text-left mt-[10px]">
+                                    <div class="flex">
+                                        <p class="font-inter pl-[10px] pr-[15px] text-[17px] text-justify font-medium text-black"><?php echo $product->getDescription(); ?></p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Button -->
+                                <div class="w-full flex justify-center">
+                                    <a class="font-inter p-[8px] w-[90%] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-light text-center hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200" href="">Llegir més</a>
+                                    <input type="hidden" name="id" value="<?php echo $product->getId(); ?>">
                                 </div>
                             </div>
                         <?php } ?>

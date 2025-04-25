@@ -122,6 +122,25 @@ class ProductRepository{
         ]);
     }
 
+    // Select with state 1
+    function stateone(){
+        $allproducts = [];
+        $sql = $this->db->prepare("SELECT id, name, SUBSTRING(description, 1,120) AS description_short, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
+                                    SUBSTRING(nutritionalinformation, 1, 20) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state, idsubcategory FROM products
+                                    WHERE state = 1");
+        $sql->execute();
+        while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
+            if (empty($fila['nutritionalinformation_short'])) {
+                $nutritionalinformation = null;
+            } else {
+                $nutritionalinformation = $fila['nutritionalinformation_short'];
+            }
+            $products = new Product($fila['id'], $fila['name'], $fila['description_short'], $fila['ingredients_short'], $nutritionalinformation, $fila['price'], $fila['brand_short'], $fila['image'], $fila['weight'], $fila['state'], $fila['idsubcategory']);
+            $allproducts[] = $products;
+        }
+        return $allproducts;
+    }
+
     // Search 
     function searchproduct(string $name) {
         try {

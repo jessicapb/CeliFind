@@ -266,7 +266,6 @@
 
     <footer class="bg-slate-100 text-black py-12 px-8 lg:px-20">
         <div class="grid grid-cols-1 max-w-screen-xl mx-auto md:grid-cols-5 text-center lg:text-start md:text-start gap-8 text-sm justify-center">
-            
             <div class="md:col-span-1 flex flex-col space-y-2">
                 <a href="/">
                     <img src="../img/logo/logo.png" alt="CeliFind logo" class="w-36">
@@ -305,6 +304,9 @@
                     <li><a href="#">Qui Som</a></li>
                 </ul>
             </div>
+        </div>
+        <div class=" max-w-screen-xl mx-auto  gap-8 text-sm">
+            <p class="space-y-1 text-gray-600 text-center  mt-[10px]">Copyright © <?=date('Y')?></p>
         </div>
     </footer>
 </body>
