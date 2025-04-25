@@ -55,32 +55,47 @@ class ProductRepository{
         $sql = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
                                     SUBSTRING(nutritionalinformation, 1, 20) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state, idsubcategory FROM products");
         $sql->execute();
-        $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
-        if (count($result) != 0) {
-            return $result;
-        } else {
-            return [];
+        while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
+            if (empty($fila['nutritionalinformation_short'])) {
+                $nutritionalinformation = null;
+            } else {
+                $nutritionalinformation = $fila['nutritionalinformation_short'];
+            }
+            $products = new Product($fila['id'], $fila['name_short'], $fila['description_short'], $fila['ingredients_short'], $nutritionalinformation, $fila['price'], $fila['brand_short'], $fila['image'], $fila['weight'], $fila['state'], $fila['idsubcategory']);
+            $allproducts[] = $products;
         }
+        return $allproducts;
     }
 
     // Select with id 
-    function findById(int $id): ?object{
-        $sql = $this->db->prepare("SELECT * FROM products WHERE id = :id");
-        $sql->execute([
-            ':id' => $id
-        ]);
-        $result = $sql->fetch(\PDO::FETCH_OBJ);
-        if ($result) {
-            return $result;
-        } else {
-            return null;
+    public function findById(int $id): ?Product {
+        $stmt = $this->db->prepare("SELECT * FROM products WHERE id = :id");
+        $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        
+        if ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            return new Product(
+                $row['id'],
+                $row['name'],
+                $row['description'],
+                $row['ingredients'],
+                $row['nutritionalinformation'],
+                $row['price'],
+                $row['brand'],
+                $row['image'],
+                $row['weight'],
+                $row['state'],
+                $row['subcategory_id']
+            );
         }
+        return null;
     }
-
+    
     // Update
     function updateProduct(Product $product){
         try {
-            $sql = $this->db->prepare("UPDATE products SET name = :name, description = :description, price = :price, ingredients = :ingredients, nutritionalinformation = :nutritionalinformation, brand = :brand, image = :image, weight = :weight, state = :state WHERE id = :id");
+            $sql = $this->db->prepare("UPDATE products SET name = :name, description = :description, price = :price, ingredients = :ingredients, nutritionalinformation = :nutritionalinformation, 
+                                        brand = :brand, image = :image, weight = :weight, state = :state, idsubcategory = :idsubcategory, WHERE id = :id");
             $sql->execute([
                 'id' => $product->getId(),
                 'name' => $product->getName(),
@@ -92,9 +107,10 @@ class ProductRepository{
                 'image' => $product->getImage(),
                 'weight' => $product->getWeight(),
                 'state' => $product->getState(),
+                'idsubcategory' => $product->getSubCategoryId(), // Añadido para actualizar la subcategoría
             ]);
         } catch (\PDOException $e) {
-            throw new BuildExceptions("Error saving product:" . $e->getMessage());
+            throw new BuildExceptions("Error updating product:" . $e->getMessage());
         }
     }
 

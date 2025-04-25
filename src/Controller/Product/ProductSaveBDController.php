@@ -3,16 +3,19 @@
 namespace App\Controller\Product;
 
 use App\Infrastructure\Persistence\ProductRepository;
+use App\Celifind\Services\ProductServices;
 use App\Celifind\Entities\Product;
 use App\Celifind\Exceptions\BuildExceptions;
 
 class ProductSaveBDController{
     private \PDO $db;
     private ProductRepository $ProductRepository;
+    private ProductServices $ProductServices;
     
     public function __construct(\PDO $db) {
         $this->db = $db;
         $this->ProductRepository = new ProductRepository($db);
+        $this->ProductService = new ProductServices($db, $this->ProductRepository);
     }
     
     public function saveproduct() {
@@ -51,14 +54,14 @@ class ProductSaveBDController{
                 $product = new Product(null,$name, $description, $ingredients,$nutritionalinformation,$price, $brand, $imageData, $weight, $state);
                 
                 // Validate if the name exists
-                if ($this->ProductRepository->exists($name)) {
+                if ($this->ProductService->exists($name)) {
                     $_SESSION['errors']['name'] = "El nom ja està registrat.";
                     header('Location: /productadd');
                     exit;
                 }
                 
                 // If everything is okay, save the product.
-                $this->ProductRepository->save($product);  
+                $this->ProductService->save($product);  
                 header('Location: /productmanager');
             }catch (BuildExceptions $e) {
                 $_SESSION['error'] = $e->getMessage();

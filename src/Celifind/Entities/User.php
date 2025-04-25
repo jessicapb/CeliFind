@@ -9,29 +9,37 @@ use App\Celifind\Exceptions\BuildExceptions;
 class User
 {
     // The others fields shouldnt even being created due to database handling
-    protected $name;
-    protected $surname;
-    protected $email;
-    protected $city;
-    protected $postalcode;
-    protected $password;
+    protected ?int $id = null;
+    public $name;
+    public $surname = null;
+    public $email;
+    public $city = null;
+    public $postalcode;
+    public $password;
 
-
-
-    public function __construct($name, $surname, $email, $city, $postalcode, $password)
+    /**
+     * Constructor para crear un usuario nuevo (valida los datos)
+     */
+    public function __construct($name, $surname = null, $email, $city = null, $postalcode, $password)
     {
         $error = 0;
         if (($error = $this->setName($name)) != 0) {
             $_SESSION['errors']['name'] = Checks::getErrorMessage($error);
         }
-        if (($error = $this->setSurname($surname)) != 0) {
+        // surname puede ser null
+        if ($surname !== null && ($error = $this->setSurname($surname)) != 0) {
             $_SESSION['errors']['surname'] = Checks::getErrorMessage($error);
+        } else if ($surname === null) {
+            $this->surname = null;
         }
         if (($error = $this->setEmail($email)) != 0) {
             $_SESSION['errors']['email'] = ChecksUser::getErrorMessage($error);
         }
-        if (($error = $this->setCity($city)) != 0) {
+        // city puede ser null
+        if ($city !== null && ($error = $this->setCity($city)) != 0) {
             $_SESSION['errors']['city'] = Checks::getErrorMessage($error);
+        } else if ($city === null) {
+            $this->city = null;
         }
         if (($error = $this->setPostalCode($postalcode)) != 0) {
             $_SESSION['errors']['postalcode'] = ChecksUser::getErrorMessage($error);
@@ -40,35 +48,28 @@ class User
             $_SESSION['errors']['password'] = ChecksUser::getErrorMessage($error);
         }
         if (!empty($_SESSION['errors'])) {
-            throw new BuildExceptions("It is not possible to create the user. Check errors.");
+            $errorMessage = json_encode($_SESSION['errors']);
+            throw new BuildExceptions($errorMessage);
         }
     }
 
+    /**
+     * Crea un usuario a partir de los datos de la base de datos (sin validar)
+     */
+    public static function fromDbRow($id, $name, $surname, $email, $city, $postalcode, $password) {
+        $user = new self($name, $surname, $email, $city, $postalcode, $password);
+        $user->id = $id;
+        return $user;
+    }
+
     // Getters
-    public function getName()
-    {
-        return $this->name;
-    }
-    public function getSurname()
-    {
-        return $this->surname;
-    }
-    public function getEmail()
-    {
-        return $this->email;
-    }
-    public function getCity()
-    {
-        return $this->city;
-    }
-    public function getPostalcode()
-    {
-        return $this->postalcode;
-    }
-    public function getPassword()
-    {
-        return $this->password;
-    }
+    public function getId(){return $this->id;}
+    public function getName(){return $this->name;}
+    public function getSurname(){return $this->surname;}
+    public function getEmail(){return $this->email;}
+    public function getCity(){return $this->city;}
+    public function getPostalcode(){return $this->postalcode;}
+    public function getPassword(){return $this->password;}
 
     // Setters
     public function setName($name)
@@ -96,6 +97,7 @@ class User
     public function setEmail($email)
     {
         $this->email = $email;
+        return 0;
     }
 
     public function setCity($city)
@@ -114,6 +116,7 @@ class User
         $error = ChecksUser::correctPostalCode($postalcode);
         if($error ===0){
             $this->postalcode = $postalcode;
+            return 0;
         }else{
             return $error;
         }

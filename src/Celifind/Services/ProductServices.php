@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Celifind\Services;
+
+use App\Infrastructure\Persistence\ProductRepository;
+use App\Celifind\Entities\Product;
+
+class ProductServices{
+    private \PDO $db;
+    private ProductRepository $ProductRepository;
+    
+    function __construct(\PDO $db, ProductRepository $ProductRepository){
+        $this->db = $db;
+        $this->ProductRepository = $ProductRepository;
+    }
+    
+    function exists(string $name):bool{
+        return $this->ProductRepository->exists($name);
+    }
+    
+    function save(Product $product){
+        $product = $this->ProductRepository->save($product);
+        return $product;
+    }
+    
+    function showlimit(){
+        return $this->ProductRepository->showlimit();
+    }
+    
+    function findById(int $id){
+        return $this->ProductRepository->findById($id);
+    }
+    
+    function update(Product $product){
+        return $this->ProductRepository->updateProduct($product);
+    }
+
+    function delete(int $id){
+        return $this->ProductRepository->deleteProduct($id);
+    }
+}

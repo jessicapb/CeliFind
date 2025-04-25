@@ -37,14 +37,14 @@
             <div class="flex flex-col  mb-[15px]">
                 <label for="name" class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Nom</label>
                 <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="name" type="text" placeholder="escriu el nom">
-                <p id="error-name"></p>
+                <p id="error-name" class="text-red-500 mt-[5px] font-inter hidden text-[15px]"></p>
             </div>
 
             <!-- Description -->
             <div class="flex flex-col  mb-[15px]">
                 <label for="name" class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Descripció</label>
                 <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="description" type="text-area" placeholder="escriu la descripció"></textarea>
-                <p id="error-description"></p>
+                <p id="error-description" class="text-red-500 mt-[5px] font-inter hidden text-[15px]"></p>
             </div>
 
             <!-- Select Categories -->

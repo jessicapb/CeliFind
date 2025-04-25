@@ -87,7 +87,7 @@ class SubcategoryRepository
     /* Query SQL for found the subcategory by ID */
     function findById(int $id): ?object
     {
-        $sql = $this->db->prepare("SELECT * FROM categories WHERE id = :id");
+        $sql = $this->db->prepare("SELECT * FROM subcategories WHERE id = :id");
         $sql->execute([
             ':id' => $id
         ]);

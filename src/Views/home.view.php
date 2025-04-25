@@ -21,10 +21,10 @@
                     <li class="ml-8"><a href="/productview">Productes</a></li>
                     <li class="ml-8"><a href="#">Receptes</a></li>
                     <li class="ml-8"><a href="#">Qui som ?</a></li>
-                    <li class="ml-8"><a href="#">informacio</a></li>
+                    <li class="ml-8"><a href="#">Informació</a></li>
                 </ul>
                 <div class="flex items-center gap-5 ml-16">
-                    <a href="#" class="font-inter p-2 px-5 text-[16px] text-black border-[#96c368] border-2 rounded-[50px] font-normal hover:bg-[rgb(150,195,104)] hover:text-white transition duration-200">Registre</a>
+                    <a href="/register" class="font-inter p-2 px-5 text-[16px] text-black border-[#96c368] border-2 rounded-[50px] font-normal hover:bg-[rgb(150,195,104)] hover:text-white transition duration-200">Registre</a>
                     <a href="#" class="font-inter p-2 px-9 text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-white transition duration-200">Iniciar Sessió</a>
                 </div>
             </div>

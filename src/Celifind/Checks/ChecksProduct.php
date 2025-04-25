@@ -4,13 +4,18 @@ namespace App\Celifind\Checks;
 use App\Celifind\Checks\Checks;
 
 class ChecksProduct extends Checks{
-    public static function minMaxNull($min,$max){
+    public static function minMaxNull(?string $string, $min, $max) {
         if ($string === null) {
             return 0; 
         }
-        if (strlen($string)<$min) return -2;
-        if (strlen($string)>$max) return -3;
-    }
+        if (strlen($string) < $min) {
+            return -3; 
+        }
+        if(strlen($string) > $max) {
+            return -4;
+        }
+        return 0;
+    }    
     
     // Function to validate wrong words
     public static function validateProductWords($string) {

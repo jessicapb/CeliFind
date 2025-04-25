@@ -49,7 +49,7 @@
         </div>
 
         <!-- Table part -->
-        <table class="w-[90%] mt-[50px] table-auto text-center border-separate border-spacing-[20px]">
+        <table class="w-full mt-[50px] table-auto text-center border-separate border-spacing-[20px]">
             <thead>
                 <tr>
                     <th class="text-black font-calistoga text-[24px] pl-[10px] font-bold pr-[10px]">Id</th>
@@ -104,10 +104,22 @@
                         <td class="border border-[#FCB666] p-[9px]">
                             <?php echo $product->getState();?>
                         </td>
-                        <!-- SubcategoryId -->
-                        <td class="border border-[#FCB666] p-[9px]">
-                            <?php echo $product->getSubCategoryId();?>
-                        </td>
+                        <!-- Subcategory Id -->
+                                <?php 
+                                    $foundSubcategory = false; 
+                                    foreach ($subcategories as $subcategory) {
+                                        if ($subcategory->getId() == $product->getSubcategoryId()) { ?>
+                                            <td class="border border-[#FCB666] p-[9px]">
+                                            <?php echo $subcategory->getId() ; ?>
+                                            </td>
+                                            <?php
+                                            $foundSubcategory = true; }
+                                    }
+                                    if (!$foundSubcategory) {
+                                        echo 'Sin subcategoría';
+                                    }
+                                ?>
+                            
                         <!-- Edit button -->
                         <td class="font-inter bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
                             <div class="flex justify-center">
@@ -144,7 +156,7 @@
                             </div>
                         </div>
                         <!-- Modal delete correct -->
-                        <?php if ($_GET['deleted'] == 'true'): ?>
+                        <?php if (isset($_GET['deleted']) && $_GET['deleted'] == 'true'): ?>
                             <div class="deletemodal fixed inset-0 flex justify-center items-center bg-opacity-50 z-50">
                                 <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
                                     <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Eliminat el producte</h2>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pàgina View Product</title>
+    <title>Productes</title>
     <link href="./src/output.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
@@ -21,7 +21,7 @@
                     <li class="ml-8 font-bold"><a href="/productview">Productes</a></li>
                     <li class="ml-8"><a href="#">Receptes</a></li>
                     <li class="ml-8"><a href="#">Qui som ?</a></li>
-                    <li class="ml-8"><a href="#">informacio</a></li>
+                    <li class="ml-8"><a href="#">Informació</a></li>
                 </ul>
                 <div class="flex items-center gap-5 ml-16">
                     <a href="#" class="font-inter p-2 px-5 text-[16px] text-black border-[#96c368] border-2 rounded-[50px] font-normal hover:bg-[rgb(150,195,104)] hover:text-white transition duration-200">Registre</a>
@@ -157,22 +157,21 @@
         <div class="flex justify-center w-full">
             <div>
                 <!-- Search part -->
-                <form action="/searchproduct" method="POST">
+                <form action="/searchproduct" class="flex justify-center" method="POST">
                     <div>
-                        <div class="relative flex items-center">
+                        <div class="relative flex items-center max-w-[800px]">
                             <img class="absolute w-5 h-5 left-2.5 " src="../../img/search/search.svg" alt="search">
                             <input name="name" class="bg-[#fefbf9] placeholder:text-black font-normal font-inter text-black text-[16px] border border-[#FCB666] rounded-[27px] pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] shadow-sm focus:shadow" placeholder="cerca el producte">
                         </div>
                     </div>
                 </form>
-                <div class="flex justify-start">
-                    <div class="grid grid-cols-4 gap-[14px] justify-center mt-[26px] mb-[20px]">
+                <div>
+                    <div class="grid grid-cols-4 gap-[14px] mt-[26px] mb-[20px]">
                         <?php foreach ($products as $product) { ?>
-                            <div class="shadow-lg w-[300px] h-[310px] rounded-[21px] bg-white p-[10px] mx-auto flex flex-col items-center">
+                            <div class="shadow-lg w-[300px] h-[310px] rounded-[21px] bg-white p-[10px] mr-[30px] mx-auto flex flex-col items-center">
                                 <div class="w-full flex justify-center mb-3">
                                     <div class="w-[180px] h-[180px] flex items-center justify-center">
-                                        <img src="<?php echo $product->getBase64(); ?>" alt="image_bd" class="object-contain w-full h-full">
-                                    </div>
+                                    <img src="<?php echo $product->getImage() ?>" alt="image_bd" class="object-contain w-full h-full">                                    </div>
                                 </div>
                                 <div class="w-full text-left mt-[10px]">
                                     <div class="flex">
@@ -183,6 +182,7 @@
                                         <p class="font-inter pl-[10px] text-[19px] font-bold text-black">Nom:</p>
                                         <p class="font-inter pl-[5px] text-[19px] font-medium text-black"><?php echo $product->getName(); ?></p>
                                     </div>
+                                    <button>Llegir més</button>
                                 </div>
                             </div>
                         <?php } ?>

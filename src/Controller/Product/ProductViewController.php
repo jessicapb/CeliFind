@@ -2,11 +2,18 @@
 
 namespace App\Controller\Product;
 
-use App\Infrastructure\Persistence\ProductRepository;
+use App\Celifind\Services\ProductServices;
 use App\Celifind\Entities\Product;
 
 class ProductViewController {
+    private $productservices;
+    
+    public function __construct(ProductServices $productservices){
+        $this->productservices = $productservices;
+    }
+    
     function productview(){
-        echo view('product/viewproduct');
+        $products  = $this->productservices->showlimit();
+        echo view('product/viewproduct',['products'=>$products]);
     }
 }

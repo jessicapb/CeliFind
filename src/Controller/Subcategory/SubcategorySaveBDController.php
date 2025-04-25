@@ -28,14 +28,14 @@ class SubcategorySaveBDController{
                 $subcategory = new Subcategory(null, $name, $description, $category_id);
                 if ($this->SubcategoryRepository->exists($name)) {
                     $_SESSION['errors']['name'] = "El nom ja està registrat.";
-                    header('Location: /subcategoryadd');
+                    header('Location: /addsubcategory');
                     exit;
                 }
                 $this->SubcategoryRepository->save($subcategory);
                 header('Location: /subcategory');
             } catch (BuildExceptions $e) {
                 $_SESSION['error'] = $e->getMessage();
-                header('Location: /subcategoryadd');
+                header('Location: /addsubcategory');
                 exit;
             }
         }
