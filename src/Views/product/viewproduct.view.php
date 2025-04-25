@@ -194,7 +194,7 @@
                                 <!-- Description -->
                                 <div class="w-full text-left mt-[10px]">
                                     <div class="flex">
-                                        <p class="font-inter pl-[10px] pr-[15px] text-[17px] text-justify font-normal text-black"><?php echo $product->getDescription(); ?></p>
+                                        <p class="font-inter pl-[10px] pr-[15px] text-[16px] text-justify font-normal text-black"><?php echo $product->getDescription(); ?></p>
                                     </div>
                                 </div>
                                 
