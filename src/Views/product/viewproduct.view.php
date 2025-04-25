@@ -127,13 +127,13 @@
                     <li class="pl-5 py-2 hover:bg-[#e8e8e8]">Alternatives vegetals</li>
                 </ul>
             </div>
-            <div class="flex items-center gap-x-2 text-[20px] font-semibold mt-4">
+            <div class="flex items-center gap-x-2 text-[23px] font-semibold mt-4">
                 <button onclick="Subcategories('snacks')" class="font-calistoga flex items-center gap-x-2 pt-[3px] pl-[20px] rounded-[50px] text-[16px] text-black opacity-[78%] font-light">
                     <img class="w-[1.25%] h-[1.25%]" src="../../img/categoria/flecha-correcta.png" alt=""> 🍟 Snacks
                 </button>
             </div>
             <div id="snacks-subcategories" class="hidden pl-[40px] mt-2">
-                <ul class="text-[12px] font-medium text-black">
+                <ul class="text-[15px] font-medium text-black">
                     <li class="pl-5 py-2 hover:bg-[#e8e8e8]">Chips i aperitius</li>
                     <li class="pl-5 py-2 hover:bg-[#e8e8e8]">Barres energètiques</li>
                     <li class="pl-5 py-2 hover:bg-[#e8e8e8]">Fruits secs</li>
@@ -146,7 +146,7 @@
                 </button>
             </div>
             <div id="fruites-subcategories" class="hidden pl-[40px]">
-                <ul class="text-[12px] font-medium text-black">
+                <ul class="text-[14px] font-medium text-black">
                     <li class="pl-5 py-2 hover:bg-[#e8e8e8]">Fruites</li>
                     <li class="pl-5 py-2 hover:bg-[#e8e8e8]">Verdures</li>
                     <li class="pl-5 py-2 hover:bg-[#e8e8e8]">Fruits secs</li>
@@ -187,14 +187,14 @@
                                 <!-- Weight -->
                                 <div class="w-full text-left mt-[10px]">
                                     <div class="flex">
-                                        <p class="font-inter pl-[10px] text-[17px] font-medium text-black"><?php echo $product->getWeight(); ?></p>
+                                        <p class="font-inter pl-[10px] text-[16px] font-medium text-black"><?php echo $product->getWeight(); ?></p>
                                     </div>
                                 </div>
                                 
                                 <!-- Description -->
                                 <div class="w-full text-left mt-[10px]">
                                     <div class="flex">
-                                        <p class="font-inter pl-[10px] pr-[15px] text-[17px] text-justify font-medium text-black"><?php echo $product->getDescription(); ?></p>
+                                        <p class="font-inter pl-[10px] pr-[15px] text-[17px] text-justify font-normal text-black"><?php echo $product->getDescription(); ?></p>
                                     </div>
                                 </div>
                                 
