@@ -7,42 +7,84 @@
     <link href="/src/output.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
 </head>
-<body class="bg-white flex flex-col items-center justify-center min-h-screen">
-<div class="p-1 space-y-0.5">
-                <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/manager">
-                    <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="home">
-                    Tornar al gestor
+<body class="bg-slate-100 flex flex-col items-center justify-center min-h-screen">
+<div class="p-1 space-y-0.5 absolute top-0 left-0 right-0 flex justify-between items-center">
+    <div class="flex flex-col items-start">
+        <img src="../../img/logo/logo.png" alt="Celifind logo" class="w-32 ml-4 mt-4 select-none">
+        <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/manager">
+            <img class="w-8 h-8" src="../../img/home/home.png" alt="home">
+            Tornar al gestor
+        </a>
+    </div>
+</div>
+
+<h1 class="text-5xl font-calistoga font-bold mb-10 mt-8 text-gray-800">Registre</h1>
+<form action="/userregister" method="POST" class="w-full max-w-md flex flex-col gap-4">
+    <div>
+        <label class="block font-calistoga text-lg text-gray-800 mb-1" for="name">Nom</label>
+        <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500" type="text" name="name" id="name" placeholder="escriu el nom" required>
+    </div>
+    <div>
+        <label class="block font-calistoga text-lg text-gray-800 mb-1" for="postalcode">Codi postal</label>
+        <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500" type="text" name="postalcode" id="postalcode" placeholder="escriu el codi postal" required>
+    </div>
+    <div>
+        <label class="block font-calistoga text-lg text-gray-800 mb-1" for="email">Correu electrònic</label>
+        <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500" type="email" name="email" id="email" placeholder="escriu el correu" required>
+    </div>
+    <div>
+        <label class="block font-calistoga text-lg text-gray-800 mb-1" for="password">Contrasenya</label>
+        <div class="relative">
+            <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500 pr-10" type="password" name="password" id="password" placeholder="escriu la contrasenya" required>
+            <img id="eyeIcon" src="/img/login/ojo1.png" alt="Mostrar contraseña" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 cursor-pointer select-none" style="z-index:2;">
+        </div>
+    </div>
+    <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Registra’t</button>
+    
+</form>
+<footer class=" font-calistoga text-black mt-8  bot-0 lg:px-20">
+        <div class="grid grid-cols-1 max-w-screen-xl mx-auto md:grid-cols-5 text-center lg:text-start md:text-start gap-8 text-sm justify-center">
+            
+            <div class="md:col-span-1 flex flex-col space-y-2">
+                <a href="/">
+                    <img src="../img/logo/logo.png" alt="CeliFind logo" class="w-36">
                 </a>
             </div>
-    <!-- Name -->
-    <div class="flex flex-col  mb-[15px]">
-                <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Nom</label>
-                <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="name" type="text" placeholder="escriu el nom">
-                <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]" id="error-name"></p>
+
+            <div>
+                <h4 class="font-semibold mb-2">Serveis i Productes</h4>
+                    <ul class="space-y-1 text-gray-600">
+                        <li><a href="#">Productes</a></li>
+                        <li><a href="#">Receptes</a></li>
+                        <li><a href="#">Qui som</a></li>
+                        <li><a href="#">Informació</a></li>
+                    </ul>
             </div>
-    <h1 class="text-5xl font-calistoga font-bold mb-10 mt-8 text-gray-800">Registre</h1>
-    <form action="/userregister" method="POST" class="w-full max-w-md flex flex-col gap-4">
-        <div>
-            <label class="block font-calistoga text-lg text-gray-800 mb-1" for="name">Nom</label>
-            <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500" type="text" name="name" id="name" placeholder="escriu el nom" required>
-        </div>
-        <div>
-            <label class="block font-calistoga text-lg text-gray-800 mb-1" for="postalcode">Codi postal</label>
-            <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500" type="text" name="postalcode" id="postalcode" placeholder="escriu el codi postal" required>
-        </div>
-        <div>
-            <label class="block font-calistoga text-lg text-gray-800 mb-1" for="email">Correu electrònic</label>
-            <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500" type="email" name="email" id="email" placeholder="escriu el correu" required>
-        </div>
-        <div>
-            <label class="block font-calistoga text-lg text-gray-800 mb-1" for="password">Contrasenya</label>
-            <div class="relative">
-                <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500 pr-10" type="password" name="password" id="password" placeholder="escriu la contrasenya" required>
-                <img id="eyeIcon" src="/img/login/ojo1.png" alt="Mostrar contraseña" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 cursor-pointer select-none" style="z-index:2;">
+
+            <div>
+                <h4 class="font-semibold mb-2">Contacta'ns</h4>
+                <ul class="space-y-1 text-gray-600">
+                    <li><a href="mailto:celifind.cat@gmail.com">celifind.cat@gmail.com</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-semibold mb-2">Política de privacitat</h4>
+                <ul class="space-y-1 text-gray-600">
+                    <li><a href="#">Avís Legal</a></li>
+                    <li><a href="#">Política de Cookies</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-semibold mb-2">Ajuda</h4>
+                <ul class="space-y-1 text-gray-600">
+                    <li><a href="#">Informació</a></li>
+                    <li><a href="#">Qui Som</a></li>
+                </ul>
             </div>
         </div>
-        <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Registra’t</button>
-    </form>
+    </footer>
 </body>
 <script>
     const eyeIcon = document.getElementById('eyeIcon');
