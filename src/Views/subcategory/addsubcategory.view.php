@@ -20,7 +20,7 @@
                 <img class="pl-[20px] pt-[20px] w-[9%] h-[9%]" src="../../img/logo/logo.png" alt="">
             </a>
             <div class="p-1 space-y-0.5">
-                <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/productmanager">
+                <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/subcategory">
                     <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="">
                     Tornar al panel de control
                 </a>

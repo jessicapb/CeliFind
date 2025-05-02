@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestor dels categories</title>
+    <title>Pàgina View Categories</title>
     <link href="./src/output.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
     <link rel="shortcut icon" class="h-18" href="../../img/logo/logo.png" type="image/x-icon">
 </head>
 
-<body>
+<body class="bg-gray-100">
     <header>
         <nav>
             <a href="/manager">
@@ -29,9 +29,13 @@
     <section>
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center">Gestor <span class="text-[#96c368] opacity-[100%]">Categories</span></h1>
         <div class="mt-[20px] flex justify-between items-center">
-            <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/categoryadd">Afegir Categoria</a>
-
-            <form action="">
+            
+            <!-- Add Category  -->
+            <div class="w-[50%]">
+                <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/categoryadd">Afegir Categoria</a>
+                <a class="font-inter bg-[#96c368] text-[#f5f5f5] text-[16px] font-medium p-[9px]  rounded-[9px] text-center transition-all focus:shadow-none active:bg-[#88c24d] hover:focus:bg-[#88c24d]  hover:bg-[#88c24d] disabled:pointer-events-none disabled:opacity-50" href="/categoryshowimage">Veure imatges</a>
+            </div>
+            <form action="/searchcategory" method="POST">
                 <div class="w-full max-w-sm min-w-[200px]">
                     <div class="relative flex items-center">
                         <img class="absolute w-5 h-5 left-2.5 " src="../../img/search/search.svg" alt="search">
@@ -60,15 +64,20 @@
                             <td class="border border-[#FCB666] p-[10px]"><?php echo $category->getId(); ?></td>
                             <td class="border border-[#FCB666] p-[10px]"><?php echo $category->getName(); ?></td>
                             <td class="border border-[#FCB666] p-[10px]"><?php echo $category->getDescription(); ?></td>
-                            <td class="border border-[#FCB666] p-[10px] w-[5%] h-[5%]"><?php echo $category->getBase64(); ?></td>
+                            <td class="border border-[#FCB666] p-[10px] w-[5%] h-[5%]"><?php echo $category->getImage(); ?></td>
 
-                            <!-- Edit button -->
-                            <td class="font-inter w-[100px] bg-[#FCB666] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
-                                <a href="" class="flex items-center justify-center w-full h-full">
-                                    <p class="mr-[5px] ml-[5px]">Editar</p>
-                                    <img class="mr-[10px] w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
-                                </a>
-                            </td>
+                        <!-- Edit button -->
+                        <td class="font-inter bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
+                            <div class="flex justify-center">
+                                <form action="/categoryupdate" method="POST">
+                                    <input type="hidden" name="id" value="<?php echo $category->getId(); ?>">
+                                    <button type="submit" class="flex items-center">
+                                        <p class="mr-[5px]">Editar</p>
+                                        <img class="w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
 
                             <!-- Delete button -->
                             <td class="font-inter w-[120px] bg-[#FCB666] text-white text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover:bg-[#ef9b3b]">
@@ -92,6 +101,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <!-- Modal delete correct -->
                             <?php if ($_GET['deleted'] == 'true'): ?>
                                 <div class="deletemodal fixed inset-0 flex justify-center items-center bg-opacity-50 z-50">
@@ -103,14 +113,6 @@
                                     </div>
                                 </div>
                             <?php endif; ?>
-
-                            <!-- Show button -->
-                            <td class="font-inter w-[100px] bg-[#FCB666] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
-                                <a href="" class="flex items-center justify-center w-full h-full">
-                                    <p class="mr-[5px] ml-[5px]">Veure</p>
-                                    <img class="mr-[10px] w-[20px] h-[20px]" src="../../img/show/show.png" alt="show">
-                                </a>
-                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>

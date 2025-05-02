@@ -53,7 +53,7 @@ class ProductRepository{
     function showlimit(){
         $allproducts = [];
         $sql = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
-                                    SUBSTRING(nutritionalinformation, 1, 20) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state, idsubcategory FROM products");
+                                    SUBSTRING(nutritionalinformation, 1, 12) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state, idsubcategory FROM products");
         $sql->execute();
         while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
             if (empty($fila['nutritionalinformation_short'])) {
@@ -66,14 +66,34 @@ class ProductRepository{
         }
         return $allproducts;
     }
+    
+    // Select with state 1
+    function stateone(){
+        $allproducts = [];
+        $sql = $this->db->prepare("SELECT id, name, description, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
+                                        SUBSTRING(nutritionalinformation, 1, 20) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state, idsubcategory FROM products
+                                        WHERE state = 1");
+        $sql->execute();
+        while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
+            if (empty($fila['nutritionalinformation_short'])) {
+                    $nutritionalinformation = null;
+            } else {
+                $nutritionalinformation = $fila['nutritionalinformation_short'];
+            }
+            $products = new Product($fila['id'], $fila['name'], $fila['description'], $fila['ingredients_short'], $nutritionalinformation, $fila['price'], $fila['brand_short'], $fila['image'], $fila['weight'], $fila['state'], $fila['idsubcategory']);
+            $allproducts[] = $products;
+        }
+        return $allproducts;
+    }
+
 
     // Select with id 
     public function findById(int $id): ?Product {
-        $stmt = $this->db->prepare("SELECT * FROM products WHERE id = :id");
-        $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
-        $stmt->execute();
+        $sql = $this->db->prepare("SELECT * FROM products WHERE id = :id");
+        $sql->bindParam(':id', $id, \PDO::PARAM_INT);
+        $sql->execute();
         
-        if ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+        if ($row = $sql->fetch(\PDO::FETCH_ASSOC)) {
             return new Product(
                 $row['id'],
                 $row['name'],
@@ -95,7 +115,7 @@ class ProductRepository{
     function updateProduct(Product $product){
         try {
             $sql = $this->db->prepare("UPDATE products SET name = :name, description = :description, price = :price, ingredients = :ingredients, nutritionalinformation = :nutritionalinformation, 
-                                        brand = :brand, image = :image, weight = :weight, state = :state, idsubcategory = :idsubcategory, WHERE id = :id");
+                                        brand = :brand, image = :image, weight = :weight, state = :state, idsubcategory = :idsubcategory WHERE id = :id");
             $sql->execute([
                 'id' => $product->getId(),
                 'name' => $product->getName(),
@@ -107,7 +127,7 @@ class ProductRepository{
                 'image' => $product->getImage(),
                 'weight' => $product->getWeight(),
                 'state' => $product->getState(),
-                'idsubcategory' => $product->getSubCategoryId(), // Añadido para actualizar la subcategoría
+                'idsubcategory' => $product->getSubCategoryId(),
             ]);
         } catch (\PDOException $e) {
             throw new BuildExceptions("Error updating product:" . $e->getMessage());
@@ -122,33 +142,12 @@ class ProductRepository{
         ]);
     }
 
-    // Select with state 1
-    function stateone(){
-        $allproducts = [];
-        $sql = $this->db->prepare("SELECT id, name, SUBSTRING(description, 1,120) AS description_short, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
-                                    SUBSTRING(nutritionalinformation, 1, 20) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state, idsubcategory FROM products
-                                    WHERE state = 1");
-        $sql->execute();
-        while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
-            if (empty($fila['nutritionalinformation_short'])) {
-                $nutritionalinformation = null;
-            } else {
-                $nutritionalinformation = $fila['nutritionalinformation_short'];
-            }
-            $products = new Product($fila['id'], $fila['name'], $fila['description_short'], $fila['ingredients_short'], $nutritionalinformation, $fila['price'], $fila['brand_short'], $fila['image'], $fila['weight'], $fila['state'], $fila['idsubcategory']);
-            $allproducts[] = $products;
-        }
-        return $allproducts;
-    }
-
     // Search 
     function searchproduct(string $name) {
-        try {
-            $sql = $this->db->prepare("SELECT * FROM products WHERE name LIKE '% . $name .%' ORDER BY name");
-            $sql->execute();
-            dd($sql);
-        } catch (\PDOException $e) {
-            throw new BuildExceptions("Error searching product:" . $e->getMessage());
-        }
+        $sql = $this->db->prepare("SELECT * FROM products WHERE name LIKE '% . $name .%' AND state = 1 ORDER BY name");
+        $sql->execute([
+            ':name' => '%' . $name . '%'
+        ]);
+        return $sql->fetchAll(\PDO::FETCH_ASSOC);
     }    
 }

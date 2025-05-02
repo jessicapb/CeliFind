@@ -18,16 +18,26 @@ class CategoryRepository
     // Cambiar por Objetos que devuelva objetos pasarle las categorias --> Preguntar
     function getall(): array
     {
+        $result_categories = [];
+
         $sql = $this->db->prepare("SELECT * FROM categories");
         $sql->execute();
-        $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
-        if (count($result) != 0) {
-            return $result;
-        } else {
-            return [];
+        $categories = $sql->fetchAll(\PDO::FETCH_ASSOC);
+        foreach ($categories as $category) {
+            $category['subcategories'] = [];
+    
+            $sql = $this->db->prepare("SELECT * FROM subcategories WHERE idcategoria = :idcategoria");
+            $sql->execute(['idcategoria' => $category['id']]);
+            $subcategories = $sql->fetchAll(\PDO::FETCH_ASSOC);
+    
+            $category['subcategories'] = $subcategories;
+            $result_categories[] = $category;
         }
+    
+        return $result_categories;
     }
-
+    
+    
 
     /* Query SQL Create */
     function save(Category $category)
@@ -62,7 +72,7 @@ class CategoryRepository
     }
 
     /* Query SQL Update */
-    function update(Category $category): void
+    function updatecategory(Category $category): void
     {
         try {
             $sql = $this->db->prepare("UPDATE categories SET name = :name, description = :description, image = :image WHERE id = :id");

@@ -18,6 +18,7 @@ use App\Controller\Product\ProductShowImageController;
 use App\Controller\Product\ProductUpdateController;
 use App\Controller\Product\ProductViewController;
 use App\Controller\Product\ProductToSubcategoryController;
+use App\Controller\Product\ProductIndividualController;
 
 //ControllerProduct
 use App\Controller\Product\ProductSaveBDController;
@@ -29,6 +30,7 @@ use App\Controller\Product\ProductToSubcategoryBDController;
 //ViewsRecipes
 use App\Controller\Recipes\RecipesManagerController;
 use App\Controller\Recipes\RecipesAddController;
+use App\Controller\Recipes\RecipesShowImageController;
 
 // ControllerRecipes
 use App\Controller\Recipes\RecipesSaveBDController;
@@ -38,12 +40,17 @@ use App\Controller\Category\CategoryShowBDController;
 use App\Controller\Category\CategoryAddBDController;
 use App\Controller\Category\CategorySaveBDController;
 use App\Controller\Category\CategoryDeleteBDController;
+use App\Controller\Category\CategoryUpdateController;
+use App\Controller\Category\CategoryUpdateBDController;
+use App\Controller\Category\CategoryShowImageBDController;
 
 // ControllerSubcategory
 use App\Controller\Subcategory\SubcategoryShowBDController;
 use App\Controller\Subcategory\SubcategoryAddBDController;
 use App\Controller\Subcategory\SubcategorySaveBDController;
 use App\Controller\Subcategory\SubcategoryDeleteBDController;
+use App\Controller\Subcategory\SubcategoryUpdateController;
+use App\Controller\Subcategory\SubcategoryUpdateBDController;
 
 // User controllers
 use App\Controller\User\UserLoginController;
@@ -59,11 +66,8 @@ use App\Celifind\Services\Services;
 // Product Services
 use App\Celifind\Services\ProductServices;
 
-// Services and connection to database
-$db=DatabaseConnection::getConnection();
-$services=new Services();
-$services->addServices('db',fn()=>$db);
-$db=$services->getService('db');
+// Recipes Services
+use App\Celifind\Services\RecipesServices;
 
 // RepositoryCategory
 use App\Infrastructure\Persistence\CategoryRepository;
@@ -79,6 +83,12 @@ use  App\Infrastructure\Persistence\RecipesRepository;
 
 //Routes
 use App\Infrastructure\Routing\Router;
+
+// Services and connection to database
+$db=DatabaseConnection::getConnection();
+$services=new Services();
+$services->addServices('db',fn()=>$db);
+$db=$services->getService('db');
 
 // Routes productrepository
 $services->addServices('productRepository', fn() => new ProductRepository($db));
@@ -109,8 +119,8 @@ $controllerproducttosubcategory = new ProductToSubcategoryBDController($db);
 // Show the form for update the product
 //$showformupdate = new ProductUpdateController($db);
 
-// Show a preview of the product
-$showpreviewimage = new ProductViewController($productServices);
+// Show a individual product
+$showindividualproduct =  new ProductIndividualController($productServices);
 
 // User controllers
 $userLoginController = new UserLoginController($db);
@@ -121,9 +131,18 @@ $logoutController = new LogoutController();
 $services->addServices('recipesRepository', fn() => new RecipesRepository($db));
 $recipesRepository = $services->getService('recipesRepository');
 
+// Routes productservices
+$services->addServices('recipesServices', fn() => new RecipesServices($db, $services->getService('recipesRepository')));
+$RecipesServices = $services->getService('recipesServices');
+
 // Save the recipes
 $saverecipes = new RecipesSaveBDController($db);
-$showlimitrecipes = new RecipesManagerController($recipesRepository);
+
+// Show the recipes
+$showlimitrecipes = new RecipesManagerController($RecipesServices);
+
+// Show the image of the recipes
+$showimagerecipes = new RecipesShowImageController($RecipesServices);
 
 // Routes Category Repository
 $services->addServices('categoryRepository', fn() => new CategoryRepository($db));
@@ -133,11 +152,27 @@ $categoryRepository = $services->getService('categoryRepository');
 $services->addServices('subcategoryRepository', fn() => new SubcategoryRepository($db));
 $subcategoryRepository = $services->getService('subcategoryRepository');
 
+// View the update of the category
+$formupdate = new CategoryUpdateController($db);
+
+// View the update of the subcategory
+$formupdatesubcategory = new SubcategoryUpdateController($db);
+
+// Update the category
+$controllerupdatecategory = new CategoryUpdateBDController($db);
+
+// Update the subcategory
+$controllerupdatesubcategory = new SubcategoryUpdateBDController($db);
+
+// Show the categories & subcategories in View Product
+$viewproduct = new ProductViewController($productServices, $categoryRepository, $subcategoryRepository);
+
 // Show the name of the product and subcategory
 $shownameproductandsubcategory = new ProductToSubcategoryController($productServices, $subcategoryRepository);
 
 // Show the product and the of the subcategory
 $showlimitproduct = new ProductManagerController($productServices, $subcategoryRepository);
+
 // Routes to show the views
 $router = new Router();
 $router 
@@ -146,7 +181,7 @@ $router
     
     // Go to the home page
     ->addRoute('GET','/home',[new HomeController(),'home'])
-        
+    
     // Go to the manager page
     ->addRoute('GET','/manager',[new ManagerController(),'manager'])
     
@@ -184,7 +219,10 @@ $router
     ->addRoute('POST','/updateproduct',[$controllerupdateproduct,'updateproduct'])
     
     // View of the product
-    ->addRoute('GET','/productview',[$showpreviewimage,'productview'])
+    ->addRoute('GET','/productview',[$viewproduct,'productview'])
+    
+    // View of a individual product
+    ->addRoute('POST','/productindividual',[$showindividualproduct,'productindividual'])
     
     // Go to the manager recipes
     ->addRoute('GET','/recipesmanager',[$showlimitrecipes,'recipesmanager'])
@@ -195,6 +233,9 @@ $router
     // Save a recipe to the database or display errors
     ->addRoute('POST', '/saverecipes', [$saverecipes, 'saverecipes'])
     
+    // Show the image of the recipes showimagerecipes
+    ->addRoute('GET', '/recipesshowimage', [$showimagerecipes, 'recipesshowimage'])
+    
     // Go to the show categories
     ->addRoute('GET', '/category', [new CategoryShowBDController($db), 'showcategory'])
     
@@ -204,6 +245,12 @@ $router
     
     ->addRoute('POST', '/deletecategory', [new CategoryDeleteBDController($db), 'deletecategory'])
     
+    ->addRoute('POST','/categoryupdate',[$formupdate,'categoryupdate'])
+    
+    ->addRoute('POST','/updatecategory',[$controllerupdatecategory,'updatecategory'])
+    
+    ->addRoute('GET','/categoryshowimage',[new CategoryShowImageBDController($db),'categoryshowimage'])
+    
     // Go to the show subcategories
     ->addRoute('GET', '/subcategory', [new SubcategoryShowBDController($db), 'showsubcategory'])
     
@@ -212,16 +259,20 @@ $router
     ->addRoute('POST', '/savesubcategory', [new SubcategorySaveBDController($db), 'savesubcategory'])
     
     ->addRoute('POST', '/deletesubcategory', [new SubcategoryDeleteBDController($db), 'deletesubcategory'])
-
+    
+    ->addRoute('GET','/subcategoryupdate',[$formupdatesubcategory,'subcategoryupdate'])
+    
+    ->addRoute('POST','/updatesubcategory',[$controllerupdatesubcategory,'updatesubcategory'])
+    
     // Go to the login page
     ->addRoute('GET','/login',[$userLoginController,'showLogin'])
-
+    
     // Go to the register page
     ->addRoute('GET','/register',[$userRegisterController,'showRegister'])
-
+    
     // Handle login POST
     ->addRoute('POST','/userlogin',[$userLoginController,'login'])
-
+    
     // Handle register POST
     ->addRoute('POST','/userregister',[$userRegisterController,'register'])
     

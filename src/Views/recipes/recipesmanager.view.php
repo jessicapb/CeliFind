@@ -29,9 +29,8 @@
         <div class="mt-[20px] flex justify-between items-center">
             <!-- Add product  -->
             <div class="w-[50%]">
-                <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/productadd">Afegir productes</a>
-                <a class="font-inter bg-[#96c368] text-[#f5f5f5] text-[16px] font-medium p-[9px]  rounded-[9px] text-center transition-all focus:shadow-none active:bg-[#88c24d] hover:focus:bg-[#88c24d]  hover:bg-[#88c24d] disabled:pointer-events-none disabled:opacity-50" href="/producttocategory">Assignar producte a subcategoria</a>
-                <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/productshowimage">Veure imatges</a>
+                <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/recipesadd">Afegir receptes</a>
+                <a class="font-inter bg-[#96c368] text-[#f5f5f5] text-[16px] font-medium p-[9px]  rounded-[9px] text-center transition-all focus:shadow-none active:bg-[#88c24d] hover:focus:bg-[#88c24d]  hover:bg-[#88c24d] disabled:pointer-events-none disabled:opacity-50" href="/recipesshowimage">Veure imatges</a>
             </div>
             
             <!-- Search part -->
@@ -39,7 +38,7 @@
                 <div class="w-full max-w-sm min-w-[200px]">
                     <div class="relative flex items-center">
                         <img class="absolute w-5 h-5 left-2.5 " src="../../img/search/search.svg" alt="search">
-                        <input name="name" class="w-full bg-[#fefbf9] placeholder:text-black font-normal font-inter text-black text-[16px] border border-[#FCB666] rounded-[27px] pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] shadow-sm focus:shadow" placeholder="escriu el producte">
+                        <input name="name" class="w-full bg-[#fefbf9] placeholder:text-black font-normal font-inter text-black text-[16px] border border-[#FCB666] rounded-[27px] pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] shadow-sm focus:shadow" placeholder="escriu les receptes">
                         <button class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] px-[25px] ml-[10px] rounded-[9px] mr-[20px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" type="submit">
                         Buscar
                         </button> 
@@ -49,41 +48,55 @@
         </div>
 
         <!-- Table part -->
-        <table class="w-[95%] mt-[50px] table-auto text-center border-separate border-spacing-[20px]">
+        <table class="w-full m-auto mt-[50px] table-auto text-center border-separate border-spacing-[20px]">
             <thead>
                 <tr>
-                    <th class="text-black font-calistoga text-[24px] pl-[10px] font-bold pr-[10px]">Id</th>
                     <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Nom</th>
                     <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Descripció</th>
                     <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Ingredients</th>
+                    <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Informació nutricional</th>
+                    <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Persones</th>
+                    <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Duració</th>
+                    <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Instruccions</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($products as $product) { ?>
+                <?php foreach ($recipes as $recipe) {?>
                     
                     <tr>
-                        <!-- ID -->
-                        <td class="border border-[#FCB666] p-[9px]">
-                            <?php echo $product->getId();?>
-                        </td>
                         <!-- Name -->
                         <td class="border border-[#FCB666] p-[9px]">
-                            <?php echo $product->getName();?>
+                            <?php echo $recipe->getName();?>
                         </td>
                         <!-- Description -->
                         <td class="border border-[#FCB666] p-[9px]">
-                            <?php echo $product->getDescription();?> 
+                            <?php echo $recipe->getDescription();?> 
                         </td>
                         <!-- Ingredients -->
                         <td class="border border-[#FCB666] p-[9px]">
-                            <?php echo $product->getIngredients(); ?> 
+                            <?php echo $recipe->getIngredients(); ?> 
                         </td>
-
+                        <!-- Ingredients -->
+                        <td class="border border-[#FCB666] p-[9px]">
+                            <?php echo $recipe->getIngredients(); ?> 
+                        </td>
+                        <!-- People -->
+                        <td class="border border-[#FCB666] p-[9px]">
+                            <?php echo $recipe->getPeople(); ?> 
+                        </td>
+                        <!-- Duration -->
+                        <td class="border border-[#FCB666] p-[9px]">
+                            <?php echo $recipe->getDuration(); ?> 
+                        </td>
+                        <!-- Instructions -->
+                        <td class="border border-[#FCB666] p-[9px]">
+                            <?php echo $recipe->getInstruction(); ?> 
+                        </td>
                         <!-- Edit button -->
                         <td class="font-inter bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
                             <div class="flex justify-center">
                                 <form action="/productupdate" method="POST">
-                                    <input type="hidden" name="id" value="<?php echo $product->getId(); ?>">
+                                    <input type="hidden" name="id" value="<?php echo $recipe->getId(); ?>">
                                     <button type="submit" class="flex items-center">
                                         <p class="mr-[5px]">Editar</p>
                                         <img class="w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
@@ -103,11 +116,11 @@
                         <!-- Modal delete -->
                         <div class="deletemodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50 hidden">
                             <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
-                                <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Vols eliminar el producte <?php echo $product->getName() ?> ?</h2>
+                                <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Vols eliminar el producte <?php echo $recipe->getName() ?> ?</h2>
                                 <p class="font-inter text-black- font-medium text-[16px] text-center">Un cop sigui eliminat no es podrà desfer l'operació.</p>
                                 <div class="flex justify-center">
                                     <form action="/deleteproduct" method="POST">
-                                        <input type="hidden" name="id" value="<?php echo $product->getId(); ?>">
+                                        <input type="hidden" name="id" value="<?php echo $recipe->getId(); ?>">
                                         <button type="submit" class="font-inter bg-[#FCB666] mt-[10px] mr-[15px] text-[white] text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">Eliminar</button>
                                     </form>
                                     <button class="closemodal font-inter bg-[#96c368] text-[#f5f5f5] text-[16px] font-medium p-[9px] mt-[10px] rounded-[9px] text-center transition-all focus:shadow-none active:bg-[#88c24d] hover:focus:bg-[#88c24d]  hover:bg-[#88c24d] disabled:pointer-events-none disabled:opacity-50">Cancelar</button>

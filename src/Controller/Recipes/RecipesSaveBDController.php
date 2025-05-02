@@ -3,18 +3,21 @@
 namespace App\Controller\Recipes;
 
 use App\Infrastructure\Persistence\RecipesRepository;
+use App\Celifind\Services\RecipesServices;
 use App\Celifind\Entities\Recipes;
 use App\Celifind\Exceptions\BuildExceptions;
 
 class RecipesSaveBDController{
     private \PDO $db;
     private RecipesRepository $RecipesRepository;
-
+    private RecipesServices $RecipesServices;
+    
     public function __construct(\PDO $db) {
         $this->db = $db;
         $this->RecipesRepository = new RecipesRepository($db);
+        $this->RecipesServices = new RecipesServices($db, $this->RecipesRepository);
     }
-
+    
     public function saverecipes(){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             // Start the session
@@ -29,13 +32,18 @@ class RecipesSaveBDController{
             $duration = filter_input(INPUT_POST, 'duration');
             $instruction = filter_input(INPUT_POST, 'instruction');
             
-            // Upload image
-            // Comprobamos si hay un campo image y si se ha subido correctamente la imagen
-            // Si funciona correctamente guarda la imagen dentro de $imagenData
-            // Se pone tmp_name porque cuando subimos la imagen temporalmente se guarda en la carpeta tmp
-            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                $imageData = file_get_contents($_FILES['image']['tmp_name']);
-            } else {
+            if (!empty($_FILES['image']['name'])) {
+                $folder = '/home/linux/CeliFind/img/recepte/imagesbd/';
+                $fileName = $_FILES['image']['name'];
+                $destination = $folder . $fileName;
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
+                    $imageData = '/img/recepte/imagesbd/' . $fileName;
+                } else {
+                    $_SESSION['errors']['image'] = "No s'ha pogut guardar la imatge.";
+                    header('Location: /recipesadd');
+                    exit;
+                }
+            }else{
                 $imageData = '';
             }
             
@@ -43,14 +51,14 @@ class RecipesSaveBDController{
                 //Create the recipes
                 $recipes = new Recipes(null, $name, $description, $ingredients, $people, $duration, $instruction, $imageData);
                 // Validate if the name exists
-                if($this->RecipesRepository->exists($name)){
+                if($this->RecipesServices->exists($name)){
                     $_SESSION['errors']['name'] = "El nom ja està registrar. ";
                     header('Location: /recipesadd');
                     exit;
                 }
                 
                 // If everything is okay, save the recipes
-                $this->RecipesRepository->save($recipes);
+                $this->RecipesServices->save($recipes);
                 header('Location: /recipesmanager');
             } catch (BuildExceptions $e) {
                 $_SESSION['error'] = $e->getMessage();

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestor dels subcategories</title>
+    <title>Pàgina View Subcategory</title>
     <link href="./src/output.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
     <link rel="shortcut icon" class="h-18" href="../../img/logo/logo.png" type="image/x-icon">
 </head>
 
-<body>
+<body class="bg-gray-100">
     <header>
         <nav>
             <a href="/manager">
@@ -64,13 +64,19 @@
                                     echo '<td class="border border-[#FCB666] p-[10px]">' . $category->getName() . '</td>';
                                 }
                             } ?>
-                            <!-- Edit button -->
-                            <td class="font-inter w-[100px] bg-[#FCB666] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
-                                <a href="" class="flex items-center justify-center w-full h-full">
-                                    <p class="mr-[5px] ml-[5px]">Editar</p>
-                                    <img class="mr-[10px] w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="">
-                                </a>
-                            </td>
+
+                        <!-- Edit button -->
+                        <td class="font-inter bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
+                            <div class="flex justify-center">
+                                <form action="/subcategoryupdate" method="GET">
+                                    <input type="hidden" name="id" value="<?php echo $subcategory->getId(); ?>">
+                                    <button type="submit" class="flex items-center">
+                                        <p class="mr-[5px]">Editar</p>
+                                        <img class="w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
 
                             <!-- Delete button -->
                             <td class="font-inter w-[120px] bg-[#FCB666] text-white text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover:bg-[#ef9b3b]">
@@ -83,7 +89,7 @@
                             <!-- Modal delete -->
                             <div class="deletemodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50 hidden">
                                 <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
-                                    <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Vols eliminar la categoria <?php echo $category->getName() ?> ?</h2>
+                                    <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Vols eliminar la subcategoria <?php echo $subcategory->getName() ?> ?</h2>
                                     <p class="font-inter text-black- font-medium text-[16px] text-center">Un cop sigui eliminat no es podrà desfer l'operació.</p>
                                     <div class="flex justify-center">
                                         <form action="/deletesubcategory" method="POST">
@@ -94,6 +100,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Modal delete correct -->
                             <?php if ($_GET['deleted'] == 'true'): ?>
                                 <div class="deletemodal fixed inset-0 flex justify-center items-center bg-opacity-50 z-50">
@@ -105,14 +112,6 @@
                                     </div>
                                 </div>
                             <?php endif; ?>
-
-                            <!-- Show button -->
-                            <td class="font-inter w-[100px] bg-[#FCB666] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
-                                <a href="" class="flex items-center justify-center w-full h-full">
-                                    <p class="mr-[5px] ml-[5px]">Veure</p>
-                                    <img class="mr-[10px] w-[20px] h-[20px]" src="../../img/show/show.png" alt="show">
-                                </a>
-                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>

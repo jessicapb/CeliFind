@@ -169,7 +169,7 @@ class Recipes{
     }
     
     public function setInstruction($instruction):int {
-        $errorNull = ChecksProduct::minMaxLength($instruction, 4, 1060);
+        $errorNull = ChecksProduct::minMaxLength($instruction, 4, 3060);
         if($errorNull !=0){
             return $errorNull;       
         }
@@ -205,18 +205,5 @@ class Recipes{
     public function setId(?int $id): int{
         $this->id = $id;
         return 0;
-    }
-    
-    // Con esta función convierto la imagen a base64
-    // Después la convertimos en una ruta
-    // Si NO hay imagen, mensaje de error
-    public function getBase64() {        
-        if ($this->image) {
-            $base64Image = base64_encode($this->image);
-            $imageType = 'image/png';
-            return "data:$imageType;base64,$base64Image";
-        } else {
-            echo "Imatge no trobada";
-        }
     }
 }

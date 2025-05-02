@@ -52,9 +52,8 @@
         <table class="w-full mt-[50px] table-auto text-center border-separate border-spacing-[20px]">
             <thead>
                 <tr>
-                    <th class="text-black font-calistoga text-[24px] pl-[10px] font-bold pr-[10px]">Id</th>
                     <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Nom</th>
-                    <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Descripció</th>
+                    <th class="text-black font-calistoga text-[24px] font-bold pr-[10px] ">Descripció</th>
                     <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Ingredients</th>
                     <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Informació nutricional</th>
                     <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Preu</th>
@@ -68,10 +67,6 @@
                 <?php foreach ($products as $product) { ?>
                     
                     <tr>
-                        <!-- ID -->
-                        <td class="border border-[#FCB666] p-[9px]">
-                            <?php echo $product->getId();?>
-                        </td>
                         <!-- Name -->
                         <td class="border border-[#FCB666] p-[9px]">
                             <?php echo $product->getName();?>
@@ -86,7 +81,13 @@
                         </td>
                         <!-- Nutritional Information -->
                         <td class="border border-[#FCB666] p-[9px]">
-                            <?php echo $product->getNutritionalInformation();?>
+                            <?php 
+                            if($product->getNutritionalInformation() === null){
+                                echo "No en té.";
+                            }else{
+                                echo $product->getNutritionalInformation();
+                            }
+                            ?>
                         </td>
                         <!-- Price -->
                         <td class="border border-[#FCB666] p-[9px]">
@@ -102,24 +103,32 @@
                         </td>
                         <!-- State -->
                         <td class="border border-[#FCB666] p-[9px]">
-                            <?php echo $product->getState();?>
+                            <?php 
+                            if($product->getState() === 1){
+                                echo "Disponible";
+                            }else{
+                                echo "No disponible";                                
+                            }
+                            ?>
                         </td>
                         <!-- Subcategory Id -->
-                                <?php 
-                                    $foundSubcategory = false; 
-                                    foreach ($subcategories as $subcategory) {
-                                        if ($subcategory->getId() == $product->getSubcategoryId()) { ?>
-                                            <td class="border border-[#FCB666] p-[9px]">
-                                            <?php echo $subcategory->getId() ; ?>
-                                            </td>
-                                            <?php
-                                            $foundSubcategory = true; }
-                                    }
-                                    if (!$foundSubcategory) {
-                                        echo 'Sin subcategoría';
-                                    }
-                                ?>
-                            
+                        <?php 
+                        $foundSubcategory = false; 
+                        foreach ($subcategories as $subcategory) {
+                            if ($subcategory['id'] === $product->getSubcategoryId()) { ?>
+                                <td class="border border-[#FCB666] p-[9px]">
+                                    <?php echo $subcategory['name'];  ?>
+                                </td>
+                                <?php
+                                $foundSubcategory = true; 
+                            }
+                            if (!$foundSubcategory) { ?>
+                                <td class="border border-[#FCB666] p-[9px]">
+                                    <?php echo "Sense subcategoria"; ?>
+                                </td>
+                            <?php }
+                        } 
+                        ?>
                         <!-- Edit button -->
                         <td class="font-inter bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
                             <div class="flex justify-center">
@@ -167,11 +176,16 @@
                             </div>
                         <?php endif; ?>
                         <!-- Show button -->
-                        <td class="font-inter flex justify-center bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
-                            <a href="" class="flex items-center">
-                                <p class="mr-[5px]">Veure</p>
-                                <img class="w-[20px] h-[20px]" src="../../img/show/show.png" alt="delete">
-                            </a>
+                        <td class="font-inter bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
+                            <div class="flex justify-center">
+                                <form action="/productindividual" target="_blank" method="POST">
+                                    <input type="hidden" name="id" value="<?php echo $product->getId(); ?>">
+                                    <button type="submit" class="flex items-center">
+                                        <p class="mr-[5px]">Veure</p>
+                                        <img class="w-[20px] h-[20px]" src="../../img/show/show.png" alt="show">
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 <?php } ?>

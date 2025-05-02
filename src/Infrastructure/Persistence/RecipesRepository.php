@@ -52,11 +52,10 @@ class RecipesRepository{
         $sql = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
                                     people, duration, SUBSTRING(instruction, 1, 8) AS instruction_short, image FROM recipes");
         $sql->execute();
-        $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
-        if (count($result) != 0) {
-            return $result;
-        } else {
-            return [];
+        while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
+            $recipes = new Recipes($fila['id'], $fila['name_short'], $fila['description_short'], $fila['ingredients_short'], $fila['people'], $fila['duration'], $fila['instruction_short'], $fila['image']);
+            $allrecipes[] = $recipes;
         }
+        return $allrecipes;
     }
 }

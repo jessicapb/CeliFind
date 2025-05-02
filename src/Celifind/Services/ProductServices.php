@@ -42,4 +42,8 @@ class ProductServices{
     function delete(int $id){
         return $this->ProductRepository->deleteProduct($id);
     }
+    
+    function searchproduct(){
+        
+    }
 }

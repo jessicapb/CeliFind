@@ -17,14 +17,21 @@ class SubcategoryRepository
     /* function to get all the subcategories */
     function getallsub(): array
     {
+        $result_subcategories = [];
         $sql = $this->db->prepare("SELECT * FROM subcategories");
         $sql->execute();
-        $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
-        if (count($result) != 0) {
-            return $result;
-        } else {
-            return [];
+        $subcategories = $sql->fetchAll(\PDO::FETCH_ASSOC);
+        foreach ($subcategories as $subcategory) {
+            $subcategory['categories'] = [];
+
+            $sql = $this->db->prepare("SELECT * FROM categories WHERE id = :idcategoria");
+            $sql->execute(['idcategoria' => $subcategory['id']]);
+            $categories = $sql->fetchAll(\PDO::FETCH_ASSOC);
+
+            $subcategory['categories'] = $categories;
+            $result_subcategories[] = $subcategory;
         }
+        return $result_subcategories;
     }
 
     /* Query SQL Create */
@@ -59,14 +66,15 @@ class SubcategoryRepository
     }
 
     /* Query SQL Update */
-    function update(Subcategory $subcategory)
+    function updatesubcategory(Subcategory $subcategory)
     {
         try {
-            $sql = $this->db->prepare("UPDATE subcategories SET name = :name, description = :description WHERE id = :id");
+            $sql = $this->db->prepare("UPDATE subcategories SET name = :name, description = :description, idcategoria = :idcategoria WHERE id = :id");
             $sql->execute([
                 'id' => $subcategory->getId(),
                 'name' => $subcategory->getName(),
                 'description' => $subcategory->getDescription(),
+                'idcategoria' => $subcategory->getIdcategoria()
             ]);
         } catch (\PDOException $e) {
             throw new BuildExceptions("Error updating subcategory: " . $e->getMessage());

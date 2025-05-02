@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 errorDescription.style.display = 'block'; 
             }
             if (errorImage) {
-                errorImage.textContent = serverErrors.ingredients; 
+                errorImage.textContent = serverErrors.image; 
                 errorImage.style.display = 'block';  
             }
         }

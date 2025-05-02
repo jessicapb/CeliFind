@@ -25,7 +25,7 @@
                 </ul>
                 <div class="flex items-center gap-5 ml-16">
                     <a href="/register" class="font-inter p-2 px-5 text-[16px] text-black border-[#96c368] border-2 rounded-[50px] font-normal hover:bg-[rgb(150,195,104)] hover:text-white transition duration-200">Registre</a>
-                    <a href="#" class="font-inter p-2 px-9 text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-white transition duration-200">Iniciar Sessió</a>
+                    <a href="/login" class="font-inter p-2 px-9 text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-white transition duration-200">Iniciar Sessió</a>
                 </div>
             </div>
         </nav>
@@ -263,7 +263,6 @@
 
 
     <!--Footer section!-->
-
     <footer class="bg-slate-100 text-black py-12 px-8 lg:px-20">
         <div class="grid grid-cols-1 max-w-screen-xl mx-auto md:grid-cols-5 text-center lg:text-start md:text-start gap-8 text-sm justify-center">
             <div class="md:col-span-1 flex flex-col space-y-2">
