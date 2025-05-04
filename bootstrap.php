@@ -48,6 +48,8 @@ use App\Controller\Subcategory\SubcategoryDeleteBDController;
 use App\Controller\User\UserLoginController;
 use App\Controller\User\UserRegisterController;
 use App\Controller\User\LogoutController;
+use App\Controller\User\ForgotPasswordController;
+use App\Controller\User\ResetPasswordController;
 
 //Database
 use App\Infrastructure\Database\DatabaseConnection;
@@ -108,6 +110,8 @@ $showformupdate = new ProductUpdateController($db);
 $userLoginController = new UserLoginController($db);
 $userRegisterController = new UserRegisterController($db);
 $logoutController = new LogoutController();
+$forgotPasswordController = new ForgotPasswordController($db);
+$resetPasswordController = new ResetPasswordController($db);
 
 // Routes recipesrepository
 $services->addServices('recipesRepository', fn() => new RecipesRepository($db));
@@ -212,4 +216,10 @@ $router
     ->addRoute('POST','/userregister',[$userRegisterController,'register'])
     
     // Handle logout GET
-    ->addRoute('GET','/logout',[$logoutController,'logout']);
+    ->addRoute('GET','/logout',[$logoutController,'logout'])
+
+    // Recuperación de contraseña
+    ->addRoute('GET','/forgotpassword',[$forgotPasswordController,'showForgotPassword'])
+    ->addRoute('POST','/forgotpassword',[$forgotPasswordController,'sendResetLink'])
+    ->addRoute('GET','/resetpassword',[$resetPasswordController,'showResetPassword'])
+    ->addRoute('POST','/resetpassword',[$resetPasswordController,'updatePassword']);

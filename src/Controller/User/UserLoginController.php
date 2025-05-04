@@ -17,7 +17,7 @@ class UserLoginController
 
     public function showLogin()
     {
-        // TODO Vou por aquí
+        
         //session_start();
         if (isset($_SESSION['user']['id'])) {
             header('Location: /manager');

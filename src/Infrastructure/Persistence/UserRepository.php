@@ -45,4 +45,35 @@ class UserRepository {
         }
         return null;
     }
+
+    public function setResetToken($email, $token, $expiry) {
+        $stmt = $this->db->prepare("UPDATE users SET reset_token = ?, reset_token_expiry = ? WHERE email = ?");
+        $stmt->execute([$token, $expiry, $email]);
+    }
+
+    public function findByResetToken($token) {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE reset_token = ? AND reset_token_expiry > NOW()");
+        $stmt->execute([$token]);
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($row) {
+            return User::fromDbRow(
+                $row['id'],
+                $row['name'],
+                $row['surname'],
+                $row['email'],
+                $row['city'],
+                $row['postalcode'],
+                $row['password']
+            );
+        }
+        return null;
+    }
+
+    public function updatePassword($userId, $newPassword) {
+        $stmt = $this->db->prepare("UPDATE users SET password = ?, reset_token = NULL, reset_token_expiry = NULL WHERE id = ?");
+        $stmt->execute([
+            password_hash($newPassword, PASSWORD_DEFAULT),
+            $userId
+        ]);
+    }
 }
