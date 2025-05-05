@@ -73,7 +73,7 @@ class RecipesRepository{
     function showlimit(){
         $allrecipes = [];
         $sql = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
-                                    SUBSTRING(nutritionalinformation, 1, 13) AS nutritionainformaltion_short, people, duration, SUBSTRING(instruction, 1, 8) AS instruction_short, image FROM recipes");
+                                    SUBSTRING(nutritionalinformation, 1, 13) AS nutritionalinformation_short, people, duration, SUBSTRING(instruction, 1, 8) AS instruction_short, image FROM recipes");
         $sql->execute();
         while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
             $recipes = new Recipes($fila['id'], $fila['name_short'], $fila['description_short'], $fila['ingredients_short'], $fila['nutritionalinformation_short'], $fila['people'], $fila['duration'], $fila['instruction_short'], $fila['image']);

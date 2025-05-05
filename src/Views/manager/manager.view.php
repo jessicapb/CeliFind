@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
     <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
-<body class="bg-slate-100">
-    <header >
+<body>
+    <header class="pb-[15px]">
         <nav class="flex justify-between items-center w-full">
             <a class="pl-[20px] pt-[20px]" href="/manager">
                 <img class="w-32" src="../../img/logo/logo.png" alt="logoimg">
@@ -26,10 +26,10 @@
                     <button id="dropdown-toggle" type="button" class="font-inter p-[8px] w-[90%] mr-[65px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
                     Administrador
                     </button>
-
+                    
                     <div id="dropdown-menu" class="font-inter hidden absolute left-0 mt-2 w-[90%] origin-top-center text-black bg-white border-1 shadow-lg rounded-[50px] z-10">
                         <div class="p-1 space-y-0.5">
-                            <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="#">
+                            <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/logout">
                                 <img class="w-[18%] h-[18%]" src="../../img/logout/logout.svg" alt="">
                                 Tancar sessió
                             </a>
@@ -39,12 +39,12 @@
             </div>
         </nav>
     </header>
-
-    <section class="pb-20">
+    
+    <section class="pb-20 bg-slate-100">
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center pt-[26px] font-bold">Benvingut <span class="text-[#96c368] opacity-[100%]">administrador</span></h1>
         <div class="flex justify-center mt-[26px]">
             <!-- Products -->
-            <div class="mr-[26px] shadow-lg w-[368px] h-[527px] rounded-[21px]">
+            <div class="mr-[26px] shadow-lg w-[368px] bg-white h-[527px] rounded-[21px]">
                 <img  src="../../img/producte/productes.png" alt="">
                 <div class="flex flex-col justify-between ">
                     <p class="font-monserrat pt-[15px] pl-[10px] pb-[15px] text-[20px] font-bold text-black">Gestiona els productes</p>
@@ -54,9 +54,9 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Recipes -->
-            <div class="mr-[26px] shadow-lg w-[368px] h-[527px] rounded-[21px]">
+            <div class="mr-[26px] shadow-lg w-[368px] bg-white h-[527px] rounded-[21px]">
                 <img src="../../img/recepte/receptes.png" alt="">
                 <div class="flex flex-col justify-between ">
                     <p class="font-monserrat pt-[15px] pl-[10px] pb-[15px] text-[20px] font-bold text-black">Gestiona les receptes</p>
@@ -66,9 +66,9 @@
                     </div>
                 </div>
             </div>
-
+            
             <!-- Establishments -->
-            <div class="mr-[26px] shadow-lg w-[368px] h-[527px] rounded-[21px]">
+            <div class="mr-[26px] shadow-lg w-[368px] bg-white h-[527px] rounded-[21px]">
                 <img  src="../../img/lloc/llocs.png" alt="">
                 <div class="flex flex-col justify-between ">
                     <p class="font-monserrat pt-[15px] pl-[10px] pb-[15px] text-[20px] font-bold text-black">Gestiona els establiments</p>

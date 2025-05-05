@@ -112,4 +112,38 @@ class CategoryRepository
             return null;
         }
     }
+
+    // Query SQL for show limit
+    function showlimit(){
+        $allcategory = [];
+        $sql = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, image FROM categories");
+        $sql->execute();
+        while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
+            if (empty($fila['name_short'])) {
+                $name = null;
+            } else {
+                $name = $fila['name_short'];
+            }
+            $categories = new Category($fila['id'], $fila['name_short'], $fila['description_short'], $fila['image']);
+            $allcategory[] = $categories;
+        }
+        return $allcategory;
+    }
+
+    // Search 
+    function searchByName($name): array
+    {
+        $stmt = $this->db->prepare("SELECT * FROM categories WHERE name LIKE :name");
+        $stmt->execute(['name' => '%' . $name . '%']);
+        $categories = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    
+        $result = [];
+        foreach ($categories as $category) {
+            $result[] = new Category($category["id"], $category["name"], $category["description"], $category["image"]);
+        }
+    
+        return $result;
+    }
+    
+    
 }

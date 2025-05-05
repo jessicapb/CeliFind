@@ -5,14 +5,15 @@ namespace App\Controller\Category;
 use App\Infrastructure\Persistence\CategoryRepository;
 use App\Celifind\Entities\Category;
 use App\Celifind\Exceptions\BuildExceptions;
+use App\Celifind\Services\CategoryServices;
 
 class CategoryUpdateBDController{
     private \PDO $db;
-    private CategoryRepository $CategoryRepository;
+    private CategoryServices $category_services;
 
-    public function __construct(\PDO $db) {
+    public function __construct(\PDO $db, CategoryServices $category_services) {
         $this->db = $db;
-        $this->CategoryRepository = new CategoryRepository($db);
+        $this->category_services = $category_services;
     }
 
     public function updatecategory() {
@@ -41,7 +42,7 @@ class CategoryUpdateBDController{
             try {
                 $category = new Category($id, $name, $description, $imageData);
 
-                $this->CategoryRepository->updatecategory($category);  
+                $this->category_services->update($category);  
                 header('Location: /category');
             } catch (BuildExceptions $e) {
                 $_SESSION['error'] = $e->getMessage();

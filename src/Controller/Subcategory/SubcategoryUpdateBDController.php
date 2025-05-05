@@ -2,17 +2,17 @@
 
 namespace App\Controller\Subcategory;
 
-use App\Infrastructure\Persistence\SubcategoryRepository;
 use App\Celifind\Entities\Subcategory;
 use App\Celifind\Exceptions\BuildExceptions;
+use App\Celifind\Services\SubcategoryServices;
 
 class SubcategoryUpdateBDController{
     private \PDO $db;
-    private SubcategoryRepository $SubcategoryRepository;
-
-    public function __construct(\PDO $db) {
+    private SubcategoryServices $subcategory_services;
+    
+    public function __construct(\PDO $db, SubcategoryServices $subcategory_services) {
         $this->db = $db;
-        $this->SubcategoryRepository = new SubcategoryRepository($db);
+        $this->subcategory_services = $subcategory_services;
     }
 
     public function updatesubcategory() {
@@ -28,16 +28,17 @@ class SubcategoryUpdateBDController{
             try {
                 $subcategory = new Subcategory($id, $name, $description, $idcategoria);
 
-                $this->SubcategoryRepository->updatesubcategory($subcategory);  
+                $this->subcategory_services->update($subcategory);  
                 header('Location: /subcategory');
             } catch (BuildExceptions $e) {
                 $_SESSION['errors'] = $e->getMessage();
                 if ($id) {
-                    $subcategory = $this->SubcategoryRepository->findById($id);
-                    header('Location: /subcategoryupdate?id=' . urlencode($subcategory));
+                    $subcategory = $this->subcategory_services->findById($id);
+                    header('Location: /subcategoryupdate?id=' . urlencode($subcategory->getId()));
                 }
-                dd($id);
-                exit;
+                else {
+                    header('Location: /subcategory');
+                }
             }
         }
     }

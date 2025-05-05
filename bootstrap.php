@@ -46,6 +46,8 @@ use App\Controller\Category\CategoryDeleteBDController;
 use App\Controller\Category\CategoryUpdateController;
 use App\Controller\Category\CategoryUpdateBDController;
 use App\Controller\Category\CategoryShowImageBDController;
+use App\Controller\Category\CategorySearchBDController;
+use App\Controller\Category\CategorySearchController;
 
 // ControllerSubcategory
 use App\Controller\Subcategory\SubcategoryShowBDController;
@@ -54,6 +56,7 @@ use App\Controller\Subcategory\SubcategorySaveBDController;
 use App\Controller\Subcategory\SubcategoryDeleteBDController;
 use App\Controller\Subcategory\SubcategoryUpdateController;
 use App\Controller\Subcategory\SubcategoryUpdateBDController;
+use App\Controller\Subcategory\SubcategorySearchBDController;
 
 // User controllers
 use App\Controller\User\UserLoginController;
@@ -81,6 +84,12 @@ use App\Celifind\Services\ProductServices;
 
 // Recipes Services
 use App\Celifind\Services\RecipesServices;
+
+// Category Services
+use App\Celifind\Services\CategoryServices;
+
+// Subcategory Services
+use App\Celifind\Services\SubcategoryServices;
 
 // RepositoryCategory
 use App\Infrastructure\Persistence\CategoryRepository;
@@ -179,17 +188,25 @@ $categoryRepository = $services->getService('categoryRepository');
 $services->addServices('subcategoryRepository', fn() => new SubcategoryRepository($db));
 $subcategoryRepository = $services->getService('subcategoryRepository');
 
+// Routes Category Services
+$services->addServices('categoryServices', fn() => new CategoryServices($db, $services->getService('categoryRepository')));
+$categoryServices = $services->getService('categoryServices');
+
+// Routes SubCategory Services
+$services->addServices('subcategoryServices', fn() => new SubcategoryServices($db, $services->getService('subcategoryRepository')));
+$subcategoryServices = $services->getService('subcategoryServices');
+
 // View the update of the category
-$formupdate = new CategoryUpdateController($db);
+$formupdate = new CategoryUpdateController($db, $categoryServices);
 
 // View the update of the subcategory
-$formupdatesubcategory = new SubcategoryUpdateController($db);
+$formupdatesubcategory = new SubcategoryUpdateController($subcategoryServices, $categoryServices);
 
 // Update the category
-$controllerupdatecategory = new CategoryUpdateBDController($db);
+$controllerupdatecategory = new CategoryUpdateBDController($db, $categoryServices);
 
 // Update the subcategory
-$controllerupdatesubcategory = new SubcategoryUpdateBDController($db);
+$controllerupdatesubcategory = new SubcategoryUpdateBDController($db, $subcategoryServices);
 
 // Show the categories & subcategories in View Product
 $viewproduct = new ProductViewController($productServices, $categoryRepository, $subcategoryRepository);
@@ -273,33 +290,40 @@ $router
     ->addRoute('POST','/recipesindividual',[$individualrecipes,'recipesindividual'])
     
     // Go to the show categories
-    ->addRoute('GET', '/category', [new CategoryShowBDController($db), 'showcategory'])
+    ->addRoute('GET', '/category', [new CategoryShowBDController($db, $categoryServices), 'showcategory'])
     
     ->addRoute('GET', '/categoryadd', [new CategoryAddBDController(), 'categoryadd'])
     
-    ->addRoute('POST', '/savecategory', [new CategorySaveBDController($db), 'savecategory'])
+    ->addRoute('POST', '/savecategory', [new CategorySaveBDController($db, $categoryServices), 'savecategory'])
     
-    ->addRoute('POST', '/deletecategory', [new CategoryDeleteBDController($db), 'deletecategory'])
+    ->addRoute('POST', '/deletecategory', [new CategoryDeleteBDController($db, $categoryServices), 'deletecategory'])
     
-    ->addRoute('POST','/categoryupdate',[$formupdate,'categoryupdate'])
+    ->addRoute('GET','/categoryupdate',[$formupdate,'categoryupdate'])
     
     ->addRoute('POST','/updatecategory',[$controllerupdatecategory,'updatecategory'])
     
-    ->addRoute('GET','/categoryshowimage',[new CategoryShowImageBDController($db),'categoryshowimage'])
+    ->addRoute('GET','/categoryshowimage',[new CategoryShowImageBDController($db, $categoryServices),'categoryshowimage'])
+    
+    ->addRoute('POST', '/searchcategory', [new CategorySearchBDController($db, $categoryServices), 'searchcategory'])
+    
+    ->addRoute('GET', '/categorysearch', [new CategorySearchBDController($db, $categoryServices), 'showsearchresults'])
     
     // Go to the show subcategories
-    ->addRoute('GET', '/subcategory', [new SubcategoryShowBDController($db), 'showsubcategory'])
+    ->addRoute('GET', '/subcategory', [new SubcategoryShowBDController($db, $subcategoryServices, $categoryServices), 'showsubcategory'])
     
-    ->addRoute('GET', '/addsubcategory', [new SubcategoryAddBDController($db), 'addsubcategory'])
+    ->addRoute('GET', '/addsubcategory', [new SubcategoryAddBDController($db, $categoryServices), 'addsubcategory'])
     
-    ->addRoute('POST', '/savesubcategory', [new SubcategorySaveBDController($db), 'savesubcategory'])
+    ->addRoute('POST', '/savesubcategory', [new SubcategorySaveBDController($db, $subcategoryServices), 'savesubcategory'])
     
-    ->addRoute('POST', '/deletesubcategory', [new SubcategoryDeleteBDController($db), 'deletesubcategory'])
+    ->addRoute('POST', '/deletesubcategory', [new SubcategoryDeleteBDController($db, $subcategoryServices), 'deletesubcategory'])
     
     ->addRoute('GET','/subcategoryupdate',[$formupdatesubcategory,'subcategoryupdate'])
     
     ->addRoute('POST','/updatesubcategory',[$controllerupdatesubcategory,'updatesubcategory'])
     
+    ->addRoute('POST', '/searchsubcategory', [new SubcategorySearchBDController($db, $subcategoryServices), 'searchsubcategory'])
+    
+    ->addRoute('GET', '/subcategorysearch', [new SubcategorySearchBDController($db, $subcategoryServices), 'showsearchresults'])
     // Go to the login page
     ->addRoute('GET','/login',[$userLoginController,'showLogin'])
     

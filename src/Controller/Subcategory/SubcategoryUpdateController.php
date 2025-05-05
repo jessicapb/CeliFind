@@ -2,19 +2,18 @@
 
 namespace App\Controller\Subcategory;
 
-use App\Infrastructure\Persistence\SubcategoryRepository;
-use App\Infrastructure\Persistence\CategoryRepository; 
 use App\Celifind\Entities\Subcategory;
+use App\Celifind\Services\CategoryServices;
+use App\Celifind\Services\SubcategoryServices;
 
-class SubcategoryUpdateController {
-    private \PDO $db;
-    private SubcategoryRepository $SubcategoryRepository;
-    private CategoryRepository $CategoryRepository; 
+class SubcategoryUpdateController 
+{
+    private SubcategoryServices $subcategory_services;
+    private CategoryServices $category_services;
 
-    public function __construct(\PDO $db) {
-        $this->db = $db;
-        $this->SubcategoryRepository = new SubcategoryRepository($db);
-        $this->CategoryRepository = new CategoryRepository($db); 
+    public function __construct(SubcategoryServices $subcategory_services, CategoryServices $category_services) {
+        $this->subcategory_services = $subcategory_services;
+        $this->category_services = $category_services;
     }
 
     public function subcategoryupdate() {
@@ -23,11 +22,17 @@ class SubcategoryUpdateController {
             $id = filter_input(INPUT_GET, 'id');
     
             if ($id) {
-                $fila = $this->SubcategoryRepository->findById($id);
-                if ($fila) {
-                    $subcategory = new Subcategory($fila->id, $fila->name, $fila->description, $fila->idcategoria);
+                $fila = $this->subcategory_services->findById($id);
 
-                    $categories = $this->CategoryRepository->getall();
+                if ($fila) {
+                    $subcategory = new Subcategory(
+                        $fila->id, 
+                        $fila->name, 
+                        $fila->description, 
+                        $fila->idcategoria
+                    );
+
+                    $categories = $this->category_services->showallcategory();
 
                     echo view('subcategory/subcategoryupdate', [
                         'subcategory' => $subcategory,

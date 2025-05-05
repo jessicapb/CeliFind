@@ -10,22 +10,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
     <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
-<body class="bg-slate-100">
-    <header>
+<body>
+    <header class="pb-[15px]">
         <nav>
             <a href="/manager">
                 <img class="ml-[20px] w-32 pt-[20px]" src="../../img/logo/logo.png" alt="logoimg">
             </a>
-            <div class="p-1 space-y-0.5">
-                <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/manager">
-                    <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="home">
-                    Tornar al gestor
-                </a>
-            </div>
         </nav>
     </header>
-
-    <section class="pb-20">
+    
+    <section class="bg-slate-100 pt-[10px]">
+        <div class="p-1 space-y-0.5">
+            <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/manager">
+                <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="home">
+                Tornar al gestor
+            </a>
+        </div>
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center font-bold">Gestor <span class="text-[#96c368] opacity-[100%]">producte</span></h1>
         <div class="mt-[20px] flex justify-between items-center">
             <!-- Add product  -->
@@ -68,19 +68,19 @@
                 <?php foreach ($products as $product) { ?>
                     <tr>
                         <!-- Name -->
-                        <td class="border border-[#FCB666] p-[9px]">
+                        <td class="border border-[#FCB666] p-[9px] bg-white">
                             <?php echo $product->getName();?>
                         </td>
                         <!-- Description -->
-                        <td class="border border-[#FCB666] p-[9px]">
+                        <td class="border border-[#FCB666] p-[9px] bg-white">
                             <?php echo $product->getDescription();?> 
                         </td>
                         <!-- Ingredients -->
-                        <td class="border border-[#FCB666] p-[9px]">
+                        <td class="border border-[#FCB666] p-[9px] bg-white">
                             <?php echo $product->getIngredients(); ?> 
                         </td>
                         <!-- Nutritional Information -->
-                        <td class="border border-[#FCB666] p-[9px]">
+                        <td class="border border-[#FCB666] p-[9px] bg-white">
                             <?php 
                             if($product->getNutritionalInformation() === null){
                                 echo "No en té.";
@@ -90,19 +90,19 @@
                             ?>
                         </td>
                         <!-- Price -->
-                        <td class="border border-[#FCB666] p-[9px]">
+                        <td class="border border-[#FCB666] p-[9px] bg-white">
                             <?php echo $product->getPrice();?>
                         </td>
                         <!-- Brand -->
-                        <td class="border border-[#FCB666] p-[9px]">
+                        <td class="border border-[#FCB666] p-[9px] bg-white">
                             <?php echo $product->getBrand();?>
                         </td>
                         <!-- Pes -->
-                        <td class="border border-[#FCB666] p-[9px]">
+                        <td class="border border-[#FCB666] p-[9px] bg-white">
                             <?php echo $product->getWeight();?>
                         </td>
                         <!-- State -->
-                        <td class="border border-[#FCB666] p-[9px]">
+                        <td class="border border-[#FCB666] p-[9px] bg-white">
                             <?php 
                             if($product->getState() === 1){
                                 echo "Disponible";
@@ -116,14 +116,14 @@
                         $foundSubcategory = false; 
                         foreach ($subcategories as $subcategory) {
                             if ($subcategory['id'] === $product->getSubcategoryId()) { ?>
-                                <td class="border border-[#FCB666] p-[9px]">
+                                <td class="border border-[#FCB666] p-[9px]  bg-white">
                                     <?php echo $subcategory['name'];  ?>
                                 </td>
                                 <?php
                                 $foundSubcategory = true; 
                             }
                             if (!$foundSubcategory) { ?>
-                                <td class="border border-[#FCB666] p-[9px]">
+                                <td class="border border-[#FCB666] p-[9px]  bg-white">
                                     <?php echo "Sense subcategoria"; ?>
                                 </td>
                             <?php }

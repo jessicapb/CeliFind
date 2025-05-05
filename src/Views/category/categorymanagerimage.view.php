@@ -10,23 +10,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <header class="pb-[15px]">
         <nav>
             <a href="/manager">
-                <img class="pl-[20px] pt-[20px] w-[9%] h-[9%]" src="../../img/logo/logo.png" alt="">
+                <img class="ml-[20px] w-32 pt-[20px]" src="../../img/logo/logo.png" alt="logoimg">
             </a>
             <div class="p-1 space-y-0.5">
                 <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/category">
                     <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="home">
-                    Tornar al panel de control
+                    Tornar al panel de controll
                 </a>
             </div>
         </nav>
     </header>
-
-    <section>
+    
+    <section class="bg-slate-100 pt-[26px]">
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center pt-[26px] font-bold">Veure <span class="text-[#96c368] opacity-[100%]">imatges</span></h1>
-        <div class="grid grid-cols-4 gap-[14px] justify-center mt-[26px] mb-[20px]">
+        <div class="grid grid-cols-4 gap-[14px] justify-center mt-[26px]">
             <?php foreach ($categories as $category) { ?>
                 <div class="shadow-lg w-[300px] h-[310px] rounded-[21px] bg-white p-[10px] mx-auto flex flex-col items-center">
                     <div class="w-full flex justify-center mb-3">
@@ -48,5 +48,8 @@
             <?php } ?>
         </div>
     </section>
+    
+    <!--Footer section!-->
+    <?php include 'src/Views/parts/footer/footer.view.php'?>
 </body>
 </html>

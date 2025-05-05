@@ -65,31 +65,31 @@
                     
                     <tr>
                         <!-- Name -->
-                        <td class="border border-[#FCB666] p-[9px]">
+                        <td class="border border-[#FCB666] p-[9px] bg-white">
                             <?php echo $recipe->getName();?>
                         </td>
                         <!-- Description -->
-                        <td class="border border-[#FCB666] p-[9px]">
+                        <td class="border border-[#FCB666] p-[9px] bg-white">
                             <?php echo $recipe->getDescription();?> 
                         </td>
                         <!-- Ingredients -->
-                        <td class="border border-[#FCB666] p-[9px]">
+                        <td class="border border-[#FCB666] p-[9px] bg-white">
                             <?php echo $recipe->getIngredients(); ?> 
                         </td>
                         <!-- Ingredients -->
-                        <td class="border border-[#FCB666] p-[9px]">
+                        <td class="border border-[#FCB666] p-[9px] bg-white">
                             <?php echo $recipe->getNutritionalInformation(); ?> 
                         </td>
                         <!-- People -->
-                        <td class="border border-[#FCB666] p-[9px]">
+                        <td class="border border-[#FCB666] p-[9px] bg-white">
                             <?php echo $recipe->getPeople(); ?> 
                         </td>
                         <!-- Duration -->
-                        <td class="border border-[#FCB666] p-[9px]">
+                        <td class="border border-[#FCB666] p-[9px] bg-white">
                             <?php echo $recipe->getDuration(); ?> 
                         </td>
                         <!-- Instructions -->
-                        <td class="border border-[#FCB666] p-[9px]">
+                        <td class="border border-[#FCB666] p-[9px] bg-white">
                             <?php echo $recipe->getInstruction(); ?> 
                         </td>
                         <!-- Edit button -->
@@ -140,10 +140,15 @@
                         <?php endif; ?>
                         <!-- Show button -->
                         <td class="font-inter flex justify-center bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
-                            <a href="" class="flex items-center">
-                                <p class="mr-[5px]">Veure</p>
-                                <img class="w-[20px] h-[20px]" src="../../img/show/show.png" alt="delete">
-                            </a>
+                            <div class="flex justify-center">
+                                <form action="/recipesindividual" target="_blank" method="POST">
+                                    <input type="hidden" name="id" value="<?php echo $recipe->getId(); ?>">
+                                    <button type="submit" class="flex items-center">
+                                        <p class="mr-[5px]">Veure</p>
+                                        <img class="w-[20px] h-[20px]" src="../../img/show/show.png" alt="show">
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 <?php } ?>
