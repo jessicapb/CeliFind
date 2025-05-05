@@ -13,7 +13,7 @@ class ProductUpdateController{
         $this->productRepository = new ProductRepository($db);
     }
     
-    function productupdate(){
+    function productupdates(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = filter_input(INPUT_POST, 'id');
             if ($id) {

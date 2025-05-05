@@ -47,7 +47,10 @@ class ProductServices{
         return $this->ProductRepository->deleteProduct($id);
     }
     
-    function searchproduct(string $name){
-        return $this->ProductRepository->exists($name);
+    function searchproduct($name){
+        if(empty($name)){
+            return $this->ProductRepository->showlimit();
+        }
+        return $this->ProductRepository->searchproduct($name);
     }
 }

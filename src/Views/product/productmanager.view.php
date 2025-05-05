@@ -48,7 +48,22 @@
                 </div>
             </form>
         </div>
-
+        
+        <!-- Modal buscador -->
+        <?php if (!empty($noResults)): ?>
+            <div class="searchmodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
+                <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
+                    <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Sense resultats</h2>
+                    <p class="font-inter text-black font-medium text-[16px] text-center">No s'han trobat productes amb aquest nom.</p>
+                    <div class="flex justify-center">
+                        <a href="/productmanager" class="closesearchmodal font-inter bg-[#FCB666] mt-[10px] text-white text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:bg-[#ef9b3b] focus:outline-none">
+                            Tancar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+        
         <!-- Table part -->
         <table class="w-full mt-[50px] table-auto text-center border-separate border-spacing-[20px]">
             <thead>
@@ -122,17 +137,17 @@
                                 <?php
                                 $foundSubcategory = true; 
                             }
-                            if (!$foundSubcategory) { ?>
-                                <td class="border border-[#FCB666] p-[9px]  bg-white">
-                                    <?php echo "Sense subcategoria"; ?>
-                                </td>
-                            <?php }
                         } 
+                        if (!$foundSubcategory) { ?>
+                            <td class="border border-[#FCB666] p-[9px]  bg-white">
+                                <?php echo "Sense subcategoria"; ?>
+                            </td>
+                        <?php }
                         ?>
                         <!-- Edit button -->
                         <td class="font-inter bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
-                            <div class="flex justify-center">
-                                <form action="/productupdate" method="POST">
+                            <div class="flex justify-center max-w-[200px]">
+                                <form action="/productupdates" method="POST">
                                     <input type="hidden" name="id" value="<?php echo $product->getId(); ?>">
                                     <button type="submit" class="flex items-center">
                                         <p class="mr-[5px]">Editar</p>
@@ -198,5 +213,8 @@
     
     <!-- File show modal delete -->
     <script src="../../js/modals/deletemodal.js"></script>
+    
+    <!-- File show modal delete -->
+    <script src="../../js/modals/searchmodal.js"></script>
 </body>
 </html>

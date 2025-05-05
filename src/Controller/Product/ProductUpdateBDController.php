@@ -45,9 +45,24 @@ class ProductUpdateBDController{
                 header('Location: /productmanager');
             }catch (BuildExceptions $e) {
                     $_SESSION['error'] = $e->getMessage();
-                    header('Location: /productupdate');
+                    header('Location: /productupdates');
                     exit;
             }
         }
     }
 }
+
+/* 
+$stmt = $db->prepare($sql);
+$stmt ->execute([
+    'name'  => $request['name']
+            => $name
+            => $request->name
+])
+$product = find()
+$sql = "UPDATE . . $name"
+foreach($datos as $dato){
+    $str .= $key.'=''.$value.','
+    $name = (filter_input,'name');
+}
+*/

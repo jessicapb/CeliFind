@@ -161,11 +161,22 @@ class ProductRepository{
     }
     
     // Search 
-    function searchproduct(string $name) {
-        $sql = $this->db->prepare("SELECT * FROM products WHERE name LIKE '% . $name .%' AND state = 1 ORDER BY name");
-        $sql->execute([
-            ':name' => '%' . $name . '%'
-        ]);
-        return $sql->fetchAll(\PDO::FETCH_ASSOC);
+    function searchproduct(string $name):array {
+        $stmt = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
+                                    SUBSTRING(nutritionalinformation, 1, 12) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state,
+                                    idsubcategory FROM products WHERE name LIKE :name");
+        $stmt->execute(['name' => '%' . $name . '%']);
+        $products = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        
+        $result = [];
+        foreach($products as $product){
+            if (empty($product['nutritionalinformation_short'])) {
+                $nutritionalinformation = null;
+            } else {
+                $nutritionalinformation = $fila['nutritionalinformation_short'];
+            }
+            $result[] = new Product($product['id'], $product['name_short'], $product['description_short'], $product['ingredients_short'], $$nutritionalinformation, $product['price'], $product['brand_short'], $product['image'], $product['weight'], $product['state'], $product['idsubcategory']);
+        }
+        return $result;
     }    
 }

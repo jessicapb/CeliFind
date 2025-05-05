@@ -13,7 +13,6 @@ use App\Controller\Manager\ManagerController;
 //ViewsProduct
 use App\Controller\Product\ProductManagerController;
 use App\Controller\Product\ProductAddController;
-use App\Controller\Product\ProductSearchController;
 use App\Controller\Product\ProductShowImageController;
 use App\Controller\Product\ProductUpdateController;
 use App\Controller\Product\ProductViewController;
@@ -22,10 +21,10 @@ use App\Controller\Product\ProductIndividualController;
 
 //ControllerProduct
 use App\Controller\Product\ProductSaveBDController;
-use App\Controller\Product\ProductSearchBDController;
 use App\Controller\Product\ProductDeleteBDController;
 use App\Controller\Product\ProductUpdateBDController;
 use App\Controller\Product\ProductToSubcategoryBDController;
+use App\Controller\Product\ProductSearchBDController;
 
 //ViewsRecipes
 use App\Controller\Recipes\RecipesManagerController;
@@ -126,8 +125,6 @@ $controllerproduct = new ProductSaveBDController($db);
 // Show the image of the product
 $showimageproduct = new ProductShowImageController($productServices);
 
-// Search the product
-//$controllersearchproduct = new ProductSearchBDController($db);
 
 // Update the product
 $controllerupdateproduct = new ProductUpdateBDController($db);
@@ -244,12 +241,6 @@ $router
     // Go to the assign product to category
     ->addRoute('GET','/producttocategory', [$shownameproductandsubcategory, 'producttocategory'])
     
-    // Go to the search product
-    ->addRoute('GET','/productsearch',[new ProductSearchController(),'productsearch'])
-    
-    // Search the product
-    //->addRoute('POST','/searchproduct',[$controllersearchproduct,'searchproduct'])
-    
     // Delete the product
     ->addRoute('POST','/deleteproduct',[$controllerdeleteproduct,'deleteproduct'])
     
@@ -257,7 +248,7 @@ $router
     ->addRoute('POST','/addProducttoSubcategory',[$controllerproducttosubcategory,'addProducttoSubcategory'])
     
     // Form to update
-    ->addRoute('POST','/productupdate',[$showformupdate,'productupdate'])
+    ->addRoute('POST','/productupdates',[$showformupdate,'productupdates'])
     
     // Update the product
     ->addRoute('POST','/updateproduct',[$controllerupdateproduct,'updateproduct'])
@@ -267,6 +258,11 @@ $router
     
     // View of a individual product
     ->addRoute('POST','/productindividual',[$showindividualproduct,'productindividual'])
+    
+    // Search the product
+    ->addRoute('POST', '/searchproduct', [new ProductSearchBDController($db, $productServices, $subcategoryServices), 'searchproduct'])
+    
+    ->addRoute('GET', '/showsearchresults', [new ProductSearchBDController($db, $productServices, $subcategoryServices), 'showsearchresults'])
     
     // Go to the manager recipes
     ->addRoute('GET','/recipesmanager',[$showlimitrecipes,'recipesmanager'])

@@ -1,38 +1,55 @@
 <?php
 namespace App\Controller\Product;
 
-use App\Infrastructure\Persistence\ProductRepository;
 use App\Celifind\Services\ProductServices;
+use App\Celifind\Services\SubcategoryServices; 
+use App\Celifind\Exceptions\BuildExceptions;
 
-class ProductSearchController {
+class ProductSearchBDController {
     private \PDO $db;
-    private ProductRepository $ProductRepository;
-    private ProductServices $ProductService;
-
-    public function __construct(\PDO $db) {
+    private ProductServices $productServices;
+    private SubcategoryServices $subcategoryServices; 
+    
+    public function __construct(\PDO $db, ProductServices $productServices, SubcategoryServices $subcategoryServices) {
         $this->db = $db;
-        $this->ProductRepository = new ProductRepository($db);
-        $this->ProductService = new ProductServices($db, $this->ProductRepository);
+        $this->productServices = $productServices;
+        $this->subcategoryServices = $subcategoryServices;  
     }
-
-    public function search() {
+    
+    public function searchproduct() {
         session_start();
-        if (trim($name) === '') {
-            $_SESSION['search_error'] = "Escriu un nom per buscar.";
-            header('Location: /productview');
-            exit;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $name = filter_input(INPUT_POST, 'name');
+            
+            try {
+                $products = $this->productServices->searchproduct($name);
+                $_SESSION['search_results'] = $products;
+                $_SESSION['no_results'] = empty($products); 
+                
+                header('Location: /showsearchresults');
+                exit;
+            } catch (BuildExceptions $e) {
+                $_SESSION['error'] = "Error al realitzar la cerca.";
+                header('Location: /productmanager');
+                exit;
+            }
         }
+    }
+    
+    public function showsearchresults() {
+        session_start();
         
-        $name = $_POST['name'] ?? '';
-        $products = $this->ProductService->searchproduct($name);
-
-        if (empty($products)) {
-            $_SESSION['search_error'] = "No s'han trobat productes amb aquest nom.";
-        } else {
-            $_SESSION['search_results'] = $products;
+        $products = [];
+        $noResults = false;
+        
+        if (isset($_SESSION['search_results']) && isset($_SESSION['no_results'])) {
+            $products = $_SESSION['search_results'];
+            $noResults = $_SESSION['no_results'];
         }
-
-        header('Location: /productview');
-        exit;
+        unset($_SESSION['search_results'], $_SESSION['no_results']);
+        
+        $subcategories = $this->subcategoryServices->showallsubcategory(); 
+        
+        echo view('product/productmanager', ['products' => $products, 'noResults' => $noResults, 'subcategories' => $subcategories]);
     }
 }
