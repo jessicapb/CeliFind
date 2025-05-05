@@ -28,6 +28,7 @@ class RecipesSaveBDController{
             $name = filter_input(INPUT_POST, 'name');
             $description = filter_input(INPUT_POST, 'description');
             $ingredients = filter_input(INPUT_POST, 'ingredients');
+            $nutritionalinformation = filter_input(INPUT_POST, 'nutritionalinformation');
             $people = filter_input(INPUT_POST, 'people');
             $duration = filter_input(INPUT_POST, 'duration');
             $instruction = filter_input(INPUT_POST, 'instruction');
@@ -49,7 +50,7 @@ class RecipesSaveBDController{
             
             try {
                 //Create the recipes
-                $recipes = new Recipes(null, $name, $description, $ingredients, $people, $duration, $instruction, $imageData);
+                $recipes = new Recipes(null, $name, $description, $ingredients, $nutritionalinformation, $people, $duration, $instruction, $imageData);
                 // Validate if the name exists
                 if($this->RecipesServices->exists($name)){
                     $_SESSION['errors']['name'] = "El nom ja està registrar. ";

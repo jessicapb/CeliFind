@@ -10,12 +10,13 @@ class Recipes{
     protected string $name;
     protected string $description;
     protected string $ingredients;
+    protected string $nutritionalinformation;
     protected string $people;
     protected string $duration;
     protected string $instruction;
     protected string $image;
     
-    public function __construct(?int $id = null, string $name, string $description, string $ingredients, string $people, string $duration, string $instruction, string $image){
+    public function __construct(?int $id = null, string $name, string $description, string $ingredients, string $nutritionalinformation,string $people, string $duration, string $instruction, string $image){
         $error = 0;
         
         $this->id = $id;
@@ -31,6 +32,10 @@ class Recipes{
             $_SESSION['errors']['ingredients'] = ChecksProduct::getErrorMessage($error);
         }
         
+        if(($error = $this->setNutritionalInformation($nutritionalinformation)) !=0){
+            $_SESSION['errors']['nutritionalinformation'] = ChecksProduct::getErrorMessage($error);
+        }
+
         if (($error = $this->setPeople($people)) != 0){
             $_SESSION['errors']['people'] = ChecksProduct::getErrorMessage($error);
         }
@@ -120,6 +125,32 @@ class Recipes{
         }
         
         $this->ingredients = $ingredients;
+        return 0;
+    }
+    
+    // Nutritional information
+    public function getNutritionalInformation(): string{
+        return $this->nutritionalinformation;
+    }
+    
+    public function setNutritionalInformation(string $nutritionalinformation): int {
+        
+        $errorNull = ChecksProduct::minMaxLength($nutritionalinformation, 4, 1060);
+        if ($errorNull != 0) {
+            return $errorNull;
+        }
+        
+        $errorWord = ChecksProduct::validateProductWords($nutritionalinformation);
+        if ($errorWord != 0) {
+            return $errorWord;
+        }
+        
+        $errorNotNumber = ChecksProduct::validateProductNotNumber($nutritionalinformation);
+        if ($errorNotNumber != 0) {
+            return $errorNotNumber;
+        }
+        
+        $this->nutritionalinformation = $nutritionalinformation;
         return 0;
     }
     

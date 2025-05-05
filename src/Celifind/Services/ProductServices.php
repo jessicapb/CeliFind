@@ -31,6 +31,10 @@ class ProductServices{
         return $this->ProductRepository->stateone();
     }
     
+    function stateonelimit(){
+        return $this->ProductRepository->stateonelimit();
+    }
+    
     function findById(int $id){
         return $this->ProductRepository->findById($id);
     }
@@ -43,7 +47,7 @@ class ProductServices{
         return $this->ProductRepository->deleteProduct($id);
     }
     
-    function searchproduct(){
-        
+    function searchproduct(string $name){
+        return $this->ProductRepository->exists($name);
     }
 }

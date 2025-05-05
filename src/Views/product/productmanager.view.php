@@ -8,12 +8,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+    <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
-<body>
+<body class="bg-slate-100">
     <header>
         <nav>
             <a href="/manager">
-                <img class="pl-[20px] pt-[20px] w-[9%] h-[9%]" src="../../img/logo/logo.png" alt="">
+                <img class="ml-[20px] w-32 pt-[20px]" src="../../img/logo/logo.png" alt="logoimg">
             </a>
             <div class="p-1 space-y-0.5">
                 <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/manager">
@@ -24,7 +25,7 @@
         </nav>
     </header>
 
-    <section>
+    <section class="pb-20">
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center font-bold">Gestor <span class="text-[#96c368] opacity-[100%]">producte</span></h1>
         <div class="mt-[20px] flex justify-between items-center">
             <!-- Add product  -->
@@ -65,7 +66,6 @@
             </thead>
             <tbody>
                 <?php foreach ($products as $product) { ?>
-                    
                     <tr>
                         <!-- Name -->
                         <td class="border border-[#FCB666] p-[9px]">
@@ -192,6 +192,9 @@
             </tbody>
         </table>
     </section> 
+    
+    <!--Footer section!-->
+    <?php include 'src/Views/parts/footer/footer.view.php'?>
     
     <!-- File show modal delete -->
     <script src="../../js/modals/deletemodal.js"></script>

@@ -40,8 +40,7 @@ class UserRegisterController
                     exit;
                 }
 
-                // surname y city a null
-                $user = new User($name, null, $email, null, $postalcode, $password);
+                $user = new User($name, $email, $postalcode, $password, null, null);
                 $this->userRepository->save($user);
 
                 header('Location: /login');

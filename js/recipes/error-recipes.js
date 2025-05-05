@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let errorName = document.getElementById('error-name');
             let errorDescription = document.getElementById('error-description');
             let errorIngredients = document.getElementById('error-ingredients');
+            let errorNutritionalInformation = document.getElementById('error-nutritionalinformation');
             let errorPeople= document.getElementById('error-people');
             let errorDuration= document.getElementById('error-duration');
             let errorInstruction = document.getElementById('error-instruction');
@@ -25,6 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (errorIngredients) {
                 errorIngredients.textContent = serverErrors.ingredients; 
                 errorIngredients.style.display = 'block';  
+            }
+            
+            // Error nutritionalinformation
+            if (errorNutritionalInformation) {
+                errorNutritionalInformation.textContent = serverErrors.nutritionalinformation; 
+                errorNutritionalInformation.style.display = 'block';   
             }
             
             // Error people

@@ -7,11 +7,11 @@ use App\Celifind\Exceptions\BuildExceptions;
 
 class RecipesRepository{
     private \PDO $db;
-
+    
     function __construct(\PDO $db){
         $this->db = $db;
     }
-
+    
     // Exists
     function exists(string $name): bool{
         try {
@@ -26,16 +26,17 @@ class RecipesRepository{
             throw new BuildExceptions("Error checking if the recipes exists:" . $ex->getMessage());
         }
     }
-
+    
     // Insert
     function save(Recipes $recipes){
         try {
-            $sql = $this->db->prepare("INSERT INTO recipes(id, name, description, ingredients, people, duration, instruction, image) VALUES(:id, :name, :description, :ingredients, :people, :duration, :instruction, :image)");
+            $sql = $this->db->prepare("INSERT INTO recipes(id, name, description, ingredients, nutritionalinformation, people, duration, instruction, image) VALUES(:id, :name, :description, :ingredients, :nutritionalinformation, :people, :duration, :instruction, :image)");
             $sql->execute([
                 'id' => $recipes->getId(),
                 'name' => $recipes->getName(),
                 'description' => $recipes->getDescription(),
                 'ingredients' => $recipes->getIngredients(),
+                'nutritionalinformation' => $recipes->getNutritionalInformation(),
                 'people' => $recipes->getPeople(),
                 'duration' => $recipes->getDuration(),
                 'instruction' => $recipes->getInstruction(),
@@ -45,17 +46,59 @@ class RecipesRepository{
             throw new BuildExceptions("Error saving recipes:" . $e->getMessage());
         }
     }
-
+    
+    // Select with id 
+    public function findById(int $id): ?Recipes {
+        $sql = $this->db->prepare("SELECT * FROM recipes WHERE id = :id");
+        $sql->bindParam(':id', $id, \PDO::PARAM_INT);
+        $sql->execute();
+        
+        if ($row = $sql->fetch(\PDO::FETCH_ASSOC)) {
+            return new Recipes(
+                $row['id'],
+                $row['name'],
+                $row['description'],
+                $row['ingredients'],
+                $row['nutritionalinformation'],
+                $row['people'],
+                $row['duration'],
+                $row['instruction'],
+                $row['image']
+            );
+        }
+        return null;
+    }
+    
     // Select limit
     function showlimit(){
         $allrecipes = [];
         $sql = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
-                                    people, duration, SUBSTRING(instruction, 1, 8) AS instruction_short, image FROM recipes");
+                                    SUBSTRING(nutritionalinformation, 1, 13) AS nutritionainformaltion_short, people, duration, SUBSTRING(instruction, 1, 8) AS instruction_short, image FROM recipes");
         $sql->execute();
         while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
-            $recipes = new Recipes($fila['id'], $fila['name_short'], $fila['description_short'], $fila['ingredients_short'], $fila['people'], $fila['duration'], $fila['instruction_short'], $fila['image']);
+            $recipes = new Recipes($fila['id'], $fila['name_short'], $fila['description_short'], $fila['ingredients_short'], $fila['nutritionalinformation_short'], $fila['people'], $fila['duration'], $fila['instruction_short'], $fila['image']);
             $allrecipes[] = $recipes;
         }
         return $allrecipes;
+    }
+    
+    // Select all
+    function selectall(){
+        $allrecipes = [];
+        $sql = $this->db->prepare("SELECT * FROM recipes");
+        $sql->execute();
+        while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
+            $recipes = new Recipes($fila['id'], $fila['name'], $fila['description'], $fila['ingredients'], $fila['nutritionalinformation'], $fila['people'], $fila['duration'], $fila['instruction'], $fila['image']);
+            $allrecipes[] = $recipes;
+        }
+        return $allrecipes;
+    }
+    
+    // Delete
+    function deleteRecipes(int $id): bool {
+        $sql = $this->db->prepare("DELETE FROM recipes WHERE id = :id");
+        return $sql->execute([
+            ':id' => $id
+        ]);
     }
 }

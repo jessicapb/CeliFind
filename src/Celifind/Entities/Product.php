@@ -57,7 +57,7 @@ class Product{
             $_SESSION['errors']['state'] = ChecksProduct::getErrorMessage($error);
         }
         $this->subcategory_id = $subcategory_id;
-
+        
         if (!empty($_SESSION['errors'])) {
             $errorMessage = json_encode($_SESSION['errors']);
             throw new BuildExceptions($errorMessage);
@@ -163,7 +163,7 @@ class Product{
         $this->nutritionalinformation = $nutritionalinformation;
         return 0;
     }
-
+    
     
     // Price
     public function getPrice(): string{

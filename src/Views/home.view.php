@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
+    <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
 <body>
     <header class="p-4">
@@ -19,9 +20,9 @@
             <div class="flex">
                 <ul class="list-none p-4m hidden lg:flex items-center">
                     <li class="ml-8"><a href="/productview">Productes</a></li>
-                    <li class="ml-8"><a href="#">Receptes</a></li>
-                    <li class="ml-8"><a href="#">Qui som ?</a></li>
-                    <li class="ml-8"><a href="#">Informació</a></li>
+                    <li class="ml-8"><a href="/receptes">Receptes</a></li>
+                    <li class="ml-8"><a href="/quisom">Qui som ?</a></li>
+                    <li class="ml-8"><a href="/informacio">Informació</a></li>
                 </ul>
                 <div class="flex items-center gap-5 ml-16">
                     <a href="/register" class="font-inter p-2 px-5 text-[16px] text-black border-[#96c368] border-2 rounded-[50px] font-normal hover:bg-[rgb(150,195,104)] hover:text-white transition duration-200">Registre</a>
@@ -36,7 +37,7 @@
             <h2 class="font-calistoga text-[80px]  md:text-[70px] lg:text-[100px]">Gluten <span class="text-[#96c368]">Free</span> <span class="text-[#FAD464]">sense</span> limits</h2>
             <p class="text-[20px] font-inter">Descobreix els nostres productes sense gluten, creats per al teu benestar i gaudeix amb confiança!</p>
             <div class="mt-20">
-                <a href="#" class="bg-[#fcb666] text-[18px] text-white font-inter p-4 rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-[#fcb666] hover:border-2 transition duration-200">Descobreix els nostres productes</a>
+                <a href="/productview" class="bg-[#fcb666] text-[18px] text-white font-inter p-4 rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-[#fcb666] hover:border-2 transition duration-200">Descobreix els nostres productes</a>
             </div>
         </div>
 
@@ -75,15 +76,12 @@
 
         <!--Recipes Section!-->
         <section class="p-10 justify-center pt-32 flex bg-slate-100">
-
             <div class="flex-wrap xl:flex items-center">
-
                 <div class="flex-1 lg:flex md:flex sm:flex text-center justify-center">
                     <img class="w-[500px]" src="../img/home/Recipes.png" alt="">
                 </div>
 
                 <div class="flex-1 text-center xl:text-left mt-16 md:mt-16 lg:mt-16">
-
                     <h1 class="text-[46px] lg:text-[50px] font-calistoga">Descobreix les Nostres Receptes Sense Gluten</h1>
                     <h2 class="text-3xl font-calistoga mt-5">Receptes per a tots els gustos</h2>
                     <p class="font-inter text-[19px] mt-2">Descobreix els nostres productes sense gluten, creats per al teu benestar i gaudeix amb confiança!</p>
@@ -91,95 +89,55 @@
                     <div class="mt-[80px]">
                         <a href="#" class="bg-[#fcb666] text-[18px] border-[#fcb666] border-2 text-white font-inter p-3 rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-[#fcb666] hover:border-2 transition duration-200">Descobreix les nostres receptes</a>
                     </div>
-
                 </div>
             </div>
-
         </section>
 
         <!--Descobreix els nostres productes section!-->
         <section class="flex-col justify-center pt-20 p-10 bg-slate-100">
-
             <div class="flex text-center flex-col">
                 <h1 class="text-[46px] lg:text-[50px] font-calistoga">Descobreix tots els nostres Productes</h1>
                 <p class="font-inter text-[19px] mt-2">Explora la nostra col·lecció i troba allò que busques!</p>
                 <div class="mt-[50px]">
-                    <a href="#" class="bg-[#fcb666] text-[18px] text-white font-inter p-4 px-9 rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-[#fcb666] hover:border-2 transition duration-200">
+                    <a href="/productview" class="bg-[#fcb666] text-[18px] text-white font-inter p-4 px-9 rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-[#fcb666] hover:border-2 transition duration-200">
                         Tots els nostres productes
                     </a>
                 </div>
             </div>
-
             <div class="flex flex-wrap mt-11 justify-center gap-10">
-
-                <div class="bg-white shadow-md p-5 rounded-xl max-w-xs w-full">
-                    <img class="w-full h-auto rounded-md" src="../img/home/pizzasingluten.png" alt="Pizza sense gluten">
-                    <div class="flex items-center justify-between mt-4">
-                        <p class="font-semibold">Títol</p>
-                        <p class="text-gray-500 text-sm">Data</p>
-                    </div>
-                    <p class="mt-2 text-gray-700 text-sm font-inter">Descripció del producte o detall breu.</p>
-                    <div class="flex justify-center mt-6">
-                        <a href="#" class="w-full text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                        Més informació
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-white shadow-md p-5 rounded-xl max-w-xs w-full">
-                    <img class="w-full h-auto rounded-md" src="../img/home/pizzasingluten.png" alt="Pizza sense gluten">
-                    <div class="flex items-center justify-between mt-4">
-                        <p class="font-semibold">Títol</p>
-                        <p class="text-gray-500 text-sm">Data</p>
-                    </div>
-                    <p class="mt-2 text-gray-700 text-sm font-inter">Descripció del producte o detall breu.</p>
-                    <div class="flex justify-center mt-6">
-                        <a href="#" class="w-full text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                        Més informació
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-white shadow-md p-5 rounded-xl max-w-xs w-full">
-                    <img class="w-full h-auto rounded-md" src="../img/home/pizzasingluten.png" alt="Pizza sense gluten">
-                    <div class="flex items-center justify-between mt-4">
-                        <p class="font-semibold">Títol</p>
-                        <p class="text-gray-500 text-sm">Data</p>
-                    </div>
-                    <p class="mt-2 text-gray-700 text-sm font-inter">Descripció del producte o detall breu.</p>
-                    <div class="flex justify-center mt-6">
-                        <a href="#" class="w-full text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                        Més informació
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-white shadow-md p-5 rounded-xl max-w-xs w-full">
-                    <img class="w-full h-auto rounded-md" src="../img/home/pizzasingluten.png" alt="Pizza sense gluten">
-                    <div class="flex items-center justify-between mt-4">
-                        <p class="font-semibold">Títol</p>
-                        <p class="text-gray-500 text-sm">Data</p>
-                    </div>
-                    <p class="mt-2 text-gray-700 text-sm font-inter">Descripció del producte o detall breu.</p>
-                    <div class="flex justify-center mt-6">
-                        <a href="#" class="w-full text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                        Més informació
-                        </a>
-                    </div>
-                </div>
-                <div class="bg-white shadow-md p-5 rounded-xl max-w-xs w-full">
-                    <img class="w-full h-auto rounded-md" src="../img/home/pizzasingluten.png" alt="Pizza sense gluten">
-                    <div class="flex items-center justify-between mt-4">
-                        <p class="font-semibold">Títol</p>
-                        <p class="text-gray-500 text-sm">Data</p>
-                    </div>
-                    <p class="mt-2 text-gray-700 text-sm font-inter">Descripció del producte o detall breu.</p>
-                    <div class="flex justify-center mt-6">
-                        <a href="#" class="w-full text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                        Més informació
-                        </a>
-                    </div>
-                </div>
+            <?php foreach ($products as $product) { ?>
+                                <div class="shadow-lg w-[400px] h-auto rounded-[21px] bg-white p-[10px] mr-[30px] mx-auto flex flex-col justify-between items-center">
+                                    <div class="flex flex-col items-start">
+                                        <!-- Image -->
+                                        <div class="w-full flex justify-center mb-3">
+                                            <div class="w-[180px] h-[180px] flex mt-[15px] items-center justify-center">
+                                                <img src="<?php echo $product->getImage() ?>" alt="image_bd" class="object-contain w-full h-full">                                    
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Name -->
+                                        <div class="w-full text-left mt-[10px] min-h-[50px]">
+                                            <p class="font-inter pl-[10px] text-[17px] font-bold text-black"><?php echo $product->getName(); ?></p>
+                                        </div>
+                                        
+                                        
+                                        <!-- Description -->
+                                        <div class="w-full text-left mt-[10px] min-h-[100px]">
+                                            <p class="font-inter pl-[10px] pr-[15px] text-[16px] text-justify font-normal text-black"><?php echo $product->getDescription(); ?></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Button -->
+                                    <div class="w-full flex justify-center mt-4">
+                                        <form action="/productindividual" method="POST" class="w-[90%]">
+                                            <input type="hidden" name="id" value="<?php echo $product->getId(); ?>">
+                                            <button type="submit" class="w-full mt-[15px] mb-[10px] text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
+                                                Més informació
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            <?php } ?>
             </div>
         <section>
 
@@ -260,53 +218,8 @@
             </div>
         </section>
     </main>
-
-
+    
     <!--Footer section!-->
-    <footer class="bg-slate-100 text-black py-12 px-8 lg:px-20">
-        <div class="grid grid-cols-1 max-w-screen-xl mx-auto md:grid-cols-5 text-center lg:text-start md:text-start gap-8 text-sm justify-center">
-            <div class="md:col-span-1 flex flex-col space-y-2">
-                <a href="/">
-                    <img src="../img/logo/logo.png" alt="CeliFind logo" class="w-36">
-                </a>
-            </div>
-
-            <div>
-                <h4 class="font-semibold mb-2">Serveis i Productes</h4>
-                    <ul class="space-y-1 text-gray-600">
-                        <li><a href="#">Productes</a></li>
-                        <li><a href="#">Receptes</a></li>
-                        <li><a href="#">Qui som</a></li>
-                        <li><a href="#">Informació</a></li>
-                    </ul>
-            </div>
-
-            <div>
-                <h4 class="font-semibold mb-2">Contacta'ns</h4>
-                <ul class="space-y-1 text-gray-600">
-                    <li><a href="mailto:celifind.cat@gmail.com">celifind.cat@gmail.com</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="font-semibold mb-2">Política de privacitat</h4>
-                <ul class="space-y-1 text-gray-600">
-                    <li><a href="#">Avís Legal</a></li>
-                    <li><a href="#">Política de Cookies</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="font-semibold mb-2">Ajuda</h4>
-                <ul class="space-y-1 text-gray-600">
-                    <li><a href="#">Informació</a></li>
-                    <li><a href="#">Qui Som</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class=" max-w-screen-xl mx-auto  gap-8 text-sm">
-            <p class="space-y-1 text-gray-600 text-center  mt-[10px]">Copyright © <?=date('Y')?></p>
-        </div>
-    </footer>
+    <?php include 'parts/footer/footer.view.php'?>
 </body>
 </html>

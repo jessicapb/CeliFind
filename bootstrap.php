@@ -31,9 +31,12 @@ use App\Controller\Product\ProductToSubcategoryBDController;
 use App\Controller\Recipes\RecipesManagerController;
 use App\Controller\Recipes\RecipesAddController;
 use App\Controller\Recipes\RecipesShowImageController;
+use App\Controller\Recipes\RecipesViewController;
+use App\Controller\Recipes\RecipesIndividualController;
 
 // ControllerRecipes
 use App\Controller\Recipes\RecipesSaveBDController;
+use App\Controller\Recipes\RecipesDeleteBDController;
 
 // ControllerCategory
 use App\Controller\Category\CategoryShowBDController;
@@ -56,6 +59,16 @@ use App\Controller\Subcategory\SubcategoryUpdateBDController;
 use App\Controller\User\UserLoginController;
 use App\Controller\User\UserRegisterController;
 use App\Controller\User\LogoutController;
+use App\Controller\User\ForgotPasswordController;
+use App\Controller\User\ResetPasswordController;
+
+//Privacity
+use App\Controller\Privacity\privacityController;
+use App\Controller\Privacity\politicprivController;
+
+//Pages
+use App\Controller\Pages\quisomController;
+use App\Controller\Pages\informacioController;
 
 // Database
 use App\Infrastructure\Database\DatabaseConnection;
@@ -105,7 +118,7 @@ $controllerproduct = new ProductSaveBDController($db);
 $showimageproduct = new ProductShowImageController($productServices);
 
 // Search the product
-$controllersearchproduct = new ProductSearchBDController($db);
+//$controllersearchproduct = new ProductSearchBDController($db);
 
 // Update the product
 $controllerupdateproduct = new ProductUpdateBDController($db);
@@ -117,15 +130,20 @@ $controllerdeleteproduct = new ProductDeleteBDController($db);
 $controllerproducttosubcategory = new ProductToSubcategoryBDController($db);
 
 // Show the form for update the product
-//$showformupdate = new ProductUpdateController($db);
+$showformupdate = new ProductUpdateController($db);
 
 // Show a individual product
 $showindividualproduct =  new ProductIndividualController($productServices);
+
+// Show the products of home
+$homeproducts = new HomeController($productServices);
 
 // User controllers
 $userLoginController = new UserLoginController($db);
 $userRegisterController = new UserRegisterController($db);
 $logoutController = new LogoutController();
+$forgotPasswordController = new ForgotPasswordController($db);
+$resetPasswordController = new ResetPasswordController($db);
 
 // Routes recipesrepository
 $services->addServices('recipesRepository', fn() => new RecipesRepository($db));
@@ -143,6 +161,15 @@ $showlimitrecipes = new RecipesManagerController($RecipesServices);
 
 // Show the image of the recipes
 $showimagerecipes = new RecipesShowImageController($RecipesServices);
+
+// Delete the recipes
+$deleterecipes = new RecipesDeleteBDController($db);
+
+// Go to the view of the recipes
+$viewrecipes =  new RecipesViewController($RecipesServices);
+
+// Show the individual recipes
+$individualrecipes =  new RecipesIndividualController($RecipesServices);
 
 // Routes Category Repository
 $services->addServices('categoryRepository', fn() => new CategoryRepository($db));
@@ -177,10 +204,10 @@ $showlimitproduct = new ProductManagerController($productServices, $subcategoryR
 $router = new Router();
 $router 
     // Open the principal (index)
-    ->addRoute('GET','/',[new HomeController(),'home'])
+    ->addRoute('GET','/',[$homeproducts,'home'])
     
     // Go to the home page
-    ->addRoute('GET','/home',[new HomeController(),'home'])
+    ->addRoute('GET','/home',[$homeproducts,'home'])
     
     // Go to the manager page
     ->addRoute('GET','/manager',[new ManagerController(),'manager'])
@@ -204,7 +231,7 @@ $router
     ->addRoute('GET','/productsearch',[new ProductSearchController(),'productsearch'])
     
     // Search the product
-    ->addRoute('POST','/searchproduct',[$controllersearchproduct,'searchproduct'])
+    //->addRoute('POST','/searchproduct',[$controllersearchproduct,'searchproduct'])
     
     // Delete the product
     ->addRoute('POST','/deleteproduct',[$controllerdeleteproduct,'deleteproduct'])
@@ -213,7 +240,7 @@ $router
     ->addRoute('POST','/addProducttoSubcategory',[$controllerproducttosubcategory,'addProducttoSubcategory'])
     
     // Form to update
-    //->addRoute('POST','/productupdate',[$showformupdate,'productupdate'])
+    ->addRoute('POST','/productupdate',[$showformupdate,'productupdate'])
     
     // Update the product
     ->addRoute('POST','/updateproduct',[$controllerupdateproduct,'updateproduct'])
@@ -235,6 +262,15 @@ $router
     
     // Show the image of the recipes showimagerecipes
     ->addRoute('GET', '/recipesshowimage', [$showimagerecipes, 'recipesshowimage'])
+    
+    // Delete the recipes
+    ->addRoute('POST', '/deleterecipes', [$deleterecipes, 'deleterecipes'])
+    
+    // Go to the view of recipes
+    ->addRoute('GET','/receptes',[$viewrecipes,'recipesview'])
+    
+    // Go to the individual recipes
+    ->addRoute('POST','/recipesindividual',[$individualrecipes,'recipesindividual'])
     
     // Go to the show categories
     ->addRoute('GET', '/category', [new CategoryShowBDController($db), 'showcategory'])
@@ -277,4 +313,22 @@ $router
     ->addRoute('POST','/userregister',[$userRegisterController,'register'])
     
     // Handle logout GET
-    ->addRoute('GET','/logout',[$logoutController,'logout']);
+    ->addRoute('GET','/logout',[$logoutController,'logout'])
+    
+    // Recuperación de contraseña
+    ->addRoute('GET','/forgotpassword',[$forgotPasswordController,'showForgotPassword'])
+    ->addRoute('POST','/forgotpassword',[$forgotPasswordController,'sendResetLink'])
+    ->addRoute('GET','/resetpassword',[$resetPasswordController,'showResetPassword'])
+    ->addRoute('POST','/resetpassword',[$resetPasswordController,'updatePassword'])
+    
+    //GO to Privacity section
+    ->addRoute('GET','/privacity',[new privacityController(), 'privacity'])
+    
+    ->addRoute('GET','/politicpriv',[new politicprivController(), 'politicpriv'])
+    
+    //Go to quisom pages
+    ->addRoute('GET','/quisom',[new quisomController(), 'quisom'])
+    
+    //Go to informacio
+    
+    ->addRoute('GET','/informacio',[new informacioController(), 'informacio']);

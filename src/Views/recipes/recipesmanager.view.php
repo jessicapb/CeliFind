@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="bg-slate-100">
     <header>
         <nav>
             <a href="/manager">
-                <img class="pl-[20px] pt-[20px] w-[9%] h-[9%]" src="../../img/logo/logo.png" alt="">
+                <img class="ml-[20px] w-32 pt-[20px]" src="../../img/logo/logo.png" alt="logoimg">
             </a>
             <div class="p-1 space-y-0.5">
                 <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/manager">
@@ -24,7 +24,7 @@
         </nav>
     </header>
 
-    <section>
+    <section class="pb-20">
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center font-bold">Gestor <span class="text-[#96c368] opacity-[100%]">receptes</span></h1>
         <div class="mt-[20px] flex justify-between items-center">
             <!-- Add product  -->
@@ -78,7 +78,7 @@
                         </td>
                         <!-- Ingredients -->
                         <td class="border border-[#FCB666] p-[9px]">
-                            <?php echo $recipe->getIngredients(); ?> 
+                            <?php echo $recipe->getNutritionalInformation(); ?> 
                         </td>
                         <!-- People -->
                         <td class="border border-[#FCB666] p-[9px]">
@@ -116,10 +116,10 @@
                         <!-- Modal delete -->
                         <div class="deletemodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50 hidden">
                             <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
-                                <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Vols eliminar el producte <?php echo $recipe->getName() ?> ?</h2>
-                                <p class="font-inter text-black- font-medium text-[16px] text-center">Un cop sigui eliminat no es podrà desfer l'operació.</p>
+                                <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Vols eliminar la recepta <?php echo $recipe->getName() ?> ?</h2>
+                                <p class="font-inter text-black- font-medium text-[16px] text-center">Un cop sigui eliminada no es podrà desfer l'operació.</p>
                                 <div class="flex justify-center">
-                                    <form action="/deleteproduct" method="POST">
+                                    <form action="/deleterecipes" method="POST">
                                         <input type="hidden" name="id" value="<?php echo $recipe->getId(); ?>">
                                         <button type="submit" class="font-inter bg-[#FCB666] mt-[10px] mr-[15px] text-[white] text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">Eliminar</button>
                                     </form>
@@ -128,12 +128,12 @@
                             </div>
                         </div>
                         <!-- Modal delete correct -->
-                        <?php if ($_GET['deleted'] == 'true'): ?>
+                        <?php if (isset($_GET['deleted']) && $_GET['deleted'] == 'true'): ?>
                             <div class="deletemodal fixed inset-0 flex justify-center items-center bg-opacity-50 z-50">
                                 <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
-                                    <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Eliminat el producte</h2>
+                                    <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Eliminada la recepta</h2>
                                     <div class="flex justify-center">
-                                        <a href="/productmanager" class="font-inter bg-[#FCB666] mt-[10px] mr-[15px] text-[white] text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">Tancar</a>
+                                        <a href="/recipesmanager" class="font-inter bg-[#FCB666] mt-[10px] mr-[15px] text-[white] text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">Tancar</a>
                                     </div>
                                 </div>
                             </div>
@@ -153,5 +153,8 @@
     
     <!-- File show modal delete -->
     <script src="../../js/modals/deletemodal.js"></script>
+    
+    <!--Footer section!-->
+    <?php include 'src/Views/parts/footer/footer.view.php'?>
 </body>
 </html>

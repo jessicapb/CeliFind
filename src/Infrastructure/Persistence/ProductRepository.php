@@ -7,11 +7,11 @@ use App\Celifind\Exceptions\BuildExceptions;
 
 class ProductRepository{
     private \PDO $db;
-
+    
     function __construct(\PDO $db){
         $this->db = $db;
     }
-
+    
     // Exists
     function exists(string $name): bool{
         try {
@@ -26,7 +26,7 @@ class ProductRepository{
             throw new BuildExceptions("Error checking if the product exists:" . $ex->getMessage());
         }
     }
-
+    
     // Insert 
     function save(Product $product){
         try {
@@ -48,7 +48,7 @@ class ProductRepository{
             throw new BuildExceptions("Error saving product:" . $e->getMessage());
         }
     }
-
+    
     // Select limit
     function showlimit(){
         $allproducts = [];
@@ -85,8 +85,26 @@ class ProductRepository{
         }
         return $allproducts;
     }
-
-
+    
+    // Select 4 with state 1
+    function stateonelimit(){
+        $allproducts = [];
+        $sql = $this->db->prepare("SELECT id, name, description, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
+                                        SUBSTRING(nutritionalinformation, 1, 20) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state, idsubcategory FROM products
+                                        WHERE state = 1 LIMIT 4");
+        $sql->execute();
+        while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
+            if (empty($fila['nutritionalinformation_short'])) {
+                    $nutritionalinformation = null;
+            } else {
+                $nutritionalinformation = $fila['nutritionalinformation_short'];
+            }
+            $products = new Product($fila['id'], $fila['name'], $fila['description'], $fila['ingredients_short'], $nutritionalinformation, $fila['price'], $fila['brand_short'], $fila['image'], $fila['weight'], $fila['state'], $fila['idsubcategory']);
+            $allproducts[] = $products;
+        }
+        return $allproducts;
+    }
+    
     // Select with id 
     public function findById(int $id): ?Product {
         $sql = $this->db->prepare("SELECT * FROM products WHERE id = :id");
@@ -133,7 +151,7 @@ class ProductRepository{
             throw new BuildExceptions("Error updating product:" . $e->getMessage());
         }
     }
-
+    
     // Delete
     function deleteProduct(int $id): bool {
         $sql = $this->db->prepare("DELETE FROM products WHERE id = :id");
@@ -141,7 +159,7 @@ class ProductRepository{
             ':id' => $id
         ]);
     }
-
+    
     // Search 
     function searchproduct(string $name) {
         $sql = $this->db->prepare("SELECT * FROM products WHERE name LIKE '% . $name .%' AND state = 1 ORDER BY name");

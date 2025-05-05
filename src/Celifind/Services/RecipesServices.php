@@ -26,4 +26,16 @@ class RecipesServices{
     function showlimit(){
         return $this->RecipesRepository->showlimit();
     }
+    
+    function findById(int $id){
+        return $this->RecipesRepository->findById($id);
+    }
+    
+    function selectall(){
+        return $this->RecipesRepository->selectall();
+    }
+    
+    function delete(int $id){
+        return $this->RecipesRepository->deleteRecipes($id);
+    }
 }

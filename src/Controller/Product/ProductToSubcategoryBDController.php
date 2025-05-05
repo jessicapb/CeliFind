@@ -47,14 +47,14 @@ class ProductToSubcategoryBDController{
             try {
                 $product = $this->productservices->findById($product_id);
                 if ($product === null) {
-                    $_SESSION['error']['product'] = "Producte no trobat.";
+                    $_SESSION['errors']['product'] = "Producte no trobat.";
                     header('Location: /producttocategory');
                     exit;
                 }
                 
                 $subcategory = $this->subcategoryrepository->findById($subcategory_id);
                 if ($subcategory === null) {
-                    $_SESSION['error']['subcategory'] = "Subcategoria no trobada.";
+                    $_SESSION['errors']['subcategory'] = "Subcategoria no trobada.";
                     header('Location: /producttocategory');
                     exit;
                 }
@@ -63,7 +63,7 @@ class ProductToSubcategoryBDController{
                 header('Location: /productmanager');
             } catch (BuildExceptions $e) {
                 $e->getMessage();
-                $_SESSION['error'] = $e->getMessage();
+                $_SESSION['errors'] = $e->getMessage();
                 header('Location: /producttocategory');
                 exit;
             }

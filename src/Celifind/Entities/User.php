@@ -20,7 +20,7 @@ class User
     /**
      * Constructor para crear un usuario nuevo (valida los datos)
      */
-    public function __construct($name, $surname = null, $email, $city = null, $postalcode, $password)
+    public function __construct($name, $email, $postalcode, $password, $surname = null, $city = null)
     {
         $error = 0;
         if (($error = $this->setName($name)) != 0) {
@@ -56,8 +56,8 @@ class User
     /**
      * Crea un usuario a partir de los datos de la base de datos (sin validar)
      */
-    public static function fromDbRow($id, $name, $surname, $email, $city, $postalcode, $password) {
-        $user = new self($name, $surname, $email, $city, $postalcode, $password);
+    public static function fromDbRow($id, $name, $email, $postalcode, $password, $surname = null, $city = null) {
+        $user = new self($name, $email, $postalcode, $password, $surname, $city);
         $user->id = $id;
         return $user;
     }

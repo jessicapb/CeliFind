@@ -5,15 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productes</title>
     <link href="./src/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/productview.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" class="h-18" href="../../img/logo/logo.png" type="image/x-icon">
-    <style>
-        .rotate-90 {
-            transform: rotate(90deg);
-        }
-    </style>
+    <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
 <body>
     <header class="p-4">
@@ -24,19 +20,19 @@
             <div class="flex">
                 <ul class="list-none p-4m hidden lg:flex items-center">
                     <li class="ml-8 font-bold"><a href="/productview">Productes</a></li>
-                    <li class="ml-8"><a href="#">Receptes</a></li>
-                    <li class="ml-8"><a href="#">Qui som ?</a></li>
-                    <li class="ml-8"><a href="#">Informació</a></li>
+                    <li class="ml-8"><a href="/receptes">Receptes</a></li>
+                    <li class="ml-8"><a href="/quisom">Qui som ?</a></li>
+                    <li class="ml-8"><a href="/informacio">Informació</a></li>
                 </ul>
                 <div class="flex items-center gap-5 ml-16">
-                    <a href="#" class="font-inter p-2 px-5 text-[16px] text-black border-[#96c368] border-2 rounded-[50px] font-normal hover:bg-[rgb(150,195,104)] hover:text-white transition duration-200">Registre</a>
-                    <a href="#" class="font-inter p-2 px-9 text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-white transition duration-200">Iniciar Sessió</a>
+                    <a href="/register" class="font-inter p-2 px-5 text-[16px] text-black border-[#96c368] border-2 rounded-[50px] font-normal hover:bg-[rgb(150,195,104)] hover:text-white transition duration-200">Registre</a>
+                    <a href="/login" class="font-inter p-2 px-9 text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-white transition duration-200">Iniciar Sessió</a>
                 </div>
             </div>
         </nav>
     </header>
-    <section class="flex items-start mt-[20px]">
-        <div class="w-[23%] shadow-lg p-2 h-auto">
+    <section class="flex items-start pt-[40px] pb-20 bg-slate-100">
+        <div class="w-[23%] rounded-[16px] bg-white shadow-lg ml-[10px] p-2 h-auto">
             <?php foreach ($categories as $category): ?>
             <div class="flex items-center gap-x-2 text-[20px] font-semibold mt-4">
                 <button onclick="Subcategories('<?php echo htmlspecialchars($category['name']); ?>')" class="font-calistoga flex items-center gap-x-2 pt-[3px] pl-[20px] rounded-[50px] text-[17px] text-black opacity-[78%] font-light">
@@ -109,6 +105,9 @@
             </div>
         </div>
     </section>
-
+    
     <script src="../../js/category/category.js"></script>
+    
+    <!--Footer section!-->
+    <?php include 'src/Views/parts/footer/footer.view.php'?>
 </body>

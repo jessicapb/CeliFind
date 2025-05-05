@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="bg-slate-100">
     <header>
         <nav>
             <a href="/manager">
-                <img class="pl-[20px] pt-[20px] w-[9%] h-[9%]" src="../../img/logo/logo.png" alt="">
+                <img class="ml-[20px] w-32 pt-[20px]" src="../../img/logo/logo.png" alt="logoimg">
             </a>
             <div class="p-1 space-y-0.5">
                 <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/recipesmanager">
@@ -24,7 +24,7 @@
         </nav>
     </header>
 
-    <section>
+    <section class="pb-20">
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center pt-[26px] font-bold">Veure <span class="text-[#96c368] opacity-[100%]">imatges</span></h1>
         <div class="grid grid-cols-4 gap-[14px] justify-center mt-[26px] mb-[20px]">
             <?php foreach ($recipes as $recipe) { ?>
@@ -48,5 +48,8 @@
             <?php } ?>
         </div>
     </section>
+    
+    <!--Footer section!-->
+    <?php include 'src/Views/parts/footer/footer.view.php'?>
 </body>
 </html>
