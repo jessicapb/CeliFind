@@ -17,14 +17,15 @@ class UserRepository {
     }
 
     public function save(User $user): void {
-        $stmt = $this->db->prepare("INSERT INTO users (name, surname, email, city, postalcode, password) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO users (name, surname, email, city, postalcode, password, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             $user->name,
             $user->surname,
             $user->email,
             $user->city,
             $user->postalcode,
-            password_hash($user->password, PASSWORD_DEFAULT)
+            password_hash($user->password, PASSWORD_DEFAULT),
+            $user->status
         ]);
     }
 

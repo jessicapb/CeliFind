@@ -46,7 +46,7 @@ class UserLoginController
                         'name' => $row['name'],
                         'email' => $row['email']
                     ];
-                    header('Location: /manager');
+                    header('Location: /productview');
                     exit;
                 } else {
                     $_SESSION['login_error'] = "Contrasenya incorrecta.";

@@ -16,11 +16,12 @@ class User
     public $city = null;
     public $postalcode;
     public $password;
+    public $status = 1; // 1 = active, 2 = admin, 3 = banned
 
     /**
      * Constructor para crear un usuario nuevo (valida los datos)
      */
-    public function __construct($name, $email, $postalcode, $password, $surname = null, $city = null)
+    public function __construct($name, $email, $postalcode, $password, $surname = null, $city = null, $status = 1)
     {
         $error = 0;
         if (($error = $this->setName($name)) != 0) {
@@ -47,6 +48,9 @@ class User
         if (($error = $this->setPassword($password)) != 0) {
             $_SESSION['errors']['password'] = ChecksUser::getErrorMessage($error);
         }
+
+        $this->status = $status; // No validation, since there is no backoffice to pply it with
+
         if (!empty($_SESSION['errors'])) {
             $errorMessage = json_encode($_SESSION['errors']);
             throw new BuildExceptions($errorMessage);
@@ -56,9 +60,15 @@ class User
     /**
      * Crea un usuario a partir de los datos de la base de datos (sin validar)
      */
+<<<<<<< HEAD
     public static function fromDbRow($id, $name, $surname, $email, $city, $postalcode, $password)
     {
         $user = new self('', '', '', '', '', ''); // No valida nada
+=======
+    public static function fromDbRow($id, $name, $email, $postalcode, $password, $surname = null, $city = null)
+    {
+        $user = new self($name, $email, $postalcode, $password, $surname, $city);
+>>>>>>> 023e5866d726d670e9252e0f30751e5dec5348e1
         $user->id = $id;
         $user->name = $name;
         $user->surname = $surname;
