@@ -56,25 +56,53 @@ class User
     /**
      * Crea un usuario a partir de los datos de la base de datos (sin validar)
      */
-    public static function fromDbRow($id, $name, $email, $postalcode, $password, $surname = null, $city = null) {
-        $user = new self($name, $email, $postalcode, $password, $surname, $city);
+    public static function fromDbRow($id, $name, $surname, $email, $city, $postalcode, $password)
+    {
+        $user = new self('', '', '', '', '', ''); // No valida nada
         $user->id = $id;
+        $user->name = $name;
+        $user->surname = $surname;
+        $user->email = $email;
+        $user->city = $city;
+        $user->postalcode = $postalcode;
+        $user->password = $password;
         return $user;
     }
 
     // Getters
-    public function getId(){return $this->id;}
-    public function getName(){return $this->name;}
-    public function getSurname(){return $this->surname;}
-    public function getEmail(){return $this->email;}
-    public function getCity(){return $this->city;}
-    public function getPostalcode(){return $this->postalcode;}
-    public function getPassword(){return $this->password;}
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function getName()
+    {
+        return $this->name;
+    }
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    public function getCity()
+    {
+        return $this->city;
+    }
+    public function getPostalcode()
+    {
+        return $this->postalcode;
+    }
+    public function getPassword()
+    {
+        return $this->password;
+    }
 
     // Setters
     public function setName($name)
     {
-        $error = ChecksUser::minMaxLength($name,3,20);
+        $error = ChecksUser::minMaxLength($name, 3, 20);
         if ($error === 0) {
             $this->name = $name;
             return 0;
@@ -85,7 +113,7 @@ class User
 
     public function setSurname($surname)
     {
-        $error = ChecksUser::minMaxLength($surname,3,20);
+        $error = ChecksUser::minMaxLength($surname, 3, 20);
         if ($error === 0) {
             $this->surname = $surname;
             return 0;
@@ -102,7 +130,7 @@ class User
 
     public function setCity($city)
     {
-        $error = ChecksUser::minMaxLength($city,2,20); // El más corto es Òs, y el mas largo Santa Maria de Merlès, con 20 caracteres en total.
+        $error = ChecksUser::minMaxLength($city, 2, 20); // El más corto es Òs, y el mas largo Santa Maria de Merlès, con 20 caracteres en total.
         if ($error === 0) {
             $this->city = $city;
             return 0;
@@ -114,10 +142,10 @@ class User
     public function setPostalcode($postalcode)
     {
         $error = ChecksUser::correctPostalCode($postalcode);
-        if($error ===0){
+        if ($error === 0) {
             $this->postalcode = $postalcode;
             return 0;
-        }else{
+        } else {
             return $error;
         }
     }
