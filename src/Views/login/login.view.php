@@ -43,7 +43,7 @@
             </p>
         <?php endif; ?>
     </div>
-    <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Registra’t</button>
+    <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Inicia sessió</button>
     <p class="mt-4 text-center text-sm text-gray-600 font-inter">
         Encara no tens compte? <a href="/register" class="text-[#fcb666] hover:underline">Registra't</a>
     </p>
@@ -97,4 +97,15 @@
         </div>
     </footer>
 </body>
+<script>
+    const eyeIcon = document.getElementById('eyeIcon');
+    const passwordInput = document.getElementById('password');
+    let visible = false;
+    eyeIcon.addEventListener('click', function() {
+        visible = !visible;
+        passwordInput.type = visible ? 'text' : 'password';
+        eyeIcon.src = visible ? '/img/login/ojo2.png' : '/img/login/ojo1.png';
+        eyeIcon.alt = visible ? 'Ocultar contraseña' : 'Mostrar contraseña';
+    });
+</script>
 </html>

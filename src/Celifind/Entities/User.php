@@ -16,11 +16,12 @@ class User
     public $city = null;
     public $postalcode;
     public $password;
+    public $status = 1; // 1 = active, 2 = admin, 3 = banned
 
     /**
      * Constructor para crear un usuario nuevo (valida los datos)
      */
-    public function __construct($name, $email, $postalcode, $password, $surname = null, $city = null)
+    public function __construct($name, $email, $postalcode, $password, $surname = null, $city = null, $status = 1)
     {
         $error = 0;
         if (($error = $this->setName($name)) != 0) {
@@ -47,6 +48,9 @@ class User
         if (($error = $this->setPassword($password)) != 0) {
             $_SESSION['errors']['password'] = ChecksUser::getErrorMessage($error);
         }
+
+        $this->status = $status; // No validation, since there is no backoffice to pply it with
+
         if (!empty($_SESSION['errors'])) {
             $errorMessage = json_encode($_SESSION['errors']);
             throw new BuildExceptions($errorMessage);
@@ -56,25 +60,47 @@ class User
     /**
      * Crea un usuario a partir de los datos de la base de datos (sin validar)
      */
-    public static function fromDbRow($id, $name, $email, $postalcode, $password, $surname = null, $city = null) {
+    public static function fromDbRow($id, $name, $email, $postalcode, $password, $surname = null, $city = null)
+    {
         $user = new self($name, $email, $postalcode, $password, $surname, $city);
         $user->id = $id;
         return $user;
     }
 
     // Getters
-    public function getId(){return $this->id;}
-    public function getName(){return $this->name;}
-    public function getSurname(){return $this->surname;}
-    public function getEmail(){return $this->email;}
-    public function getCity(){return $this->city;}
-    public function getPostalcode(){return $this->postalcode;}
-    public function getPassword(){return $this->password;}
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function getName()
+    {
+        return $this->name;
+    }
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    public function getCity()
+    {
+        return $this->city;
+    }
+    public function getPostalcode()
+    {
+        return $this->postalcode;
+    }
+    public function getPassword()
+    {
+        return $this->password;
+    }
 
     // Setters
     public function setName($name)
     {
-        $error = ChecksUser::minMaxLength($name,3,20);
+        $error = ChecksUser::minMaxLength($name, 3, 20);
         if ($error === 0) {
             $this->name = $name;
             return 0;
@@ -85,7 +111,7 @@ class User
 
     public function setSurname($surname)
     {
-        $error = ChecksUser::minMaxLength($surname,3,20);
+        $error = ChecksUser::minMaxLength($surname, 3, 20);
         if ($error === 0) {
             $this->surname = $surname;
             return 0;
@@ -102,7 +128,7 @@ class User
 
     public function setCity($city)
     {
-        $error = ChecksUser::minMaxLength($city,2,20); // El más corto es Òs, y el mas largo Santa Maria de Merlès, con 20 caracteres en total.
+        $error = ChecksUser::minMaxLength($city, 2, 20); // El más corto es Òs, y el mas largo Santa Maria de Merlès, con 20 caracteres en total.
         if ($error === 0) {
             $this->city = $city;
             return 0;
@@ -114,10 +140,10 @@ class User
     public function setPostalcode($postalcode)
     {
         $error = ChecksUser::correctPostalCode($postalcode);
-        if($error ===0){
+        if ($error === 0) {
             $this->postalcode = $postalcode;
             return 0;
-        }else{
+        } else {
             return $error;
         }
     }
