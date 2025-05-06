@@ -52,7 +52,7 @@
             <div class="flex justify-center w-full">
                 <div>
                     <!-- Search part -->
-                    <form action="/searchproduct" class="flex justify-center" method="POST">
+                    <form action="/searchproductstateone" class="flex justify-center" method="POST">
                         <div>
                             <div class="relative flex items-center max-w-[800px]">
                                 <img class="absolute w-5 h-5 left-2.5 " src="../../img/search/search.svg" alt="search">
@@ -60,6 +60,22 @@
                             </div>
                         </div>
                     </form>
+                    
+                    <!-- Modal search -->
+                    <?php if (!empty($noResults)): ?>
+                        <div class="searchmodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
+                            <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
+                                <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Sense resultats</h2>
+                                <p class="font-inter text-black font-medium text-[16px] text-center">No s'han trobat productes amb aquest nom.</p>
+                                <div class="flex justify-center">
+                                    <a href="/productview" class="closesearchmodal font-inter bg-[#FCB666] mt-[10px] text-white text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:bg-[#ef9b3b] focus:outline-none">
+                                        Tancar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    
                     <div>
                         <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 px-10 pt-10 pb-20">
                             <?php foreach ($products as $product) { ?>
@@ -110,4 +126,7 @@
     
     <!--Footer section!-->
     <?php include 'src/Views/parts/footer/footer.view.php'?>
+    
+    <!-- File show modal search -->
+    <script src="../../js/modals/searchmodal.js"></script>
 </body>

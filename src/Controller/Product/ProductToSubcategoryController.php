@@ -3,20 +3,20 @@
 namespace App\Controller\Product;
 
 use App\Celifind\Services\ProductServices;
-use App\Infrastructure\Persistence\SubcategoryRepository;
+use App\Celifind\Services\SubcategoryServices;
 use App\Celifind\Entities\Product;
 
 class ProductToSubcategoryController {
     private $productservices;
-    private $subcategoryrepository;
-    public function __construct(ProductServices $productservices, SubcategoryRepository $subcategoryrepository ) {
+    private $subcategoryservices;
+    public function __construct(ProductServices $productservices, SubcategoryServices $subcategoryservices ) {
         $this->productservices = $productservices;
-        $this->subcategoryrepository = $subcategoryrepository;
+        $this->subcategoryservices = $subcategoryservices;
     }
     
     function producttocategory(){
         $products = $this->productservices->showlimit();
-        $subcategories = $this->subcategoryrepository->getallsub();
+        $subcategories = $this->subcategoryservices->showallsubcategory();
         echo view('product/producttosubcategory',['products'=>$products,'subcategories' => $subcategories]);
     }
 }

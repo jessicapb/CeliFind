@@ -3,25 +3,25 @@
 namespace App\Controller\Product;
 
 use App\Celifind\Services\ProductServices;
-use App\Infrastructure\Persistence\CategoryRepository;
-use App\Infrastructure\Persistence\SubcategoryRepository;
+use App\Celifind\Services\SubcategoryServices;
+use App\Celifind\Services\CategoryServices;
 use App\Celifind\Entities\Product;
 
 class ProductViewController {
     private $productservices;
-    protected CategoryRepository $categoryRepository;
-    protected SubcategoryRepository $subcategoryRepository;
-
-    public function __construct(ProductServices $productservices, CategoryRepository $categoryRepository, SubcategoryRepository $subcategoryRepository){
+    private $categoryservices;
+    private $subcategoryservices;
+    
+    public function __construct(ProductServices $productservices, CategoryServices $categoryservices, SubcategoryServices $subcategoryservices){
         $this->productservices = $productservices;
-        $this->categoryRepository = $categoryRepository;
-        $this->subcategoryRepository = $subcategoryRepository;
+        $this->categoryservices = $categoryservices;
+        $this->subcategoryservices = $subcategoryservices;
     }
     
     function productview(){
         $products  = $this->productservices->stateone();
-        $categories = $this->categoryRepository->getall();
-        $subcategories = $this->subcategoryRepository->getallsub();
+        $categories = $this->categoryservices->showallcategory();
+        $subcategories = $this->subcategoryservices->showallsubcategory();
         echo view('product/viewproduct',['products'=>$products, 'categories' => $categories, 'subcategories' => $subcategories]);
     }
 }

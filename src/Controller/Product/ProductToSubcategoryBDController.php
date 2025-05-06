@@ -4,6 +4,7 @@ namespace App\Controller\Product;
 use App\Infrastructure\Persistence\ProductRepository;
 use App\Celifind\Services\ProductServices;
 use App\Infrastructure\Persistence\SubcategoryRepository;
+use App\Celifind\Services\SubcategoryServices;
 use App\Celifind\Exceptions\BuildExceptions;
 use App\Celifind\Entities\Product;
 
@@ -12,7 +13,8 @@ class ProductToSubcategoryBDController{
     private ProductRepository $productrepository;
     private ProductServices $productservices;
     private SubcategoryRepository $subcategoryrepository;
-
+    private SubcategoryServices $subcategoryservices;
+    
     public function __construct(\PDO $db){
         $this->db = $db;
         
@@ -20,6 +22,7 @@ class ProductToSubcategoryBDController{
         $this->subcategoryrepository = new SubcategoryRepository($db);
         
         $this->productservices = new ProductServices($db, $this->productrepository);
+        $this->subcategoryservices = new SubcategoryServices($db, $this->subcategoryrepository);
     }
     
     function addProducttoSubcategory(){
@@ -52,7 +55,7 @@ class ProductToSubcategoryBDController{
                     exit;
                 }
                 
-                $subcategory = $this->subcategoryrepository->findById($subcategory_id);
+                $subcategory = $this->subcategoryservices->findById($subcategory_id);
                 if ($subcategory === null) {
                     $_SESSION['errors']['subcategory'] = "Subcategoria no trobada.";
                     header('Location: /producttocategory');

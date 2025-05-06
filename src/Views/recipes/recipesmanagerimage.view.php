@@ -8,25 +8,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+    <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
-<body class="bg-slate-100">
-    <header>
+<body>
+    <header class="pb-[15px]">
         <nav>
             <a href="/manager">
                 <img class="ml-[20px] w-32 pt-[20px]" src="../../img/logo/logo.png" alt="logoimg">
             </a>
-            <div class="p-1 space-y-0.5">
-                <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/recipesmanager">
-                    <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="home">
-                    Tornar al panel de control
-                </a>
-            </div>
         </nav>
     </header>
-
-    <section class="pb-20">
+    
+    <section class="bg-slate-100 pt-[10px]">
+        <div class="p-1 space-y-0.5">
+            <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/recipesmanager">
+                <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="home">
+                Tornar al panel de control
+            </a>
+        </div>
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center pt-[26px] font-bold">Veure <span class="text-[#96c368] opacity-[100%]">imatges</span></h1>
-        <div class="grid grid-cols-4 gap-[14px] justify-center mt-[26px] mb-[20px]">
+        <div class="grid grid-cols-4 gap-[14px] justify-center mt-[26px]">
             <?php foreach ($recipes as $recipe) { ?>
                 <div class="shadow-lg w-[300px] h-[310px] rounded-[21px] bg-white p-[10px] mx-auto flex flex-col items-center">
                     <div class="w-full flex justify-center mb-3">

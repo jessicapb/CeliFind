@@ -38,4 +38,18 @@ class RecipesServices{
     function delete(int $id){
         return $this->RecipesRepository->deleteRecipes($id);
     }
+    
+    function searchrecipes($name){
+        if(empty($name)){
+            return $this->RecipesRepository->showlimit();
+        }
+        return $this->RecipesRepository->searchrecipes($name);
+    }
+    
+    function searchrecipesall($name){
+        if(empty($name)){
+            return $this->RecipesRepository->selectall();
+        }
+        return $this->RecipesRepository->searchrecipesall($name);
+    }
 }

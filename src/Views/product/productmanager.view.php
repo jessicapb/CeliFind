@@ -49,7 +49,7 @@
             </form>
         </div>
         
-        <!-- Modal buscador -->
+        <!-- Modal search -->
         <?php if (!empty($noResults)): ?>
             <div class="searchmodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
                 <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
@@ -214,7 +214,7 @@
     <!-- File show modal delete -->
     <script src="../../js/modals/deletemodal.js"></script>
     
-    <!-- File show modal delete -->
+    <!-- File show modal search -->
     <script src="../../js/modals/searchmodal.js"></script>
 </body>
 </html>

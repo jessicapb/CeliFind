@@ -52,7 +52,7 @@ class ProductRepository{
     // Select limit
     function showlimit(){
         $allproducts = [];
-        $sql = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
+        $sql = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, SUBSTRING(ingredients, 1, 14) AS ingredients_short, 
                                     SUBSTRING(nutritionalinformation, 1, 12) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state, idsubcategory FROM products");
         $sql->execute();
         while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
@@ -178,5 +178,25 @@ class ProductRepository{
             $result[] = new Product($product['id'], $product['name_short'], $product['description_short'], $product['ingredients_short'], $$nutritionalinformation, $product['price'], $product['brand_short'], $product['image'], $product['weight'], $product['state'], $product['idsubcategory']);
         }
         return $result;
-    }    
+    }
+    
+    // Search with state one
+    function searchproductstateone(string $name):array {
+        $stmt = $this->db->prepare("SELECT id, name, description, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
+                                        SUBSTRING(nutritionalinformation, 1, 20) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state, idsubcategory FROM products
+                                        WHERE name LIKE :name AND state = 1");
+        $stmt->execute(['name' => '%' . $name . '%']);
+        $productsstateone = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            
+        $result = [];
+        foreach($productsstateone as $product){
+            if (empty($product['nutritionalinformation_short'])) {
+                $nutritionalinformation = null;
+            } else {
+                $nutritionalinformation = $product['nutritionalinformation_short'];
+            }
+            $result[] = new Product($product['id'], $product['name'], $product['description'], $product['ingredients_short'], $nutritionalinformation, $product['price'], $product['brand_short'], $product['image'], $product['weight'], $product['state'], $product['idsubcategory']);        
+        }
+        return $result;
+    }  
 }

@@ -8,23 +8,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+    <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
-<body class="bg-slate-100">
-    <header>
+<body>
+    <header class="pb-[15px]">
         <nav>
             <a href="/manager">
                 <img class="ml-[20px] w-32 pt-[20px]" src="../../img/logo/logo.png" alt="logoimg">
             </a>
-            <div class="p-1 space-y-0.5">
-                <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/manager">
-                    <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="home">
-                    Tornar al gestor
-                </a>
-            </div>
         </nav>
     </header>
-
-    <section class="pb-20">
+    
+    <section class="bg-slate-100 pt-[10px]">
+        <div class="p-1 space-y-0.5">
+            <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/manager">
+                <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="home">
+                Tornar al gestor
+            </a>
+        </div>
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center font-bold">Gestor <span class="text-[#96c368] opacity-[100%]">receptes</span></h1>
         <div class="mt-[20px] flex justify-between items-center">
             <!-- Add product  -->
@@ -34,7 +35,7 @@
             </div>
             
             <!-- Search part -->
-            <form action="/searchproduct" method="POST">
+            <form action="/searchrecipes" method="POST">
                 <div class="w-full max-w-sm min-w-[200px]">
                     <div class="relative flex items-center">
                         <img class="absolute w-5 h-5 left-2.5 " src="../../img/search/search.svg" alt="search">
@@ -46,7 +47,22 @@
                 </div>
             </form>
         </div>
-
+        
+        <!-- Modal buscador -->
+        <?php if (!empty($noResults)): ?>
+            <div class="searchmodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
+                <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
+                    <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Sense resultats</h2>
+                    <p class="font-inter text-black font-medium text-[16px] text-center">No s'han trobat receptes amb aquest nom.</p>
+                    <div class="flex justify-center">
+                        <a href="/recipesmanager" class="closesearchmodal font-inter bg-[#FCB666] mt-[10px] text-white text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:bg-[#ef9b3b] focus:outline-none">
+                            Tancar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+        
         <!-- Table part -->
         <table class="w-full m-auto mt-[50px] table-auto text-center border-separate border-spacing-[20px]">
             <thead>
@@ -158,6 +174,9 @@
     
     <!-- File show modal delete -->
     <script src="../../js/modals/deletemodal.js"></script>
+    
+    <!-- File show modal search -->
+    <script src="../../js/modals/searchmodal.js"></script>
     
     <!--Footer section!-->
     <?php include 'src/Views/parts/footer/footer.view.php'?>

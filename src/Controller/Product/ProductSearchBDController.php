@@ -21,6 +21,13 @@ class ProductSearchBDController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = filter_input(INPUT_POST, 'name');
             
+            if (empty($name)) {
+                $_SESSION['no_results'] = true;
+                $_SESSION['search_results'] = []; 
+                header('Location: /showsearchresults');
+                exit;
+            }
+            
             try {
                 $products = $this->productServices->searchproduct($name);
                 $_SESSION['search_results'] = $products;

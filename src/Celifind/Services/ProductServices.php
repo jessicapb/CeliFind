@@ -53,4 +53,11 @@ class ProductServices{
         }
         return $this->ProductRepository->searchproduct($name);
     }
+    
+    function searchproductstateone($name){
+        if(empty($name)){
+            return $this->ProductRepository->stateone();
+        }
+        return $this->ProductRepository->searchproductstateone($name);
+    }
 }

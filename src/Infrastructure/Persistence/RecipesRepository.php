@@ -101,4 +101,32 @@ class RecipesRepository{
             ':id' => $id
         ]);
     }
+    
+    // Search 
+    function searchrecipes(string $name):array {
+        $stmt = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
+                                    SUBSTRING(nutritionalinformation, 1, 13) AS nutritionalinformation_short, people, duration, SUBSTRING(instruction, 1, 8) AS instruction_short, image 
+                                    FROM recipes WHERE name LIKE :name");
+        $stmt->execute(['name' => '%' . $name . '%']);
+        $recipes = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        
+        $result = [];
+        foreach($recipes as $recipe){
+            $result[] = new Recipes($recipe['id'], $recipe['name_short'], $recipe['description_short'], $recipe['ingredients_short'], $recipe['nutritionalinformation_short'], $recipe['people'], $recipe['duration'], $recipe['instruction_short'], $recipe['image']);
+        }
+        return $result;
+    }  
+    
+    // Search all recipes
+    function searchrecipesall(string $name):array {
+        $stmt = $this->db->prepare("SELECT * FROM recipes  WHERE name LIKE :name");
+        $stmt->execute(['name' => '%' . $name . '%']);
+        $recipesall = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        
+        $result = [];
+        foreach($recipesall as $recipe){
+            $result[] = new Recipes($recipe['id'], $recipe['name'], $recipe['description'], $recipe['ingredients'], $recipe['nutritionalinformation'], $recipe['people'], $recipe['duration'], $recipe['instruction'], $recipe['image']);
+        }
+        return $result;
+    } 
 }

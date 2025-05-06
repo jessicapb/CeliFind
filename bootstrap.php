@@ -25,6 +25,7 @@ use App\Controller\Product\ProductDeleteBDController;
 use App\Controller\Product\ProductUpdateBDController;
 use App\Controller\Product\ProductToSubcategoryBDController;
 use App\Controller\Product\ProductSearchBDController;
+use App\Controller\Product\ProductSearchStateOneBDController;
 
 //ViewsRecipes
 use App\Controller\Recipes\RecipesManagerController;
@@ -36,6 +37,8 @@ use App\Controller\Recipes\RecipesIndividualController;
 // ControllerRecipes
 use App\Controller\Recipes\RecipesSaveBDController;
 use App\Controller\Recipes\RecipesDeleteBDController;
+use App\Controller\Recipes\RecipesSearchBDController;
+use App\Controller\Recipes\RecipesSearchAllBDController;
 
 // ControllerCategory
 use App\Controller\Category\CategoryShowBDController;
@@ -206,13 +209,13 @@ $controllerupdatecategory = new CategoryUpdateBDController($db, $categoryService
 $controllerupdatesubcategory = new SubcategoryUpdateBDController($db, $subcategoryServices);
 
 // Show the categories & subcategories in View Product
-$viewproduct = new ProductViewController($productServices, $categoryRepository, $subcategoryRepository);
+$viewproduct = new ProductViewController($productServices, $categoryServices, $subcategoryServices);
 
 // Show the name of the product and subcategory
-$shownameproductandsubcategory = new ProductToSubcategoryController($productServices, $subcategoryRepository);
+$shownameproductandsubcategory = new ProductToSubcategoryController($productServices, $subcategoryServices);
 
 // Show the product and the of the subcategory
-$showlimitproduct = new ProductManagerController($productServices, $subcategoryRepository);
+$showlimitproduct = new ProductManagerController($productServices, $subcategoryServices);
 
 // Routes to show the views
 $router = new Router();
@@ -264,6 +267,10 @@ $router
     
     ->addRoute('GET', '/showsearchresults', [new ProductSearchBDController($db, $productServices, $subcategoryServices), 'showsearchresults'])
     
+    // Search the product with state one
+    ->addRoute('POST', '/searchproductstateone', [new ProductSearchStateOneBDController($db, $productServices, $categoryServices ,$subcategoryServices), 'searchproductstateone'])
+    
+    ->addRoute('GET', '/showsearchresultsproductone', [new ProductSearchStateOneBDController($db, $productServices , $categoryServices ,$subcategoryServices), 'showsearchresultsproductone'])
     // Go to the manager recipes
     ->addRoute('GET','/recipesmanager',[$showlimitrecipes,'recipesmanager'])
     
@@ -284,6 +291,16 @@ $router
     
     // Go to the individual recipes
     ->addRoute('POST','/recipesindividual',[$individualrecipes,'recipesindividual'])
+    
+    // Search the recipes
+    ->addRoute('POST', '/searchrecipes', [new RecipesSearchBDController($db, $RecipesServices), 'searchrecipes'])
+    
+    ->addRoute('GET', '/showsearchresultsrecipes', [new RecipesSearchBDController($db, $RecipesServices), 'showsearchresultsrecipes'])
+    
+    // Search the recipes
+    ->addRoute('POST', '/searchrecipesall', [new RecipesSearchAllBDController($db, $RecipesServices), 'searchrecipesall'])
+    
+    ->addRoute('GET', '/showsearchresultsrecipesall', [new RecipesSearchAllBDController($db, $RecipesServices), 'showsearchresultsrecipesall'])
     
     // Go to the show categories
     ->addRoute('GET', '/category', [new CategoryShowBDController($db, $categoryServices), 'showcategory'])
