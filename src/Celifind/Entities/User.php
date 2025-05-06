@@ -60,15 +60,9 @@ class User
     /**
      * Crea un usuario a partir de los datos de la base de datos (sin validar)
      */
-<<<<<<< HEAD
     public static function fromDbRow($id, $name, $surname, $email, $city, $postalcode, $password)
     {
         $user = new self('', '', '', '', '', ''); // No valida nada
-=======
-    public static function fromDbRow($id, $name, $email, $postalcode, $password, $surname = null, $city = null)
-    {
-        $user = new self($name, $email, $postalcode, $password, $surname, $city);
->>>>>>> 023e5866d726d670e9252e0f30751e5dec5348e1
         $user->id = $id;
         $user->name = $name;
         $user->surname = $surname;
