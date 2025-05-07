@@ -26,9 +26,13 @@ class SpecificproductsubcatController{
 
     //function to show specific product
     function showspecificsubcategoriproduct(){
+
+        //we start the session:
+        session_start();
+
         //we check if its null
         $subcategoryId = $_GET['subcategory'] ?? null;
-        
+        $products = [];
         $noResults = false;
 
         if (isset($_SESSION['search_results']) && isset($_SESSION['no_results'])) {
@@ -48,6 +52,5 @@ class SpecificproductsubcatController{
         $categories = $this->CategoryService->showallcategory();
 
         echo view('product/viewproduct', ['products' => $products, 'noResults' => $noResults, 'categories' => $categories, 'subcategories' => $subcategories]);
-
     }
 }

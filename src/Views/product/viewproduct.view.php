@@ -40,7 +40,7 @@
                         <img class="flecha w-[4%] h-[4%] mt-[1px] rotate-90 " src="../../img/categoria/flecha-correcta.png" alt="flecha"><img class="w-[11%] h-[11%] mt-[1px]" src="<?php echo htmlspecialchars($category['image']); ?>" alt="officialimage" id="officialimage"><?php echo htmlspecialchars($category['name']); ?>
                     </button>
                 </div>
-                <div id="<?php echo htmlspecialchars($category['name']); ?>-subcategories" class="hidden pl-[40px] mt-2 categoria">
+                <div action="/showspecificsubcategoriproduct" method="GET" id="<?php echo htmlspecialchars($category['name']); ?>-subcategories" class="hidden pl-[40px] mt-2 categoria">
                     <ul class="text-[14px] font-medium text-black cursor-pointer">
                         <?php foreach ($category['subcategories'] as $subcategory): ?>
                             <a href="/showspecificsubcategoriproduct?subcategory=<?php echo urlencode($subcategory['id']);?>">

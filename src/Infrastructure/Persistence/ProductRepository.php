@@ -200,9 +200,9 @@ class ProductRepository{
         return $result;
     }  
 
-
-    public function getBySubcategoryId(int $subcategoryId): array { // get all product from specific categori
-
+    // get all product from specific categori
+    public function getBySubcategoryId(int $subcategoryId): array { 
+        
         $stmt = $this->db->prepare("SELECT * FROM products WHERE idsubcategory = :subcategoryId AND state = 1");
         $stmt->execute(['subcategoryId' => $subcategoryId]);
         $products = $stmt->fetchAll(\PDO::FETCH_ASSOC);
