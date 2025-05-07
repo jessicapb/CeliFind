@@ -1,20 +1,25 @@
 <?php
+
 namespace App\Controller\User;
 
 use App\Infrastructure\Persistence\UserRepository;
 
-class EditProfileController {
+class EditProfileController
+{
     private \PDO $db;
     private UserRepository  $userRepository;
 
-    public function __construct(\PDO $db, UserRepository $userRepository) {
+    public function __construct(\PDO $db, UserRepository $userRepository)
+    {
         $this->db = $db;
         $this->userRepository = $userRepository;
     }
 
     public function showEditProfile() {
-        session_start();
-        if (!isset($_SESSION['user'])) {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (empty($_SESSION['user'])) {
             header('Location: /login');
             exit;
         }
@@ -22,8 +27,10 @@ class EditProfileController {
     }
 
     public function updateProfile() {
-        session_start();
-        if (!isset($_SESSION['user']['id'])) {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (empty($_SESSION['user']['id'])) {
             header('Location: /login');
             exit;
         }
@@ -33,6 +40,26 @@ class EditProfileController {
         $city = trim($_POST['city'] ?? '');
         $postalcode = trim($_POST['postalcode'] ?? '');
         $password = trim($_POST['password'] ?? '');
+        $confirm_password = trim($_POST['confirm_password'] ?? '');
+
+        // Validación de contraseñas
+        if ($password !== '' || $confirm_password !== '') {
+            if ($password === '' || $confirm_password === '') {
+                $_SESSION['errors']['password'] = "Has d'omplir els dos camps de contrasenya.";
+                header('Location: /editprofile');
+                exit;
+            }
+            if ($password !== $confirm_password) {
+                $_SESSION['errors']['confirm_password'] = 'Les contrasenyes no coincideixen.';
+                header('Location: /editprofile');
+                exit;
+            }
+            if (strlen($password) < 6) {
+                $_SESSION['errors']['password'] = 'La contrasenya ha de tenir almenys 6 caràcters.';
+                header('Location: /editprofile');
+                exit;
+            }
+        }
 
         // Si todos los campos requeridos están vacíos, no editar nada
         if ($name === '' && $surname === '' && $city === '' && $postalcode === '' && $password === '') {
@@ -57,6 +84,9 @@ class EditProfileController {
         $_SESSION['user']['surname'] = $surname !== '' ? $surname : ($current['surname'] ?? '');
         $_SESSION['user']['city'] = $city !== '' ? $city : ($current['city'] ?? '');
         $_SESSION['user']['postalcode'] = $postalcode !== '' ? $postalcode : ($current['postalcode'] ?? '');
+        if ($password !== '') {
+            $_SESSION['success_password'] = 'Contrasenya actualitzada correctament.';
+        }
         $_SESSION['success'] = 'Perfil actualizado correctamente.';
         header('Location: /editprofile');
         exit;

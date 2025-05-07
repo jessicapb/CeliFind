@@ -10,7 +10,7 @@ class ChecksUser extends Checks
 
     public static function checkPass($password)
     {
-        $error = Checks::minMaxLength($password, 6, 15);
+        $error = Checks::minMaxLength($password, 6, 30);
         if ($error !== 0) {
             return $error;
         }

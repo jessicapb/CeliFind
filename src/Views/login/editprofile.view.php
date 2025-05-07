@@ -1,5 +1,4 @@
-<?php //session_start(); 
-?>
+
 <!DOCTYPE html>
 <html lang="ca">
 
@@ -122,14 +121,33 @@
             </div>
             <div>
                 <label class="block font-calistoga text-lg text-gray-800 mb-1" for="password">Nova contrasenya (opcional)</label>
-                <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500" type="password" name="password" id="password" placeholder="Deixa-ho en blanc per no canviar-la">
+                <div class="relative">
+                    <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500 pr-10" type="password" name="password" id="password" placeholder="Deixa-ho en blanc per no canviar-la">
+                    <img id="eyeIcon" src="/img/login/ojo1.png" alt="Mostrar contraseña" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 cursor-pointer select-none" style="z-index:2;">
+                </div>
                 <?php if (!empty($_SESSION['errors']['password'])): ?>
                     <p class="text-red-500 mt-[5px] font-inter text-[15px]">
-                        <?= $_SESSION['errors']['password'];
-                        unset($_SESSION['errors']['password']); ?>
+                        <?= $_SESSION['errors']['password']; unset($_SESSION['errors']['password']); ?>
                     </p>
                 <?php endif; ?>
             </div>
+            <div>
+                <label class="block font-calistoga text-lg text-gray-800 mb-1" for="confirm_password">Repeteix la nova contrasenya</label>
+                <div class="relative">
+                    <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500 pr-10" type="password" name="confirm_password" id="confirm_password" placeholder="Repeteix la nova contrasenya">
+                    <img id="eyeIconConfirm" src="/img/login/ojo1.png" alt="Mostrar contraseña" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 cursor-pointer select-none" style="z-index:2;">
+                </div>
+                <?php if (!empty($_SESSION['errors']['confirm_password'])): ?>
+                    <p class="text-red-500 mt-[5px] font-inter text-[15px]">
+                        <?= $_SESSION['errors']['confirm_password']; unset($_SESSION['errors']['confirm_password']); ?>
+                    </p>
+                <?php endif; ?>
+            </div>
+            <?php if (!empty($_SESSION['success_password'])): ?>
+                <p class="text-green-600 text-center mb-2 text-sm">
+                    <?= $_SESSION['success_password']; unset($_SESSION['success_password']); ?>
+                </p>
+            <?php endif; ?>
             <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Actualitza</button>
         </form>
         <a href="/home" class="mt-6 text-[#fcb666] hover:underline font-inter">Tornar a la home</a>
@@ -173,6 +191,26 @@
         </div>
     </footer>
     <script src="../js/dropdown/dropdown.js"></script>
+    <script>
+        const eyeIcon = document.getElementById('eyeIcon');
+        const passwordInput = document.getElementById('password');
+        let visible = false;
+        eyeIcon.addEventListener('click', function() {
+            visible = !visible;
+            passwordInput.type = visible ? 'text' : 'password';
+            eyeIcon.src = visible ? '/img/login/ojo2.png' : '/img/login/ojo1.png';
+            eyeIcon.alt = visible ? 'Ocultar contraseña' : 'Mostrar contraseña';
+        });
+        const eyeIconConfirm = document.getElementById('eyeIconConfirm');
+        const confirmPasswordInput = document.getElementById('confirm_password');
+        let visibleConfirm = false;
+        eyeIconConfirm.addEventListener('click', function() {
+            visibleConfirm = !visibleConfirm;
+            confirmPasswordInput.type = visibleConfirm ? 'text' : 'password';
+            eyeIconConfirm.src = visibleConfirm ? '/img/login/ojo2.png' : '/img/login/ojo1.png';
+            eyeIconConfirm.alt = visibleConfirm ? 'Ocultar contraseña' : 'Mostrar contraseña';
+        });
+    </script>
 </body>
 
 </html>
