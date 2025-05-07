@@ -46,7 +46,7 @@ class CategorySaveBDController
 
         try {
             $category = new Category(null, $name, $description, $imageData);
-            if ($this->CategoryServices->exists($name)) {
+            if ($this->CategoryServices->exists(trim($name))) {
                 $_SESSION['errors']['name'] = "El nom ja està registrat.";
                 header('Location: /categoryadd');
                 exit;

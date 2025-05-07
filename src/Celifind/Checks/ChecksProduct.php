@@ -66,6 +66,7 @@ class ChecksProduct extends Checks{
         return 0;
     }
     
+    // RECIPES
     // Function to validate pattern for people
     public static function validatePeople($people){
         $peoplePattern = '/^\d{1,2}\spersones$/'; 
@@ -79,6 +80,15 @@ class ChecksProduct extends Checks{
     public static function validateDuration($duration){
         $durationPattern = '/^\d{1,3}-\d{1,3}min$|^\d{1,3}min$/';
         if (!preg_match($durationPattern, $duration)){
+            return -10;
+        }
+        return 0;
+    }
+    
+    //ESTABLISHMENTS
+    public static function validateSchedule($schedule){
+        $durationPattern = '/^\d{0,9}-\d{1,3}min$|^\d{1,3}min$/';
+        if (!preg_match($durationPattern, $schedule)){
             return -10;
         }
         return 0;

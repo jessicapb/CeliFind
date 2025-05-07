@@ -24,7 +24,10 @@ class Subcategory
             $_SESSION['errors']['description'] = ChecksProduct::getErrorMessage($error);
         }
 
-        $this->idcategoria = $idcategoria;
+        if (($error = $this->setIdcategoria($idcategoria)) != 0) {
+            $_SESSION['errors']['idcategoria'] = ChecksProduct::getErrorMessage($error);
+        }
+
         if (!empty($_SESSION['errors'])) {
             $errorMessage = json_encode($_SESSION['errors']);
             throw new BuildExceptions($errorMessage);
@@ -102,8 +105,11 @@ class Subcategory
 
     public function setIdcategoria($idcategoria)
     {
+        $errorNull = ChecksProduct::minMaxLength($idcategoria, 1, 50);
+        if ($errorNull != 0) {
+            return $errorNull;
+        }
         $this->idcategoria = $idcategoria;
-
-        return $this;
+        return 0;
     }
 }

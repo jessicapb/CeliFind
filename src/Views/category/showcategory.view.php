@@ -11,7 +11,7 @@
     <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
 <body >
-    <header class="pb-[15px]">
+    <header class="pb-[15px] border-b border-gray-300">
         <nav>
             <a href="/manager">
                 <img class="ml-[20px] w-32 pt-[20px]" src="../../img/logo/logo.png" alt="logoimg">
@@ -95,7 +95,7 @@
                                     <img class="mr-[10px] w-[20px] h-[20px]" src="../../img/delete/delete.png" alt="delete">
                                 </button>
                             </td>
-
+                            
                             <!-- Modal delete -->
                             <div class="deletemodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50 hidden">
                                 <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">

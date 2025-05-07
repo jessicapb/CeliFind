@@ -18,6 +18,10 @@ class SubcategoryServices{
         return $this->SubcategoryRepository->exists($name);
     }
     
+    function existsSubcategory(string $name, int $id):bool{
+        return $this->SubcategoryRepository->existsSubcategory($name, $id);
+    }
+    
     function save(Subcategory $subcategory){
         $subcategory = $this->SubcategoryRepository->save($subcategory);
         return $subcategory;
@@ -38,7 +42,7 @@ class SubcategoryServices{
     function delete(int $id){
         return $this->SubcategoryRepository->deleteSubcategory($id);
     }
-
+    
     function searchsubcategory($name)
     {
         if (empty($name)) {

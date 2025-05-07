@@ -15,7 +15,7 @@
     <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
 <body class="font-inter bg-gray-50">
-    <header class="p-4">
+    <header class="p-4 border-b border-gray-300">
         <nav class="flex justify-between">
             <a href="/">
                 <img class="w-32" src="../img/logo/logo.png" alt="">

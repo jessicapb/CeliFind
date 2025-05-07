@@ -30,21 +30,21 @@
     </section>
     <form class="flex justify-center" action="/updatesubcategory" method="POST" enctype="multipart/form-data">
     <?php $subcategory = $subcategory; ?>
-    <input type="hidden" name="id" value="<?php echo $subcategory->getId(); ?>">
+    <input type="hidden" name="id" value="<?= $formData['id'] ?? '' ?>">
 
     <div class="w-[18%]">
         <!-- Name -->
         <div class="flex flex-col  mb-[15px]">
                 <label for="name" class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Nom</label>
-                <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="name" type="text" value="<?php echo $subcategory->getName(); ?>" placeholder="Introdueix el nom">
-                <p id="error-name" class="text-red-500 mt-[5px] font-inter hidden text-[15px]"></p>
+                <input name="name" type="text" value="<?= $formData['name'] ?? '' ?>" class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" placeholder="Introdueix el nom">
+                <p class="text-red-500"><?= $errors['name'] ?? '' ?></p>
             </div>
 
             <!-- Description -->
             <div class="flex flex-col  mb-[15px]">
                 <label for="description" class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Descripció</label>
-                <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="description" type="text-area" placeholder="escriu la descripció"><?php echo $subcategory->getDescription(); ?></textarea>
-                <p id="error-description" class="text-red-500 mt-[5px] font-inter hidden text-[15px]"></p>
+                <textarea name="description" class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" placeholder="escriu la descripció"><?= $formData['description'] ?? '' ?></textarea>
+                <p class="text-red-500"><?= $errors['description'] ?? '' ?></p>
             </div>
 
             <!-- Select Categories -->
@@ -52,16 +52,15 @@
                 <label for="idcategoria" class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Categoria</label>
 
                 <select class=" bg-white border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="idcategoria" id="idcategoria">    
-                <option value="<?php echo $subcategory->getIdcategoria(); ?>" selected disabled hidden>Selecciona una categoria</option>
+                <option <?= $formData['idcategoria'] ?? '' ?> selected disabled hidden>Selecciona una categoria</option>
                     <?php if (!empty($categories)): ?>
                         <?php foreach ($categories as $category): ?>
                             <option value="<?= $category["id"] ?>"><?= $category["name"] ?></option>
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </select>
-                <p id="error-idcategoria" class="text-red-500 mt-[5px] font-inter hidden text-[15px]"></p>
+                <p class="text-red-500"><?= $errors['idcategoria'] ?? '' ?></p>
             </div>
-
         <!-- Button -->
         <div class="flex flex-col mb-[15px]">
             <button type="submit"
@@ -71,9 +70,6 @@
         </div>
     </div>
 </form>
-
-    <!-- Show images -->
-    <script src="../../js/showimage/showimage.js"></script>
     
     <!-- Start the session to catch the errors -->
     <?php
@@ -89,6 +85,9 @@
     <script>
         var serverErrors = <?php echo json_encode($serverErrors); ?>;
     </script>
+    
+    <!-- Show images -->
+    <script src="../../js/showimage/showimage.js"></script>
     
     <!-- File errors -->
     <script src="../../js/subcategory/error-subcategory.js"></script>

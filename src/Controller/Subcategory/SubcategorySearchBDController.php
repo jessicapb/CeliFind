@@ -24,7 +24,7 @@ class SubcategorySearchBDController
     public function searchsubcategory()
     {
         session_start();
-
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = filter_input(INPUT_POST, 'name');
             if (empty($name)) {
@@ -34,7 +34,7 @@ class SubcategorySearchBDController
             } else {
                 
                 try {
-                    $subcategories = $this->subcategoryServices->searchsubcategory($name);
+                    $subcategories = $this->subcategoryServices->searchsubcategory(trim($name));
                     $_SESSION['search_results'] = $subcategories;
                     header('Location: /subcategorysearch');
                     exit;
@@ -48,13 +48,11 @@ class SubcategorySearchBDController
     }
 
     /* We loop through Category and Subcategory to convert it to OBJ */
-
     public function showsearchresults()
     {
         session_start(); 
-
+        
         if (isset($_SESSION['search_results'])) {
-           
             $subcategories_response = $_SESSION['search_results'];
             unset($_SESSION['search_results']);
             foreach ($subcategories_response as $subcategory) {

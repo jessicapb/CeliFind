@@ -68,7 +68,7 @@
                         <div class="searchmodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
                             <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
                                 <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Sense resultats</h2>
-                                <p class="font-inter text-black font-medium text-[16px] text-center">No s'han trobat receptes amb aquest nom.</p>
+                                <p class="font-inter text-black font-medium text-[16px] text-center">No s'han trobat productes amb aquest nom.</p>
                                 <div class="flex justify-center">
                                     <a href="/productview" class="closesearchmodal font-inter bg-[#FCB666] mt-[10px] text-white text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:bg-[#ef9b3b] focus:outline-none">
                                         Tancar

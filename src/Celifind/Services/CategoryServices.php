@@ -19,6 +19,10 @@ class CategoryServices{
         return $this->CategoryRepository->exists($name);
     }
     
+    function existsCategory(string $name, int $id):bool{
+        return $this->CategoryRepository->existsCategory($name, $id);
+    }
+    
     function save(Category $category){
         $category = $this->CategoryRepository->save($category);
         return $category;
@@ -39,7 +43,7 @@ class CategoryServices{
     function delete(int $id){
         return $this->CategoryRepository->deleteCategory($id);
     }
-
+    
     public function searchcategory($name)
     {
         if (empty($name)) {
@@ -48,8 +52,6 @@ class CategoryServices{
     
         return $this->CategoryRepository->searchByName($name);
     }
-    
-    
     
     function showallcategory(){
         return $this->CategoryRepository->getall();

@@ -14,7 +14,7 @@ class SubcategoryUpdateBDController{
         $this->db = $db;
         $this->subcategory_services = $subcategory_services;
     }
-
+    
     public function updatesubcategory() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_start();
@@ -24,21 +24,20 @@ class SubcategoryUpdateBDController{
             $name = filter_input(INPUT_POST, 'name');
             $description = filter_input(INPUT_POST, 'description');
             $idcategoria = filter_input(INPUT_POST, 'idcategoria');
-
+            
             try {
                 $subcategory = new Subcategory($id, $name, $description, $idcategoria);
-
+                if ($this->subcategory_services->existsSubcategory($name, $id)) {
+                    $_SESSION['errors']['name'] = 'El nom ja està registrat';
+                    header('Location: /subcategoryupdate?id=' . urlencode($id));
+                    exit;
+                }
                 $this->subcategory_services->update($subcategory);  
                 header('Location: /subcategory');
             } catch (BuildExceptions $e) {
-                $_SESSION['errors'] = $e->getMessage();
-                if ($id) {
-                    $subcategory = $this->subcategory_services->findById($id);
-                    header('Location: /subcategoryupdate?id=' . urlencode($subcategory->getId()));
-                }
-                else {
-                    header('Location: /subcategory');
-                }
+                $_SESSION['errors']['general'] = $e->getMessage();
+                header('Location: /subcategoryupdate?id=' . urlencode($id));
+                exit;
             }
         }
     }

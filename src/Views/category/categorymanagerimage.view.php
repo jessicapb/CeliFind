@@ -11,7 +11,7 @@
     <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
 <body>
-    <header class="pb-[15px]">
+    <header class="pb-[15px] border-b border-gray-300">
         <nav>
             <a href="/manager">
                 <img class="ml-[20px] w-32 pt-[20px]" src="../../img/logo/logo.png" alt="logoimg">

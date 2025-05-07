@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
     <link rel="shortcut icon" class="h-18" href="../../img/logo/logo.png" type="image/x-icon">
-
 </head>
 <body>
     <header>
@@ -30,23 +29,20 @@
     </section>
     <form class="flex justify-center" action="/updatecategory" method="POST" enctype="multipart/form-data">
     <?php $category = $category; ?>
-    <input type="hidden" name="id" value="<?php echo $category->getId(); ?>">
-
+    <input type="hidden" name="id" value="<?= $formData['id'] ?? '' ?>">
     <div class="w-[18%]">
         <!-- Name -->
         <div class="flex flex-col  mb-[15px]">
             <label for="name" class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Nom</label>
-            <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow"
-                name="name" type="text" value="<?php echo $category->getName(); ?>" placeholder="Introdueix el nom">
-            <p id="error-name" class="text-red-500 mt-[5px] font-inter hidden text-[15px]"></p>
+            <input name="name" type="text" value="<?= $formData['name'] ?? '' ?>" class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" placeholder="Introdueix el nom">
+            <p class="text-red-500"><?= $errors['name'] ?? '' ?></p>
         </div>
 
         <!-- Description -->
         <div class="flex flex-col  mb-[15px]">
             <label for="description" class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Descripció</label>
-            <textarea name="description" class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow"
-                placeholder="Introdueix la descripció"><?php echo $category->getDescription(); ?></textarea>
-            <p id="error-description" class="text-red-500 mt-[5px] font-inter hidden text-[15px]"></p>
+            <textarea name="description" class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" placeholder="Introdueix la descripció"><?= $formData['description'] ?? '' ?></textarea>
+            <p class="text-red-500"><?= $errors['description'] ?? '' ?></p>
         </div>
 
         <!-- Image -->
@@ -63,7 +59,7 @@
                 <img id="preview-img" src="../../img/uploadimage/imageupload.png" alt="imatge" class="w-[50px] h-[50px] object-cover rounded-[5px] mr-[10px]">
                 <span id="image-name" class="text-black text-[16px] font-normal"></span>
             </div>
-            <p id="error-image" class="text-red-500 mt-[5px] font-inter hidden text-[15px]"></p>
+            <p class="text-red-500"><?= $errors['image'] ?? '' ?></p>
         </div>
 
         <!-- Button -->
@@ -75,9 +71,6 @@
         </div>
     </div>
 </form>
-
-    <!-- Show images -->
-    <script src="../../js/showimage/showimage.js"></script>
     
     <!-- Start the session to catch the errors -->
     <?php

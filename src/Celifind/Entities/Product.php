@@ -19,7 +19,7 @@ class Product{
 
     public function __construct(?int $id = null, string $name, string $description, string $ingredients, ?string $nutritionalinformation, string $price, string $brand, string $image, string $weight, int $state, ?int $subcategory_id = null){
         $error = 0;
-
+        
         $this->id = $id;
         if(($error = $this->setName($name)) !=0){
             $_SESSION['errors']['name'] = ChecksProduct::getErrorMessage($error);
