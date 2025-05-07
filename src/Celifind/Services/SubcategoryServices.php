@@ -3,6 +3,7 @@
 namespace App\Celifind\Services;
 use App\Infrastructure\Persistence\SubcategoryRepository;
 use App\Celifind\Entities\Subcategory;
+use App\Infrastructure\Persistence\CategoryRepository;
 
 class SubcategoryServices{
     private \PDO $db;
@@ -43,9 +44,7 @@ class SubcategoryServices{
         if (empty($name)) {
             return $this->SubcategoryRepository->getallsub();
         }
-    
-        return $this->SubcategoryRepository->searchByName($name);
-        
+        return $this->SubcategoryRepository->searchByNameSubCategories($name);
     }
     
     function showallsubcategory(){

@@ -27,26 +27,28 @@
             </a>
         </div>
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center pt-[26px] font-bold">Veure <span class="text-[#96c368] opacity-[100%]">imatges</span></h1>
-        <div class="grid grid-cols-4 gap-[14px] justify-center mt-[26px]">
-            <?php foreach ($recipes as $recipe) { ?>
-                <div class="shadow-lg w-[300px] h-[310px] rounded-[21px] bg-white p-[10px] mx-auto flex flex-col items-center">
-                    <div class="w-full flex justify-center mb-3">
-                        <div class="w-[180px] h-[180px] flex items-center justify-center">
-                        <img src="<?php echo $recipe->getImage() ?>" alt="image_bd" class="object-contain w-full h-full">
+        <div class="flex flex-wrap gap-5 p-[50px] items-center xl:flex lg:flex md:flex sm:flex justify-center">
+
+            <?php foreach ($recipes as $recipe): ?>
+                <div class="border border-gray-300 p-5 w-[300px] h-[300px] flex flex-col items-center justify-center rounded-xl shadow-md">
+            
+                    <div class="w-auto flex items-center justify-center mb-4">
+                        <img src="<?= $recipe->getImage() ?>" alt="Imagen del producto" class="object-contai rounded-md">
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex">
+                            <p class="font-inter text-[19px] font-bold text-black">Id:</p>
+                            <p class="font-inter text-[19px] font-medium text-black ml-2"><?= $recipe->getId(); ?></p>
+                        </div>
+                        <div class="flex">
+                            <p class="font-inter text-[19px] font-bold text-black">Nom:</p>
+                            <p class="font-inter text-[19px] font-medium text-black ml-2"><?= $recipe->getName(); ?></p>
                         </div>
                     </div>
-                    <div class="w-full text-left mt-[10px]">
-                        <div class="flex">
-                            <p class="font-inter pl-[10px] text-[19px] font-bold text-black">Id:</p>
-                            <p class="font-inter pl-[5px] text-[19px] font-medium text-black"><?php echo $recipe->getId(); ?></p>
-                        </div>
-                        <div class="flex">
-                            <p class="font-inter pl-[10px] text-[19px] font-bold text-black">Nom:</p>
-                            <p class="font-inter pl-[5px] text-[19px] font-medium text-black"><?php echo $recipe->getName(); ?></p>
-                        </div>
-                    </div>
+
                 </div>
-            <?php } ?>
+            <?php endforeach; ?>
         </div>
     </section>
     

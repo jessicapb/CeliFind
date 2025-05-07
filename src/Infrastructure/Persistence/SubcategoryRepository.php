@@ -34,6 +34,27 @@ class SubcategoryRepository
         return $result_subcategories;
     }
 
+    /* Query SQL Search */
+
+    function searchByNameSubCategories($name): array{
+        $stmt = $this->db->prepare("SELECT * FROM subcategories WHERE name LIKE :name");
+        $stmt->execute(['name' => '%' . $name . '%']);
+        $subcategories = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        //dd($subcategories);
+        $result_subcategories = [];
+        foreach ($subcategories as $subcategory) {
+            $subcategory['categories'] = [];
+
+            $sql = $this->db->prepare("SELECT * FROM categories WHERE id = :idcategoria");
+            $sql->execute(['idcategoria' => $subcategory['id']]);
+            $categories = $sql->fetchAll(\PDO::FETCH_ASSOC);
+
+            $subcategory['categories'] = $categories;
+            $result_subcategories[] = $subcategory;
+            }
+        return $result_subcategories;
+    }
+   
     /* Query SQL Create */
     function save(Subcategory $subcategory)
     {
@@ -106,4 +127,18 @@ class SubcategoryRepository
             return null;
         }
     }
+
+    // Select limit
+    function showlimit(){
+        $allsubcategory = [];
+        $sql = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, image, idcategoria FROM subcategories");
+        $sql->execute();
+        $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
+        if (count($result) != 0) {
+            return $result;
+        } else {
+            return [];
+        }
+    } 
+    
 }

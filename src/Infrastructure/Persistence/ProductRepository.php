@@ -52,7 +52,7 @@ class ProductRepository{
     // Select limit
     function showlimit(){
         $allproducts = [];
-        $sql = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, SUBSTRING(ingredients, 1, 14) AS ingredients_short, 
+        $sql = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
                                     SUBSTRING(nutritionalinformation, 1, 12) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state, idsubcategory FROM products");
         $sql->execute();
         while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
@@ -70,7 +70,7 @@ class ProductRepository{
     // Select with state 1
     function stateone(){
         $allproducts = [];
-        $sql = $this->db->prepare("SELECT id, name, description, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
+        $sql = $this->db->prepare("SELECT id, name, SUBSTRING(description, 1 ,140) as description , SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
                                         SUBSTRING(nutritionalinformation, 1, 20) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state, idsubcategory FROM products
                                         WHERE state = 1");
         $sql->execute();
@@ -89,7 +89,7 @@ class ProductRepository{
     // Select 4 with state 1
     function stateonelimit(){
         $allproducts = [];
-        $sql = $this->db->prepare("SELECT id, name, description, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
+        $sql = $this->db->prepare("SELECT id, name, SUBSTRING(description,1,200) as description , SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
                                         SUBSTRING(nutritionalinformation, 1, 20) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state, idsubcategory FROM products
                                         WHERE state = 1 LIMIT 4");
         $sql->execute();

@@ -14,7 +14,7 @@
     <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
 <body>    
-    <header class="p-4">
+    <header class="p-4 border-b border-gray-300">
         <nav class="flex justify-between">
             <a href="/">
                 <img class="w-32" src="../img/logo/logo.png" alt="">
@@ -38,11 +38,11 @@
         <section class="py-16 px-6">
             <div>
                 <div>
-                <form action="/searchrecipesall" class="flex justify-center" method="POST">
+                <form action="/searchrecipesall" class="flex p-[40px]" method="POST">
                         <div>
                             <div class="relative flex items-center max-w-[800px]">
                                 <img class="absolute w-5 h-5 left-2.5 " src="../../img/search/search.svg" alt="search">
-                                <input name="name" class="bg-[#fefbf9] placeholder:text-black font-normal font-inter text-black text-[16px] border border-[#FCB666] rounded-[27px] pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] shadow-sm focus:shadow" placeholder="cerca la recepta">
+                                <input name="name" class="w-[400px] bg-[#fefbf9] placeholder:text-black font-normal font-inter text-black text-[16px] border border-[#FCB666] rounded-[27px] pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] shadow-sm focus:shadow" placeholder="cerca la recepta">
                             </div>
                         </div>
                     </form>
@@ -64,42 +64,40 @@
                 </div>
             <?php endif; ?>
             
-            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 px-10 pt-10 pb-20">
+            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 px-10 pb-20">
                 <?php foreach ($recipes as $recipe) { ?>
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col min-h-[550px]">
-                        <img src="<?php echo $recipe->getImage() ?>" alt="Nom de la recepta" class="w-full h-56 object-cover">
-                        <div class="p-6 flex flex-col flex-grow">
-                            <div class="flex justify-between flex-col xl:flex-row lg:flex-row md:flew-row sm:flex-row">
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col min-h-[550px]">
+                            <img src="<?php echo $recipe->getImage() ?>" alt="Nom de la recepta" class="w-full h-56 object-cover">
+                            <div class="p-6 flex flex-col flex-grow">
                                 <div class="w-full text-left mt-[10px] min-h-[50px]">
                                     <p class="text-2xl font-semibold font-montserrat mb-2"><?php echo $recipe->getName(); ?></p>
                                 </div>
                                 <div class="flex items-center gap-5">
                                     <div class="flex items-center">
-                                        <img class="w-[20px]" src="./img/home/usuarios.png" alt=""> <!--People IMG!-->
-                                        <p class="ml-2"><?php echo $recipe->getPeople(); ?><!--Num People!--></p>
+                                        <img class="opacity-70 w-[20px]" src="./img/home/usuarios.png" alt=""> <!--People IMG!-->
+                                        <p class="ml-2 opacity-70"><?php echo $recipe->getPeople(); ?><!--Num People!--></p>
                                     </div>
                                     <div class="flex items-center">
-                                        <img class="w-[20px]" src="./img/home/reloj.png" alt=""> <!--Timer IMG!-->
-                                        <p class="ml-2"><?php echo $recipe->getDuration(); ?><!--Min recipe!--></p>
+                                        <img class="opacity-70 w-[20px]" src="./img/home/reloj.png" alt=""> <!--Timer IMG!-->
+                                        <p class="ml-2 opacity-70"><?php echo $recipe->getDuration(); ?><!--Min recipe!--></p>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <div class="w-full text-left mt-[10px] min-h-[100px]">
-                                <p class="text-gray-700 mt-3 lg:mt-0 md:mt-0 text-base mb-4"><?php echo $recipe->getDescription(); ?></p>
-                            </div>
-                            
-                            <div class="w-full flex justify-center mt-auto">
-                                <form action="/recipesindividual" method="POST" class="w-[90%]">
-                                    <input type="hidden" name="id" value="<?php echo $recipe->getId(); ?>">
-                                    <button type="submit" class="w-full mt-[15px] mb-[10px] text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                                        Veure recepta
-                                    </button>
-                                </form>
+                                
+                                <div class="w-full text-left mt-[10px] min-h-[100px]">
+                                    <p class="text-gray-700 mt-3 lg:mt-0 md:mt-0 text-base mb-4"><?php echo $recipe->getDescription(); ?>...</p>
+                                </div>
+                                
+                                <div class="w-full flex justify-center mt-auto">
+                                    <form action="/recipesindividual" method="POST" class="w-[90%]">
+                                        <input type="hidden" name="id" value="<?php echo $recipe->getId(); ?>">
+                                        <button type="submit" class="w-full mt-[15px] mb-[10px] text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
+                                            Veure recepta
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <?php } ?>                
+                    <?php } ?>                 
             </div>
         </section>
     </main>

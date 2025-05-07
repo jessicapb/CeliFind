@@ -35,8 +35,8 @@
             </a>
         </div>
     </header>
-    <section class="flex justify-center items-center bg-slate-100">
-        <div class="mt-[25px]">
+    <section class="p-[30px] flex flex-wrap justify-center items-center bg-slate-100">
+        <div class="mt-[25px] min-w-[500px]">
             <!-- Name -->
             <div>
                 <?php
@@ -100,9 +100,9 @@
         </div>
         
         <!-- Image-->
-        <div class="shadow-lg w-[700px] h-auto ml-[60px] rounded-[21px] bg-white p-[10px] mr-[20px] flex jusityf-center items-center">
+        <div class="min-w-[500px] border-2 shadow-lg w-[700px] h-auto ml-0 mt-[50px] xl:ml-[60px] xl:mt-0 lg:ml-[60px] lg:mt-0 rounded-[21px] bg-white p-[10px] mr-[20px] flex jusityf-center items-center">
             <div class="w-full flex justify-center mb-3">
-                <div class="w-[500px] h-[450px] flex mt-[15px] items-center justify-center">
+                <div class="w-[80%] h-[450px] flex mt-[15px] items-center justify-center">
                     <img src="<?php echo $product->getImage() ?>" alt="image_bd" class="object-contain w-full h-full">                                    
                 </div>
             </div>

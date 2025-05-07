@@ -1,18 +1,24 @@
 <?php
 
 namespace App\Controller\Subcategory;
+
+use App\Celifind\Entities\Subcategory;
 use App\Celifind\Services\SubcategoryServices;
 use App\Celifind\Exceptions\BuildExceptions;
+use App\Celifind\Services\CategoryServices;
+use App\Celifind\Entities\Category;
 
-class SubcategorySearchBDController{
-
+class SubcategorySearchBDController
+{
     private \PDO $db;
     private SubcategoryServices $subcategoryServices;
+    private CategoryServices $categoryServices;
 
-    public function __construct(\PDO $db, SubcategoryServices $subcategoryServices)
+    public function __construct(\PDO $db, SubcategoryServices $subcategoryServices, CategoryServices $categoryServices)
     {
         $this->db = $db;
         $this->subcategoryServices = $subcategoryServices;
+        $this->categoryServices = $categoryServices;
     }
 
     public function searchsubcategory()
@@ -21,12 +27,12 @@ class SubcategorySearchBDController{
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = filter_input(INPUT_POST, 'name');
-        
             if (empty($name)) {
-                $_SESSION['search_results'] = $this->subcategoryServices->showallsubcategory();
+                $_SESSION['search_results'] =  $this->subcategoryServices->showallsubcategory();
                 header('Location: /subcategorysearch'); 
                 exit;
             } else {
+                
                 try {
                     $subcategories = $this->subcategoryServices->searchsubcategory($name);
                     $_SESSION['search_results'] = $subcategories;
@@ -41,17 +47,27 @@ class SubcategorySearchBDController{
         }        
     }
 
+    /* We loop through Category and Subcategory to convert it to OBJ */
+
     public function showsearchresults()
     {
         session_start(); 
 
         if (isset($_SESSION['search_results'])) {
-            $subcategories = $_SESSION['search_results'];
-            unset($_SESSION['search_results']);  
-
-            echo view('subcategory/showsubcategory', ['subcategories' => $subcategories]);
+           
+            $subcategories_response = $_SESSION['search_results'];
+            unset($_SESSION['search_results']);
+            foreach ($subcategories_response as $subcategory) {
+                $view_subcategory[] = new Subcategory($subcategory["id"], $subcategory["name"], $subcategory["description"], $subcategory["idcategoria"]);
+            }
+            $response_cat = $this->categoryServices->showallcategory();
+            foreach ($response_cat as $category) {
+                $view_category[] = new Category($category["id"], $category["name"], $category["description"], $category["image"]);
+            }
+            echo view('subcategory/showsubcategory', ['subcategories' => $view_subcategory, 'categories' => $view_category]);
+            
         } else {
-            echo view('subcategory/showsubcategory', ['subcategories' => []]);
+            echo view('subcategory/showsubcategory', ['subcategories' => [], 'categories' => []]);
         }
     }
 }

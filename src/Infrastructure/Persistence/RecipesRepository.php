@@ -85,10 +85,10 @@ class RecipesRepository{
     // Select all
     function selectall(){
         $allrecipes = [];
-        $sql = $this->db->prepare("SELECT * FROM recipes");
+        $sql = $this->db->prepare("SELECT id,name,SUBSTRING(description,1,170) as description_short ,ingredients,nutritionalinformation,people,duration,instruction,image FROM recipes");
         $sql->execute();
         while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
-            $recipes = new Recipes($fila['id'], $fila['name'], $fila['description'], $fila['ingredients'], $fila['nutritionalinformation'], $fila['people'], $fila['duration'], $fila['instruction'], $fila['image']);
+            $recipes = new Recipes($fila['id'], $fila['name'], $fila['description_short'], $fila['ingredients'], $fila['nutritionalinformation'], $fila['people'], $fila['duration'], $fila['instruction'], $fila['image']);
             $allrecipes[] = $recipes;
         }
         return $allrecipes;

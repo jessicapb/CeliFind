@@ -28,8 +28,8 @@
                     <li class="ml-8"><a href="/informacio">Informació</a></li>
                 </ul>
                 <div class="flex items-center gap-5 ml-16">
-                    <a href="#" class="font-inter p-2 px-5 text-[16px] text-black border-[#96c368] border-2 rounded-[50px] font-normal hover:bg-[rgb(150,195,104)] hover:text-white transition duration-200">Registre</a>
-                    <a href="#" class="font-inter p-2 px-9 text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-white transition duration-200">Iniciar Sessió</a>
+                    <a href="/register" class="font-inter p-2 px-5 text-[16px] text-black border-[#96c368] border-2 rounded-[50px] font-normal hover:bg-[rgb(150,195,104)] hover:text-white transition duration-200">Registre</a>
+                    <a href="/login" class="font-inter p-2 px-9 text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-white transition duration-200">Iniciar Sessió</a>
                 </div>
             </div>
         </nav>
@@ -53,7 +53,7 @@
                 <img src="./img/logo/logo.png" alt="CeliFind" class="w-[400px] mx-auto">
             </div>
         </section>
-
+        
         <section class="container mx-auto px-6 py-16">
             <div class="flex flex-col lg:flex-row items-center gap-12">
                 <div class="flex-1 text-center">
@@ -65,8 +65,7 @@
                 </div>
             </div>
         </section>
-
-
+        
         <section class="container mx-auto px-6 flex flex-col lg:flex-row items-center gap-12">
             <div class="flex-1 text-center lg:text-left">
                 <h3 class="text-3xl font-semibold font-calistoga text-[#96c368] mb-6">Els Nostres Productes</h3>
@@ -78,7 +77,7 @@
                 <img src="./img/home/pizzasingluten.png" alt="pizzasingluten" class="w-[400px] mx-auto">
             </div>
         </section>
-
+        
         <section class="container mx-auto px-6 py-16">
             <div class="flex flex-col text-center justify-center items-center mt-36">
                 <h3 class="text-7xl font-semibold font-calistoga text-[#96c368] mb-6 font-calistoga">Estem per a tu</h3>
@@ -90,11 +89,10 @@
                 </div>
             </div>
         </section>
-        
-        <!--Footer section!-->
-        <?php include '../parts/footer/footer.view.php'?>
-
-    </main>    
+    </main> 
+    
+    <!--Footer section!-->
+    <?php include 'src/Views/parts/footer/footer.view.php'?>
     
     <!-- FontAwesome Icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>

@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pàgina View Categories</title>
+    <title>Gestor de les categories</title>
     <link href="./src/output.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" class="h-18" href="../../img/logo/logo.png" type="image/x-icon">
+    <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
 <body >
     <header class="pb-[15px]">
@@ -28,24 +28,38 @@
         </div>
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center">Gestor <span class="text-[#96c368] opacity-[100%]">Categories</span></h1>
         <div class="mt-[20px] flex justify-between items-center">
-            
             <!-- Add Category  -->
             <div class="w-[50%]">
                 <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/categoryadd">Afegir Categoria</a>
                 <a class="font-inter bg-[#96c368] text-[#f5f5f5] text-[16px] font-medium p-[9px]  rounded-[9px] text-center transition-all focus:shadow-none active:bg-[#88c24d] hover:focus:bg-[#88c24d]  hover:bg-[#88c24d] disabled:pointer-events-none disabled:opacity-50" href="/categoryshowimage">Veure imatges</a>
             </div>
             <form action="/searchcategory" method="POST">
-                <div class="w-full max-w-sm min-w-[200px]">
+                <div class="w-full max-w-sm min-w-[200px] mr-[50px]">
                     <div class="relative flex items-center">
                         <img class="absolute w-5 h-5 left-2.5 " src="../../img/search/search.svg" alt="search">
-                        <input name="name" class="w-full bg-[#fefbf9] placeholder:text-black font-normal font-inter text-black text-[16px] border border-[#FCB666] rounded-[27px] pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] shadow-sm focus:shadow" placeholder="escriu la categoria" />
-                        <button class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[20px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" type="submit">
-                            Buscar
-                        </button>
+                        <input name="name" class="w-[500px] bg-[#fefbf9] placeholder:text-black font-normal font-inter text-black text-[16px] border border-[#FCB666] rounded-[27px] pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] shadow-sm focus:shadow" placeholder="escriu el producte">
+                        <button class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] px-[40px] ml-[20px] rounded-[9px] mr-[20px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" type="submit">
+                        Buscar
+                        </button> 
                     </div>
                 </div>
             </form>
         </div>
+        
+        <!-- Modal search -->
+        <?php if (!empty($noResults)): ?>
+            <div class="searchmodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
+                <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
+                    <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Sense resultats</h2>
+                    <p class="font-inter text-black font-medium text-[16px] text-center">No s'han trobat productes amb aquest nom.</p>
+                    <div class="flex justify-center">
+                        <a href="/productmanager" class="closesearchmodal font-inter bg-[#FCB666] mt-[10px] text-white text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:bg-[#ef9b3b] focus:outline-none">
+                            Tancar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
         
         <section>
             <table class="w-full mt-[50px] table-auto text-center border-separate border-spacing-2">

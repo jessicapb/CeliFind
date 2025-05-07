@@ -334,9 +334,10 @@ $router
     
     ->addRoute('POST','/updatesubcategory',[$controllerupdatesubcategory,'updatesubcategory'])
     
-    ->addRoute('POST', '/searchsubcategory', [new SubcategorySearchBDController($db, $subcategoryServices), 'searchsubcategory'])
+    ->addRoute('POST', '/searchsubcategory', [new SubcategorySearchBDController($db, $subcategoryServices, $categoryServices), 'searchsubcategory'])
     
-    ->addRoute('GET', '/subcategorysearch', [new SubcategorySearchBDController($db, $subcategoryServices), 'showsearchresults'])
+    ->addRoute('GET', '/subcategorysearch', [new SubcategorySearchBDController($db, $subcategoryServices, $categoryServices), 'showsearchresults'])
+    
     // Go to the login page
     ->addRoute('GET','/login',[$userLoginController,'showLogin'])
     

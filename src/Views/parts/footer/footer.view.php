@@ -1,5 +1,5 @@
 <!--Footer section!-->
-<footer class="bg-slate-100 text-black py-12 px-8 lg:px-20">
+<footer class="bg-slate-100 border-t border-gray-300 text-black py-12 px-8 lg:px-20">
     <div class="grid grid-cols-1 max-w-screen-xl mx-auto md:grid-cols-5 text-center lg:text-start md:text-start gap-8 text-sm justify-center">
         <div class="md:col-span-1 flex flex-col space-y-2">
             <a href="/">

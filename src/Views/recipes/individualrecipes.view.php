@@ -59,12 +59,17 @@
     </section>
     
     <section class="bg-slate-100 text-black pt-[30px]">
-        <div class="flex flex-col sm:flex-row justify-between items-start w-full max-w-6xl mx-auto">
-            <div class="w-full sm:w-1/2 pr-4 pl-[10px]">
+        <div class="p-[10px] items-start w-full max-w-6xl  mx-auto">
+            <h2 class="font-calistoga text-[35px] text-black pl-[10px] opacity-[78%] font-regular">Descripció</h2>
+            <p class="font-inter text-[16px] text-black pl-[10px] font-normal pt-[5px]"><?php echo $recipes->getDescription(); ?></p>
+        </div>
+        <!--NUTRITION AND INGREDIENTS!-->
+        <div class="flex mt-[50px] flex-col sm:flex-row justify-between p-[10px] items-start w-full max-w-6xl mx-auto">
+            <div class="w-full sm:w-1/2 pl-[10px]">
                 <h2 class="font-calistoga text-[35px] text-black opacity-[78%] font-regular">Informació Nutricional</h2>
                 <p class="font-inter text-[16px] text-black font-normal pt-[5px]"><?php echo $recipes->getNutritionalInformation(); ?></p>
             </div>
-            <div class="w-full sm:w-1/2 pl-4">
+            <div class="w-full sm:w-1/2 pl-3">
                 <h2 class="font-calistoga text-[35px] text-black opacity-[78%] font-regular">Ingredients</h2>
                 <p class="font-inter text-[16px] text-black font-normal pt-[5px]"><?php echo $recipes->getIngredients(); ?></p>
             </div>

@@ -24,9 +24,32 @@
                     <li class="ml-8"><a href="/quisom">Qui som ?</a></li>
                     <li class="ml-8"><a href="/informacio">Informació</a></li>
                 </ul>
+                
                 <div class="flex items-center gap-5 ml-16">
                     <a href="/register" class="font-inter p-2 px-5 text-[16px] text-black border-[#96c368] border-2 rounded-[50px] font-normal hover:bg-[rgb(150,195,104)] hover:text-white transition duration-200">Registre</a>
-                    <a href="/login" class="font-inter p-2 px-9 text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-white transition duration-200">Iniciar Sessió</a>
+                    <div class="relative inline-block text-left">
+                        <?php if (isset($_SESSION['user'])): ?>
+                            <button id="dropdown-toggle" type="button" class="font-inter min-w-[180px] p-[8px] mr-[30px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
+                                <?= htmlspecialchars($_SESSION['user']['name']) ?>
+                            </button>
+                            <div id="dropdown-menu" class="font-inter hidden absolute left-0 mt-2 w-[90%] origin-top-center text-black bg-white border-1 shadow-lg rounded-[20px] z-10">
+                                <div class="p-1 space-y-0.5">
+                                    <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href=" /editprofile">
+                                        <img class="w-[18%] h-[18%]" src="../../img/profile/placegholder.png" alt="">
+                                        Editar perfil
+                                    </a>
+                                    <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/home">
+                                        <img class="w-[18%] h-[18%]" src="../../img/logout/logout.svg" alt="">
+                                        Tancar sessió
+                                    </a>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <a href="/login" class="font-inter p-2 px-9 text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-white transition duration-200">
+                                Iniciar sessió
+                            </a>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -105,42 +128,46 @@
                 </div>
             </div>
             <div class="flex flex-wrap mt-11 justify-center gap-10">
-            <?php foreach ($products as $product) { ?>
-                                <div class="shadow-lg w-[400px] h-auto rounded-[21px] bg-white p-[10px] mr-[30px] mx-auto flex flex-col justify-between items-center">
-                                    <div class="flex flex-col items-start">
-                                        <!-- Image -->
-                                        <div class="w-full flex justify-center mb-3">
-                                            <div class="w-[180px] h-[180px] flex mt-[15px] items-center justify-center">
-                                                <img src="<?php echo $product->getImage() ?>" alt="image_bd" class="object-contain w-full h-full">                                    
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Name -->
-                                        <div class="w-full text-left mt-[10px] min-h-[50px]">
-                                            <p class="font-inter pl-[10px] text-[17px] font-bold text-black"><?php echo $product->getName(); ?></p>
-                                        </div>
-                                        
-                                        
-                                        <!-- Description -->
-                                        <div class="w-full text-left mt-[10px] min-h-[100px]">
-                                            <p class="font-inter pl-[10px] pr-[15px] text-[16px] text-justify font-normal text-black"><?php echo $product->getDescription(); ?></p>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Button -->
-                                    <div class="w-full flex justify-center mt-4">
-                                        <form action="/productindividual" method="POST" class="w-[90%]">
-                                            <input type="hidden" name="id" value="<?php echo $product->getId(); ?>">
-                                            <button type="submit" class="w-full mt-[15px] mb-[10px] text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                                                Més informació
-                                            </button>
-                                        </form>
-                                    </div>
+                <?php foreach ($products as $product) { ?>
+                    <div class="shadow-lg w-[480px] h-auto rounded-[21px] bg-white p-[10px] mx-auto flex flex-col justify-between items-center">
+                        <div class="flex flex-col items-start">
+                            <!-- Image -->
+                            <div class="w-full flex justify-center mb-3">
+                                <div class="w-[180px] h-[180px] flex mt-[15px] items-center justify-center">
+                                    <img src="<?php echo $product->getImage() ?>" alt="image_bd" class="object-contain w-full h-full">                                    
                                 </div>
-                            <?php } ?>
+                            </div>
+                            
+                            <!-- Name -->
+                            <div class="w-full text-left mt-[10px] min-h-[30px]">
+                                <p class="font-inter pl-[10px] text-[17px] font-bold text-black"><?php echo $product->getName(); ?></p>
+                            </div>
+                            
+                            <!--Wheigth!-->
+                            <div class="w-full text-left">
+                                <p class="font-inter pl-[10px] text-[16px] font-medium text-black opacity-50"><?php echo $product->getWeight(); ?></p>
+                            </div>
+                            
+                            <!-- Description -->
+                            <div class="w-full text-left mt-[15px] min-h-[100px]">
+                                <p class="font-inter pl-[10px] pr-[15px] text-[16px] text-justify font-normal text-black"><?php echo $product->getDescription();?>...</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Button -->
+                        <div class="w-full flex justify-center mt-4">
+                            <form action="/productindividual" method="POST" class="w-[90%]">
+                                <input type="hidden" name="id" value="<?php echo $product->getId(); ?>">
+                                <button type="submit" class="w-full mt-[15px] mb-[10px] text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
+                                    Més informació
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
         <section>
-
+        
         <!--Localities section!-->
         <section class="bg-slate-100">
             <div class="flex-col justify-center pt-36 p-10 text-center">

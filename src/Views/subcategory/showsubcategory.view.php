@@ -31,12 +31,12 @@
         <div class="mt-[20px] flex justify-between items-center">
             <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/addsubcategory">Afegir Subcategoria</a>
 
-            <form action="">
+            <form action="/searchsubcategory" method="POST">
                 <div class="w-full max-w-sm min-w-[200px]">
                     <div class="relative flex items-center">
                         <img class="absolute w-5 h-5 left-2.5 " src="../../img/search/search.svg" alt="search">
-                        <input class="w-full bg-[#fefbf9] placeholder:text-black font-normal font-inter text-black text-[16px] border border-[#FCB666] rounded-[27px] pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] shadow-sm focus:shadow" placeholder="escriu la subcategoria" />
-                        <button class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[20px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" type="button">
+                        <input name="name" class="w-full bg-[#fefbf9] placeholder:text-black font-normal font-inter text-black text-[16px] border border-[#FCB666] rounded-[27px] pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] shadow-sm focus:shadow" placeholder="escriu la subcategoria" />
+                        <button class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[20px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" type="submit">
                             Buscar
                         </button>
                     </div>
@@ -47,7 +47,6 @@
             <table class="w-full mt-[50px] table-auto text-center border-separate border-spacing-2">
                 <thead>
                     <tr>
-                        <th class="text-black font-calistoga text-[24px] pl-[10px] font-bold pr-[10px]">Id Subcategoria</th>
                         <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Nom</th>
                         <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Descripció</th>
                         <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Nom Categoria</th>
@@ -56,7 +55,6 @@
                 <tbody>
                     <?php foreach ($subcategories as $subcategory) { ?>
                         <tr>
-                            <td class="border border-[#FCB666] p-[10px]"><?php echo $subcategory->getId(); ?></td>
                             <td class="border border-[#FCB666] p-[10px]"><?php echo $subcategory->getName(); ?></td>
                             <td class="border border-[#FCB666] p-[10px]"><?php echo $subcategory->getDescription(); ?></td>
                             <?php foreach ($categories as $category) {
