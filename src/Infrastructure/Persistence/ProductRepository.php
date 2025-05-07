@@ -199,4 +199,29 @@ class ProductRepository{
         }
         return $result;
     }  
+    
+    // get all product from specific categori
+    public function getBySubcategoryId(int $subcategoryId): array { 
+        $stmt = $this->db->prepare("SELECT * FROM products WHERE idsubcategory = :subcategoryId AND state = 1");
+        $stmt->execute(['subcategoryId' => $subcategoryId]);
+        $products = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        
+        $result = [];
+        foreach ($products as $row) {
+            $result[] = new Product(
+                $row['id'],
+                $row['name'],
+                $row['description'],
+                $row['ingredients'],
+                $row['nutritionalinformation'],
+                $row['price'],
+                $row['brand'],
+                $row['image'],
+                $row['weight'],
+                $row['state'],
+                $row['idsubcategory']
+            );
+        }
+        return $result;
+    }
 }

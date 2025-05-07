@@ -34,13 +34,10 @@
                 <a class="font-inter bg-[#96c368] text-[#f5f5f5] text-[16px] font-medium p-[9px]  rounded-[9px] text-center transition-all focus:shadow-none active:bg-[#88c24d] hover:focus:bg-[#88c24d]  hover:bg-[#88c24d] disabled:pointer-events-none disabled:opacity-50" href="/categoryshowimage">Veure imatges</a>
             </div>
             <form action="/searchcategory" method="POST">
-                <div class="w-full max-w-sm min-w-[200px] mr-[50px]">
+                <div class="w-full max-w-sm min-w-[200px] mr-[15px]">
                     <div class="relative flex items-center">
                         <img class="absolute w-5 h-5 left-2.5 " src="../../img/search/search.svg" alt="search">
-                        <input name="name" class="w-[500px] bg-[#fefbf9] placeholder:text-black font-normal font-inter text-black text-[16px] border border-[#FCB666] rounded-[27px] pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] shadow-sm focus:shadow" placeholder="escriu el producte">
-                        <button class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] px-[40px] ml-[20px] rounded-[9px] mr-[20px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" type="submit">
-                        Buscar
-                        </button> 
+                        <input name="name" class="w-[500px] bg-[#fefbf9] placeholder:text-black font-normal font-inter text-black text-[16px] border border-[#FCB666] rounded-[27px] pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] shadow-sm focus:shadow" placeholder="escriu la categoria">
                     </div>
                 </div>
             </form>
@@ -62,7 +59,7 @@
         <?php endif; ?>
         
         <section>
-            <table class="w-full mt-[50px] table-auto text-center border-separate border-spacing-2">
+            <table class="w-full mt-[50px] table-auto text-center border-separate border-spacing-[13px] pb-[20px]">
                 <thead>
                     <tr>
                         <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Nom</th>
@@ -100,7 +97,7 @@
                             <div class="deletemodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50 hidden">
                                 <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
                                     <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Vols eliminar la categoria <?php echo $category->getName() ?> ?</h2>
-                                    <p class="font-inter text-black- font-medium text-[16px] text-center">Un cop sigui eliminat no es podrà desfer l'operació.</p>
+                                    <p class="font-inter text-black- font-medium text-[16px] text-center">Un cop sigui eliminada no es podrà desfer l'operació.</p>
                                     <div class="flex justify-center">
                                         <form action="/deletecategory" method="POST">
                                             <input type="hidden" name="id" value="<?php echo $category->getId(); ?>">
@@ -110,12 +107,11 @@
                                     </div>
                                 </div>
                             </div>
-                            
                             <!-- Modal delete correct -->
-                            <?php if ($_GET['deleted'] == 'true'): ?>
+                            <?php if (isset($_GET['deleted']) && $_GET['deleted'] == 'true'): ?>
                                 <div class="deletemodal fixed inset-0 flex justify-center items-center bg-opacity-50 z-50">
                                     <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
-                                        <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Categoria eliminada</h2>
+                                        <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Eliminada la categoria</h2>
                                         <div class="flex justify-center">
                                             <a href="/category" class="font-inter bg-[#FCB666] mt-[10px] mr-[15px] text-[white] text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">Tancar</a>
                                         </div>

@@ -1,50 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pàgina View Subcategory</title>
+    <title>Gestor de les subcategories</title>
     <link href="./src/output.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" class="h-18" href="../../img/logo/logo.png" type="image/x-icon">
+    <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
-
-<body class="bg-gray-100">
-    <header>
+<body>
+    <header class="pb-[15px] border-b border-gray-300">
         <nav>
             <a href="/manager">
-                <img class="pl-[20px] pt-[20px] w-[9%] h-[9%]" src="../../img/logo/logo.png" alt="">
+                <img class="ml-[20px] w-32 pt-[20px]"  src="../../img/logo/logo.png" alt="">
             </a>
-            <div class="p-1 space-y-0.5">
-                <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/manager">
-                    <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="">
-                    Tornar al gestor
-                </a>
-            </div>
         </nav>
     </header>
-    <section>
+    
+    <section class="bg-gray-100 pt-[10px]">
+        <div class="p-1 space-y-0.5">
+            <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/manager">
+                <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="">
+                Tornar al gestor
+            </a>
+        </div>
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center">Gestor <span class="text-[#96c368] opacity-[100%]">Subcategories</span></h1>
         <div class="mt-[20px] flex justify-between items-center">
             <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/addsubcategory">Afegir Subcategoria</a>
-
             <form action="/searchsubcategory" method="POST">
-                <div class="w-full max-w-sm min-w-[200px]">
+                <div class="w-full max-w-sm min-w-[200px] pr-[15px]">
                     <div class="relative flex items-center">
                         <img class="absolute w-5 h-5 left-2.5 " src="../../img/search/search.svg" alt="search">
-                        <input name="name" class="w-full bg-[#fefbf9] placeholder:text-black font-normal font-inter text-black text-[16px] border border-[#FCB666] rounded-[27px] pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] shadow-sm focus:shadow" placeholder="escriu la subcategoria" />
-                        <button class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[20px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" type="submit">
-                            Buscar
-                        </button>
+                        <input name="name" class="w-full bg-[#fefbf9] placeholder:text-black font-normal font-inter text-black text-[16px] border border-[#FCB666] rounded-[27px] pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] shadow-sm focus:shadow" placeholder="escriu la subcategoria"/>
                     </div>
                 </div>
             </form>
         </div>
         <section>
-            <table class="w-full mt-[50px] table-auto text-center border-separate border-spacing-2">
+            <table class="w-full mt-[50px] table-auto text-center border-separate border-spacing-2 pb-[20px]">
                 <thead>
                     <tr>
                         <th class="text-black font-calistoga text-[24px] font-bold pr-[10px]">Nom</th>
@@ -55,14 +50,14 @@
                 <tbody>
                     <?php foreach ($subcategories as $subcategory) { ?>
                         <tr>
-                            <td class="border border-[#FCB666] p-[10px]"><?php echo $subcategory->getName(); ?></td>
-                            <td class="border border-[#FCB666] p-[10px]"><?php echo $subcategory->getDescription(); ?></td>
+                            <td class="border border-[#FCB666] p-[10px] bg-white"><?php echo $subcategory->getName(); ?></td>
+                            <td class="border border-[#FCB666] p-[10px] bg-white"><?php echo $subcategory->getDescription(); ?></td>
                             <?php foreach ($categories as $category) {
                                 if ($category->getId() === $subcategory->getIdcategoria()) {
-                                    echo '<td class="border border-[#FCB666] p-[10px]">' . $category->getName() . '</td>';
+                                    echo '<td class="border border-[#FCB666] p-[10px] bg-white">' . $category->getName() . '</td>';
                                 }
                             } ?>
-
+                        
                         <!-- Edit button -->
                         <td class="font-inter bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
                             <div class="flex justify-center">
@@ -114,8 +109,11 @@
                     <?php } ?>
                 </tbody>
             </table>
-
         </section>
     </section>
+    
+    <!--Footer section!-->
+    <?php include 'src/Views/parts/footer/footer.view.php'?>
+    
     <script src="../../js/modals/deletemodal.js"></script>
 </body>

@@ -60,4 +60,8 @@ class ProductServices{
         }
         return $this->ProductRepository->searchproductstateone($name);
     }
+    
+    function getBySubcategoryId(int $subcategoryId): array { // get all products from that categori
+        return $this->ProductRepository->getBySubcategoryId($subcategoryId);
+    }
 }

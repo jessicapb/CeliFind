@@ -44,13 +44,12 @@
             <div class="flex flex-col  mb-[15px]">
                 <label for="description" class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Descripció</label>
                 <textarea name="description" class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" placeholder="escriu la descripció"><?= $formData['description'] ?? '' ?></textarea>
-                <p class="text-red-500"><?= $errors['description'] ?? '' ?></p>
+                <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]"><?= $errors['description'] ?? '' ?></p>
             </div>
-
+            
             <!-- Select Categories -->
             <div class="flex flex-col  mb-[15px]">
                 <label for="idcategoria" class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Categoria</label>
-
                 <select class=" bg-white border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="idcategoria" id="idcategoria">    
                 <option <?= $formData['idcategoria'] ?? '' ?> selected disabled hidden>Selecciona una categoria</option>
                     <?php if (!empty($categories)): ?>
@@ -59,7 +58,7 @@
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </select>
-                <p class="text-red-500"><?= $errors['idcategoria'] ?? '' ?></p>
+                <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]"><?= $errors['idcategoria'] ?? '' ?></p>
             </div>
         <!-- Button -->
         <div class="flex flex-col mb-[15px]">

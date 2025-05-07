@@ -19,7 +19,7 @@
         </nav>
     </header>
     
-    <section class="bg-slate-100 pt-[10px]">
+    <section class="bg-slate-100 pt-[10px] pt-[10px]">
         <div class="p-1 space-y-0.5">
             <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/category">
                 <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="home">

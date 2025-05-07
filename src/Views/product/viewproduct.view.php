@@ -40,16 +40,22 @@
                         <img class="flecha w-[4%] h-[4%] mt-[1px] rotate-90 " src="../../img/categoria/flecha-correcta.png" alt="flecha"><img class="w-[11%] h-[11%] mt-[1px]" src="<?php echo htmlspecialchars($category['image']); ?>" alt="officialimage" id="officialimage"><?php echo htmlspecialchars($category['name']); ?>
                     </button>
                 </div>
-                <div id="<?php echo htmlspecialchars($category['name']); ?>-subcategories" class="hidden pl-[40px] mt-2 categoria">
+                <form action="/showspecificsubcategoriproduct" method="POST" id="<?php echo htmlspecialchars($category['name']); ?>-subcategories" class="hidden pl-[40px] mt-2 categoria">
                     <ul class="text-[14px] font-medium text-black cursor-pointer">
                         <?php foreach ($category['subcategories'] as $subcategory): ?>
-                            <li class="pl-5 py-2 hover:bg-[#e8e8e8]"><?php echo htmlspecialchars($subcategory['name']); ?></li>
+                            <!-- Eliminar el enlace <a> y usar un botón dentro del <li> -->
+                            <li class="pl-5 py-2 border-b-2 border-gray-300 hover:bg-[#e8e8e8]">
+                                <button type="submit" name="subcategory" value="<?php echo urlencode($subcategory['id']); ?>" class="w-full text-left">
+                                    <?php echo htmlspecialchars($subcategory['name']); ?>
+                                </button>
+                            </li>
                         <?php endforeach; ?>
                     </ul>
-                </div>
+                </form>
             </div>
             <?php endforeach; ?>
         </div>
+        
             <!-- Product part -->
             <div class="flex justify-center w-full h-[100%] overflow-auto">
                 <div>

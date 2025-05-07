@@ -12,7 +12,7 @@
     <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
 <body>
-    <header class="pb-[15px]">
+    <header class="pb-[15px] border-b border-gray-300">
         <nav class="flex justify-between items-center w-full">
             <a class="pl-[20px] pt-[20px]" href="/manager">
                 <img class="w-32" src="../../img/logo/logo.png" alt="logoimg">
@@ -20,7 +20,6 @@
             <div class="flex items-center mr-[20px]">
                 <a href="/category" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Categories</a>
                 <a href="/subcategory" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Subcategories</a>
-                <a href="" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Revisions</a>
                 <!-- Dropdown -->
                 <div class="relative inline-block text-left">
                     <button id="dropdown-toggle" type="button" class="font-inter p-[8px] w-[90%] mr-[65px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
