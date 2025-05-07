@@ -233,4 +233,5 @@
         </div>
     </div>
     <script src="../../js/category/category.js"></script>
+    <script src="../js/dropdown/dropdown.js"></script>
 </body>
