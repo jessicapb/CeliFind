@@ -6,6 +6,10 @@
     <title>Registre</title>
     <link href="/src/output.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+    <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
 <body>
     <!-- Header -->
@@ -64,8 +68,8 @@
                 <!-- Password -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal" for="password">Contrasenya</label>
-                    <div class="relative">
-                        <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500 pr-10" type="password" name="password" id="password" placeholder="escriu la contrasenya" required>
+                    <div class="relative bg-white border border-[#fcb666] rounded-[9px] p-[8px]  transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow">
+                        <input class="focus:outline-none bg-none placeholder:text-black font-normal text-[16px] font-inter" type="password" name="password" id="password" placeholder="escriu la contrasenya" required>
                         <img id="eyeIcon" src="/img/login/ojo1.png" alt="Mostrar contraseña" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 cursor-pointer select-none" style="z-index:2;">
                     </div>
                     <?php if (!empty($_SESSION['errors']['password'])): ?>
@@ -74,7 +78,11 @@
                         </p>
                     <?php endif; ?>
                 </div>
-                <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Registra’t</button>
+                <div class="flex flex-col mb-[15px]">
+                    <button class="text-center font-inter bg-[#FCB666] text-[#f5f5f5] text-[16px] font-medium p-[8px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
+                        Registra't
+                    </button> 
+                </div>  
             </div>
         </form>
     </section>

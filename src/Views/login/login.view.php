@@ -55,9 +55,9 @@
                     <?php endif; ?>
                 </div>
                 <div class="flex flex-col mb-[15px]">
-                    <a href="/productview" class="text-center font-inter bg-[#FCB666] text-[#f5f5f5] text-[16px] font-medium p-[8px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
+                    <button class="text-center font-inter bg-[#FCB666] text-[#f5f5f5] text-[16px] font-medium p-[8px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
                         Iniciar sessió
-                    </a> 
+                    </button> 
                 </div>  
                 <!-- Register-->
                 <div class="flex pb-[7px] justify-center">
