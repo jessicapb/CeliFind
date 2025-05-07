@@ -19,6 +19,7 @@ class ProductSearchStateOneBDController {
         $this->subcategoryServices = $subcategoryServices;  
     }
     
+    //function for search product
     public function searchproductstateone() {
         session_start();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -46,6 +47,7 @@ class ProductSearchStateOneBDController {
         }
     }
     
+    //function to show the search result
     public function showsearchresultsproductone() {
         session_start();
         

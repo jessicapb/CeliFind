@@ -26,6 +26,7 @@ use App\Controller\Product\ProductUpdateBDController;
 use App\Controller\Product\ProductToSubcategoryBDController;
 use App\Controller\Product\ProductSearchBDController;
 use App\Controller\Product\ProductSearchStateOneBDController;
+use App\Controller\Product\SpecificproductsubcatController;
 
 //ViewsRecipes
 use App\Controller\Recipes\RecipesManagerController;
@@ -271,6 +272,10 @@ $router
     ->addRoute('POST', '/searchproductstateone', [new ProductSearchStateOneBDController($db, $productServices, $categoryServices ,$subcategoryServices), 'searchproductstateone'])
     
     ->addRoute('GET', '/showsearchresultsproductone', [new ProductSearchStateOneBDController($db, $productServices , $categoryServices ,$subcategoryServices), 'showsearchresultsproductone'])
+
+    //Search specific product
+    ->addRoute('GET' , '/showspecificsubcategoriproduct', [new SpecificproductsubcatController($subcategoryServices,$categoryServices,$productServices),'showspecificsubcategoriproduct'])
+
     // Go to the manager recipes
     ->addRoute('GET','/recipesmanager',[$showlimitrecipes,'recipesmanager'])
     

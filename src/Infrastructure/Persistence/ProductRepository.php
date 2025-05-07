@@ -70,7 +70,7 @@ class ProductRepository{
     // Select with state 1
     function stateone(){
         $allproducts = [];
-        $sql = $this->db->prepare("SELECT id, name, SUBSTRING(description, 1 ,140) as description , SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
+        $sql = $this->db->prepare("SELECT id, name, SUBSTRING(description, 1,150) as description , SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
                                         SUBSTRING(nutritionalinformation, 1, 20) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state, idsubcategory FROM products
                                         WHERE state = 1");
         $sql->execute();
@@ -199,4 +199,30 @@ class ProductRepository{
         }
         return $result;
     }  
+
+
+    public function getBySubcategoryId(int $subcategoryId): array { // get all product from specific categori
+
+        $stmt = $this->db->prepare("SELECT * FROM products WHERE idsubcategory = :subcategoryId AND state = 1");
+        $stmt->execute(['subcategoryId' => $subcategoryId]);
+        $products = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    
+        $result = [];
+        foreach ($products as $row) {
+            $result[] = new Product(
+                $row['id'],
+                $row['name'],
+                $row['description'],
+                $row['ingredients'],
+                $row['nutritionalinformation'],
+                $row['price'],
+                $row['brand'],
+                $row['image'],
+                $row['weight'],
+                $row['state'],
+                $row['idsubcategory']
+            );
+        }
+        return $result;
+    }
 }

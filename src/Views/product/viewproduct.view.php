@@ -43,7 +43,9 @@
                 <div id="<?php echo htmlspecialchars($category['name']); ?>-subcategories" class="hidden pl-[40px] mt-2 categoria">
                     <ul class="text-[14px] font-medium text-black cursor-pointer">
                         <?php foreach ($category['subcategories'] as $subcategory): ?>
-                            <li class="pl-5 py-2 hover:bg-[#e8e8e8]"><?php echo htmlspecialchars($subcategory['name']); ?></li>
+                            <a href="/showspecificsubcategoriproduct?subcategory=<?php echo urlencode($subcategory['id']);?>">
+                                <li class="pl-5 py-2 border-b-2 botder-gray-300 hover:bg-[#e8e8e8]"><?php echo htmlspecialchars($subcategory['name']);?></li>
+                            </a>
                         <?php endforeach; ?>
                     </ul>
                 </div>
