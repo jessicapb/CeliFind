@@ -50,6 +50,7 @@ use App\Controller\User\UserRegisterController;
 use App\Controller\User\LogoutController;
 use App\Controller\User\ForgotPasswordController;
 use App\Controller\User\ResetPasswordController;
+use App\Controller\User\EditProfileController;
 
 //Database
 use App\Infrastructure\Database\DatabaseConnection;
@@ -74,6 +75,9 @@ use  App\Infrastructure\Persistence\ProductRepository;
 
 // RepositoryRecipes
 use  App\Infrastructure\Persistence\RecipesRepository;
+
+// RepositoryUser
+use App\Infrastructure\Persistence\UserRepository;
 
 //Routes
 use App\Infrastructure\Routing\Router;
@@ -112,6 +116,8 @@ $userRegisterController = new UserRegisterController($db);
 $logoutController = new LogoutController();
 $forgotPasswordController = new ForgotPasswordController($db);
 $resetPasswordController = new ResetPasswordController($db);
+$userRepository = new UserRepository($db);
+$editProfileController = new EditProfileController($db, $userRepository);
 
 // Routes recipesrepository
 $services->addServices('recipesRepository', fn() => new RecipesRepository($db));
@@ -222,4 +228,8 @@ $router
     ->addRoute('GET','/forgotpassword',[$forgotPasswordController,'showForgotPassword'])
     ->addRoute('POST','/forgotpassword',[$forgotPasswordController,'sendResetLink'])
     ->addRoute('GET','/resetpassword',[$resetPasswordController,'showResetPassword'])
-    ->addRoute('POST','/resetpassword',[$resetPasswordController,'updatePassword']);
+    ->addRoute('POST','/resetpassword',[$resetPasswordController,'updatePassword'])
+
+    // Editar perfil usuario
+    ->addRoute('GET','/editprofile',[$editProfileController,'showEditProfile'])
+    ->addRoute('POST','/editprofile',[$editProfileController,'updateProfile']);

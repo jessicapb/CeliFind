@@ -17,7 +17,7 @@ class UserLoginController
 
     public function showLogin()
     {
-        
+
         //session_start();
         if (isset($_SESSION['user']['id'])) {
             header('Location: /manager');
@@ -44,7 +44,8 @@ class UserLoginController
                     $_SESSION['user'] = [
                         'id' => $row['id'],
                         'name' => $row['name'],
-                        'email' => $row['email']
+                        'email' => $row['email'],
+                        'status' => $row['status']
                     ];
                     header('Location: /productview');
                     exit;

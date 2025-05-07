@@ -61,7 +61,9 @@
         <?php endif; ?>
     </div>
     <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Registra’t</button>
-    
+    <p class="mt-4 text-center text-sm text-gray-600 font-inter">
+                Ya tens compte? <a href="/register" class="text-[#fcb666] hover:underline">Inicia sessió </a>
+            </p>
 </form>
 <!-- Footer -->
 <footer class=" font-calistoga text-gray-800 mt-8 w-full bot-0 px-2 lg:px-20">

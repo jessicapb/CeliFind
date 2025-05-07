@@ -47,9 +47,9 @@
                     </p>
                 <?php endif; ?>
             </div>
-            <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Registra’t</button>
+            <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Inicia sessió</button>
             <p class="mt-4 text-center text-sm text-gray-600 font-inter">
-                Encara no tens compte? <a href="/register" class="text-[#fcb666] hover:underline">Inicia sessió</a>
+                Encara no tens compte? <a href="/register" class="text-[#fcb666] hover:underline">Registra't </a>
             </p>
             <p class="mt-2 text-center text-sm font-inter">
                 <a href="/forgotpassword" class="text-[#96c368] hover:underline">Has oblidat la contrasenya?</a>

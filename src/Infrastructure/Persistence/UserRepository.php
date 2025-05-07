@@ -77,4 +77,27 @@ class UserRepository {
             $userId
         ]);
     }
+
+    public function updateProfile($id, $name, $surname, $city, $postalcode, $password = null) {
+        if ($password) {
+            $stmt = $this->db->prepare("UPDATE users SET name = ?, surname = ?, city = ?, postalcode = ?, password = ? WHERE id = ?");
+            $stmt->execute([
+                $name,
+                $surname,
+                $city,
+                $postalcode,
+                password_hash($password, PASSWORD_DEFAULT),
+                $id
+            ]);
+        } else {
+            $stmt = $this->db->prepare("UPDATE users SET name = ?, surname = ?, city = ?, postalcode = ? WHERE id = ?");
+            $stmt->execute([
+                $name,
+                $surname,
+                $city,
+                $postalcode,
+                $id
+            ]);
+        }
+    }
 }

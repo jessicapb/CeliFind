@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,9 +24,49 @@
                     <li class="ml-8"><a href="#">Qui som ?</a></li>
                     <li class="ml-8"><a href="#">Informació</a></li>
                 </ul>
-                <div class="flex items-center gap-5 ml-16">
-                    <a href="#" class="font-inter p-2 px-5 text-[16px] text-black border-[#96c368] border-2 rounded-[50px] font-normal hover:bg-[rgb(150,195,104)] hover:text-white transition duration-200">Registre</a>
-                    <a href="#" class="font-inter p-2 px-9 text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-white transition duration-200">Iniciar Sessió</a>
+                <div class="relative inline-block text-left">
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <button id="dropdown-toggle" type="button" class="font-inter min-w-[180px] p-[8px] mr-[30px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
+                            <?= htmlspecialchars($_SESSION['user']['name']) ?>
+                        </button>
+                        <div id="dropdown-menu" class="font-inter hidden absolute left-0 mt-2 w-[90%] origin-top-center text-black bg-white border-1 shadow-lg rounded-[20px] z-10">
+                            <div class="p-1 space-y-0.5">
+                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href=" /editprofile">
+                                    <img class="w-[18%] h-[18%]" src="../../img/profile/placegholder.png" alt="">
+                                    Editar perfil
+                                </a>
+                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/home">
+                                    <img class="w-[18%] h-[18%]" src="../../img/logout/logout.svg" alt="">
+                                    Tancar sessió
+                                </a>
+                            </div>
+                        </div>
+                        <?php elseif (isset($_SESSION['status']) && $_SESSION['status']===2): ?>
+                            <button id="dropdown-toggle" type="button" class="font-inter min-w-[180px] p-[8px] mr-[30px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
+                            <?= htmlspecialchars($_SESSION['user']['name']) ?>
+                        </button>
+                        <div id="dropdown-menu" class="font-inter hidden absolute left-0 mt-2 w-[90%] origin-top-center text-black bg-white border-1 shadow-lg rounded-[20px] z-10">
+                            <div class="p-1 space-y-0.5">
+                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href=" /editprofile">
+                                    <img class="w-[18%] h-[18%]" src="../../img/profile/placegholder.png" alt="">
+                                    Editar perfil
+                                </a>
+                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/manager">
+                                    <img class="w-[18%] h-[18%]" src="../../img/manager/manager.svg" alt="">
+                                    Manager
+                                </a>
+                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/home">
+                                    <img class="w-[18%] h-[18%]" src="../../img/logout/logout.svg" alt="">
+                                    Tancar sessió
+                                </a>
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <div class="flex items-center gap-5 ml-16">
+                            <a href="/register" class="font-inter p-2 px-5 text-[16px] text-black border-[#96c368] border-2 rounded-[50px] font-normal hover:bg-[rgb(150,195,104)] hover:text-white transition duration-200">Registre</a>
+                            <a href="/login" class="font-inter p-2 px-9 text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-white transition duration-200">Iniciar Sessió</a>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </nav>
