@@ -70,6 +70,7 @@ class User
         $user->city = $city;
         $user->postalcode = $postalcode;
         $user->password = $password;
+        $user->status = 1; // No se guarda en la base de datos, pero lo inicializamos a 1 por defecto
         return $user;
     }
 

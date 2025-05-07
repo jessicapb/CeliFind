@@ -20,7 +20,6 @@
             </a>
         </div>
     </div>
-<<<<<<< HEAD
     <!-- End Header -->
     <main class="flex-1 flex flex-col items-center justify-center w-full">
         <h1 class="text-5xl font-calistoga font-bold mb-10 mt-8 text-gray-800">Iniciar sessió</h1>
@@ -50,7 +49,7 @@
             </div>
             <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Registra’t</button>
             <p class="mt-4 text-center text-sm text-gray-600 font-inter">
-                Encara no tens compte? <a href="/register" class="text-[#fcb666] hover:underline">Registra't</a>
+                Encara no tens compte? <a href="/register" class="text-[#fcb666] hover:underline">Inicia sessió</a>
             </p>
             <p class="mt-2 text-center text-sm font-inter">
                 <a href="/forgotpassword" class="text-[#96c368] hover:underline">Has oblidat la contrasenya?</a>
@@ -59,19 +58,6 @@
     </main>
     <!-- Footer -->
     <footer class=" font-calistoga text-gray-800 mt-8 w-full bot-0 px-2 lg:px-20">
-=======
-    <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Inicia sessió</button>
-    <p class="mt-4 text-center text-sm text-gray-600 font-inter">
-        Encara no tens compte? <a href="/register" class="text-[#fcb666] hover:underline">Registra't</a>
-    </p>
-    <p class="mt-2 text-center text-sm font-inter">
-        <a href="/forgotpassword" class="text-[#96c368] hover:underline">Has oblidat la contrasenya?</a>
-    </p>
-</form>
-</main>
-<!-- Footer -->
-<footer class=" font-calistoga text-gray-800 mt-8 w-full bot-0 px-2 lg:px-20">
->>>>>>> 023e5866d726d670e9252e0f30751e5dec5348e1
         <div class="grid grid-cols-1  mx-auto md:grid-cols-5 text-center lg:text-start md:text-start gap-8 text-sm justify-center">
 
             <div class="md:col-span-1 flex flex-col space-y-2">
@@ -126,8 +112,4 @@
         eyeIcon.alt = visible ? 'Ocultar contraseña' : 'Mostrar contraseña';
     });
 </script>
-<<<<<<< HEAD
-
-=======
->>>>>>> 023e5866d726d670e9252e0f30751e5dec5348e1
 </html>
