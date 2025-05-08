@@ -37,7 +37,7 @@
                                     <img class="w-[18%] h-[18%]" src="../../img/profile/placegholder.png" alt="">
                                     Editar perfil
                                 </a>
-                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/home">
+                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/logout">
                                     <img class="w-[18%] h-[18%]" src="../../img/logout/logout.svg" alt="">
                                     Tancar sessió
                                 </a>

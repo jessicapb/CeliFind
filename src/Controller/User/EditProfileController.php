@@ -15,7 +15,8 @@ class EditProfileController
         $this->userRepository = $userRepository;
     }
 
-    public function showEditProfile() {
+    public function showEditProfile()
+    {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
@@ -26,7 +27,8 @@ class EditProfileController
         require VIEWS . '/login/editprofile.view.php';
     }
 
-    public function updateProfile() {
+    public function updateProfile()
+    {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
@@ -34,6 +36,7 @@ class EditProfileController
             header('Location: /login');
             exit;
         }
+
         $id = $_SESSION['user']['id'];
         $name = trim($_POST['name'] ?? '');
         $surname = trim($_POST['surname'] ?? '');
@@ -49,11 +52,13 @@ class EditProfileController
                 header('Location: /editprofile');
                 exit;
             }
+
             if ($password !== $confirm_password) {
                 $_SESSION['errors']['confirm_password'] = 'Les contrasenyes no coincideixen.';
                 header('Location: /editprofile');
                 exit;
             }
+
             if (strlen($password) < 6) {
                 $_SESSION['errors']['password'] = 'La contrasenya ha de tenir almenys 6 caràcters.';
                 header('Location: /editprofile');
@@ -69,7 +74,7 @@ class EditProfileController
         }
 
         // Solo actualiza los campos que no estén vacíos
-        $userRepo = new \App\Infrastructure\Persistence\UserRepository($this->db);
+        $userRepo = $this->userRepository;
         $current = $_SESSION['user'];
         $userRepo->updateProfile(
             $id,

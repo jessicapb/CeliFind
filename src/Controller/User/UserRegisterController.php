@@ -19,6 +19,18 @@ class UserRegisterController
 
     public function showRegister()
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (isset($_SESSION['user']['id'])) {
+            // Si la sesión está iniciada, redirige según el rol
+            if (isset($_SESSION['user']['status']) && $_SESSION['user']['status'] == 2) {
+                header('Location: /manager');
+            } else {
+                header('Location: /productview');
+            }
+            exit;
+        }
         require VIEWS . '/login/register.view.php';
     }
 

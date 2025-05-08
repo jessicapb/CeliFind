@@ -1,6 +1,7 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
     <link rel="shortcut icon" class="h-18" href="../../img/logo/logo.png" type="image/x-icon">
 </head>
+
 <body>
     <header class="p-4">
         <nav class="flex justify-between">
@@ -18,15 +20,13 @@
                 <img class="w-32" src="../img/logo/logo.png" alt="">
             </a>
             <div class="flex">
-                <ul class="list-none p-4m hidden lg:flex items-center">
+                <ul class="list-none p-4 hidden lg:flex items-center justify-center text-center">
                     <li class="ml-8 font-bold"><a href="/productview">Productes</a></li>
                     <li class="ml-8"><a href="#">Receptes</a></li>
-                    <li class="ml-8"><a href="#">Qui som ?</a></li>
-                    <li class="ml-8"><a href="#">Informació</a></li>
                 </ul>
-                <div class="relative inline-block text-left">
+                <div class="relative inline-block items-center justify-center">
                     <?php if (isset($_SESSION['user'])): ?>
-                        <button id="dropdown-toggle" type="button" class="font-inter min-w-[180px] p-[8px] mr-[30px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
+                        <button id="dropdown-toggle" type="button" class="font-inter min-w-[180px] p-[8px]  text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
                             <?= htmlspecialchars($_SESSION['user']['name']) ?>
                         </button>
                         <div id="dropdown-menu" class="font-inter hidden absolute left-0 mt-2 w-[90%] origin-top-center text-black bg-white border-1 shadow-lg rounded-[20px] z-10">
@@ -35,14 +35,14 @@
                                     <img class="w-[18%] h-[18%]" src="../../img/profile/placegholder.png" alt="">
                                     Editar perfil
                                 </a>
-                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/home">
+                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/logout">
                                     <img class="w-[18%] h-[18%]" src="../../img/logout/logout.svg" alt="">
                                     Tancar sessió
                                 </a>
                             </div>
                         </div>
-                        <?php elseif (isset($_SESSION['status']) && $_SESSION['status']===2): ?>
-                            <button id="dropdown-toggle" type="button" class="font-inter min-w-[180px] p-[8px] mr-[30px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
+                    <?php elseif (isset($_SESSION['status']) && $_SESSION['status'] === 2): ?>
+                        <button id="dropdown-toggle" type="button" class="font-inter min-w-[180px] p-[8px] mr-[30px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
                             <?= htmlspecialchars($_SESSION['user']['name']) ?>
                         </button>
                         <div id="dropdown-menu" class="font-inter hidden absolute left-0 mt-2 w-[90%] origin-top-center text-black bg-white border-1 shadow-lg rounded-[20px] z-10">
@@ -55,7 +55,7 @@
                                     <img class="w-[18%] h-[18%]" src="../../img/manager/manager.svg" alt="">
                                     Manager
                                 </a>
-                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/home">
+                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/logout">
                                     <img class="w-[18%] h-[18%]" src="../../img/logout/logout.svg" alt="">
                                     Tancar sessió
                                 </a>

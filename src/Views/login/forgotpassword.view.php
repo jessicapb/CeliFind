@@ -6,12 +6,12 @@ session_start();
 
 <head>
     <meta charset="UTF-8">
-    <title>Recuperar contrasenya</title>
+    <title>Recupera la teva contrasenya</title>
     <link href="/src/output.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
 </head>
 
-<body class="bg-slate-100 flex flex-col min-h-screen px-2">
+<body class="bg-slate-100 flex flex-col items-center justify-center min-h-screen px-2">
     <!-- Header -->
     <div class="p-1 space-y-0.5 top-0 left-0 right-0 flex justify-between w-full min-w-full">
         <div class="flex flex-col w-full">
@@ -24,28 +24,26 @@ session_start();
     </div>
     <!-- End Header -->
     <main class="flex-1 flex flex-col items-center justify-center w-full">
-        <h1 class="text-4xl font-calistoga font-bold mb-8 mt-8 text-gray-800 text-center">Recuperar contrasenya</h1>
-        <form action="/forgotpassword" method="POST" class="w-full max-w-md flex flex-col gap-4 sm:p-8">
-            <?php if (!empty($_SESSION['errors']['email'])): ?>
-                <div class="text-red-600 text-center mb-2 text-sm"><?php echo $_SESSION['errors']['email'];
-                                                                    unset($_SESSION['errors']['email']); ?></div>
-            <?php endif; ?>
-            <?php if (!empty($_SESSION['success'])): ?>
-                <div class="text-green-600 text-center mb-2 text-sm"><?php echo $_SESSION['success'];
-                                                                        unset($_SESSION['success']); ?></div>
-            <?php endif; ?>
+        <h1 class="text-4xl font-calistoga font-bold mb-8 mt-8 text-gray-800 text-center">Recupera la teva contrasenya
+        </h1>
+        <?php if (!empty($_SESSION['success'])): ?>
+            <div class="text-green-600 text-center mb-2 text-sm"><?php echo $_SESSION['success'];
+                                                                    unset($_SESSION['success']); ?></div>
+        <?php endif; ?>
+        <form action="/forgotpassword" method="POST" class="w-full max-w-md flex flex-col gap-4  p-6   sm:p-8">
             <div>
                 <label class="block font-calistoga text-lg text-gray-800 mb-1" for="email">Correu electrònic</label>
-                <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500" type="email" name="email" id="email" placeholder="escriu el teu correu" required>
+                <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500" type="email" name="email" id="email" required>
                 <?php if (!empty($_SESSION['errors']['email'])): ?>
                     <p class="text-red-500 mt-[5px] font-inter text-[15px]">
-                        <?= $_SESSION['errors']['email']; unset($_SESSION['errors']['email']); ?>
+                        <?= $_SESSION['errors']['email'];
+                        unset($_SESSION['errors']['email']); ?>
                     </p>
                 <?php endif; ?>
             </div>
-            <button class="w-full bg-[#fcb666] text-white font-calistoga py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Enviar enllaç de recuperació</button>
+            <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Envia l'enllaç</button>
         </form>
-        <a href="/login" class="mt-6 text-[#fcb666] hover:underline font-inter">Tornar a l'inici de sessió</a>
+        <a href="/login" class="mt-6 text-[#fcb666] hover:underline font-inter">Tornar a login</a>
     </main>
     <!-- Footer -->
     <footer class=" font-calistoga text-gray-800 mt-8 w-full bot-0 px-2 lg:px-20">

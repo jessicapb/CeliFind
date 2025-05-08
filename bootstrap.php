@@ -51,6 +51,7 @@ use App\Controller\User\LogoutController;
 use App\Controller\User\ForgotPasswordController;
 use App\Controller\User\ResetPasswordController;
 use App\Controller\User\EditProfileController;
+use App\Celifind\Services\EmailService;
 
 //Database
 use App\Infrastructure\Database\DatabaseConnection;
@@ -114,9 +115,10 @@ $showformupdate = new ProductUpdateController($db);
 $userLoginController = new UserLoginController($db);
 $userRegisterController = new UserRegisterController($db);
 $logoutController = new LogoutController();
-$forgotPasswordController = new ForgotPasswordController($db);
-$resetPasswordController = new ResetPasswordController($db);
 $userRepository = new UserRepository($db);
+$emailService = new EmailService();
+$forgotPasswordController = new ForgotPasswordController($db, $userRepository, $emailService);
+$resetPasswordController = new ResetPasswordController($db, $userRepository);
 $editProfileController = new EditProfileController($db, $userRepository);
 
 // Routes recipesrepository

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ca">
 
@@ -22,8 +21,7 @@
                 <ul class="list-none p-4m hidden lg:flex items-center">
                     <li class="ml-8"><a href="/productview">Productes</a></li>
                     <li class="ml-8"><a href="#">Receptes</a></li>
-                    <li class="ml-8"><a href="#">Qui som ?</a></li>
-                    <li class="ml-8"><a href="#">Informació</a></li>
+                    
                 </ul>
                 <div class="relative inline-block text-left">
                     <?php if (isset($_SESSION['user']) && $_SESSION['user']['status'] == 1) : ?>
@@ -127,7 +125,8 @@
                 </div>
                 <?php if (!empty($_SESSION['errors']['password'])): ?>
                     <p class="text-red-500 mt-[5px] font-inter text-[15px]">
-                        <?= $_SESSION['errors']['password']; unset($_SESSION['errors']['password']); ?>
+                        <?= $_SESSION['errors']['password'];
+                        unset($_SESSION['errors']['password']); ?>
                     </p>
                 <?php endif; ?>
             </div>
@@ -139,13 +138,15 @@
                 </div>
                 <?php if (!empty($_SESSION['errors']['confirm_password'])): ?>
                     <p class="text-red-500 mt-[5px] font-inter text-[15px]">
-                        <?= $_SESSION['errors']['confirm_password']; unset($_SESSION['errors']['confirm_password']); ?>
+                        <?= $_SESSION['errors']['confirm_password'];
+                        unset($_SESSION['errors']['confirm_password']); ?>
                     </p>
                 <?php endif; ?>
             </div>
             <?php if (!empty($_SESSION['success_password'])): ?>
                 <p class="text-green-600 text-center mb-2 text-sm">
-                    <?= $_SESSION['success_password']; unset($_SESSION['success_password']); ?>
+                    <?= $_SESSION['success_password'];
+                    unset($_SESSION['success_password']); ?>
                 </p>
             <?php endif; ?>
             <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Actualitza</button>
