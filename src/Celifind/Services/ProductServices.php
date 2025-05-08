@@ -43,6 +43,10 @@ class ProductServices{
         return $this->ProductRepository->findById($id);
     }
     
+    function findByIdUpdate(int $id){
+        return $this->ProductRepository->findByIdUpdate($id);
+    }
+    
     function update(Product $product){
         return $this->ProductRepository->updateProduct($product);
     }

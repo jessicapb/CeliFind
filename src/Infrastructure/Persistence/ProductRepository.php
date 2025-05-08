@@ -121,6 +121,20 @@ class ProductRepository{
     }
     
     // Select with id 
+    public function findByIdUpdate(int $id): ?object {
+        $sql = $this->db->prepare("SELECT * FROM products WHERE id = :id");
+        $sql->bindParam(':id', $id, \PDO::PARAM_INT);
+        $sql->execute();
+        
+        $result = $sql->fetch(\PDO::FETCH_OBJ);
+        if($result){
+                return $result;
+        }else{
+                return null;
+        }
+    }
+    
+    // Select with id 
     public function findById(int $id): ?Product {
         $sql = $this->db->prepare("SELECT * FROM products WHERE id = :id");
         $sql->bindParam(':id', $id, \PDO::PARAM_INT);

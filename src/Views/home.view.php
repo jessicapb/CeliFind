@@ -49,7 +49,7 @@
                                 Iniciar sessió
                             </a>
                         <?php endif; ?>
-                        <a href="/manager" target="_blank">Manager por ahora</a>
+                        <a href="/productmanager" target="_blank">Manager por ahora</a>
                     </div>
                 </div>
             </div>

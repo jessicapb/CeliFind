@@ -19,8 +19,7 @@ class ProductUpdateController{
             $id = filter_input(INPUT_GET, 'id');
             
             if ($id) {
-                $fila = $this->productservices->findById($id);
-                
+                $fila = $this->productservices->findByIdUpdate($id);
                 $errors = $_SESSION['errors'] ?? [];
                 unset($_SESSION['errors']);
                 
@@ -29,16 +28,16 @@ class ProductUpdateController{
                 
                 if (!$formData && $fila) {
                     $formData = [
-                        'id' => $fila->getId(),
-                        'name' => $fila->getName(),
-                        'description' => $fila->getDescription(),
-                        'ingredients' => $fila->getIngredients(),
-                        'nutritionalinformation' => $fila->getNutritionalInformation(),
-                        'price' => $fila->getPrice(),
-                        'brand' => $fila->getBrand(),
-                        'image' => $fila->getImage(),
-                        'weight' => $fila->getWeight(),
-                        'state' => $fila->getState(),
+                        'id' => $fila->id,
+                        'name' => $fila->name,
+                        'description' => $fila->description,
+                        'ingredients' => $fila->ingredients,
+                        'nutritionalinformation' => $fila->nutritionalinformation,
+                        'price' => $fila->price,
+                        'brand' => $fila->brand,
+                        'image' => $fila->image,
+                        'weight' => $fila->weight,
+                        'state' => $fila->state,
                     ];
                 }
                 

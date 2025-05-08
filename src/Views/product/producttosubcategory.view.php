@@ -11,23 +11,39 @@
     <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
 <body>
+    <!--Header section!-->
     <header class="pb-[15px] border-b border-gray-300">
-        <nav>
-            <a href="/manager" class="block w-fit"> 
-                <img class="ml-[20px] w-32 pt-[20px]" src="../../img/logo/logo.png" alt="logoimg">
+        <nav class="flex justify-between items-center w-full">
+            <a class="pl-[20px] pt-[20px]" href="/productmanager">
+                <img class="w-32" src="../../img/logo/logo.png" alt="logoimg">
             </a>
+            <div class="flex items-center mr-[20px]">
+                <a href="/productmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-bold">Productes</a>
+                <a href="/recipesmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Receptes</a>
+                <a href="/category" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Establiments</a>
+                <a href="/category" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Categories</a>
+                <a href="/subcategory" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Subcategories</a>
+                <!-- Dropdown -->
+                <div class="relative inline-block text-left">
+                    <button id="dropdown-toggle" type="button" class="font-inter p-[8px] w-[90%] mr-[65px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
+                    Administrador
+                    </button>
+                    
+                    <div id="dropdown-menu" class="font-inter hidden absolute left-0 mt-2 w-[90%] origin-top-center text-black bg-white border-1 shadow-lg rounded-[50px] z-10">
+                        <div class="p-1 space-y-0.5">
+                            <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/logout">
+                                <img class="w-[18%] h-[18%]" src="../../img/logout/logout.svg" alt="">
+                                Tancar sessió
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </nav>
     </header>
     
-    <section class="bg-slate-100 pt-[10px] pb-[20px]">
-        <div class="p-1 space-y-0.5">
-            <a href="/productmanager" class="inline-flex items-center ml-2 md:ml-4 lg:ml-4">
-                <img class="w-8 h-8 sm:w-8 sm:h-8 md:w-8 md:h-8 lg:w-8 lg:h-8" src="../../img/home/home.png" alt="Icona casa">
-                <span class="pl-2 font-calistoga text-[24px] sm:text-2xl md:text-[24px] lg:text-[24px] text-black opacity-80 font-light">Tornar al panel de controll</span>
-            </a>
-        </div>
-        
-        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center">Assignar producte <span class="text-[#96c368] opacity-[100%]">a subcategoria</span></h1>
+    <section class="bg-slate-100 pb-[20px]">
+        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center pt-[26px]">Assignar producte <span class="text-[#96c368] opacity-[100%]">a subcategoria</span></h1>
         
         <form class="flex justify-center" action="/addProducttoSubcategory" method="POST">
             <div class="w-[18%]">

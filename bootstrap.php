@@ -7,9 +7,6 @@ $dotenv->load();
 //ControllerHome
 use App\Controller\Home\HomeController;
 
-// View Manager
-use App\Controller\Manager\ManagerController;
-
 //ViewsProduct
 use App\Controller\Product\ProductManagerController;
 use App\Controller\Product\ProductAddController;
@@ -225,9 +222,6 @@ $router
     
     // Go to the home page
     ->addRoute('GET','/home',[$homeproducts,'home'])
-    
-    // Go to the manager page
-    ->addRoute('GET','/manager',[new ManagerController(),'manager'])
     
     //Go to the manager product
     ->addRoute('GET','/productmanager',[$showlimitproduct,'productmanager'])
