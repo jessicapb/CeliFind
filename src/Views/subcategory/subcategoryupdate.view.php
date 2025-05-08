@@ -111,5 +111,8 @@
     
     <!--Footer section!-->
     <?php include 'src/Views/parts/footer/footer.view.php'?>
+    
+    <!--Dropdown section!-->
+    <script src="../../js/dropdown/dropdown.js"></script>
 </body>
 </html>

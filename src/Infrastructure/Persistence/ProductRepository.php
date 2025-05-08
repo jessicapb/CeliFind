@@ -120,7 +120,7 @@ class ProductRepository{
         return $allproducts;
     }
     
-    // Select with id 
+    // Select with id for the update
     public function findByIdUpdate(int $id): ?object {
         $sql = $this->db->prepare("SELECT * FROM products WHERE id = :id");
         $sql->bindParam(':id', $id, \PDO::PARAM_INT);

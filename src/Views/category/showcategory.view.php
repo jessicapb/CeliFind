@@ -43,11 +43,11 @@
     </header>
     
     <section class="bg-slate-100 pb-[20px]">
-        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center pt-[26px]">Gestor <span class="text-[#96c368] opacity-[100%]">Categories</span></h1>
+        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center pt-[26px]">Gestor <span class="text-[#96c368] opacity-[100%]">categories</span></h1>
         <div class="mt-[20px] flex justify-between items-center">
             <!-- Add Category  -->
             <div class="w-[50%]">
-                <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/categoryadd">Afegir Categoria</a>
+                <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/categoryadd">Afegir categoria</a>
                 <a class="font-inter bg-[#96c368] text-[#f5f5f5] text-[16px] font-medium p-[9px]  rounded-[9px] text-center transition-all focus:shadow-none active:bg-[#88c24d] hover:focus:bg-[#88c24d]  hover:bg-[#88c24d] disabled:pointer-events-none disabled:opacity-50" href="/categoryshowimage">Veure imatges</a>
             </div>
             <form action="/searchcategory" method="POST">
@@ -149,5 +149,9 @@
     <script src="../../js/modals/searchmodal.js"></script>
     
     <script src="../../../js/category/category.js"></script>
+    
     <script src="../../../js/modals/deletemodal.js"></script>
+    
+    <!--Dropdown section!-->
+    <script src="../../js/dropdown/dropdown.js"></script>
 </body>

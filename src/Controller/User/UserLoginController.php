@@ -17,12 +17,19 @@ class UserLoginController
 
     public function showLogin()
     {
-        
-        //session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         if (isset($_SESSION['user']['id'])) {
-            header('Location: /manager');
+            // Si la sesión está iniciada, redirige según el rol
+            if (isset($_SESSION['user']['status']) && $_SESSION['user']['status'] == 2) {
+                header('Location: /manager');
+            } else {
+                header('Location: /productview');
+            }
             exit;
         }
+        
         require VIEWS . '/login/login.view.php';
     }
 
@@ -44,7 +51,8 @@ class UserLoginController
                     $_SESSION['user'] = [
                         'id' => $row['id'],
                         'name' => $row['name'],
-                        'email' => $row['email']
+                        'email' => $row['email'],
+                        'status' => $row['status']
                     ];
                     header('Location: /productview');
                     exit;

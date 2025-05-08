@@ -42,8 +42,8 @@
         </nav>
     </header>
     
-    <section class="bg-slate-100 pt-[20px] pb-[20px]">
-        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center font-bold">Gestor <span class="text-[#96c368] opacity-[100%]">receptes</span></h1>
+    <section class="bg-slate-100 pb-[20px]">
+        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center font-bold pt-[26px]">Gestor <span class="text-[#96c368] opacity-[100%]">receptes</span></h1>
         <div class="mt-[20px] flex justify-between items-center">
             <!-- Add product  -->
             <div class="w-[50%]">
@@ -125,7 +125,7 @@
                         <!-- Edit button -->
                         <td class="font-inter bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
                             <div class="flex justify-center">
-                                <form action="/productupdate" method="POST">
+                                <form action="/recipesupdates" method="GET">
                                     <input type="hidden" name="id" value="<?php echo $recipe->getId(); ?>">
                                     <button type="submit" class="flex items-center">
                                         <p class="mr-[5px]">Editar</p>
@@ -194,5 +194,8 @@
     
     <!--Footer section!-->
     <?php include 'src/Views/parts/footer/footer.view.php'?>
+    
+    <!--Dropdown section!-->
+    <script src="../../js/dropdown/dropdown.js"></script>
 </body>
 </html>

@@ -43,10 +43,9 @@
     </header>
     
     <section class="bg-slate-100 pb-[20px]">
-        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center">Actualitzar <span class="text-[#96c368] opacity-[100%]">producte</span></h1>
+        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center pt-[26px]">Actualitzar <span class="text-[#96c368] opacity-[100%]">producte</span></h1>
         
         <form class="flex justify-center" action="/updateproduct" method="POST" enctype="multipart/form-data">
-            <?php $product = $product; ?>
             <input type="hidden" name="id" value="<?= $formData['id'] ?? '' ?>">
             <div class="w-[18%]">
                 <!-- Name -->
@@ -164,5 +163,8 @@
     
     <!-- File errors -->
     <script src="../../js/product/error-product.js"></script>
+    
+    <!--Dropdown section!-->
+    <script src="../../js/dropdown/dropdown.js"></script>
 </body>
 </html>

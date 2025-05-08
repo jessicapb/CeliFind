@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Afegir receptes</title>
+    <title>Actualitzar la recepta</title>
     <link href="./src/output.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
@@ -43,56 +43,57 @@
     </header>
     
     <section class="bg-slate-100 pb-[20px]">
-        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center pt-[26px]">Afegir <span class="text-[#96c368] opacity-[100%]">recepta</span></h1>
+        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center pt-[26px]">Actualitzar <span class="text-[#96c368] opacity-[100%]">recepta</span></h1>
         
-        <form class="flex justify-center pb-20" action="/saverecipes" method="POST" enctype="multipart/form-data">
+        <form class="flex justify-center pb-20" action="/updaterecipes" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="<?= $formData['id'] ?? '' ?>">
             <div class="w-[18%]">
                 <!-- Name -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Nom</label>
-                    <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="name" type="text" placeholder="escriu el nom">
+                    <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" value="<?= $formData['name'] ?? '' ?>" name="name" type="text" placeholder="escriu el nom">
                     <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]" id="error-name"></p>
                 </div>
                 
                 <!-- Description -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Descripció</label>
-                    <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="description" placeholder="escriu la descripció"></textarea>
+                    <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="description" placeholder="escriu la descripció"><?= $formData['description'] ?? '' ?></textarea>
                     <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]" id="error-description"></p>
                 </div>
                 
                 <!-- Ingredients -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Ingredients</label>
-                    <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="ingredients" placeholder="escriu els ingredients"></textarea>
+                    <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="ingredients" placeholder="escriu els ingredients"><?= $formData['ingredients'] ?? '' ?></textarea>
                     <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]" id="error-ingredients"></p>
                 </div>
                 
                 <!-- Nutritional information -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Informació nutricional</label>
-                    <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="nutritionalinformation" placeholder="escriu la informació nutricional"></textarea>
+                    <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="nutritionalinformation" placeholder="escriu la informació nutricional"><?= $formData['nutritionalinformation'] ?? 'No en té' ?></textarea>
                     <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]"  id="error-nutritionalinformation"></p>
                 </div>
                 
                 <!-- People -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Persones</label>
-                    <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="people" type="text" placeholder="escriu el nombre de persones">
+                    <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" value="<?= $formData['people'] ?? '' ?>" name="people" type="text" placeholder="escriu el nombre de persones">
                     <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]" id="error-people"></p>
                 </div>
                 
                 <!-- Duration -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Duració</label>
-                    <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="duration" type="text" placeholder="escriu la duració">
+                    <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" value="<?= $formData['duration'] ?? '' ?>" name="duration" type="text" placeholder="escriu la duració">
                     <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]" id="error-duration"></p>
                 </div>
                 
                 <!-- Instruction -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Instruccions</label>
-                    <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="instruction" placeholder="escriu les instruccions"></textarea>
+                    <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="instruction" placeholder="escriu les instruccions"><?= $formData['instruction'] ?? '' ?></textarea>
                     <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]"  id="error-instruction"></p>
                 </div>
                 
@@ -119,7 +120,7 @@
                 <!-- Button -->
                 <div class="flex flex-col mb-[15px]">
                     <button class="font-inter bg-[#FCB666] text-[#f5f5f5] text-[16px] font-medium p-[8px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
-                        Afegir recepta
+                        Actualitzar recepta
                     </button> 
                 </div>
             </div>

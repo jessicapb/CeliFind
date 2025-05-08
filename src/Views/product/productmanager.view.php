@@ -43,7 +43,7 @@
     </header>
     
     <section class="bg-slate-100 pb-[20px]">
-        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center font-bold pt-[26px]">Gestor <span class="text-[#96c368] opacity-[100%]">producte</span></h1>
+        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center font-bold pt-[26px]">Gestor <span class="text-[#96c368] opacity-[100%]">productes</span></h1>
         <div class="mt-[20px] flex justify-between items-center">
             <!-- Add product  -->
             <div class="w-[50%]">

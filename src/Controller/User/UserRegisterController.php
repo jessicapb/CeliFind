@@ -19,6 +19,18 @@ class UserRegisterController
 
     public function showRegister()
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (isset($_SESSION['user']['id'])) {
+            // Si la sesión está iniciada, redirige según el rol
+            if (isset($_SESSION['user']['status']) && $_SESSION['user']['status'] == 2) {
+                header('Location: /manager');
+            } else {
+                header('Location: /productview');
+            }
+            exit;
+        }
         require VIEWS . '/login/register.view.php';
     }
 
@@ -32,7 +44,7 @@ class UserRegisterController
             $email = filter_input(INPUT_POST, 'email');
             $postalcode = filter_input(INPUT_POST, 'postalcode');
             $password = filter_input(INPUT_POST, 'password');
-
+            $status = 1;
             try {
                 if ($this->userRepository->existsByEmail($email)) {
                     $_SESSION['errors']['email'] = "El correu electrònic ja està registrat.";
@@ -40,7 +52,7 @@ class UserRegisterController
                     exit;
                 }
 
-                $user = new User($name, $email, $postalcode, $password, null, null);
+                $user = new User($name, $email, $postalcode, $password, null, null, $status);
                 $this->userRepository->save($user);
 
                 header('Location: /login');

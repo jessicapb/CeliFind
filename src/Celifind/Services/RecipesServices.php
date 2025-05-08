@@ -18,6 +18,10 @@ class RecipesServices{
         return $this->RecipesRepository->exists($name);
     }
     
+    function existsRepository(string $name):bool{
+        return $this->RecipesRepository->existsRepository($name);
+    }
+    
     function save(Recipes $recipes){
         $recipes = $this->RecipesRepository->save($recipes);
         return $recipes;
@@ -29,6 +33,10 @@ class RecipesServices{
     
     function findById(int $id){
         return $this->RecipesRepository->findById($id);
+    }
+    
+    function findByIdUpdate(int $id){
+        return $this->RecipesRepository->findByIdUpdate($id);
     }
     
     function selectall(){

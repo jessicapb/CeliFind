@@ -42,7 +42,7 @@
         </nav>
     </header>
     
-    <section class="bg-slate-100 pt-[10px]">
+    <section class="bg-slate-100 pb-[20px]">
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center pt-[26px] font-bold">Veure <span class="text-[#96c368] opacity-[100%]">imatges</span></h1>
         <div class="flex flex-wrap gap-5 p-[50px] items-center xl:flex lg:flex md:flex sm:flex justify-center">
             <?php foreach ($products as $product): ?>
@@ -68,5 +68,8 @@
     
     <!--Footer section!-->
     <?php include 'src/Views/parts/footer/footer.view.php'?>
+    
+    <!--Dropdown section!-->
+    <script src="../../js/dropdown/dropdown.js"></script>
 </body>
 </html>

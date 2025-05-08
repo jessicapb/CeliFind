@@ -31,12 +31,14 @@ use App\Controller\Recipes\RecipesAddController;
 use App\Controller\Recipes\RecipesShowImageController;
 use App\Controller\Recipes\RecipesViewController;
 use App\Controller\Recipes\RecipesIndividualController;
+use App\Controller\Recipes\RecipesUpdateController;
 
 // ControllerRecipes
 use App\Controller\Recipes\RecipesSaveBDController;
 use App\Controller\Recipes\RecipesDeleteBDController;
 use App\Controller\Recipes\RecipesSearchBDController;
 use App\Controller\Recipes\RecipesSearchAllBDController;
+use App\Controller\Recipes\RecipesUpdateBDController;
 
 // ControllerCategory
 use App\Controller\Category\CategoryShowBDController;
@@ -64,6 +66,8 @@ use App\Controller\User\UserRegisterController;
 use App\Controller\User\LogoutController;
 use App\Controller\User\ForgotPasswordController;
 use App\Controller\User\ResetPasswordController;
+use App\Controller\User\EditProfileController;
+use App\Celifind\Services\EmailService;
 
 //Privacity
 use App\Controller\Privacity\privacityController;
@@ -102,6 +106,9 @@ use  App\Infrastructure\Persistence\ProductRepository;
 
 // RepositoryRecipes
 use  App\Infrastructure\Persistence\RecipesRepository;
+
+// RepositoryUser
+use App\Infrastructure\Persistence\UserRepository;
 
 //Routes
 use App\Infrastructure\Routing\Router;
@@ -148,8 +155,11 @@ $homeproducts = new HomeController($productServices);
 $userLoginController = new UserLoginController($db);
 $userRegisterController = new UserRegisterController($db);
 $logoutController = new LogoutController();
-$forgotPasswordController = new ForgotPasswordController($db);
-$resetPasswordController = new ResetPasswordController($db);
+$userRepository = new UserRepository($db);
+$emailService = new EmailService();
+$forgotPasswordController = new ForgotPasswordController($db, $userRepository, $emailService);
+$resetPasswordController = new ResetPasswordController($db, $userRepository);
+$editProfileController = new EditProfileController($db, $userRepository);
 
 // Routes recipesrepository
 $services->addServices('recipesRepository', fn() => new RecipesRepository($db));
@@ -176,6 +186,12 @@ $viewrecipes =  new RecipesViewController($RecipesServices);
 
 // Show the individual recipes
 $individualrecipes =  new RecipesIndividualController($RecipesServices);
+
+// Show the form for update the recipes
+$showformupdaterecipes = new RecipesUpdateController($db, $RecipesServices);
+
+// Update the product
+$controllerupdaterecipes = new RecipesUpdateBDController($db, $RecipesServices);
 
 // Routes Category Repository
 $services->addServices('categoryRepository', fn() => new CategoryRepository($db));
@@ -300,6 +316,12 @@ $router
     
     ->addRoute('GET', '/showsearchresultsrecipesall', [new RecipesSearchAllBDController($db, $RecipesServices), 'showsearchresultsrecipesall'])
     
+    // Form to update
+    ->addRoute('GET','/recipesupdates',[$showformupdaterecipes,'recipesupdates'])
+    
+    // Update the product
+    ->addRoute('POST','/updaterecipes',[$controllerupdaterecipes,'updaterecipes'])
+    
     // Go to the show categories
     ->addRoute('GET', '/category', [new CategoryShowBDController($db, $categoryServices), 'showcategory'])
     
@@ -357,14 +379,6 @@ $router
     ->addRoute('GET','/resetpassword',[$resetPasswordController,'showResetPassword'])
     ->addRoute('POST','/resetpassword',[$resetPasswordController,'updatePassword'])
     
-    //GO to Privacity section
-    ->addRoute('GET','/privacity',[new privacityController(), 'privacity'])
-    
-    ->addRoute('GET','/politicpriv',[new politicprivController(), 'politicpriv'])
-    
-    //Go to quisom pages
-    ->addRoute('GET','/quisom',[new quisomController(), 'quisom'])
-    
-    //Go to informacio
-    
-    ->addRoute('GET','/informacio',[new informacioController(), 'informacio']);
+    // Editar perfil usuario
+    ->addRoute('GET','/editprofile',[$editProfileController,'showEditProfile'])
+    ->addRoute('POST','/editprofile',[$editProfileController,'updateProfile']);
