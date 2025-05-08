@@ -2,39 +2,50 @@
 
 namespace App\Controller\Product;
 
-use App\Infrastructure\Persistence\ProductRepository;
+use App\Celifind\Services\ProductServices;
 use App\Celifind\Entities\Product;
 
 class ProductUpdateController{
-    private $productRepository;
+    private $productservices;
     
-    public function __construct(\PDO $db) {
+    public function __construct(\PDO $db, ProductServices $productservices) {
         $this->db = $db;
-        $this->productRepository = new ProductRepository($db);
+        $this->productservices = $productservices;
     }
     
     function productupdates(){
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $id = filter_input(INPUT_POST, 'id');
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            session_start();
+            $id = filter_input(INPUT_GET, 'id');
+            
             if ($id) {
+                $fila = $this->productservices->findById($id);
                 
-                $fila = $this->productRepository->findById($id);
-                if ($fila) {
-                    $product = new Product(
-                        $fila->getId(),
-                        $fila->getName(),
-                        $fila->getDescription(),
-                        $fila->getIngredients(),
-                        $fila->getNutritionalInformation(),
-                        $fila->getPrice(),
-                        $fila->getBrand(),
-                        $fila->getImage(),
-                        $fila->getWeight(),
-                        $fila->getState(),
-                        $fila->getSubcategoryId()
-                    );
-                    echo view('product/productupdate', ['product' => $product]);
+                $errors = $_SESSION['errors'] ?? [];
+                unset($_SESSION['errors']);
+                
+                $formData = $_SESSION['formData'] ?? null;
+                unset($_SESSION['formData']);
+                
+                if (!$formData && $fila) {
+                    $formData = [
+                        'id' => $fila->getId(),
+                        'name' => $fila->getName(),
+                        'description' => $fila->getDescription(),
+                        'ingredients' => $fila->getIngredients(),
+                        'nutritionalinformation' => $fila->getNutritionalInformation(),
+                        'price' => $fila->getPrice(),
+                        'brand' => $fila->getBrand(),
+                        'image' => $fila->getImage(),
+                        'weight' => $fila->getWeight(),
+                        'state' => $fila->getState(),
+                    ];
                 }
+                
+                echo view('product/productupdate', [
+                    'formData' => $formData,
+                    'errors' => $errors,
+                ]);
             }
         }
     }

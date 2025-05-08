@@ -14,26 +14,29 @@
     <!-- Header -->
     <header class="border-b border-gray-300 pb-[15px]">
         <nav>
-            <a href="/home">
-                <img class="ml-[20px] w-32 pt-[20px]" src="../../img/logo/logo.png" alt="logoimg">
+            <a href="/home" class="block w-fit">
+                <img class="ml-[20px] w-32 pt-[20px] block" src="../../img/logo/logo.png" alt="Logo">
             </a>
         </nav>
     </header>
     <!-- End Header -->
     <main class="bg-slate-100 pt-[10px]">
         <div class="p-1 space-y-0.5">
-            <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/home">
-                <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="">
-                Tornar al home
+            <a href="/home" class="inline-flex items-center ml-2 md:ml-4 lg:ml-4">
+                <img class="w-8 h-8 sm:w-8 sm:h-8 md:w-8 md:h-8 lg:w-8 lg:h-8" src="../../img/home/home.png" alt="Icona casa">
+                <span class="pl-2 font-calistoga text-[24px] sm:text-2xl md:text-[24px] lg:text-[24px] text-black opacity-80 font-light">
+                    Tornar al inici
+                </span>
             </a>
         </div>
+        
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center">Iniciar <span class="text-[#96c368] opacity-[100%]">sessió</span></h1>
         <form class="flex justify-center pb-20" action="/userlogin" method="POST">
             <div class="w-[18%]">
                 <!-- Email -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal" for="email">Correu electrònic</label>
-                    <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" type="email" name="email" id="email" placeholder="escriu el correu" required>
+                    <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500 pr-10" type="password" type="email" name="email" id="email" placeholder="escriu el correu" required>
                     <?php if (!empty($_SESSION['login_error']) && strpos($_SESSION['login_error'], 'correu') !== false): ?>
                         <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]">
                             <?= $_SESSION['login_error'];

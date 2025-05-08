@@ -129,9 +129,8 @@ $controllerproduct = new ProductSaveBDController($db);
 // Show the image of the product
 $showimageproduct = new ProductShowImageController($productServices);
 
-
 // Update the product
-$controllerupdateproduct = new ProductUpdateBDController($db);
+$controllerupdateproduct = new ProductUpdateBDController($db, $productServices);
 
 // Delete the product
 $controllerdeleteproduct = new ProductDeleteBDController($db);
@@ -140,7 +139,7 @@ $controllerdeleteproduct = new ProductDeleteBDController($db);
 $controllerproducttosubcategory = new ProductToSubcategoryBDController($db);
 
 // Show the form for update the product
-$showformupdate = new ProductUpdateController($db);
+$showformupdate = new ProductUpdateController($db, $productServices);
 
 // Show a individual product
 $showindividualproduct =  new ProductIndividualController($productServices);
@@ -252,7 +251,7 @@ $router
     ->addRoute('POST','/addProducttoSubcategory',[$controllerproducttosubcategory,'addProducttoSubcategory'])
     
     // Form to update
-    ->addRoute('POST','/productupdates',[$showformupdate,'productupdates'])
+    ->addRoute('GET','/productupdates',[$showformupdate,'productupdates'])
     
     // Update the product
     ->addRoute('POST','/updateproduct',[$controllerupdateproduct,'updateproduct'])

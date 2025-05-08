@@ -18,6 +18,10 @@ class ProductServices{
         return $this->ProductRepository->exists($name);
     }
     
+    function existsProduct(string $name, int $id):bool{
+        return $this->CategoryRepository->existsProduct($name, $id);
+    }
+    
     function save(Product $product){
         $product = $this->ProductRepository->save($product);
         return $product;

@@ -27,22 +27,24 @@ class SubcategorySearchBDController
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = filter_input(INPUT_POST, 'name');
+            
             if (empty($name)) {
-                $_SESSION['search_results'] =  $this->subcategoryServices->showallsubcategory();
+                $_SESSION['no_results'] = true;
+                $_SESSION['search_results'] = []; 
                 header('Location: /subcategorysearch'); 
                 exit;
-            } else {
-                
-                try {
-                    $subcategories = $this->subcategoryServices->searchsubcategory(trim($name));
-                    $_SESSION['search_results'] = $subcategories;
-                    header('Location: /subcategorysearch');
-                    exit;
-                } catch (BuildExceptions $e) {
-                    $_SESSION['error'] = "Error al realizar la búsqueda.";
-                    header('Location: /subcategory');
-                    exit;
-                }
+            }
+            
+            try {
+                $subcategories = $this->subcategoryServices->searchsubcategory(trim($name));
+                $_SESSION['search_results'] = $subcategories;
+                $_SESSION['no_results'] = empty($subcategories); 
+                header('Location: /subcategorysearch');
+                exit;
+            } catch (BuildExceptions $e) {
+                $_SESSION['error'] = "Error al realizar la búsqueda.";
+                header('Location: /subcategory');
+                exit;
             }
         }        
     }
@@ -51,10 +53,14 @@ class SubcategorySearchBDController
     public function showsearchresults()
     {
         session_start(); 
+        $subcategories_response = [];
+        $noResults = false;
         
-        if (isset($_SESSION['search_results'])) {
+        if (isset($_SESSION['search_results']) && isset($_SESSION['no_results'])) {
             $subcategories_response = $_SESSION['search_results'];
-            unset($_SESSION['search_results']);
+            $noResults = $_SESSION['no_results'];
+            unset($_SESSION['search_results'], $_SESSION['no_results']);
+            
             foreach ($subcategories_response as $subcategory) {
                 $view_subcategory[] = new Subcategory($subcategory["id"], $subcategory["name"], $subcategory["description"], $subcategory["idcategoria"]);
             }
@@ -62,10 +68,7 @@ class SubcategorySearchBDController
             foreach ($response_cat as $category) {
                 $view_category[] = new Category($category["id"], $category["name"], $category["description"], $category["image"]);
             }
-            echo view('subcategory/showsubcategory', ['subcategories' => $view_subcategory, 'categories' => $view_category]);
-            
-        } else {
-            echo view('subcategory/showsubcategory', ['subcategories' => [], 'categories' => []]);
-        }
+        } 
+        echo view('subcategory/showsubcategory', ['subcategories' => $view_subcategory, 'categories' => $view_category, 'noResults' => $noResults]);
     }
 }

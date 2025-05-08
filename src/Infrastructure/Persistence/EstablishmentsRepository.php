@@ -41,7 +41,7 @@ class EstablishmentsRepository{
                 'image' => $establishments->getImage(),
             ]);
         } catch (\PDOException $e) {
-            throw new BuildExceptions("Error saving product:" . $e->getMessage());
+            throw new BuildExceptions("Error saving establishments:" . $e->getMessage());
         }
     }
 }

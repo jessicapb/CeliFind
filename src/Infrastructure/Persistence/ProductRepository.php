@@ -27,20 +27,35 @@ class ProductRepository{
         }
     }
     
+    // Exists name and id
+    function existsProduct(string $name, int $id): bool{
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM products WHERE name = :name AND id != :id");
+            $stmt->execute(['name' => $name, 'id' => $id]);    
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\PDOException $ex) {
+            throw new BuildExceptions("Error checking if the product exists:" . $ex->getMessage());
+        }
+    }
+    
     // Insert 
     function save(Product $product){
         try {
             $sql = $this->db->prepare("INSERT INTO products(id, name, description, ingredients, nutritionalinformation, price, brand, image, weight, state, idsubcategory) VALUES(:id,:name, :description, :ingredients, :nutritionalinformation, :price, :brand, :image, :weight, :state, :idsubcategory)");
             $sql->execute([
                 'id' => $product->getId(),
-                'name' => $product->getName(),
-                'description' => $product->getDescription(),
-                'ingredients' => $product->getIngredients(),
-                'nutritionalinformation' => $product->getNutritionalInformation(),
-                'price' => $product->getPrice(),
-                'brand' => $product->getBrand(),
-                'image' => $product->getImage(),
-                'weight' => $product->getWeight(),
+                'name' => trim($product->getName()),
+                'description' => trim($product->getDescription()),
+                'ingredients' => trim($product->getIngredients()),
+                'nutritionalinformation' => trim($product->getNutritionalInformation()),
+                'price' => trim($product->getPrice()),
+                'brand' => trim($product->getBrand()),
+                'image' => trim($product->getImage()),
+                'weight' => trim($product->getWeight()),
                 'state' => $product->getState(),
                 'idsubcategory' => $product->getSubCategoryId(),
             ]);
@@ -122,8 +137,7 @@ class ProductRepository{
                 $row['brand'],
                 $row['image'],
                 $row['weight'],
-                $row['state'],
-                $row['subcategory_id']
+                $row['state']
             );
         }
         return null;
@@ -136,14 +150,14 @@ class ProductRepository{
                                         brand = :brand, image = :image, weight = :weight, state = :state, idsubcategory = :idsubcategory WHERE id = :id");
             $sql->execute([
                 'id' => $product->getId(),
-                'name' => $product->getName(),
-                'description' => $product->getDescription(),
-                'ingredients' => $product->getIngredients(),
-                'nutritionalinformation' => $product->getNutritionalInformation(),
-                'price' => $product->getPrice(),
-                'brand' => $product->getBrand(),
-                'image' => $product->getImage(),
-                'weight' => $product->getWeight(),
+                'name' => trim($product->getName()),
+                'description' => trim($product->getDescription()),
+                'ingredients' => trim($product->getIngredients()),
+                'nutritionalinformation' => trim($product->getNutritionalInformation()),
+                'price' => trim($product->getPrice()),
+                'brand' => trim($product->getBrand()),
+                'image' => trim($product->getImage()),
+                'weight' => trim($product->getWeight()),
                 'state' => $product->getState(),
                 'idsubcategory' => $product->getSubCategoryId(),
             ]);

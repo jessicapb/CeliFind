@@ -13,19 +13,22 @@
 <body>
     <header class="pb-[15px] border-b border-gray-300">
         <nav>
-            <a href="/manager">
-                <img class="ml-[20px] w-32 pt-[20px]"  src="../../img/logo/logo.png" alt="">
+            <a href="/manager" class="block w-fit"> 
+                <img class="ml-[20px] w-32 pt-[20px]" src="../../img/logo/logo.png" alt="logoimg">
             </a>
         </nav>
     </header>
     
-    <section class="bg-gray-100 pt-[10px]">
+    <section class="bg-gray-100 pt-[10px] pb-[20px]">
         <div class="p-1 space-y-0.5">
-            <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/manager">
-                <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="">
-                Tornar al gestor
+            <a href="/manager" class="inline-flex items-center ml-2 md:ml-4 lg:ml-4">
+                <img class="w-8 h-8 sm:w-8 sm:h-8 md:w-8 md:h-8 lg:w-8 lg:h-8" src="../../img/home/home.png" alt="Icona casa">
+                <span class="pl-2 font-calistoga text-[24px] sm:text-2xl md:text-[24px] lg:text-[24px] text-black opacity-80 font-light">
+                    Tornar al gestor
+                </span>
             </a>
         </div>
+        
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center">Gestor <span class="text-[#96c368] opacity-[100%]">Subcategories</span></h1>
         <div class="mt-[20px] flex justify-between items-center">
             <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/addsubcategory">Afegir Subcategoria</a>
@@ -38,6 +41,22 @@
                 </div>
             </form>
         </div>
+        
+        <!-- Modal search -->
+        <?php if (!empty($noResults)): ?>
+            <div class="searchmodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
+                <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
+                    <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Sense resultats</h2>
+                    <p class="font-inter text-black font-medium text-[16px] text-center">No s'han trobat subcategories amb aquest nom.</p>
+                    <div class="flex justify-center">
+                        <a href="/subcategory" class="closesearchmodal font-inter bg-[#FCB666] mt-[10px] text-white text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:bg-[#ef9b3b] focus:outline-none">
+                            Tancar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+        
         <section>
             <table class="w-full mt-[50px] table-auto text-center border-separate border-spacing-2 pb-[20px]">
                 <thead>
@@ -57,20 +76,20 @@
                                     echo '<td class="border border-[#FCB666] p-[10px] bg-white">' . $category->getName() . '</td>';
                                 }
                             } ?>
-                        
-                        <!-- Edit button -->
-                        <td class="font-inter bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
-                            <div class="flex justify-center">
-                                <form action="/subcategoryupdate" method="GET">
-                                    <input type="hidden" name="id" value="<?php echo $subcategory->getId(); ?>">
-                                    <button type="submit" class="flex items-center">
-                                        <p class="mr-[5px]">Editar</p>
-                                        <img class="w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-
+                            
+                            <!-- Edit button -->
+                            <td class="font-inter bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
+                                <div class="flex justify-center">
+                                    <form action="/subcategoryupdate" method="GET">
+                                        <input type="hidden" name="id" value="<?php echo $subcategory->getId(); ?>">
+                                        <button type="submit" class="flex items-center">
+                                            <p class="mr-[5px]">Editar</p>
+                                            <img class="w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                            
                             <!-- Delete button -->
                             <td class="font-inter w-[120px] bg-[#FCB666] text-white text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover:bg-[#ef9b3b]">
                                 <button class="openmodal flex items-center justify-center w-full h-full cursor-pointer">
@@ -78,7 +97,7 @@
                                     <img class="mr-[10px] w-[20px] h-[20px]" src="../../img/delete/delete.png" alt="delete">
                                 </button>
                             </td>
-
+                            
                             <!-- Modal delete -->
                             <div class="deletemodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50 hidden">
                                 <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
@@ -93,7 +112,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <!-- Modal delete correct -->
                             <?php if ($_GET['deleted'] == 'true'): ?>
                                 <div class="deletemodal fixed inset-0 flex justify-center items-center bg-opacity-50 z-50">
@@ -114,6 +133,9 @@
     
     <!--Footer section!-->
     <?php include 'src/Views/parts/footer/footer.view.php'?>
+    
+    <!-- File show modal search -->
+    <script src="../../js/modals/searchmodal.js"></script>
     
     <script src="../../js/modals/deletemodal.js"></script>
 </body>

@@ -6,12 +6,12 @@ use App\Celifind\Services\CategoryServices;
 class CategoryUpdateController{
     private \PDO $db;
     private CategoryServices $category_services;
-
+    
     public function __construct(\PDO $db, CategoryServices $category_services) {
         $this->db = $db;
         $this->category_services = $category_services;
     }
-
+    
     public function categoryupdate() {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             session_start(); 

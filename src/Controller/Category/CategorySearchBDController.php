@@ -24,38 +24,39 @@ class CategorySearchBDController
             $name = filter_input(INPUT_POST, 'name');
             
             if (empty($name)) {
-                $_SESSION['search_results'] = $this->categoryServices->showallcategory();
-                header('Location: /categorysearch'); 
+                $_SESSION['no_results'] = true;
+                $_SESSION['search_results'] = []; 
+                header('Location: /categorysearch');
                 exit;
-            } else {
-                try {
-                    $categories = $this->categoryServices->searchcategory(trim($name));
-                    $_SESSION['search_results'] = $categories;
-                    
-                    header('Location: /categorysearch');
-                    exit;
-                } catch (BuildExceptions $e) {
+            } 
+            
+            try {
+                $categories = $this->categoryServices->searchcategory(trim($name));
+                $_SESSION['search_results'] = $categories;
+                $_SESSION['no_results'] = empty($categories); 
+                header('Location: /categorysearch');
+                exit;
+            } catch (BuildExceptions $e) {
                     $_SESSION['error'] = "Error al realizar la búsqueda.";
                     header('Location: /category');
                     exit;
-                }
             }
         }
     }
     
-    
     public function showsearchresults()
     {
         session_start(); 
-    
-        if (isset($_SESSION['search_results'])) {
+        $categories = [];
+        $noResults = false;
+        
+        if (isset($_SESSION['search_results']) && isset($_SESSION['no_results'])) {
             $categories = $_SESSION['search_results'];
-            unset($_SESSION['search_results']); 
-    
-            echo view('category/showcategory', ['categories' => $categories]);
-        } else {
-            echo view('category/showcategory', ['categories' => []]);
+            $noResults = $_SESSION['no_results'];
+            unset($_SESSION['search_results'], $_SESSION['no_results']);
         }
+        
+        echo view('category/showcategory', ['categories' => $categories, 'noResults' => $noResults]);
     }
     
 }

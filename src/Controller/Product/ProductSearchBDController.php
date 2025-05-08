@@ -29,7 +29,7 @@ class ProductSearchBDController {
             }
             
             try {
-                $products = $this->productServices->searchproduct($name);
+                $products = $this->productServices->searchproduct(trim($name));
                 $_SESSION['search_results'] = $products;
                 $_SESSION['no_results'] = empty($products); 
                 
@@ -52,8 +52,8 @@ class ProductSearchBDController {
         if (isset($_SESSION['search_results']) && isset($_SESSION['no_results'])) {
             $products = $_SESSION['search_results'];
             $noResults = $_SESSION['no_results'];
+            unset($_SESSION['search_results'], $_SESSION['no_results']);
         }
-        unset($_SESSION['search_results'], $_SESSION['no_results']);
         
         $subcategories = $this->subcategoryServices->showallsubcategory(); 
         

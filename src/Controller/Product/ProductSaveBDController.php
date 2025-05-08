@@ -54,7 +54,7 @@ class ProductSaveBDController{
                 $product = new Product(null,$name, $description, $ingredients,$nutritionalinformation,$price, $brand, $imageData, $weight, $state);
                 
                 // Validate if the name exists
-                if ($this->ProductService->exists($name)) {
+                if ($this->ProductService->exists(trim($name))) {
                     $_SESSION['errors']['name'] = "El nom ja està registrat.";
                     header('Location: /productadd');
                     exit;

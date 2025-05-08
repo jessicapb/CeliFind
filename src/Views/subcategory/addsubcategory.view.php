@@ -11,19 +11,19 @@
     <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
 <body>
-<header class="pb-[15px] border-b border-gray-300">
+    <header class="pb-[15px] border-b border-gray-300">
         <nav>
-            <a href="/manager">
-                <img class="ml-[20px] w-32 pt-[20px]"  src="../../img/logo/logo.png" alt="">
+            <a href="/manager" class="block w-fit"> 
+                <img class="ml-[20px] w-32 pt-[20px]" src="../../img/logo/logo.png" alt="logoimg">
             </a>
         </nav>
     </header>
     
     <section class="bg-gray-100 pt-[10px] pb-[20px]">
         <div class="p-1 space-y-0.5">
-            <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" href="/subcategory">
-                <img class="w-[1.8%] h-[1.8%]" src="../../img/home/home.png" alt="">
-                Tornar al panel de control
+            <a href="/subcategory" class="inline-flex items-center ml-2 md:ml-4 lg:ml-4">
+                <img class="w-8 h-8 sm:w-8 sm:h-8 md:w-8 md:h-8 lg:w-8 lg:h-8" src="../../img/home/home.png" alt="Icona casa">
+                <span class="pl-2 font-calistoga text-[24px] sm:text-2xl md:text-[24px] lg:text-[24px] text-black opacity-80 font-light">Tornar al panel de control</span>
             </a>
         </div>
         
@@ -57,7 +57,7 @@
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </select>
-                    <p id="error-category" class="text-red-500 mt-[5px] font-inter hidden text-[15px]"></p>
+                    <p id="error-idcategory" class="text-red-500 mt-[5px] font-inter hidden text-[15px]"></p>
                 </div>
                 
                 <!-- Button -->
