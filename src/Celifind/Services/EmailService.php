@@ -10,13 +10,13 @@ class EmailService {
     public function __construct() {
         $this->mailer = new PHPMailer(true);
         $this->mailer->isSMTP();
-        $this->mailer->Host = ''; 
+        $this->mailer->Host = $_ENV['MAIL_HOST'];
         $this->mailer->SMTPAuth = true;
-        $this->mailer->Username = 'celifind.cat@gmail.com'; 
-        $this->mailer->Password = "Gq7CeliFind=a95'CJDA.%x0Yg}"; 
+        $this->mailer->Username = $_ENV['MAIL_USER'];
+        $this->mailer->Password = $_ENV['MAIL_PASS'];
         $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $this->mailer->Port = 587;
-        $this->mailer->setFrom('celifind.cat@gmail.com', 'CeliFind');
+        $this->mailer->Port = $_ENV['MAIL_PORT'];
+        $this->mailer->setFrom($_ENV['MAIL_FROM'], $_ENV['MAIL_FROM_NAME']);
     }
 
     public function send($to, $subject, $body) {
