@@ -27,9 +27,13 @@ class EmailService {
             $this->mailer->Subject = $subject;
             $this->mailer->Body = $body;
             $this->mailer->send();
-            return true;
+            if($this->mailer->send()){
+                return true;
+            }else{
+                return false;
+            }
         } catch (\Exception $e) {
-            return false;
+            $e->getMessage();
         }
     }
 }

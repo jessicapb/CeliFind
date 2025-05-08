@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="ca">
 <head>
@@ -62,7 +62,7 @@
     </div>
     <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Registra’t</button>
     <p class="mt-4 text-center text-sm text-gray-600 font-inter">
-                Ya tens compte? <a href="/register" class="text-[#fcb666] hover:underline">Inicia sessió </a>
+                Ja tens compte? <a href="/login" class="text-[#fcb666] hover:underline">Inicia sessió </a>
             </p>
 </form>
 <!-- Footer -->

@@ -48,10 +48,10 @@
                 <?php endif; ?>
             </div>
             <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Inicia sessió</button>
-            <p class="mt-4 text-center text-sm text-gray-600 font-inter">
+            <p class="mt-4 text-center font-semibold text-gray-600 font-inter">
                 Encara no tens compte? <a href="/register" class="text-[#fcb666] hover:underline">Registra't </a>
             </p>
-            <p class="mt-2 text-center text-sm font-inter">
+            <p class="mt-2 text-center  font-inter font-semibold">
                 <a href="/forgotpassword" class="text-[#96c368] hover:underline">Has oblidat la contrasenya?</a>
             </p>
         </form>
