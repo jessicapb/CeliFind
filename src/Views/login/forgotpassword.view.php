@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['old'])) unset($_SESSION['old']);
+
 ?>
 <!DOCTYPE html>
 <html lang="ca">
@@ -34,7 +34,7 @@ if (isset($_SESSION['old'])) unset($_SESSION['old']);
         <form action="/forgotpassword" method="POST" class="w-full max-w-md flex flex-col gap-4  p-6   sm:p-8">
             <div>
                 <label class="block font-calistoga text-lg text-gray-800 mb-1" for="email">Correu electrònic</label>
-                <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500" type="email" name="email" id="email" required value="<?= isset($_SESSION['old']['email']) ? htmlspecialchars($_SESSION['old']['email']) : '' ?>">
+                <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500" type="email" name="email" id="email" required>
                 <?php if (!empty($_SESSION['errors']['email'])): ?>
                     <p class="text-red-500 mt-[5px] font-inter text-[15px]">
                         <?= $_SESSION['errors']['email'];
