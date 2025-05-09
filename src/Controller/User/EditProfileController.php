@@ -68,7 +68,7 @@ class EditProfileController
 
         // Si todos los campos requeridos están vacíos, no editar nada
         if ($name === '' && $surname === '' && $city === '' && $postalcode === '' && $password === '') {
-            $_SESSION['success'] = 'No se ha actualizado ningún dato porque todos los campos están vacíos.';
+            $_SESSION['success'] = 'No es podrà actualitzar cap dada perquè tots els camps estan buits.';
             header('Location: /editprofile');
             exit;
         }
@@ -92,7 +92,7 @@ class EditProfileController
         if ($password !== '') {
             $_SESSION['success_password'] = 'Contrasenya actualitzada correctament.';
         }
-        $_SESSION['success'] = 'Perfil actualizado correctamente.';
+        $_SESSION['success'] = 'Perfil actualitzat correctament.';
         header('Location: /editprofile');
         exit;
     }

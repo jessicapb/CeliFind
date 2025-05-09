@@ -23,7 +23,7 @@ class UserLoginController
         if (isset($_SESSION['user']['id'])) {
             // Si la sesión está iniciada, redirige según el rol
             if (isset($_SESSION['user']['status']) && $_SESSION['user']['status'] == 2) {
-                header('Location: /manager');
+                header('Location: /productmanager');
             } else {
                 header('Location: /productview');
             }
