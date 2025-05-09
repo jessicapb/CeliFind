@@ -6,7 +6,8 @@ use App\Celifind\Services\ProductServices;
 use App\Celifind\Entities\Product;
 
 class ProductUpdateController{
-    private $productservices;
+    private \PDO $db;
+    private ProductServices $productservices;
     
     public function __construct(\PDO $db, ProductServices $productservices) {
         $this->db = $db;

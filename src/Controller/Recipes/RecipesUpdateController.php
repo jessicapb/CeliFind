@@ -6,7 +6,8 @@ use App\Celifind\Services\RecipesServices;
 use App\Celifind\Entities\Recipes;
 
 class RecipesUpdateController{
-    private $recipesservices;
+    private \PDO $db;
+    private RecipesServices $recipesservices;
     
     public function __construct(\PDO $db, RecipesServices $recipesservices) {
         $this->db = $db;

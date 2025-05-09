@@ -7,6 +7,7 @@ use App\Celifind\Services\ProductServices;
 use App\Celifind\Entities\Product;
 
 class ProductDeleteBDController{
+    private \PDO $db;
     private ProductRepository $productRepository;
     private ProductServices $productServices;
     

@@ -3,6 +3,8 @@
 namespace App\Infrastructure\Routing;
 
 class Router {
+    private array $routes = [];
+
     function addRoute(string $method,string $path, callable $action){
         $this->routes[$method][$path]=$action;
         return $this;

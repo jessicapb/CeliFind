@@ -1,13 +1,11 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="ca">
-
 <head>
     <meta charset="UTF-8">
     <title>Restableix la teva contrasenya</title>
     <link href="/src/output.css" rel="stylesheet">
 </head>
-
 <body class="bg-slate-100 flex flex-col items-center justify-center min-h-screen px-2">
     <h1 class="text-4xl font-calistoga font-bold mb-8 mt-8 text-gray-800 text-center">Restableix la teva contrasenya</h1>
     <form action="/resetpassword" method="POST" class="w-full max-w-md flex flex-col gap-4 bg-white p-6 rounded-xl shadow-md border border-[#fcb666] sm:p-8">
@@ -17,8 +15,7 @@
             <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500" type="password" name="password" id="password" required>
             <?php if (!empty($_SESSION['errors']['password'])): ?>
                 <p class="text-red-500 mt-[5px] font-inter text-[15px]">
-                    <?= $_SESSION['errors']['password'];
-                    unset($_SESSION['errors']['password']); ?>
+                    <?= $_SESSION['errors']['password']; unset($_SESSION['errors']['password']); ?>
                 </p>
             <?php endif; ?>
         </div>
@@ -27,8 +24,7 @@
             <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500" type="password" name="confirm_password" id="confirm_password" required>
             <?php if (!empty($_SESSION['errors']['confirm_password'])): ?>
                 <p class="text-red-500 mt-[5px] font-inter text-[15px]">
-                    <?= $_SESSION['errors']['confirm_password'];
-                    unset($_SESSION['errors']['confirm_password']); ?>
+                    <?= $_SESSION['errors']['confirm_password']; unset($_SESSION['errors']['confirm_password']); ?>
                 </p>
             <?php endif; ?>
         </div>
@@ -36,5 +32,4 @@
     </form>
     <a href="/login" class="mt-6 text-[#fcb666] hover:underline font-inter">Tornar a login</a>
 </body>
-
 </html>
