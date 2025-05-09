@@ -6,26 +6,27 @@ use App\Celifind\Entities\Subcategory;
 use App\Infrastructure\Persistence\SubcategoryRepository;
 use App\Infrastructure\Persistence\CategoryRepository;
 use App\Celifind\Entities\Category;
+use App\Celifind\Services\CategoryServices;
+use App\Celifind\Services\SubcategoryServices;
 
 class SubcategoryShowBDController
 {
+    private \PDO $db;
+    private CategoryServices $category_services;
+    private SubcategoryServices $subcategory_services;
 
-    private SubcategoryRepository $subcategory_repository;
-    private CategoryRepository $category_repository;
-
-    public function __construct(\PDO $db)
+    public function __construct(\PDO $db, SubcategoryServices $subcategory_services, CategoryServices $category_services)
     {
-        $this->subcategory_repository = new SubcategoryRepository($db);
-        $this->category_repository = new CategoryRepository($db);
-
+        $this->db = $db;
+        $this->subcategory_services = $subcategory_services;
+        $this->category_services = $category_services;
     }
 
-    /* Function of view al the subcategories in the view of showsubcategory */
+    /* Function of view all the subcategories in the view of showsubcategory */
     function showsubcategory()
     {
-        $subcategories = $this->subcategory_repository->getallsub();
-        $categories = $this->category_repository->getall();
-
+        $subcategories = $this->subcategory_services->showallsubcategory();
+        $categories = $this->category_services->showallcategory();
         $view_subcategory = [];
         $view_category = [];
 

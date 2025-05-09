@@ -9,7 +9,7 @@ class Product{
     protected string $name;
     protected string $description;
     protected string $ingredients;
-    protected string $nutritionalinformation;
+    protected ?string $nutritionalinformation;
     protected string $price;
     protected string $brand;
     protected string $image;
@@ -17,9 +17,9 @@ class Product{
     protected int $state;
     protected ?int $subcategory_id = null;
 
-    public function __construct(?int $id = null, string $name, string $description, string $ingredients, string $nutritionalinformation, string $price, string $brand, string $image, string $weight, int $state, ?int $subcategory_id = null){
+    public function __construct(?int $id = null, string $name, string $description, string $ingredients, ?string $nutritionalinformation, string $price, string $brand, string $image, string $weight, int $state, ?int $subcategory_id = null){
         $error = 0;
-
+        
         $this->id = $id;
         if(($error = $this->setName($name)) !=0){
             $_SESSION['errors']['name'] = ChecksProduct::getErrorMessage($error);
@@ -57,7 +57,7 @@ class Product{
             $_SESSION['errors']['state'] = ChecksProduct::getErrorMessage($error);
         }
         $this->subcategory_id = $subcategory_id;
-
+        
         if (!empty($_SESSION['errors'])) {
             $errorMessage = json_encode($_SESSION['errors']);
             throw new BuildExceptions($errorMessage);
@@ -135,29 +135,35 @@ class Product{
     }
     
     // Nutritional information
-    public function getNutritionalInformation(): string{
+    public function getNutritionalInformation(): ?string{
         return $this->nutritionalinformation;
     }
     
-    public function setNutritionalInformation(string $nutritionalinformation):int {
+    public function setNutritionalInformation(?string $nutritionalinformation): int {
+        if ($nutritionalinformation === null || $nutritionalinformation === '') {
+            $this->nutritionalinformation = null;
+            return 0; 
+        }
+        
         $errorNull = ChecksProduct::minMaxNull($nutritionalinformation, 4, 1060);
-        if($errorNull != 0){
-            return $errorNull; 
+        if ($errorNull != 0) {
+            return $errorNull;
         }
         
         $errorWord = ChecksProduct::validateProductWords($nutritionalinformation);
-        if($errorWord !=0){
+        if ($errorWord != 0) {
             return $errorWord;
         }
         
         $errorNotNumber = ChecksProduct::validateProductNotNumber($nutritionalinformation);
-        if($errorNotNumber !=0){
+        if ($errorNotNumber != 0) {
             return $errorNotNumber;
         }
         
         $this->nutritionalinformation = $nutritionalinformation;
         return 0;
     }
+    
     
     // Price
     public function getPrice(): string{
@@ -262,11 +268,11 @@ class Product{
     }
     
     //SubCategoryId
-    public function getSubCategoryId(): ?int {
+    public function getSubcategoryId(): ?int {
         return $this->subcategory_id;
     }
     
-    public function setSubategoryId(?int $subcategory_id): int {
+    public function setSubcategoryId(?int $subcategory_id): int {
         $this->subcategory_id = $subcategory_id;
         return 0;
     }

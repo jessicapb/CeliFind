@@ -2,7 +2,7 @@
 
 namespace App\Celifind\Checks;
 
-// Los códigos buenos son el 0, y los negativos no valen
+// Los códigos bueno son el 1, y los malos son el 0
 abstract class Checks
 {
 
@@ -36,7 +36,6 @@ abstract class Checks
     public static function minLength($value, $min)
     {
         $error = Checks::notEmpty($value);
-
         if ($error === 0) { // Si $value NO es null y NO está vacío
             // Ahora sí, comprobar la longitud
             if (strlen((string)$value) < $min) { // Comparamos la LONGITUD

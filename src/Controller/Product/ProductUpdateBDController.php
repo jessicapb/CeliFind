@@ -1,17 +1,17 @@
 <?php
 namespace App\Controller\Product;
 
-use App\Infrastructure\Persistence\ProductRepository;
+use App\Celifind\Services\ProductServices;
 use App\Celifind\Entities\Product;
 use App\Celifind\Exceptions\BuildExceptions;
 
 class ProductUpdateBDController{
     private \PDO $db;
-    private ProductRepository $ProductRepository;
+    private ProductServices $productservices;
     
-    public function __construct(\PDO $db) {
+    public function __construct(\PDO $db, ProductServices $productservices) {
         $this->db = $db;
-        $this->ProductRepository = new ProductRepository($db);
+        $this->productservices = $productservices;
     }
     
     public function updateproduct() {
@@ -31,22 +31,50 @@ class ProductUpdateBDController{
             $weight = filter_input(INPUT_POST, 'weight');
             $state = filter_input(INPUT_POST, 'state');
             
-            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                $imageData = file_get_contents($_FILES['image']['tmp_name']);
-            } else {
+            $_SESSION['formData'] = [
+                'id' => $id,
+                'name' => $name,
+                'description' => $description,
+                'ingredients' => $ingredients,
+                'nutritionalinformation' => $nutritionalinformation,
+                'price' => $price,
+                'brand' => $brand,
+                'weight' => $weight,
+                'state' => $state,
+            ];
+            
+            if (!empty($_FILES['image']['name'])) {
+                $folder = '/home/linux/CeliFind/img/producte/imagesbd/';
+                $fileName = $_FILES['image']['name'];
+                $destination = $folder . $fileName;
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
+                    $imageData = '/img/producte/imagesbd/' . $fileName;
+                } else {
+                    $_SESSION['errors']['image'] = "No s'ha pogut guardar la imatge.";
+                    header('Location: /productupdates?id=' . urlencode($id));
+                    exit;
+                }
+            }else{
                 $imageData = '';
             }
+            
             try{
-                // Create the product
+                // Update the product
                 $product = new Product($id,$name, $description, $ingredients,$nutritionalinformation,$price, $brand, $imageData, $weight, $state);
                 
-                // If everything is okay, save the product.
-                $this->ProductRepository->updateproduct($product);  
+                if ($this->productservices->existsProduct($name, $id)) {
+                    $_SESSION['errors']['name'] = 'El nom ja està registrat';
+                    header('Location: /productupdates?id=' . urlencode($id));
+                    exit;
+                }
+                
+                // If everything is okay, update the product.
+                $this->productservices->update($product);  
                 header('Location: /productmanager');
             }catch (BuildExceptions $e) {
-                    $_SESSION['error'] = $e->getMessage();
-                    header('Location: /productupdate');
-                    exit;
+                $_SESSION['errors']['general'] = $e->getMessage();
+                header('Location: /productupdates?id=' . urlencode($id));
+                exit;
             }
         }
     }

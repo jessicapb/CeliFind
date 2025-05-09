@@ -2,49 +2,73 @@
 namespace App\Controller\Product;
 
 use App\Infrastructure\Persistence\ProductRepository;
-use App\Celifind\Entities\Product;
+use App\Celifind\Services\ProductServices;
+use App\Infrastructure\Persistence\SubcategoryRepository;
+use App\Celifind\Services\SubcategoryServices;
 use App\Celifind\Exceptions\BuildExceptions;
-use App\Celifind\Checks\Product\ValidationForm;
+use App\Celifind\Entities\Product;
 
 class ProductToSubcategoryBDController{
     private \PDO $db;
-    private ProductRepository $ProductRepository;
+    private ProductRepository $productrepository;
+    private ProductServices $productservices;
+    private SubcategoryRepository $subcategoryrepository;
+    private SubcategoryServices $subcategoryservices;
     
-    public function __construct(\PDO $db) {
+    public function __construct(\PDO $db){
         $this->db = $db;
-        $this->ProductRepository = new ProductRepository($db);
+        
+        $this->productrepository = new ProductRepository($db);
+        $this->subcategoryrepository = new SubcategoryRepository($db);
+        
+        $this->productservices = new ProductServices($db, $this->productrepository);
+        $this->subcategoryservices = new SubcategoryServices($db, $this->subcategoryrepository);
     }
     
-    public function saveproduct() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            $name = filter_input(INPUT_POST, 'name');
-            $description = filter_input(INPUT_POST, 'description');
-            $ingredients = filter_input(INPUT_POST, 'ingredients');
-            $nutritionalinformation = filter_input(INPUT_POST, 'nutritionalinformation');
-            $price = filter_input(INPUT_POST, 'price');
-            $brand = filter_input(INPUT_POST, 'brand');
-            $weight = filter_input(INPUT_POST, 'weight');
-            $state = filter_input(INPUT_POST, 'state');
-    
-            try{
-                // Create the product
-                $product = new Product(null,$name, $description, $ingredients,$nutritionalinformation,$price, $brand, $weight, $state);
-                
-                // Validate if the name exists
-                if ($this->ProductRepository->exists($name)) {
-                    $_SESSION['errors']['name'] = "El nom ja està registrat.";
-                    header('Location: /productadd');
+    function addProducttoSubcategory(){
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            // Start the session
+            session_start();
+            $_SESSION['errors'] = [];
+            
+            $product_id = (int) filter_input(INPUT_POST, 'product');
+            $subcategory_id = (int) filter_input(INPUT_POST, 'subcategory');
+            
+            if (empty($product_id)) {
+                $_SESSION['errors']['product'] = "Producte és obligatori.";
+            }
+            
+            if (empty($subcategory_id)) {
+                $_SESSION['errors']['subcategory'] = "Subcategoria és obligatòria.";
+            }
+            
+            if (!empty($_SESSION['errors'])) {
+                header('Location: /producttocategory');
+                exit;
+            }
+            
+            try {
+                $product = $this->productservices->findById($product_id);
+                if ($product === null) {
+                    $_SESSION['errors']['product'] = "Producte no trobat.";
+                    header('Location: /producttocategory');
                     exit;
                 }
                 
-                // If everything is okay, save the product.
-                $this->ProductRepository->save($product);  
-                header('Location: /productmanager');
-            }catch (BuildExceptions $e) {
-                    $_SESSION['error'] = $e->getMessage();
-                    header('Location: /productadd');
+                $subcategory = $this->subcategoryservices->findById($subcategory_id);
+                if ($subcategory === null) {
+                    $_SESSION['errors']['subcategory'] = "Subcategoria no trobada.";
+                    header('Location: /producttocategory');
                     exit;
+                }
+                $product->setSubcategoryId($subcategory_id);
+                $this->productservices->update($product);
+                header('Location: /productmanager');
+            } catch (BuildExceptions $e) {
+                $e->getMessage();
+                $_SESSION['errors'] = $e->getMessage();
+                header('Location: /producttocategory');
+                exit;
             }
         }
     }

@@ -2,22 +2,18 @@
 
 namespace App\Controller\Product;
 
-use App\Infrastructure\Persistence\ProductRepository;
+use App\Celifind\Services\ProductServices;
 use App\Celifind\Entities\Product;
 
 class ProductShowImageController {
-    private $productRepository;
+    private $productservices;
     
-    public function __construct(ProductRepository $productRepository) {
-        $this->productRepository = $productRepository;
+    public function __construct(ProductServices $productservices) {
+        $this->productservices = $productservices;
     }
     
     function productshowimage(){
-        $products = $this->productRepository->showlimit();
-        $allproduct = [];
-        foreach($products as $fila){
-            $allproducts [] = new Product($fila['id'], $fila['name_short'], $fila['description_short'], $fila['ingredients_short'], $fila['nutritionalinformation_short'], $fila['price'], $fila['brand_short'], $fila['image'], $fila['weight'], $fila['state'], $fila['idsubcategory']);
-        }
-        echo view('product/productmanagerimage',['products'=>$allproducts]);
+        $products = $this->productservices->showlimit();
+        echo view('product/productmanagerimage',['products'=>$products]);
     }
 }

@@ -6,8 +6,6 @@ use App\Celifind\Checks\Checks;
 
 class ChecksUser extends Checks
 {
-
-
     public static function checkPass($password)
     {
         $error = Checks::minMaxLength($password, 6, 30);
@@ -16,7 +14,7 @@ class ChecksUser extends Checks
         }
         if ($error === 0) return 0;
     }
-
+    
     /**
      * Check if the postal code is valid.
      * @param string $postalCode The postal code to check.
@@ -38,7 +36,7 @@ class ChecksUser extends Checks
             return $error; // Error from notEmpty
         }
     }
-
+    
     public static function correctEmail($email)
     {
         $error = Checks::notEmpty($email);
@@ -52,7 +50,7 @@ class ChecksUser extends Checks
             return $error; // Error de notEmpty
         }
     }
-
+    
     public static function getErrorMessage($e)
     {
         return match ($e) {

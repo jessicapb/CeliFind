@@ -28,7 +28,8 @@ class Category
         }
 
         if (!empty($_SESSION['errors'])) {
-            throw new BuildExceptions($_SESSION['errors']);
+            $errorMessage = json_encode($_SESSION['errors']);
+            throw new BuildExceptions($errorMessage);
         }
     }
 

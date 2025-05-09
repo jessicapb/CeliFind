@@ -3,21 +3,23 @@
 namespace App\Controller\Product;
 
 use App\Infrastructure\Persistence\ProductRepository;
+use App\Celifind\Services\ProductServices;
 use App\Celifind\Entities\Product;
 
 class ProductDeleteBDController{
     private ProductRepository $productRepository;
-    private $db;
+    private ProductServices $productServices;
     
     public function __construct(\PDO $db) {
         $this->db = $db;
         $this->productRepository = new ProductRepository($db);
+        $this->productServices = new ProductServices($db, $this->productRepository);
     }
 
     function deleteproduct(){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $id = filter_input(INPUT_POST, 'id');
-            if($this->productRepository->deleteProduct($id)){
+            if($this->productServices->delete($id)){
                 header('Location: /productmanager?deleted=true');
                 exit();
             }

@@ -4,13 +4,18 @@ namespace App\Celifind\Checks;
 use App\Celifind\Checks\Checks;
 
 class ChecksProduct extends Checks{
-    public static function minMaxNull($min,$max){
+    public static function minMaxNull(?string $string, $min, $max) {
         if ($string === null) {
             return 0; 
         }
-        if (strlen($string)<$min) return -2;
-        if (strlen($string)>$max) return -3;
-    }
+        if (strlen($string) < $min) {
+            return -3; 
+        }
+        if(strlen($string) > $max) {
+            return -4;
+        }
+        return 0;
+    }    
     
     // Function to validate wrong words
     public static function validateProductWords($string) {
@@ -61,6 +66,7 @@ class ChecksProduct extends Checks{
         return 0;
     }
     
+    // RECIPES
     // Function to validate pattern for people
     public static function validatePeople($people){
         $peoplePattern = '/^\d{1,2}\spersones$/'; 
@@ -74,6 +80,15 @@ class ChecksProduct extends Checks{
     public static function validateDuration($duration){
         $durationPattern = '/^\d{1,3}-\d{1,3}min$|^\d{1,3}min$/';
         if (!preg_match($durationPattern, $duration)){
+            return -10;
+        }
+        return 0;
+    }
+    
+    //ESTABLISHMENTS
+    public static function validateSchedule($schedule){
+        $durationPattern = '/^\d{0,9}-\d{1,3}min$|^\d{1,3}min$/';
+        if (!preg_match($durationPattern, $schedule)){
             return -10;
         }
         return 0;

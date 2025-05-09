@@ -2,24 +2,18 @@
 
 namespace App\Infrastructure\Routing;
 
-use App\Infrastructure\Routing\Request;
-
-class Router
-{
-    private array $routes = [];
-    function addRoute(string $method, string $path, callable $action)
-    {
-        $this->routes[$method][$path] = $action;
+class Router {
+    function addRoute(string $method,string $path, callable $action){
+        $this->routes[$method][$path]=$action;
         return $this;
     }
 
-    function dispatch(Request $request)
-    {
-        $method = $request->getMethod();
-        $path = $request->getPath();
-        if (isset($this->routes[$method][$path])) {
+    function dispatch(Request $request){
+        $method=$request->getMethod();
+        $path=$request->getPath();
+        if(isset($this->routes[$method][$path])){       
             call_user_func($this->routes[$method][$path]);
-        } else {
+        }else{
             http_response_code(404);
             echo "Route not found";
         }

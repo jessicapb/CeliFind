@@ -1,27 +1,22 @@
 <?php
-
 namespace App\Infrastructure\Persistence;
 
 use App\Celifind\Entities\User;
 
-class UserRepository
-{
+class UserRepository {
     private \PDO $db;
 
-    public function __construct(\PDO $db)
-    {
+    public function __construct(\PDO $db) {
         $this->db = $db;
     }
 
-    public function existsByEmail($email): bool
-    {
+    public function existsByEmail($email): bool {
         $stmt = $this->db->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
         $stmt->execute([$email]);
         return $stmt->fetchColumn() > 0;
     }
 
-    public function save(User $user): void
-    {
+    public function save(User $user): void {
         $stmt = $this->db->prepare("INSERT INTO users (name, surname, email, city, postalcode, password, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([
             $user->name,
@@ -34,8 +29,7 @@ class UserRepository
         ]);
     }
 
-    public function findByEmail($email): ?User
-    {
+    public function findByEmail($email): ?User {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $row = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -53,14 +47,12 @@ class UserRepository
         return null;
     }
 
-    public function setResetToken($email, $token, $expiry)
-    {
+    public function setResetToken($email, $token, $expiry) {
         $stmt = $this->db->prepare("UPDATE users SET reset_token = ?, reset_token_expiry = ? WHERE email = ?");
         $stmt->execute([$token, $expiry, $email]);
     }
 
-    public function findByResetToken($token)
-    {
+    public function findByResetToken($token) {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE reset_token = ? AND reset_token_expiry > NOW()");
         $stmt->execute([$token]);
         $row = $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -78,8 +70,7 @@ class UserRepository
         return null;
     }
 
-    public function updatePassword($userId, $newPassword)
-    {
+    public function updatePassword($userId, $newPassword) {
         $stmt = $this->db->prepare("UPDATE users SET password = ?, reset_token = NULL, reset_token_expiry = NULL WHERE id = ?");
         $stmt->execute([
             password_hash($newPassword, PASSWORD_DEFAULT),
@@ -87,8 +78,7 @@ class UserRepository
         ]);
     }
 
-    public function updateProfile($id, $name, $surname, $city, $postalcode, $password = null)
-    {
+    public function updateProfile($id, $name, $surname, $city, $postalcode, $password = null) {
         if ($password) {
             $stmt = $this->db->prepare("UPDATE users SET name = ?, surname = ?, city = ?, postalcode = ?, password = ? WHERE id = ?");
             $stmt->execute([
