@@ -1,6 +1,7 @@
-<?php session_start();?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <header class="p-4">
         <nav class="flex justify-between">
@@ -25,7 +27,7 @@
                     <li class="ml-8"><a href="#">Informació</a></li>
                 </ul>
                 <div class="relative inline-block text-left">
-                    <?php if (isset($_SESSION['user']) && $_SESSION['user']['status']==1) : ?>
+                    <?php if (isset($_SESSION['user']) && $_SESSION['user']['status'] == 1) : ?>
                         <button id="dropdown-toggle" type="button" class="font-inter min-w-[180px] p-[8px] mr-[30px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
                             <?= htmlspecialchars($_SESSION['user']['name']) ?>
                         </button>
@@ -41,8 +43,8 @@
                                 </a>
                             </div>
                         </div>
-                        <?php elseif (isset($_SESSION['user']) && $_SESSION['user']['status']==2): ?>
-                            <button id="dropdown-toggle" type="button" class="font-inter min-w-[180px] p-[8px] mr-[30px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
+                    <?php elseif (isset($_SESSION['user']) && $_SESSION['user']['status'] == 2): ?>
+                        <button id="dropdown-toggle" type="button" class="font-inter min-w-[180px] p-[8px] mr-[30px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
                             <?= htmlspecialchars($_SESSION['user']['name']) ?>
                         </button>
                         <div id="dropdown-menu" class="font-inter hidden absolute left-0 mt-2 w-[90%] origin-top-center text-black bg-white border-1 shadow-lg rounded-[20px] z-10">
@@ -74,11 +76,11 @@
     <main>
         <div class="flex justify-center flex-col text-center bg-[url('../img/home/Celifind.png')] object-cover h-[700px] bg-no-repeat bg-cover">
             <h1 class="text-[26px] font-calistoga font-bold">Menjar sense gluten Barcelona<h1>
-            <h2 class="font-calistoga text-[80px]  md:text-[70px] lg:text-[100px]">Gluten <span class="text-[#96c368]">Free</span> <span class="text-[#FAD464]">sense</span> limits</h2>
-            <p class="text-[20px] font-inter">Descobreix els nostres productes sense gluten, creats per al teu benestar i gaudeix amb confiança!</p>
-            <div class="mt-20">
-                <a href="#" class="bg-[#fcb666] text-[18px] text-white font-inter p-4 rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-[#fcb666] hover:border-2 transition duration-200">Descobreix els nostres productes</a>
-            </div>
+                    <h2 class="font-calistoga text-[80px]  md:text-[70px] lg:text-[100px]">Gluten <span class="text-[#96c368]">Free</span> <span class="text-[#FAD464]">sense</span> limits</h2>
+                    <p class="text-[20px] font-inter">Descobreix els nostres productes sense gluten, creats per al teu benestar i gaudeix amb confiança!</p>
+                    <div class="mt-20">
+                        <a href="#" class="bg-[#fcb666] text-[18px] text-white font-inter p-4 rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-[#fcb666] hover:border-2 transition duration-200">Descobreix els nostres productes</a>
+                    </div>
         </div>
 
         <!--Adejectives section!-->
@@ -99,7 +101,7 @@
                     </div>
                     <div class="pt-6">
                         <h1 class="text-4xl font-calistoga text-white">Benestar</h1>
-                        <p  class="mt-5 text-[17px]">El nostre compromís amb la salut de la comunitat celíaca és total. Els nostres productes sense gluten són segurs, deliciosos i elaborats amb cura per cuidar el teu cor i benestar.</p>
+                        <p class="mt-5 text-[17px]">El nostre compromís amb la salut de la comunitat celíaca és total. Els nostres productes sense gluten són segurs, deliciosos i elaborats amb cura per cuidar el teu cor i benestar.</p>
                     </div>
                 </div>
                 <div class="m-10">
@@ -108,7 +110,7 @@
                     </div>
                     <div class="pt-6">
                         <h1 class="text-4xl font-calistoga text-white">Qualitat</h1>
-                        <p  class="mt-5 text-[17px]">Cada producte passa estrictes controls de qualitat per assegurar que només el millor arribi a la teva taula. Pots confiar que cada mostra serà sinònim de seguretat, puresa i sabor.</p>
+                        <p class="mt-5 text-[17px]">Cada producte passa estrictes controls de qualitat per assegurar que només el millor arribi a la teva taula. Pots confiar que cada mostra serà sinònim de seguretat, puresa i sabor.</p>
                     </div>
                 </div>
             </div>
@@ -162,7 +164,7 @@
                     <p class="mt-2 text-gray-700 text-sm font-inter">Descripció del producte o detall breu.</p>
                     <div class="flex justify-center mt-6">
                         <a href="#" class="w-full text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                        Més informació
+                            Més informació
                         </a>
                     </div>
                 </div>
@@ -176,7 +178,7 @@
                     <p class="mt-2 text-gray-700 text-sm font-inter">Descripció del producte o detall breu.</p>
                     <div class="flex justify-center mt-6">
                         <a href="#" class="w-full text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                        Més informació
+                            Més informació
                         </a>
                     </div>
                 </div>
@@ -190,7 +192,7 @@
                     <p class="mt-2 text-gray-700 text-sm font-inter">Descripció del producte o detall breu.</p>
                     <div class="flex justify-center mt-6">
                         <a href="#" class="w-full text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                        Més informació
+                            Més informació
                         </a>
                     </div>
                 </div>
@@ -204,7 +206,7 @@
                     <p class="mt-2 text-gray-700 text-sm font-inter">Descripció del producte o detall breu.</p>
                     <div class="flex justify-center mt-6">
                         <a href="#" class="w-full text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                        Més informació
+                            Més informació
                         </a>
                     </div>
                 </div>
@@ -217,89 +219,89 @@
                     <p class="mt-2 text-gray-700 text-sm font-inter">Descripció del producte o detall breu.</p>
                     <div class="flex justify-center mt-6">
                         <a href="#" class="w-full text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                        Més informació
+                            Més informació
                         </a>
                     </div>
                 </div>
             </div>
-        <section>
+            <section>
 
-        <!--Localities section!-->
-        <section class="bg-slate-100">
-            <div class="flex-col justify-center pt-36 p-10 text-center">
-                    <h1 class="text-[46px] lg:text-[50px] font-calistoga">Els millors llocs sense gluten en Barcelona</h1>
-                    <p class="font-inter text-[19px]">Consulta les recomanacions d'altres celíacs i descobreix els llocs més segurs per gaudir d'un àpat sense gluten.</p>
-                <div class="mt-16">
-                    <a href="#" class="bg-[#fcb666] text-[18px] text-white p-3 px-6 border-2 border-[#fcb666] rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-2 transition duration-300 ease-in-out">Explora els nostres llocs</a>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-10 pt-10 pb-20">
-                <!--Box!-->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="" alt="Restaurant" class="w-full h-48 object-cover">
-                    <div class="p-4 text-left">
-                        <div class="flex justify-between items-center mb-2">
-                            <h2 class="font-bold">Títol</h2>
-                            <span class="text-gray-400 font-semibold">Restaurant</span>
-                        </div>
-                        <p class="font-medium">Ubicació</p>
-                        <p class="text-sm text-gray-600 mt-2 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</p>
-                        <div class="flex justify-between items-center">
-                            <p class="text-gray-400">Ubicació</p>
-                            <a href="#" class="text-[#fcb666] border border-[#fcb666] px-4 py-1 rounded-full hover:bg-[#fcb666] hover:text-white transition duration-300">Explorar</a>
+                <!--Localities section!-->
+                <section class="bg-slate-100">
+                    <div class="flex-col justify-center pt-36 p-10 text-center">
+                        <h1 class="text-[46px] lg:text-[50px] font-calistoga">Els millors llocs sense gluten en Barcelona</h1>
+                        <p class="font-inter text-[19px]">Consulta les recomanacions d'altres celíacs i descobreix els llocs més segurs per gaudir d'un àpat sense gluten.</p>
+                        <div class="mt-16">
+                            <a href="#" class="bg-[#fcb666] text-[18px] text-white p-3 px-6 border-2 border-[#fcb666] rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-2 transition duration-300 ease-in-out">Explora els nostres llocs</a>
                         </div>
                     </div>
-                </div>
-                <!--BOX!-->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="" alt="Restaurant" class="w-full h-48 object-cover">
-                    <div class="p-4 text-left">
-                        <div class="flex justify-between items-center mb-2">
-                            <h2 class="font-bold">Títol</h2>
-                            <span class="text-gray-400 font-semibold">Restaurant</span>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-10 pt-10 pb-20">
+                        <!--Box!-->
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                            <img src="" alt="Restaurant" class="w-full h-48 object-cover">
+                            <div class="p-4 text-left">
+                                <div class="flex justify-between items-center mb-2">
+                                    <h2 class="font-bold">Títol</h2>
+                                    <span class="text-gray-400 font-semibold">Restaurant</span>
+                                </div>
+                                <p class="font-medium">Ubicació</p>
+                                <p class="text-sm text-gray-600 mt-2 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</p>
+                                <div class="flex justify-between items-center">
+                                    <p class="text-gray-400">Ubicació</p>
+                                    <a href="#" class="text-[#fcb666] border border-[#fcb666] px-4 py-1 rounded-full hover:bg-[#fcb666] hover:text-white transition duration-300">Explorar</a>
+                                </div>
+                            </div>
                         </div>
-                        <p class="font-medium">Ubicació</p>
-                        <p class="text-sm text-gray-600 mt-2 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</p>
-                        <div class="flex justify-between items-center">
-                            <p class="text-gray-400">Ubicació</p>
-                            <a href="#" class="text-[#fcb666] border border-[#fcb666] px-4 py-1 rounded-full hover:bg-[#fcb666] hover:text-white transition duration-300">Explorar</a>
+                        <!--BOX!-->
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                            <img src="" alt="Restaurant" class="w-full h-48 object-cover">
+                            <div class="p-4 text-left">
+                                <div class="flex justify-between items-center mb-2">
+                                    <h2 class="font-bold">Títol</h2>
+                                    <span class="text-gray-400 font-semibold">Restaurant</span>
+                                </div>
+                                <p class="font-medium">Ubicació</p>
+                                <p class="text-sm text-gray-600 mt-2 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</p>
+                                <div class="flex justify-between items-center">
+                                    <p class="text-gray-400">Ubicació</p>
+                                    <a href="#" class="text-[#fcb666] border border-[#fcb666] px-4 py-1 rounded-full hover:bg-[#fcb666] hover:text-white transition duration-300">Explorar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--BOX!-->
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                            <img src="" alt="Restaurant" class="w-full h-48 object-cover">
+                            <div class="p-4 text-left">
+                                <div class="flex justify-between items-center mb-2">
+                                    <h2 class="font-bold">Títol</h2>
+                                    <span class="text-gray-400 font-semibold">Restaurant</span>
+                                </div>
+                                <p class="font-medium">Ubicació</p>
+                                <p class="text-sm text-gray-600 mt-2 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</p>
+                                <div class="flex justify-between items-center">
+                                    <p class="text-gray-400">Ubicació</p>
+                                    <a href="#" class="text-[#fcb666] border border-[#fcb666] px-4 py-1 rounded-full hover:bg-[#fcb666] hover:text-white transition duration-300">Explorar</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--BOX!-->
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                            <img src="" alt="Restaurant" class="w-full h-48 object-cover">
+                            <div class="p-4 text-left">
+                                <div class="flex justify-between items-center mb-2">
+                                    <h2 class="font-bold">Títol</h2>
+                                    <span class="text-gray-400 font-semibold">Restaurant</span>
+                                </div>
+                                <p class="font-medium">Ubicació</p>
+                                <p class="text-sm text-gray-600 mt-2 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</p>
+                                <div class="flex justify-between items-center">
+                                    <p class="text-gray-400">Ubicació</p>
+                                    <a href="#" class="text-[#fcb666] border border-[#fcb666] px-4 py-1 rounded-full hover:bg-[#fcb666] hover:text-white transition duration-300">Explorar</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!--BOX!-->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="" alt="Restaurant" class="w-full h-48 object-cover">
-                    <div class="p-4 text-left">
-                        <div class="flex justify-between items-center mb-2">
-                            <h2 class="font-bold">Títol</h2>
-                            <span class="text-gray-400 font-semibold">Restaurant</span>
-                        </div>
-                        <p class="font-medium">Ubicació</p>
-                        <p class="text-sm text-gray-600 mt-2 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</p>
-                        <div class="flex justify-between items-center">
-                            <p class="text-gray-400">Ubicació</p>
-                            <a href="#" class="text-[#fcb666] border border-[#fcb666] px-4 py-1 rounded-full hover:bg-[#fcb666] hover:text-white transition duration-300">Explorar</a>
-                        </div>
-                    </div>
-                </div>
-                <!--BOX!-->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="" alt="Restaurant" class="w-full h-48 object-cover">
-                    <div class="p-4 text-left">
-                        <div class="flex justify-between items-center mb-2">
-                            <h2 class="font-bold">Títol</h2>
-                            <span class="text-gray-400 font-semibold">Restaurant</span>
-                        </div>
-                        <p class="font-medium">Ubicació</p>
-                        <p class="text-sm text-gray-600 mt-2 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</p>
-                        <div class="flex justify-between items-center">
-                            <p class="text-gray-400">Ubicació</p>
-                            <a href="#" class="text-[#fcb666] border border-[#fcb666] px-4 py-1 rounded-full hover:bg-[#fcb666] hover:text-white transition duration-300">Explorar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                </section>
     </main>
 
 
@@ -307,7 +309,7 @@
 
     <footer class="bg-slate-100 text-black py-12 px-8 lg:px-20">
         <div class="grid grid-cols-1 max-w-screen-xl mx-auto md:grid-cols-5 text-center lg:text-start md:text-start gap-8 text-sm justify-center">
-            
+
             <div class="md:col-span-1 flex flex-col space-y-2">
                 <a href="/">
                     <img src="../img/logo/logo.png" alt="CeliFind logo" class="w-36">
@@ -316,12 +318,12 @@
 
             <div>
                 <h4 class="font-semibold mb-2">Serveis i Productes</h4>
-                    <ul class="space-y-1 text-gray-600">
-                        <li><a href="#">Productes</a></li>
-                        <li><a href="#">Receptes</a></li>
-                        <li><a href="#">Qui som</a></li>
-                        <li><a href="#">Informació</a></li>
-                    </ul>
+                <ul class="space-y-1 text-gray-600">
+                    <li><a href="#">Productes</a></li>
+                    <li><a href="#">Receptes</a></li>
+                    <li><a href="#">Qui som</a></li>
+                    <li><a href="#">Informació</a></li>
+                </ul>
             </div>
 
             <div>
@@ -350,4 +352,5 @@
     </footer>
 </body>
 <script src="../js/dropdown/dropdown.js"></script>
+
 </html>

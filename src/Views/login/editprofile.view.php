@@ -21,7 +21,7 @@
                 <ul class="list-none p-4m hidden lg:flex items-center">
                     <li class="ml-8"><a href="/productview">Productes</a></li>
                     <li class="ml-8"><a href="#">Receptes</a></li>
-                    
+
                 </ul>
                 <div class="relative inline-block text-left">
                     <?php if (isset($_SESSION['user']) && $_SESSION['user']['status'] == 1) : ?>

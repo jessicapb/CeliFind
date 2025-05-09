@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ca">
 
@@ -112,4 +111,5 @@
         eyeIcon.alt = visible ? 'Ocultar contraseña' : 'Mostrar contraseña';
     });
 </script>
+
 </html>
