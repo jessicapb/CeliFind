@@ -3,16 +3,19 @@
 namespace App\Controller\Product;
 
 use App\Infrastructure\Persistence\ProductRepository;
+use App\Celifind\Services\ProductServices;
 use App\Celifind\Entities\Product;
 use App\Celifind\Exceptions\BuildExceptions;
 
 class ProductSaveBDController{
     private \PDO $db;
     private ProductRepository $ProductRepository;
+    private ProductServices $ProductServices;
     
     public function __construct(\PDO $db) {
         $this->db = $db;
         $this->ProductRepository = new ProductRepository($db);
+        $this->ProductService = new ProductServices($db, $this->ProductRepository);
     }
     
     public function saveproduct() {
@@ -31,13 +34,18 @@ class ProductSaveBDController{
             $weight = filter_input(INPUT_POST, 'weight');
             $state = filter_input(INPUT_POST, 'state');
             
-            // Upload image
-            // Comprobamos si hay un campo image y si se ha subido correctamente la imagen
-            // Si funciona correctamente guarda la imagen dentro de $imagenData
-            // Se pone tmp_name porque cuando subimos la imagen temporalmente se guarda en la carpeta tmp
-            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                $imageData = file_get_contents($_FILES['image']['tmp_name']);
-            } else {
+            if (!empty($_FILES['image']['name'])) {
+                $folder = '/home/linux/CeliFind/img/producte/imagesbd/';
+                $fileName = $_FILES['image']['name'];
+                $destination = $folder . $fileName;
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
+                    $imageData = '/img/producte/imagesbd/' . $fileName;
+                } else {
+                    $_SESSION['errors']['image'] = "No s'ha pogut guardar la imatge.";
+                    header('Location: /productadd');
+                    exit;
+                }
+            }else{
                 $imageData = '';
             }
             
@@ -46,14 +54,14 @@ class ProductSaveBDController{
                 $product = new Product(null,$name, $description, $ingredients,$nutritionalinformation,$price, $brand, $imageData, $weight, $state);
                 
                 // Validate if the name exists
-                if ($this->ProductRepository->exists($name)) {
+                if ($this->ProductService->exists(trim($name))) {
                     $_SESSION['errors']['name'] = "El nom ja està registrat.";
                     header('Location: /productadd');
                     exit;
                 }
                 
                 // If everything is okay, save the product.
-                $this->ProductRepository->save($product);  
+                $this->ProductService->save($product);  
                 header('Location: /productmanager');
             }catch (BuildExceptions $e) {
                 $_SESSION['error'] = $e->getMessage();

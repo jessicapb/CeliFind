@@ -1,15 +1,15 @@
-const image = document.getElementById('image');
-const previewimg = document.getElementById('preview-img');
-const imagename = document.getElementById('image-name');
-const imagepreview = document.getElementById('image-preview')
-const imagetrigger = document.getElementById('image-trigger');
+let image = document.getElementById('image');
+let previewimg = document.getElementById('preview-img');
+let imagename = document.getElementById('image-name');
+let imagepreview = document.getElementById('image-preview')
+let imagetrigger = document.getElementById('image-trigger');
 
 function previewImage() {
-    const input = image; // Agafar la imatge
-    const file = input.files[0]; // Compte la imatge seleccionat
+    let input = image; // Agafar la imatge
+    let file = input.files[0]; // Compte la imatge seleccionat
 
     if (file) {
-        const reader = new FileReader(); // Crear un lector per la imatge
+        let reader = new FileReader(); // Crear un lector per la imatge
         reader.onload = function(e) { // S'executa quan la imatge ha sigut llegida
             previewimg.src = e.target.result; // Mostra la imatge
             imagename.textContent = file.name; // Mostra el nom 

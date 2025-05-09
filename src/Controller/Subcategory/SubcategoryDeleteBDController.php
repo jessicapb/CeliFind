@@ -3,21 +3,24 @@
 namespace App\Controller\Subcategory;
 
 use App\Infrastructure\Persistence\SubcategoryRepository;
+use App\Celifind\Services\SubcategoryServices;
 
 class SubcategoryDeleteBDController
 {
-    private SubcategoryRepository $subcategoryRepository;
+    private \PDO $db;
+    private SubcategoryServices $subcategoryServices;
 
-    public function __construct(\PDO $db)
+    public function __construct(\PDO $db, SubcategoryServices $subcategoryServices)
     {
-        $this->subcategoryRepository = new SubcategoryRepository($db);
+        $this->db = $db;
+        $this->subcategoryServices = $subcategoryServices;
     }
 
     function deletesubcategory()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = filter_input(INPUT_POST, 'id');
-            if ($this->subcategoryRepository->deleteSubcategory($id)) {
+            if ($this->subcategoryServices->delete($id)) {
                 header('Location: /subcategory?deleted=true');
                 exit();
             }

@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,34 +10,75 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
+    <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
 <body>
-    <header class="p-4">
+<header class="p-4">
         <nav class="flex justify-between">
-        <a href="/">
-            <img class="w-32" src="../img/logo/logo.png" alt="">
-        </a>
-        <div class="flex">
-            <ul class="list-none p-4m hidden lg:flex items-center">
-                <li class="ml-8"><a href="#">Productes</a></li>
-                <li class="ml-8"><a href="#">Receptes</a></li>
-                <li class="ml-8"><a href="#">Qui som ?</a></li>
-                <li class="ml-8"><a href="#">informacio</a></li>
-            </ul>
-            <div class="flex items-center gap-5 ml-16">
-                <a href="#" class="font-inter p-2 px-5 text-[16px] text-black border-[#96c368] border-2 rounded-[50px] font-normal hover:bg-[rgb(150,195,104)] hover:text-white transition duration-200">Registre</a>
-                <a href="#" class="font-inter p-2 px-9 text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-white transition duration-200">Iniciar Sessió</a>
+            <a href="/">
+                <img class="w-32" src="../img/logo/logo.png" alt="">
+            </a>
+            <div class="flex items-center">
+                <ul class="list-none p-4 hidden lg:flex items-center">
+                    <li class="ml-8"><a href="/productview">Productes</a></li>
+                    <li class="ml-8"><a href="#">Receptes</a></li>
+                    <li class="ml-8"><a href="#">Qui som ?</a></li>
+                    <li class="ml-8"><a href="#">Informació</a></li>
+                </ul>
+                <div class="relative inline-block text-left">
+                    <?php if (isset($_SESSION['user']) && $_SESSION['user']['status']==1) : ?>
+                        <button id="dropdown-toggle" type="button" class="font-inter min-w-[180px] p-[8px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
+                            <?= htmlspecialchars($_SESSION['user']['name']) ?>
+                        </button>
+                        <div id="dropdown-menu" class="font-inter hidden absolute left-0 mt-2 w-[90%] origin-top-center text-black bg-white border-1 shadow-lg rounded-[20px] z-10">
+                            <div class="p-1 space-y-0.5">
+                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href=" /editprofile">
+                                    <img class="w-[18%] h-[18%]" src="../../img/profile/placegholder.png" alt="">
+                                    Editar perfil
+                                </a>
+                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/logout">
+                                    <img class="w-[18%] h-[18%]" src="../../img/logout/logout.svg" alt="">
+                                    Tancar sessió
+                                </a>
+                            </div>
+                        </div>
+                        <?php elseif (isset($_SESSION['user']) && $_SESSION['user']['status']==2): ?>
+                            <button id="dropdown-toggle" type="button" class="font-inter min-w-[180px] p-[8px] mr-[30px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
+                            <?= htmlspecialchars($_SESSION['user']['name']) ?>
+                        </button>
+                        <div id="dropdown-menu" class="font-inter hidden absolute left-0 mt-2 w-[90%] origin-top-center text-black bg-white border-1 shadow-lg rounded-[20px] z-10">
+                            <div class="p-1 space-y-0.5">
+                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href=" /editprofile">
+                                    <img class="w-[18%] h-[18%]" src="../../img/profile/placegholder.png" alt="">
+                                    Editar perfil
+                                </a>
+                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/manager">
+                                    <img class="w-[18%] h-[18%]" src="../../img/manager/manager.svg" alt="">
+                                    Manager
+                                </a>
+                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/logout">
+                                    <img class="w-[18%] h-[18%]" src="../../img/logout/logout.svg" alt="">
+                                    Tancar sessió
+                                </a>
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <div class="flex items-center gap-5 ml-16">
+                            <a href="/register" class="font-inter p-2 px-5 text-[16px] text-black border-[#96c368] border-2 rounded-[50px] font-normal hover:bg-[rgb(150,195,104)] hover:text-white transition duration-200">Registre</a>
+                            <a href="/login" class="font-inter p-2 px-9 text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-white transition duration-200">Iniciar Sessió</a>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
     <main>
         <div class="flex justify-center flex-col text-center bg-[url('../img/home/Celifind.png')] object-cover h-[700px] bg-no-repeat bg-cover">
             <h1 class="text-[26px] font-calistoga font-bold">Menjar sense gluten Barcelona<h1>
             <h2 class="font-calistoga text-[80px]  md:text-[70px] lg:text-[100px]">Gluten <span class="text-[#96c368]">Free</span> <span class="text-[#FAD464]">sense</span> limits</h2>
             <p class="text-[20px] font-inter">Descobreix els nostres productes sense gluten, creats per al teu benestar i gaudeix amb confiança!</p>
             <div class="mt-20">
-                <a href="#" class="bg-[#fcb666] text-[18px] text-white font-inter p-4 rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-[#fcb666] hover:border-2 transition duration-200">Descobreix els nostres productes</a>
+                <a href="/productview" class="bg-[#fcb666] text-[18px] text-white font-inter p-4 rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-[#fcb666] hover:border-2 transition duration-200">Descobreix els nostres productes</a>
             </div>
         </div>
 
@@ -75,15 +117,12 @@
 
         <!--Recipes Section!-->
         <section class="p-10 justify-center pt-32 flex bg-slate-100">
-
             <div class="flex-wrap xl:flex items-center">
-
                 <div class="flex-1 lg:flex md:flex sm:flex text-center justify-center">
                     <img class="w-[500px]" src="../img/home/Recipes.png" alt="">
                 </div>
 
                 <div class="flex-1 text-center xl:text-left mt-16 md:mt-16 lg:mt-16">
-
                     <h1 class="text-[46px] lg:text-[50px] font-calistoga">Descobreix les Nostres Receptes Sense Gluten</h1>
                     <h2 class="text-3xl font-calistoga mt-5">Receptes per a tots els gustos</h2>
                     <p class="font-inter text-[19px] mt-2">Descobreix els nostres productes sense gluten, creats per al teu benestar i gaudeix amb confiança!</p>
@@ -91,98 +130,62 @@
                     <div class="mt-[80px]">
                         <a href="#" class="bg-[#fcb666] text-[18px] border-[#fcb666] border-2 text-white font-inter p-3 rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-[#fcb666] hover:border-2 transition duration-200">Descobreix les nostres receptes</a>
                     </div>
-
                 </div>
             </div>
-
         </section>
 
         <!--Descobreix els nostres productes section!-->
         <section class="flex-col justify-center pt-20 p-10 bg-slate-100">
-
             <div class="flex text-center flex-col">
                 <h1 class="text-[46px] lg:text-[50px] font-calistoga">Descobreix tots els nostres Productes</h1>
                 <p class="font-inter text-[19px] mt-2">Explora la nostra col·lecció i troba allò que busques!</p>
                 <div class="mt-[50px]">
-                    <a href="#" class="bg-[#fcb666] text-[18px] text-white font-inter p-4 px-9 rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-[#fcb666] hover:border-2 transition duration-200">
+                    <a href="/productview" class="bg-[#fcb666] text-[18px] text-white font-inter p-4 px-9 rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-[#fcb666] hover:border-2 transition duration-200">
                         Tots els nostres productes
                     </a>
                 </div>
             </div>
-
             <div class="flex flex-wrap mt-11 justify-center gap-10">
-
-                <div class="bg-white shadow-md p-5 rounded-xl max-w-xs w-full">
-                    <img class="w-full h-auto rounded-md" src="../img/home/pizzasingluten.png" alt="Pizza sense gluten">
-                    <div class="flex items-center justify-between mt-4">
-                        <p class="font-semibold">Títol</p>
-                        <p class="text-gray-500 text-sm">Data</p>
+                <?php foreach ($products as $product) { ?>
+                    <div class="shadow-lg w-[480px] h-auto rounded-[21px] bg-white p-[10px] mx-auto flex flex-col justify-between items-center">
+                        <div class="flex flex-col items-start">
+                            <!-- Image -->
+                            <div class="w-full flex justify-center mb-3">
+                                <div class="w-[180px] h-[180px] flex mt-[15px] items-center justify-center">
+                                    <img src="<?php echo $product->getImage() ?>" alt="image_bd" class="object-contain w-full h-full">                                    
+                                </div>
+                            </div>
+                            
+                            <!-- Name -->
+                            <div class="w-full text-left mt-[10px] min-h-[30px]">
+                                <p class="font-inter pl-[10px] text-[17px] font-bold text-black"><?php echo $product->getName(); ?></p>
+                            </div>
+                            
+                            <!--Wheigth!-->
+                            <div class="w-full text-left">
+                                <p class="font-inter pl-[10px] text-[16px] font-medium text-black opacity-50"><?php echo $product->getWeight(); ?></p>
+                            </div>
+                            
+                            <!-- Description -->
+                            <div class="w-full text-left mt-[15px] min-h-[100px]">
+                                <p class="font-inter pl-[10px] pr-[15px] text-[16px] text-justify font-normal text-black"><?php echo $product->getDescription();?>...</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Button -->
+                        <div class="w-full flex justify-center mt-4">
+                            <form action="/productindividual" method="POST" class="w-[90%]">
+                                <input type="hidden" name="id" value="<?php echo $product->getId(); ?>">
+                                <button type="submit" class="w-full mt-[15px] mb-[10px] text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
+                                    Més informació
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                    <p class="mt-2 text-gray-700 text-sm font-inter">Descripció del producte o detall breu.</p>
-                    <div class="flex justify-center mt-6">
-                        <a href="#" class="w-full text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                        Més informació
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-white shadow-md p-5 rounded-xl max-w-xs w-full">
-                    <img class="w-full h-auto rounded-md" src="../img/home/pizzasingluten.png" alt="Pizza sense gluten">
-                    <div class="flex items-center justify-between mt-4">
-                        <p class="font-semibold">Títol</p>
-                        <p class="text-gray-500 text-sm">Data</p>
-                    </div>
-                    <p class="mt-2 text-gray-700 text-sm font-inter">Descripció del producte o detall breu.</p>
-                    <div class="flex justify-center mt-6">
-                        <a href="#" class="w-full text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                        Més informació
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-white shadow-md p-5 rounded-xl max-w-xs w-full">
-                    <img class="w-full h-auto rounded-md" src="../img/home/pizzasingluten.png" alt="Pizza sense gluten">
-                    <div class="flex items-center justify-between mt-4">
-                        <p class="font-semibold">Títol</p>
-                        <p class="text-gray-500 text-sm">Data</p>
-                    </div>
-                    <p class="mt-2 text-gray-700 text-sm font-inter">Descripció del producte o detall breu.</p>
-                    <div class="flex justify-center mt-6">
-                        <a href="#" class="w-full text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                        Més informació
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-white shadow-md p-5 rounded-xl max-w-xs w-full">
-                    <img class="w-full h-auto rounded-md" src="../img/home/pizzasingluten.png" alt="Pizza sense gluten">
-                    <div class="flex items-center justify-between mt-4">
-                        <p class="font-semibold">Títol</p>
-                        <p class="text-gray-500 text-sm">Data</p>
-                    </div>
-                    <p class="mt-2 text-gray-700 text-sm font-inter">Descripció del producte o detall breu.</p>
-                    <div class="flex justify-center mt-6">
-                        <a href="#" class="w-full text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                        Més informació
-                        </a>
-                    </div>
-                </div>
-                <div class="bg-white shadow-md p-5 rounded-xl max-w-xs w-full">
-                    <img class="w-full h-auto rounded-md" src="../img/home/pizzasingluten.png" alt="Pizza sense gluten">
-                    <div class="flex items-center justify-between mt-4">
-                        <p class="font-semibold">Títol</p>
-                        <p class="text-gray-500 text-sm">Data</p>
-                    </div>
-                    <p class="mt-2 text-gray-700 text-sm font-inter">Descripció del producte o detall breu.</p>
-                    <div class="flex justify-center mt-6">
-                        <a href="#" class="w-full text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
-                        Més informació
-                        </a>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         <section>
-
+        
         <!--Localities section!-->
         <section class="bg-slate-100">
             <div class="flex-col justify-center pt-36 p-10 text-center">
@@ -260,52 +263,9 @@
             </div>
         </section>
     </main>
-
-
+    
+    <script src="../js/dropdown/dropdown.js"></script>
     <!--Footer section!-->
-
-    <footer class="bg-slate-100 text-black py-12 px-8 lg:px-20">
-        <div class="grid grid-cols-1 max-w-screen-xl mx-auto md:grid-cols-5 text-center lg:text-start md:text-start gap-8 text-sm justify-center">
-            
-            <div class="md:col-span-1 flex flex-col space-y-2">
-                <a href="/">
-                    <img src="../img/logo/logo.png" alt="CeliFind logo" class="w-36">
-                </a>
-            </div>
-
-            <div>
-                <h4 class="font-semibold mb-2">Serveis i Productes</h4>
-                    <ul class="space-y-1 text-gray-600">
-                        <li><a href="#">Productes</a></li>
-                        <li><a href="#">Receptes</a></li>
-                        <li><a href="#">Qui som</a></li>
-                        <li><a href="#">Informació</a></li>
-                    </ul>
-            </div>
-
-            <div>
-                <h4 class="font-semibold mb-2">Contacta'ns</h4>
-                <ul class="space-y-1 text-gray-600">
-                    <li><a href="mailto:celifind.cat@gmail.com">celifind.cat@gmail.com</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="font-semibold mb-2">Política de privacitat</h4>
-                <ul class="space-y-1 text-gray-600">
-                    <li><a href="#">Avís Legal</a></li>
-                    <li><a href="#">Política de Cookies</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="font-semibold mb-2">Ajuda</h4>
-                <ul class="space-y-1 text-gray-600">
-                    <li><a href="#">Informació</a></li>
-                    <li><a href="#">Qui Som</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
+    <?php include 'parts/footer/footer.view.php'?>
 </body>
 </html>

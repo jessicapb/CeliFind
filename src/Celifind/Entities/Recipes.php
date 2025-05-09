@@ -10,12 +10,13 @@ class Recipes{
     protected string $name;
     protected string $description;
     protected string $ingredients;
+    protected string $nutritionalinformation;
     protected string $people;
     protected string $duration;
     protected string $instruction;
     protected string $image;
     
-    public function __construct(?int $id = null, string $name, string $description, string $ingredients, string $people, string $duration, string $instruction, string $image){
+    public function __construct(?int $id = null, string $name, string $description, string $ingredients, string $nutritionalinformation,string $people, string $duration, string $instruction, string $image){
         $error = 0;
         
         $this->id = $id;
@@ -31,6 +32,10 @@ class Recipes{
             $_SESSION['errors']['ingredients'] = ChecksProduct::getErrorMessage($error);
         }
         
+        if(($error = $this->setNutritionalInformation($nutritionalinformation)) !=0){
+            $_SESSION['errors']['nutritionalinformation'] = ChecksProduct::getErrorMessage($error);
+        }
+
         if (($error = $this->setPeople($people)) != 0){
             $_SESSION['errors']['people'] = ChecksProduct::getErrorMessage($error);
         }
@@ -123,6 +128,32 @@ class Recipes{
         return 0;
     }
     
+    // Nutritional information
+    public function getNutritionalInformation(): string{
+        return $this->nutritionalinformation;
+    }
+    
+    public function setNutritionalInformation(string $nutritionalinformation): int {
+        
+        $errorNull = ChecksProduct::minMaxLength($nutritionalinformation, 4, 1060);
+        if ($errorNull != 0) {
+            return $errorNull;
+        }
+        
+        $errorWord = ChecksProduct::validateProductWords($nutritionalinformation);
+        if ($errorWord != 0) {
+            return $errorWord;
+        }
+        
+        $errorNotNumber = ChecksProduct::validateProductNotNumber($nutritionalinformation);
+        if ($errorNotNumber != 0) {
+            return $errorNotNumber;
+        }
+        
+        $this->nutritionalinformation = $nutritionalinformation;
+        return 0;
+    }
+    
     // People
     public function getPeople():string{
         return $this->people;
@@ -169,7 +200,7 @@ class Recipes{
     }
     
     public function setInstruction($instruction):int {
-        $errorNull = ChecksProduct::minMaxLength($instruction, 4, 1060);
+        $errorNull = ChecksProduct::minMaxLength($instruction, 4, 3060);
         if($errorNull !=0){
             return $errorNull;       
         }
@@ -189,7 +220,7 @@ class Recipes{
     }
     
     public function setImage($image):int{
-        $errorNull = ChecksProduct::notNull($image);
+        $errorNull = ChecksProduct::notEmpty($image);
         if ($errorNull != 0) {
             return $errorNull;
         }
@@ -205,18 +236,5 @@ class Recipes{
     public function setId(?int $id): int{
         $this->id = $id;
         return 0;
-    }
-    
-    // Con esta función convierto la imagen a base64
-    // Después la convertimos en una ruta
-    // Si NO hay imagen, mensaje de error
-    public function getBase64() {        
-        if ($this->image) {
-            $base64Image = base64_encode($this->image);
-            $imageType = 'image/png';
-            return "data:$imageType;base64,$base64Image";
-        } else {
-            echo "Imatge no trobada";
-        }
     }
 }

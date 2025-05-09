@@ -2,22 +2,21 @@
 
 namespace App\Controller\Product;
 
-use App\Infrastructure\Persistence\ProductRepository;
+use App\Celifind\Services\ProductServices;
+use App\Celifind\Services\SubcategoryServices;
 use App\Celifind\Entities\Product;
 
 class ProductToSubcategoryController {
-    private $productRepository;
-    
-    public function __construct(ProductRepository $productRepository) {
-        $this->productRepository = $productRepository;
+    private $productservices;
+    private $subcategoryservices;
+    public function __construct(ProductServices $productservices, SubcategoryServices $subcategoryservices ) {
+        $this->productservices = $productservices;
+        $this->subcategoryservices = $subcategoryservices;
     }
     
     function producttocategory(){
-        $products = $this->productRepository->showlimit();
-        $allproduct = [];
-        foreach($products as $fila){
-            $allproducts [] = new Product($fila['id'], $fila['name_short'], $fila['description_short'], $fila['ingredients_short'], $fila['nutritionalinformation_short'], $fila['price'], $fila['brand_short'], $fila['image'], $fila['weight'], $fila['state'], $fila['idsubcategory']);
-        }
-        echo view('product/producttosubcategory',['products'=>$allproducts]);
+        $products = $this->productservices->showlimit();
+        $subcategories = $this->subcategoryservices->showallsubcategory();
+        echo view('product/producttosubcategory',['products'=>$products,'subcategories' => $subcategories]);
     }
 }

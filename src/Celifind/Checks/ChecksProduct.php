@@ -4,13 +4,18 @@ namespace App\Celifind\Checks;
 use App\Celifind\Checks\Checks;
 
 class ChecksProduct extends Checks{
-    public static function minMaxNull($min,$max){
+    public static function minMaxNull(?string $string, $min, $max) {
         if ($string === null) {
             return 0; 
         }
-        if (strlen($string)<$min) return -2;
-        if (strlen($string)>$max) return -3;
-    }
+        if (strlen($string) < $min) {
+            return -3; 
+        }
+        if(strlen($string) > $max) {
+            return -4;
+        }
+        return 0;
+    }    
     
     // Function to validate wrong words
     public static function validateProductWords($string) {
@@ -61,6 +66,7 @@ class ChecksProduct extends Checks{
         return 0;
     }
     
+    // RECIPES
     // Function to validate pattern for people
     public static function validatePeople($people){
         $peoplePattern = '/^\d{1,2}\spersones$/'; 
@@ -79,12 +85,14 @@ class ChecksProduct extends Checks{
         return 0;
     }
     
-    /*public static function validateNotOnlySpaces($string) {
-        if (!preg_match('/^\s+$/', $string)) {
-            return -11; 
+    //ESTABLISHMENTS
+    public static function validateSchedule($schedule){
+        $durationPattern = '/^\d{0,9}-\d{1,3}min$|^\d{1,3}min$/';
+        if (!preg_match($durationPattern, $schedule)){
+            return -10;
         }
-        return 0; 
-    }*/
+        return 0;
+    }
     
     public static function getErrorMessage($e) {
         $word = '';
@@ -103,7 +111,6 @@ class ChecksProduct extends Checks{
             -8 => "L'estructura del camp és incorrecta. Exemple: 125g.",
             -9 => "L'estructura del camp és incorrecta. Exemple: 8 persones o 15 persones",
             -10 => "L'estructura del camp és incorrecta. Exemple: 115-120min o 30min",
-            -11 => "El camp no pot tindrà comes i espais",
             default => "Error desconegut",
         };
     }

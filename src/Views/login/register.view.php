@@ -1,32 +1,124 @@
-<!-- registro.php - Formulario de registro -->
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <title>Registre</title>
+    <link href="/src/output.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
 </head>
-<body>
-    <h2>Registro de Usuario</h2>
-    
-    <form method="post" action="../../Controller/User/addUser.php">
-        <div>
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
+<body class="bg-slate-100 flex flex-col items-center justify-center min-h-screen">
+    <!-- Header -->
+<div class="p-1 space-y-0.5 top-0 left-0 right-0 flex justify-between w-full min-w-full">
+    <div class="flex flex-col w-full">
+        <img src="../../img/logo/logo.png" alt="Celifind logo" class="w-32 ml-4 mt-4 " href="/">
+        <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light" >
+            <img class="w-8 h-8"  src="../../img/home/home.png" alt="home" >
+            Tornar al gestor
+        </a>
+    </div>
+</div>
+<!-- End Header -->
+<h1 class="text-5xl font-calistoga font-bold mb-10 mt-8 text-gray-800">Registre</h1>
+<form action="/userregister" method="POST" class="w-full max-w-md flex flex-col gap-6 mb-4">
+    <div>
+        <label class="block font-calistoga text-lg text-gray-800 mb-1" for="name">Nom</label>
+        <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500" type="text" name="name" id="name" placeholder="escriu el nom" required>
+        <?php if (!empty($_SESSION['errors']['name'])): ?>
+            <p class="text-red-500 mt-[5px] font-inter text-[15px]">
+                <?= $_SESSION['errors']['name']; unset($_SESSION['errors']['name']); ?>
+            </p>
+        <?php endif; ?>
+    </div>
+    <div>
+        <label class="block font-calistoga text-lg text-gray-800 mb-1" for="postalcode">Codi postal</label>
+        <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500" type="text" name="postalcode" id="postalcode" placeholder="escriu el codi postal" required>
+        <?php if (!empty($_SESSION['errors']['postalcode'])): ?>
+            <p class="text-red-500 mt-[5px] font-inter text-[15px]">
+                <?= $_SESSION['errors']['postalcode']; unset($_SESSION['errors']['postalcode']); ?>
+            </p>
+        <?php endif; ?>
+    </div>
+    <div>
+        <label class="block font-calistoga text-lg text-gray-800 mb-1" for="email">Correu electrònic</label>
+        <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500" type="email" name="email" id="email" placeholder="escriu el correu" required>
+        <?php if (!empty($_SESSION['errors']['email'])): ?>
+            <p class="text-red-500 mt-[3px] font-inter text-[15px]">
+                <?= $_SESSION['errors']['email']; unset($_SESSION['errors']['email']); ?>
+            </p>
+        <?php endif; ?>
+    </div>
+    <div>
+        <label class="block font-calistoga text-lg text-gray-800 mb-1" for="password">Contrasenya</label>
+        <div class="relative">
+            <input class="w-full border border-[#fcb666] rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#fcb666] placeholder-gray-500 pr-10" type="password" name="password" id="password" placeholder="escriu la contrasenya" required>
+            <img id="eyeIcon" src="/img/login/ojo1.png" alt="Mostrar contraseña" class="absolute right-3 top-1/2 transform -translate-y-1/2 w-6 h-6 cursor-pointer select-none" style="z-index:2;">
         </div>
-        <div>
-            <label for="email">Correo electrónico:</label>
-            <input type="email" id="email" name="email" required>
+        <?php if (!empty($_SESSION['errors']['password'])): ?>
+            <p class="text-red-500 mt-[5px] font-inter text-[15px]">
+                <?= $_SESSION['errors']['password']; unset($_SESSION['errors']['password']); ?>
+            </p>
+        <?php endif; ?>
+    </div>
+    <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Registra’t</button>
+    <p class="mt-4 text-center text-sm text-gray-600 font-inter">
+                Ja tens compte? <a href="/login" class="text-[#fcb666] hover:underline">Inicia sessió </a>
+            </p>
+</form>
+<!-- Footer -->
+<footer class=" font-calistoga text-gray-800 mt-8 w-full bot-0 px-2 lg:px-20">
+        <div class="grid grid-cols-1 max-w-screen mx-auto md:grid-cols-5 text-center lg:text-start md:text-start gap-8 text-sm justify-center">
+            
+            <div class="md:col-span-1 flex flex-col space-y-2">
+                <a href="/">
+                    <img src="../img/logo/logo.png" alt="CeliFind logo" class="w-20 lg:display-block mx-auto md:mx-0">
+                </a>
+            </div>
+
+            <div>
+                <h4 class=" mb-2">Serveis i Productes</h4>
+                    <ul class="space-y-1 text-gray-600">
+                        <li><a href="#">Productes</a></li>
+                        <li><a href="#">Receptes</a></li>
+                        <li><a href="#">Qui som</a></li>
+                        <li><a href="#">Informació</a></li>
+                    </ul>
+            </div>
+
+            <div>
+                <h4 class=" mb-2">Contacta'ns</h4>
+                <ul class="space-y-1 text-gray-600">
+                    <li><a href="mailto:celifind.cat@gmail.com">celifind.cat@gmail.com</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class=" mb-2">Política de privacitat</h4>
+                <ul class="space-y-1 text-gray-600">
+                    <li><a href="#">Avís Legal</a></li>
+                    <li><a href="#">Política de Cookies</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class=" mb-2">Ajuda</h4>
+                <ul class="space-y-1 text-gray-600">
+                    <li><a href="#">Informació</a></li>
+                    <li><a href="#">Qui Som</a></li>
+                </ul>
+            </div>
         </div>
-        <div>
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div>
-            <button type="submit" value="registrarse">Enviar</button>
-        </div>
-    </form>
-    
-    <p>¿Ya tienes una cuenta? <a href="login.view.php">Iniciar sesión</a></p>
+    </footer>
 </body>
+<script>
+    const eyeIcon = document.getElementById('eyeIcon');
+    const passwordInput = document.getElementById('password');
+    let visible = false;
+    eyeIcon.addEventListener('click', function() {
+        visible = !visible;
+        passwordInput.type = visible ? 'text' : 'password';
+        eyeIcon.src = visible ? '/img/login/ojo2.png' : '/img/login/ojo1.png';
+        eyeIcon.alt = visible ? 'Ocultar contraseña' : 'Mostrar contraseña';
+    });
+</script>
 </html>

@@ -2,27 +2,49 @@
 
 namespace App\Controller\Product;
 
-use App\Infrastructure\Persistence\ProductRepository;
+use App\Celifind\Services\ProductServices;
 use App\Celifind\Entities\Product;
 
 class ProductUpdateController{
-    private $productRepository;
+    private $productservices;
     
-    public function __construct(\PDO $db) {
+    public function __construct(\PDO $db, ProductServices $productservices) {
         $this->db = $db;
-        $this->productRepository = new ProductRepository($db);
+        $this->productservices = $productservices;
     }
     
-    function productupdate(){
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $id = filter_input(INPUT_POST, 'id');
+    function productupdates(){
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            session_start();
+            $id = filter_input(INPUT_GET, 'id');
+            
             if ($id) {
-                $fila = $this->productRepository->findById($id);
-                if ($fila) {
-                    $product = new Product($fila->id, $fila->name, $fila->description, $fila->ingredients, $fila->nutritionalinformation, $fila->price, $fila->brand, $fila->image, $fila->weight,
-                                            $fila->state, $fila->idsubcategory);
-                    echo view('product/productupdate', ['product' => $product]);
+                $fila = $this->productservices->findByIdUpdate($id);
+                $errors = $_SESSION['errors'] ?? [];
+                unset($_SESSION['errors']);
+                
+                $formData = $_SESSION['formData'] ?? null;
+                unset($_SESSION['formData']);
+                
+                if (!$formData && $fila) {
+                    $formData = [
+                        'id' => $fila->id,
+                        'name' => $fila->name,
+                        'description' => $fila->description,
+                        'ingredients' => $fila->ingredients,
+                        'nutritionalinformation' => $fila->nutritionalinformation,
+                        'price' => $fila->price,
+                        'brand' => $fila->brand,
+                        'image' => $fila->image,
+                        'weight' => $fila->weight,
+                        'state' => $fila->state,
+                    ];
                 }
+                
+                echo view('product/productupdate', [
+                    'formData' => $formData,
+                    'errors' => $errors,
+                ]);
             }
         }
     }
