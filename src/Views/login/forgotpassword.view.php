@@ -43,7 +43,7 @@ session_start();
             </div>
             <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Envia l'enllaç</button>
         </form>
-        <a href="/login" class="mt-6 text-[#fcb666] hover:underline font-inter">Tornar a login</a>
+        <a href="/login" class="mt-6 text-[#fcb666] hover:underline font-semibold">Tornar a login</a>
     </main>
     <!-- Footer -->
     <footer class=" font-calistoga text-gray-800 mt-8 w-full bot-0 px-2 lg:px-20">

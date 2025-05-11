@@ -13,7 +13,6 @@ class EmailService
     public function __construct()
     {
         $this->mailer = new PHPMailer(true);
-        $this->mailer->SMTPDebug = SMTP::DEBUG_SERVER;
         $this->mailer->isSMTP();
         $this->mailer->Host = $_ENV['MAIL_HOST'];
         $this->mailer->SMTPAuth = true;
@@ -22,7 +21,7 @@ class EmailService
         $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $this->mailer->Port = $_ENV['MAIL_PORT'];
         $this->mailer->setFrom($_ENV['MAIL_FROM'], $_ENV['MAIL_FROM_NAME']);
-        // Esto evita que compruebe el certificado, útil para entornos de desarrollo
+        // Esto evita que compruebe el certificado, para entornos de desarrollo
         $this->mailer->SMTPOptions = [
             'ssl' => [
                 'verify_peer' => false,
@@ -40,10 +39,9 @@ class EmailService
             $this->mailer->isHTML(true);
             $this->mailer->Subject = $subject;
             $this->mailer->Body = $body;
-            $sent = $this->mailer->send();
+            $this->mailer->send();
             return true;
-        } catch (\Exception $e) {
-            error_log("Mailer Error: " . $this->mailer->ErrorInfo);
+        } catch (\Exception) {
             return false;
         }
     }
