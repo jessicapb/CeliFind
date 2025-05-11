@@ -41,7 +41,8 @@ class UserRepository {
                 $row['email'],
                 $row['city'],
                 $row['postalcode'],
-                $row['password']
+                $row['password'],
+                $row['status']
             );
         }
         return null;
@@ -64,7 +65,8 @@ class UserRepository {
                 $row['email'],
                 $row['city'],
                 $row['postalcode'],
-                $row['password']
+                $row['password'],
+                $row['status']
             );
         }
         return null;
