@@ -75,7 +75,7 @@ class UserRepository {
     public function updatePassword($userId, $newPassword) {
         $stmt = $this->db->prepare("UPDATE users SET password = ?, reset_token = NULL, reset_token_expiry = NULL WHERE id = ?");
         $stmt->execute([
-            password_hash($newPassword, PASSWORD_DEFAULT),
+            $newPassword,
             $userId
         ]);
     }
