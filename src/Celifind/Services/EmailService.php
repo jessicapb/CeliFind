@@ -22,6 +22,14 @@ class EmailService
         $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $this->mailer->Port = $_ENV['MAIL_PORT'];
         $this->mailer->setFrom($_ENV['MAIL_FROM'], $_ENV['MAIL_FROM_NAME']);
+        // Esto evita que compruebe el certificado, útil para entornos de desarrollo
+        $this->mailer->SMTPOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            ]
+        ];
     }
 
     public function send($to, $subject, $body)
