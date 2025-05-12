@@ -60,6 +60,7 @@ class RecipesSaveBDController{
                 
                 // If everything is okay, save the recipes
                 $this->RecipesServices->save($recipes);
+                $_SESSION['success_add'] = true;
                 header('Location: /recipesmanager');
             } catch (BuildExceptions $e) {
                 $_SESSION['error'] = $e->getMessage();

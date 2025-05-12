@@ -22,11 +22,13 @@
             </a>
             <div class="flex items-center">
                 <?php if (isset($_SESSION['user']) && isset($_SESSION['user']['id'])) : ?>
-                    <ul class="list-none p-4 hidden lg:flex items-center">
+                    <ul class="list-none flex p-4 hidden lg:flex items-center md:flex items-center">
                         <li class="list-none ml-8"><a href="/productview">Productes</a></li>
                         <li class="list-none ml-8 mr-[15px] font-bold"><a href="/receptes">Receptes</a></li>
-                        <?php else: ?>
-                            <li class="list-none ml-8"><a href="/productview">Productes</a></li>
+                    </ul>
+                <?php else: ?>
+                    <ul class="list-none flex p-4 hidden lg:flex items-center md:flex items-center">
+                        <li class="list-none ml-8 "><a href="/productview">Productes</a></li>
                         <li class="list-none ml-8 font-bold"><a href="/receptes">Receptes</a></li>
                         <li class="list-none ml-8"><a href="/quisom">Qui som ?</a></li>
                         <li class="list-none ml-8"><a href="/informacio">Informació</a></li>

@@ -52,7 +52,9 @@ class CategoryUpdateBDController{
                     header('Location: /categoryupdate?id=' . urlencode($id));
                     exit;
                 }
+                
                 $this->category_services->update($category);  
+                $_SESSION['success_update'] = true;
                 header('Location: /category');
             } catch (BuildExceptions $e) {
                 $_SESSION['errors']['general'] = $e->getMessage();

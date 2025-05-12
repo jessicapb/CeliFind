@@ -59,17 +59,16 @@ class RecipesUpdateBDController{
             
             try {
                 //Update the recipes
-                $recipes = new Recipes(null, $name, $description, $ingredients, $nutritionalinformation, $people, $duration, $instruction, $imageData);
-                
+                $recipes = new Recipes($id, $name, $description, $ingredients, $nutritionalinformation, $people, $duration, $instruction, $imageData);
                 // Validate if the name exists
-                if ($this->recipesservices->existsRepository($name, $id)) {
+                if ($this->recipesservices->existsRecipes($name, $id)) {
                     $_SESSION['errors']['name'] = 'El nom ja està registrat';
                     header('Location: /recipesupdates?id=' . urlencode($id));
                     exit;
                 }
-                
                 // If everything is okay, update the recipes
                 $this->recipesservices->update($recipes);
+                $_SESSION['success_update'] = true;
                 header('Location: /recipesmanager');
             } catch (BuildExceptions $e) {
                 $_SESSION['errors']['general'] = $e->getMessage();

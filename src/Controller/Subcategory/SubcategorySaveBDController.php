@@ -34,6 +34,7 @@ class SubcategorySaveBDController{
                     exit;
                 }
                 $this->SubcategoryServices->save($subcategory);
+                $_SESSION['success_add'] = true;
                 header('Location: /subcategory');
             } catch (BuildExceptions $e) {
                 $_SESSION['error'] = $e->getMessage();

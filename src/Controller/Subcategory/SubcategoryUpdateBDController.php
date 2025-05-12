@@ -19,7 +19,7 @@ class SubcategoryUpdateBDController{
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_start();
             $_SESSION['errors'] = [];
-
+            
             $id = filter_input(INPUT_POST, 'id');
             $name = filter_input(INPUT_POST, 'name');
             $description = filter_input(INPUT_POST, 'description');
@@ -33,6 +33,7 @@ class SubcategoryUpdateBDController{
                     exit;
                 }
                 $this->subcategory_services->update($subcategory);  
+                $_SESSION['success_update'] = true;
                 header('Location: /subcategory');
             } catch (BuildExceptions $e) {
                 $_SESSION['errors']['general'] = $e->getMessage();

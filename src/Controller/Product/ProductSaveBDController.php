@@ -10,7 +10,7 @@ use App\Celifind\Exceptions\BuildExceptions;
 class ProductSaveBDController{
     private \PDO $db;
     private ProductRepository $ProductRepository;
-    private ProductServices $ProductServices;
+    private ProductServices $ProductService;
     
     public function __construct(\PDO $db) {
         $this->db = $db;
@@ -62,6 +62,7 @@ class ProductSaveBDController{
                 
                 // If everything is okay, save the product.
                 $this->ProductService->save($product);  
+                $_SESSION['success_add'] = true;
                 header('Location: /productmanager');
             }catch (BuildExceptions $e) {
                 $_SESSION['error'] = $e->getMessage();

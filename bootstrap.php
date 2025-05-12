@@ -40,6 +40,15 @@ use App\Controller\Recipes\RecipesSearchBDController;
 use App\Controller\Recipes\RecipesSearchAllBDController;
 use App\Controller\Recipes\RecipesUpdateBDController;
 
+// ViewsEstablishments
+use App\Controller\Establishments\EstablishmentsManagerController;
+use App\Controller\Establishments\EstablishmentsAddController;
+
+//ControllerEstablishments
+use App\Controller\Establishments\EstablishmentsSaveBDController;
+use App\Controller\Establishments\EstablishmentsDeleteBDController;
+use App\Controller\Establishments\EstablishmentsSearchBDController;
+
 // ControllerCategory
 use App\Controller\Category\CategoryShowBDController;
 use App\Controller\Category\CategoryAddBDController;
@@ -69,6 +78,15 @@ use App\Controller\User\ResetPasswordController;
 use App\Controller\User\EditProfileController;
 use App\Celifind\Services\EmailService;
 
+// User manager
+use App\Controller\User\UserManagerController;
+
+// User views
+use App\Controller\User\UserAddController;
+
+// User controler
+use App\Controller\User\UserSaveBDController;
+
 //Privacity
 use App\Controller\Privacity\privacityController;
 use App\Controller\Privacity\politicprivController;
@@ -95,6 +113,9 @@ use App\Celifind\Services\CategoryServices;
 // Subcategory Services
 use App\Celifind\Services\SubcategoryServices;
 
+// Establishments Services
+use App\Celifind\Services\EstablishmentsServices;
+
 // RepositoryCategory
 use App\Infrastructure\Persistence\CategoryRepository;
 
@@ -109,6 +130,9 @@ use  App\Infrastructure\Persistence\RecipesRepository;
 
 // RepositoryUser
 use App\Infrastructure\Persistence\UserRepository;
+
+// RepositoryEstablishments
+use App\Infrastructure\Persistence\EstablishmentsRepository;
 
 //Routes
 use App\Infrastructure\Routing\Router;
@@ -192,6 +216,14 @@ $showformupdaterecipes = new RecipesUpdateController($db, $RecipesServices);
 
 // Update the product
 $controllerupdaterecipes = new RecipesUpdateBDController($db, $RecipesServices);
+
+// Routes Establishments Repository
+$services->addServices('establishmentsRepository', fn() => new EstablishmentsRepository($db));
+$establishmentsRepository = $services->getService('establishmentsRepository');
+
+// Routes Establishments Services
+$services->addServices('establishmentsServices', fn() => new EstablishmentsServices($db, $services->getService('establishmentsRepository')));
+$establishmentsServices = $services->getService('establishmentsServices');
 
 // Routes Category Repository
 $services->addServices('categoryRepository', fn() => new CategoryRepository($db));
@@ -388,4 +420,30 @@ $router
     
     // Editar perfil usuario
     ->addRoute('GET','/editprofile',[$editProfileController,'showEditProfile'])
-    ->addRoute('POST','/editprofile',[$editProfileController,'updateProfile']);
+    ->addRoute('POST','/editprofile',[$editProfileController,'updateProfile'])
+    
+    // Go to the manager user view
+    ->addRoute('GET','/usersmanager',[new UserManagerController($userRepository),'usersmanager'])
+    
+    // Go to the update user 
+    ->addRoute('GET','/useradd',[new UserAddController(),'useradd'])
+    
+    // Add a user
+    ->addRoute('POST','/saveuser',[new UserSaveBDController($db, $userRepository),'saveuser'])
+    
+    // Go to the manager establishments view
+    ->addRoute('GET','/establishmentsmanager',[new EstablishmentsManagerController($establishmentsServices),'establishmentsmanager'])
+    
+    // Go to the manager establishments add
+    ->addRoute('GET','/establishmentsadd',[new EstablishmentsAddController(),'establishmentsadd'])
+    
+    // Go to the add establishments
+    ->addRoute('POST','/savestablishments',[new EstablishmentsSaveBDController($db, $establishmentsServices),'savestablishments'])
+    
+    // Delete the establishment
+    ->addRoute('POST','/deleteestablishments',[new EstablishmentsDeleteBDController($db),'deleteestablishments'])
+    
+    // Search the establishment
+    ->addRoute('POST', '/searchestablishments', [new EstablishmentsSearchBDController($db, $establishmentsServices), 'searchestablishments'])
+    
+    ->addRoute('GET', '/showsearchresults', [new EstablishmentsSearchBDController($db, $establishmentsServices), 'showsearchresults']);

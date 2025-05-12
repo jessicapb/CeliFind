@@ -28,7 +28,7 @@ class RecipesRepository{
     }
     
     // Exists name and id
-    function existsRepository(string $name, int $id): bool{
+    function existsRecipes(string $name, int $id): bool{
         try {
             $stmt = $this->db->prepare("SELECT * FROM recipes WHERE name = :name AND id != :id");
             $stmt->execute(['name' => $name, 'id' => $id]);    
@@ -121,6 +121,29 @@ class RecipesRepository{
             $allrecipes[] = $recipes;
         }
         return $allrecipes;
+    }
+    
+    
+    // Update
+    function updateRecipes(Recipes $recipes){
+        try {
+            $sql = $this->db->prepare("UPDATE recipes SET name = :name, description = :description, ingredients = :ingredients, nutritionalinformation = :nutritionalinformation, 
+                                        people = :people, duration = :duration, instruction = :instruction, image = :image  WHERE id = :id");
+            $sql->execute([
+                'id' => $recipes->getId(),
+                'name' => $recipes->getName(),
+                'description' => $recipes->getDescription(),
+                'ingredients' => $recipes->getIngredients(),
+                'nutritionalinformation' => $recipes->getNutritionalInformation(),
+                'people' => $recipes->getPeople(),
+                'duration' => $recipes->getDuration(),
+                'instruction' => $recipes->getInstruction(),
+                'image' => $recipes->getImage()
+            ]);
+            return true;
+        } catch (\PDOException $e) {
+            throw new BuildExceptions("Error updating the recipes:" . $e->getMessage());
+        }
     }
     
     // Delete

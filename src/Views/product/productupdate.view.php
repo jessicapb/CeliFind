@@ -21,9 +21,10 @@
             <div class="flex items-center">
                 <a href="/productmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-bold">Productes</a>
                 <a href="/recipesmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Receptes</a>
-                <a href="/category" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Establiments</a>
+                <a href="/establishmentsmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Establiments</a>
                 <a href="/category" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Categories</a>
                 <a href="/subcategory" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Subcategories</a>
+                <a href="/usersmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Usuaris</a>
                 <!-- Dropdown -->
                 <div class="relative inline-block text-left">
                     <?php if (isset($_SESSION['user'])): ?>
@@ -69,35 +70,35 @@
                 <!-- Description -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Descripció</label>
-                    <textarea name="description" class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" ><?= $formData['description'] ?? '' ?></textarea>
+                    <textarea name="description" class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" placeholder="escriu la descripció"><?= $formData['description'] ?? '' ?></textarea>
                     <p class="text-red-500 mt-[5px] font-inter text-[15px]"><?= $errors['description'] ?? '' ?></p>
                 </div>
                 
                 <!-- Price -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Preu</label>
-                    <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" value="<?= $formData['price'] ?? '' ?>" name="price" type="text">
+                    <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" value="<?= $formData['price'] ?? '' ?>" placeholder="escriu el preu" name="price" type="text">
                     <p class="text-red-500 mt-[5px] font-inter text-[15px]"><?= $errors['price'] ?? '' ?></p>
                 </div>
                 
                 <!-- Ingredients -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Ingredients</label>
-                    <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="ingredients"><?= $formData['ingredients'] ?? '' ?></textarea>
+                    <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="ingredients" placeholder="escriu els ingredients"><?= $formData['ingredients'] ?? '' ?></textarea>
                     <p class="text-red-500 mt-[5px] font-inter text-[15px]"><?= $errors['ingredients'] ?? '' ?></p>
                 </div>
                 
                 <!-- Nutritional information -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Informació nutricional</label>
-                    <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="nutritionalinformation"><?= $formData['nutritionalinformation'] ?? 'No en té' ?></textarea>
+                    <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="nutritionalinformation" placeholder="escriu la informació nutricional"><?= $formData['nutritionalinformation'] ?? 'No en té' ?></textarea>
                     <p class="text-red-500 mt-[5px] font-inter text-[15px]"><?= $errors['nutritionalinformation'] ?? '' ?></p>
                 </div>
                 
                 <!-- Brand -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Marca</label>
-                    <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="brand"><?= $formData['brand'] ?? '' ?></textarea></textarea>
+                    <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" placeholder="escriu la marca" name="brand"><?= $formData['brand'] ?? '' ?></textarea>
                     <p class="text-red-500 mt-[5px] font-inter text-[15px]"><?= $errors['brand'] ?? '' ?></p>
                 </div>
                 
@@ -124,7 +125,7 @@
                 <!-- Weight -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Pes</label>
-                    <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" value="<?= $formData['weight'] ?? '' ?>" name="weight"  type="text">
+                    <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" placeholder="escriu el pes" value="<?= $formData['weight'] ?? '' ?>" name="weight"  type="text">
                     <p class="text-red-500 mt-[5px] font-inter text-[15px]"><?= $errors['weight'] ?? '' ?></p>
                 </div> 
                 

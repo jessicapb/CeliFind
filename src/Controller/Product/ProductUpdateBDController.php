@@ -70,6 +70,7 @@ class ProductUpdateBDController{
                 
                 // If everything is okay, update the product.
                 $this->productservices->update($product);  
+                $_SESSION['success_update'] = true;
                 header('Location: /productmanager');
             }catch (BuildExceptions $e) {
                 $_SESSION['errors']['general'] = $e->getMessage();

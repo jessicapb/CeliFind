@@ -9,21 +9,26 @@ session_start();
     <title>Recupera la teva contrasenya</title>
     <link href="/src/output.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
+    <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
 
-<body class="bg-slate-100 flex flex-col items-center justify-center min-h-screen px-2">
+<body>
     <!-- Header -->
-    <div class="p-1 space-y-0.5 top-0 left-0 right-0 flex justify-between w-full min-w-full">
-        <div class="flex flex-col w-full">
-            <img src="../../img/logo/logo.png" alt="Celifind logo" class="w-32 ml-4 mt-4 " href="/">
-            <a class="font-calistoga flex items-center gap-x-2 pt-[10px] pl-[20px] rounded-[50px] text-[24px] text-black opacity-[78%] font-light">
-                <img class="w-8 h-8" src="../../img/home/home.png" alt="home">
-                Tornar al gestor
+    <header class="p-4 border-b border-gray-300">
+        <nav class="flex flex-col w-full">
+            <a href="/home" class="block w-fit">
+                <img src="../../img/logo/logo.png" alt="Celifind logo" class="w-32 h-auto block">
             </a>
-        </div>
-    </div>
+        </nav>
+    </header>
     <!-- End Header -->
-    <main class="flex-1 flex flex-col items-center justify-center w-full">
+    
+    <main class="bg-slate-100 flex flex-col items-center justify-center min-h-screen">
         <h1 class="text-4xl font-calistoga font-bold mb-8 mt-8 text-gray-800 text-center">Recupera la teva contrasenya
         </h1>
         <?php if (!empty($_SESSION['success'])): ?>
@@ -43,52 +48,10 @@ session_start();
             </div>
             <button class="w-full bg-[#fcb666] text-white font-calistoga text-lg py-2 rounded mt-2 hover:bg-[#fcb666]/80 transition">Envia l'enllaç</button>
         </form>
-        <a href="/login" class="mt-6 text-[#fcb666] hover:underline font-inter">Tornar a login</a>
+        <a href="/login" class="mt-6 text-[#fcb666] hover:underline font-semibold">Tornar a login</a>
     </main>
-    <!-- Footer -->
-    <footer class=" font-calistoga text-gray-800 mt-8 w-full bot-0 px-2 lg:px-20">
-        <div class="grid grid-cols-1 max-w-screen mx-auto md:grid-cols-5 text-center lg:text-start md:text-start gap-8 text-sm justify-center">
-
-            <div class="md:col-span-1 flex flex-col space-y-2">
-                <a href="/">
-                    <img src="../img/logo/logo.png" alt="CeliFind logo" class="w-20 lg:display-block mx-auto md:mx-0">
-                </a>
-            </div>
-
-            <div>
-                <h4 class=" mb-2">Serveis i Productes</h4>
-                <ul class="space-y-1 text-gray-600">
-                    <li><a href="#">Productes</a></li>
-                    <li><a href="#">Receptes</a></li>
-                    <li><a href="#">Qui som</a></li>
-                    <li><a href="#">Informació</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class=" mb-2">Contacta'ns</h4>
-                <ul class="space-y-1 text-gray-600">
-                    <li><a href="mailto:celifind.cat@gmail.com">celifind.cat@gmail.com</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class=" mb-2">Política de privacitat</h4>
-                <ul class="space-y-1 text-gray-600">
-                    <li><a href="#">Avís Legal</a></li>
-                    <li><a href="#">Política de Cookies</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class=" mb-2">Ajuda</h4>
-                <ul class="space-y-1 text-gray-600">
-                    <li><a href="#">Informació</a></li>
-                    <li><a href="#">Qui Som</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
+    
+    <!--Footer section!-->
+    <?php include 'src/Views/parts/footer/footer.view.php'?>
 </body>
-
 </html>

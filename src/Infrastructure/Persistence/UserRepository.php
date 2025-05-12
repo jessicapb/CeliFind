@@ -29,6 +29,7 @@ class UserRepository {
         ]);
     }
 
+    
     public function findByEmail($email): ?User {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->execute([$email]);
@@ -64,7 +65,8 @@ class UserRepository {
                 $row['email'],
                 $row['city'],
                 $row['postalcode'],
-                $row['password']
+                $row['password'],
+                $row['status']
             );
         }
         return null;
@@ -73,7 +75,7 @@ class UserRepository {
     public function updatePassword($userId, $newPassword) {
         $stmt = $this->db->prepare("UPDATE users SET password = ?, reset_token = NULL, reset_token_expiry = NULL WHERE id = ?");
         $stmt->execute([
-            password_hash($newPassword, PASSWORD_DEFAULT),
+            $newPassword,
             $userId
         ]);
     }
@@ -100,4 +102,16 @@ class UserRepository {
             ]);
         }
     }
+
+    // Manager querys
+    // Select limit
+    function showlimit(){
+        $allusers = [];
+        $sql = $this->db->prepare("SELECT * FROM users");
+        $sql->execute();
+        $row = $sql->fetchAll(\PDO::FETCH_ASSOC);
+        return $row;
+    }
+
+    //asasasa
 }

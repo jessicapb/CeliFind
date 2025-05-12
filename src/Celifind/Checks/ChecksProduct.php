@@ -86,12 +86,21 @@ class ChecksProduct extends Checks{
     }
     
     //ESTABLISHMENTS
-    public static function validateSchedule($schedule){
-        $durationPattern = '/^\d{0,9}-\d{1,3}min$|^\d{1,3}min$/';
-        if (!preg_match($durationPattern, $schedule)){
-            return -10;
+    // Function to validate phone number pattern (e.g. "937 63 96 12")
+    public static function validatePhoneNumber($phoneNumber){
+        $phonePattern = '/^\d{3} \d{2} \d{2} \d{2}$/';
+        if (!preg_match($phonePattern, $phoneNumber)){
+            return -11;
         }
-        return 0;
+        return 0;  
+    }
+    
+    public static function validateURL($url){
+        $urlPattern = '/^https:\/\/[a-z0-9\-]+(\.[a-z]{2,})+\/?$/i';
+        if (!preg_match($urlPattern, $url)){
+            return -12;
+        }
+        return 0;  
     }
     
     public static function getErrorMessage($e) {
@@ -111,6 +120,8 @@ class ChecksProduct extends Checks{
             -8 => "L'estructura del camp és incorrecta. Exemple: 125g.",
             -9 => "L'estructura del camp és incorrecta. Exemple: 8 persones o 15 persones",
             -10 => "L'estructura del camp és incorrecta. Exemple: 115-120min o 30min",
+            -11 => "L'estructura del camp és incorrecta. Exemple: 107 53 56 92.",
+            -12 => "L'estructura del camp és incorrecta. Exemple: https://celifind.cat/.",
             default => "Error desconegut",
         };
     }

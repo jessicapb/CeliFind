@@ -21,9 +21,10 @@
             <div class="flex items-center">
                 <a href="/productmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-bold">Productes</a>
                 <a href="/recipesmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Receptes</a>
-                <a href="/category" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Establiments</a>
+                <a href="/establishmentsmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Establiments</a>
                 <a href="/category" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Categories</a>
                 <a href="/subcategory" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Subcategories</a>
+                <a href="/usersmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Usuaris</a>
                 <!-- Dropdown -->
                 <div class="relative inline-block text-left">
                     <?php if (isset($_SESSION['user'])): ?>

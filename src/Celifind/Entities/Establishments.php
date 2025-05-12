@@ -9,11 +9,12 @@ class Establishments{
     protected string $name;
     protected string $description;
     protected string $location;
+    protected string $phonenumber;
+    protected string $website;
     protected string $schedule;
-    protected string $letter;
     protected string $image;
     
-    public function __construct(?int $id = null, string $name, string $description, string $location, string $schedule, string $letter, string $image){
+    public function __construct(?int $id = null, string $name, string $description, string $location, string $phonenumber, string $website, string $schedule, string $image){
         $error = 0;
         
         $this->id = $id;
@@ -29,12 +30,16 @@ class Establishments{
             $_SESSION['errors']['location'] = ChecksProduct::getErrorMessage($error);
         }
         
-        if(($error = $this->setSchedule($schedule)) !=0){
-            $_SESSION['errors']['schedule'] = ChecksProduct::getErrorMessage($error);
+        if (($error = $this->setPhonenumber($phonenumber)) != 0){
+            $_SESSION['errors']['phonenumber'] = ChecksProduct::getErrorMessage($error);
         }
         
-        if(($error = $this->setLetter($letter)) !=0){
-            $_SESSION['errors']['letter'] = ChecksProduct::getErrorMessage($error);
+        if (($error = $this->setWebsite($website)) != 0){
+            $_SESSION['errors']['website'] = ChecksProduct::getErrorMessage($error);
+        }
+        
+        if(($error = $this->setSchedule($schedule)) !=0){
+            $_SESSION['errors']['schedule'] = ChecksProduct::getErrorMessage($error);
         }
         
         if(($error = $this->setImage($image)) !=0){
@@ -113,12 +118,57 @@ class Establishments{
             return $errorWord;
         }
         
-        $errorNotNumber = ChecksProduct::validateProductNotNumber($location);
-        if($errorNotNumber !=0){
-            return $errorNotNumber;
+        $this->location = $location;
+        return 0; 
+    }
+    
+    //PhoneNumber
+    public function getPhoneNumber(): string{
+        return $this->phonenumber;
+    }
+    
+    public function setPhonenumber(string $phonenumber): int{
+        $errorNull = ChecksProduct::minMaxLength($phonenumber, 4, 1060);
+        if($errorNull !=0){
+            return $errorNull;       
         }
         
-        $this->location = $location;
+        $errorWord = ChecksProduct::validateProductWords($phonenumber);
+        if($errorWord !=0){
+            return $errorWord;
+        }
+        
+        $errorPatternPhone = ChecksProduct::validatePhoneNumber($phonenumber);
+        if($errorPatternPhone !=0){
+            return $errorPatternPhone;
+        }
+        
+        $this->phonenumber = $phonenumber;
+        return 0; 
+    }
+    
+    // Website
+    public function getWebsite(): string{
+        return $this->website;
+    }
+    
+    public function setWebsite(string $website): int{
+        $errorNull = ChecksProduct::minMaxLength($website, 4, 1060);
+        if($errorNull !=0){
+            return $errorNull;       
+        }
+        
+        $errorWord = ChecksProduct::validateProductWords($website);
+        if($errorWord !=0){
+            return $errorWord;
+        }
+        
+        $errorPatternURL = ChecksProduct::validateURL($website);
+        if($errorPatternURL !=0){
+            return $errorPatternURL;
+        }
+        
+        $this->website = $website;
         return 0; 
     }
     
@@ -138,37 +188,7 @@ class Establishments{
             return $errorWord;
         }
         
-        $errorNotNumber = ChecksProduct::validateProductNotNumber($schedule);
-        if($errorNotNumber !=0){
-            return $errorNotNumber;
-        }
-        
         $this->schedule = $schedule;
-        return 0; 
-    }
-    
-    // Letter
-    public function getLetter(): string{
-        return $this->letter;
-    }
-    
-    public function setLetter(string $letter): int{
-        $errorNull = ChecksProduct::minMaxLength($letter, 4, 1060);
-        if($errorNull !=0){
-            return $errorNull;       
-        }
-        
-        $errorWord = ChecksProduct::validateProductWords($letter);
-        if($errorWord !=0){
-            return $errorWord;
-        }
-        
-        $errorNotNumber = ChecksProduct::validateProductNotNumber($letter);
-        if($errorNotNumber !=0){
-            return $errorNotNumber;
-        }
-        
-        $this->letter = $letter;
         return 0; 
     }
     

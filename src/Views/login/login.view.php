@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
 <html lang="ca">
-
 <head>
     <meta charset="UTF-8">
     <title>Inici de sessió</title>
@@ -13,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Klee+One&display=swap" rel="stylesheet">
     <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
-
 <body>
     <!-- Header -->
     <header class="p-4 border-b border-gray-300">

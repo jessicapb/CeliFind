@@ -18,8 +18,8 @@ class RecipesServices{
         return $this->RecipesRepository->exists($name);
     }
     
-    function existsRepository(string $name):bool{
-        return $this->RecipesRepository->existsRepository($name);
+    function existsRecipes(string $name, int $id):bool{
+        return $this->RecipesRepository->existsRecipes($name, $id);
     }
     
     function save(Recipes $recipes){
@@ -41,6 +41,10 @@ class RecipesServices{
     
     function selectall(){
         return $this->RecipesRepository->selectall();
+    }
+    
+    function update(Recipes $recipes){
+        return $this->RecipesRepository->updateRecipes($recipes);
     }
     
     function delete(int $id){

@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+    <link rel="shortcut icon"  href="../../img/logo/logocelifind.png" type="image/x-icon">
 </head>
 <body>
     <header class="p-4 border-b border-gray-300">
@@ -18,11 +19,13 @@
             </a>
             <div class="flex items-center">
                 <?php if (isset($_SESSION['user']) && isset($_SESSION['user']['id'])) : ?>
-                    <ul class="list-none p-4 hidden lg:flex items-center">
+                    <ul class="list-none flex p-4 hidden lg:flex items-center md:flex items-center">
                         <li class="list-none ml-8 font-bold"><a href="/productview">Productes</a></li>
                         <li class="list-none ml-8 mr-[15px]"><a href="/receptes">Receptes</a></li>
-                        <?php else: ?>
-                            <li class="list-none ml-8 font-bold"><a href="/productview">Productes</a></li>
+                    </ul>
+                <?php else: ?>
+                    <ul class="list-none flex p-4 hidden lg:flex items-center md:flex items-center">
+                        <li class="list-none ml-8 font-bold"><a href="/productview">Productes</a></li>
                         <li class="list-none ml-8"><a href="/receptes">Receptes</a></li>
                         <li class="list-none ml-8"><a href="/quisom">Qui som ?</a></li>
                         <li class="list-none ml-8"><a href="/informacio">Informació</a></li>

@@ -41,12 +41,12 @@ class UserLoginController
 
             $email = filter_input(INPUT_POST, 'email');
             $password = filter_input(INPUT_POST, 'password');
-
             $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ?");
             $stmt->execute([$email]);
             $row = $stmt->fetch(\PDO::FETCH_ASSOC);
-
+            
             if ($row) {
+                //dd($password, $row['password']);
                 if (password_verify($password, $row['password'])) {
                     $_SESSION['user'] = [
                         'id' => $row['id'],

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,26 +18,37 @@
             <a class="pl-[20px] pt-[20px]" href="/productmanager">
                 <img class="w-32" src="../../img/logo/logo.png" alt="logoimg">
             </a>
-            <div class="flex items-center mr-[20px]">
+            <div class="flex items-center">
                 <a href="/productmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Productes</a>
                 <a href="/recipesmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-bold">Receptes</a>
-                <a href="/category" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Establiments</a>
+                <a href="/establishmentsmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Establiments</a>
                 <a href="/category" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Categories</a>
                 <a href="/subcategory" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Subcategories</a>
+                <a href="/usersmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Usuaris</a>
                 <!-- Dropdown -->
                 <div class="relative inline-block text-left">
-                    <button id="dropdown-toggle" type="button" class="font-inter p-[8px] w-[90%] mr-[65px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
-                    Administrador
-                    </button>
-                    
-                    <div id="dropdown-menu" class="font-inter hidden absolute left-0 mt-2 w-[90%] origin-top-center text-black bg-white border-1 shadow-lg rounded-[50px] z-10">
-                        <div class="p-1 space-y-0.5">
-                            <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/logout">
-                                <img class="w-[18%] h-[18%]" src="../../img/logout/logout.svg" alt="">
-                                Tancar sessió
-                            </a>
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <button id="dropdown-toggle" type="button" class="font-inter min-w-[180px] p-[8px] mr-[30px] mt-[20px] text-[16px] text-black border-[#fcb666] border-2 rounded-[50px] font-normal hover:bg-[#fcb666] hover:text-[white] hover:font-normal hover:border-[#fcb666] hover:border-2 transition duration-200">
+                            <?= htmlspecialchars($_SESSION['user']['name']) ?>
+                        </button>
+                        <div id="dropdown-menu" class="font-inter hidden absolute left-0 mt-2 w-[90%] origin-top-center text-black bg-white border-1 shadow-lg rounded-[20px] z-10">
+                            <div class="p-1 space-y-0.5">
+                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/editprofile">
+                                    <img class="w-[17%] h-[17%]" src="../../img/logout/editar.svg" alt="">
+                                    Editar perfil
+                                </a>
+                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/home">
+                                    <img class="w-[17%] h-[17%]" src="../../img/logout/home.svg" alt="">
+                                    Home
+                                </a>
+                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/logout">
+                                    <img class="w-[18%] h-[18%]" src="../../img/logout/logout.svg" alt="">
+                                    Tancar sessió
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    <?php else: ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </nav>
@@ -52,49 +64,49 @@
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Nom</label>
                     <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" value="<?= $formData['name'] ?? '' ?>" name="name" type="text" placeholder="escriu el nom">
-                    <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]" id="error-name"></p>
+                    <p class="text-red-500 mt-[5px] font-inter text-[15px]"><?= $errors['name'] ?? '' ?></p>
                 </div>
                 
                 <!-- Description -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Descripció</label>
                     <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="description" placeholder="escriu la descripció"><?= $formData['description'] ?? '' ?></textarea>
-                    <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]" id="error-description"></p>
+                    <p class="text-red-500 mt-[5px] font-inter text-[15px]"><?= $errors['description'] ?? '' ?></p>
                 </div>
                 
                 <!-- Ingredients -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Ingredients</label>
                     <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="ingredients" placeholder="escriu els ingredients"><?= $formData['ingredients'] ?? '' ?></textarea>
-                    <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]" id="error-ingredients"></p>
+                    <p class="text-red-500 mt-[5px] font-inter text-[15px]"><?= $errors['ingredients'] ?? '' ?></p>
                 </div>
                 
                 <!-- Nutritional information -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Informació nutricional</label>
                     <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="nutritionalinformation" placeholder="escriu la informació nutricional"><?= $formData['nutritionalinformation'] ?? 'No en té' ?></textarea>
-                    <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]"  id="error-nutritionalinformation"></p>
+                    <p class="text-red-500 mt-[5px] font-inter text-[15px]"><?= $errors['nutritionalinformation'] ?? '' ?></p>
                 </div>
                 
                 <!-- People -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Persones</label>
                     <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" value="<?= $formData['people'] ?? '' ?>" name="people" type="text" placeholder="escriu el nombre de persones">
-                    <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]" id="error-people"></p>
+                    <p class="text-red-500 mt-[5px] font-inter text-[15px]"><?= $errors['people'] ?? '' ?></p>
                 </div>
                 
                 <!-- Duration -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Duració</label>
                     <input class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" value="<?= $formData['duration'] ?? '' ?>" name="duration" type="text" placeholder="escriu la duració">
-                    <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]" id="error-duration"></p>
+                    <p class="text-red-500 mt-[5px] font-inter text-[15px]"><?= $errors['duration'] ?? '' ?></p>
                 </div>
                 
                 <!-- Instruction -->
                 <div class="flex flex-col  mb-[15px]">
                     <label class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Instruccions</label>
                     <textarea class="border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black text-[16px] font-normal font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow" name="instruction" placeholder="escriu les instruccions"><?= $formData['instruction'] ?? '' ?></textarea>
-                    <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]"  id="error-instruction"></p>
+                    <p class="text-red-500 mt-[5px] font-inter text-[15px]"  id="error-instruction"><?= $errors['instruction'] ?? '' ?></p>
                 </div>
                 
                 <!-- Image-->
@@ -114,7 +126,7 @@
                         <img id="preview-img" src="../../img/uploadimage/imageupload.png" alt="imatge" class="w-[50px] h-[50px] object-cover rounded-[5px] mr-[10px]">
                         <span id="image-name" class="text-black text-[16px] font-normal"></span>
                     </div>
-                    <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]" id="error-image"></p> 
+                    <p class="text-red-500 mt-[5px] font-inter text-[15px]"><?= $errors['image'] ?? '' ?></p> 
                 </div>
                 
                 <!-- Button -->

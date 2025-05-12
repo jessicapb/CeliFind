@@ -20,11 +20,13 @@
             </a>
             <div class="flex items-center">
                 <?php if (isset($_SESSION['user']) && isset($_SESSION['user']['id'])) : ?>
-                    <ul class="list-none p-4 hidden lg:flex items-center">
+                    <ul class="list-none flex p-4 hidden lg:flex items-center md:flex items-center">
                         <li class="list-none ml-8"><a href="/productview">Productes</a></li>
                         <li class="list-none ml-8 mr-[15px]"><a href="/receptes">Receptes</a></li>
-                        <?php else: ?>
-                            <li class="list-none ml-8"><a href="/productview">Productes</a></li>
+                    </ul>
+                <?php else: ?>
+                    <ul class="list-none flex p-4 hidden lg:flex items-center md:flex items-center">
+                        <li class="list-none ml-8"><a href="/productview">Productes</a></li>
                         <li class="list-none ml-8"><a href="/receptes">Receptes</a></li>
                         <li class="list-none ml-8"><a href="/quisom">Qui som ?</a></li>
                         <li class="list-none ml-8"><a href="/informacio">Informació</a></li>
@@ -133,7 +135,7 @@
                     <p class="font-inter text-[19px] mt-2">Descobreix els nostres productes sense gluten, creats per al teu benestar i gaudeix amb confiança!</p>
 
                     <div class="mt-[80px]">
-                        <a href="#" class="bg-[#fcb666] text-[18px] border-[#fcb666] border-2 text-white font-inter p-3 rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-[#fcb666] hover:border-2 transition duration-200">Descobreix les nostres receptes</a>
+                        <a href="/receptes" class="bg-[#fcb666] text-[18px] border-[#fcb666] border-2 text-white font-inter p-3 rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-[#fcb666] hover:border-2 transition duration-200">Descobreix les nostres receptes</a>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,8 @@ namespace App\Celifind\Entities;
 use App\Celifind\Checks\Checks;
 use App\Celifind\Checks\ChecksUser;
 use App\Celifind\Exceptions\BuildExceptions;
+//use ReflectionClass;
+
 
 class User
 {
@@ -49,7 +51,7 @@ class User
             $_SESSION['errors']['password'] = ChecksUser::getErrorMessage($error);
         }
 
-        $this->status = $status; // No validation, since there is no backoffice to pply it with
+        $this->status = $status; // No validation, since there is no backoffice to apply it with
 
         if (!empty($_SESSION['errors'])) {
             $errorMessage = json_encode($_SESSION['errors']);
@@ -60,17 +62,17 @@ class User
     /**
      * Crea un usuario a partir de los datos de la base de datos (sin validar)
      */
-    public static function fromDbRow($id, $name, $surname, $email, $city, $postalcode, $password)
+    public static function fromDbRow($id, $name, $surname, $email, $city, $postalcode, $password, $status)
     {
-        $user = new self('', '', '', '', '', ''); // No valida nada
+        $user = (new \ReflectionClass(self::class))->newInstanceWithoutConstructor(); // No valida nada
         $user->id = $id;
         $user->name = $name;
-        $user->surname = $surname;
+        $user->surname = $surname ?? "";
         $user->email = $email;
-        $user->city = $city;
+        $user->city = $city ?? "";
         $user->postalcode = $postalcode;
         $user->password = $password;
-        $user->status = 1; // No se guarda en la base de datos, pero lo inicializamos a 1 por defecto
+        $user->status = $status;
         return $user;
     }
 
