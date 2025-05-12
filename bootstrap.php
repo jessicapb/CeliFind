@@ -76,6 +76,7 @@ use App\Controller\Privacity\politicprivController;
 use App\Controller\Pages\quisomController;
 use App\Controller\Pages\informacioController;
 use App\Controller\Pages\locationController;
+use App\Controller\Pages\EstablishmentsController;
 
 // Database
 use App\Infrastructure\Database\DatabaseConnection;
@@ -95,6 +96,9 @@ use App\Celifind\Services\CategoryServices;
 // Subcategory Services
 use App\Celifind\Services\SubcategoryServices;
 
+//
+use App\Celifind\Services\EstablishmentsServices;
+
 // RepositoryCategory
 use App\Infrastructure\Persistence\CategoryRepository;
 
@@ -109,6 +113,10 @@ use  App\Infrastructure\Persistence\RecipesRepository;
 
 //Routes
 use App\Infrastructure\Routing\Router;
+
+//---------------------
+// RepositoryEstablishments
+use App\Infrastructure\Persistence\EstablishmentsRepository;
 
 // Services and connection to database
 $db=DatabaseConnection::getConnection();
@@ -142,10 +150,6 @@ $controllerproducttosubcategory = new ProductToSubcategoryBDController($db);
 
 // Show the form for update the product
 $showformupdate = new ProductUpdateController($db);
-
-
-// Show the products of home
-$homeproducts = new HomeController($productServices);
 
 // User controllers
 $userLoginController = new UserLoginController($db);
@@ -197,6 +201,17 @@ $categoryServices = $services->getService('categoryServices');
 $services->addServices('subcategoryServices', fn() => new SubcategoryServices($db, $services->getService('subcategoryRepository')));
 $subcategoryServices = $services->getService('subcategoryServices');
 
+// Routes Establishments Repository
+$services->addServices('establishmentsRepository', fn() => new EstablishmentsRepository($db));
+$establishmentsRepository = $services->getService('establishmentsRepository');
+
+// Routes Establishments Services
+$services->addServices('establishmentsServices', fn() => new EstablishmentsServices($db, $services->getService('establishmentsRepository')));
+$establishmentsServices = $services->getService('establishmentsServices');
+
+// Show the products of home
+$homeproducts = new HomeController($productServices, $establishmentsServices);
+
 // Show a individual product
 $showindividualproduct =  new ProductIndividualController($productServices ,$subcategoryServices);
 
@@ -220,6 +235,9 @@ $shownameproductandsubcategory = new ProductToSubcategoryController($productServ
 
 // Show the product and the of the subcategory
 $showlimitproduct = new ProductManagerController($productServices, $subcategoryServices);
+
+
+
 
 // Routes to show the views
 $router = new Router();
@@ -381,4 +399,8 @@ $router
 
     //Go to Locations
 
-    ->addRoute('GET','/locationview',[new locationController(),'location']);
+    ->addRoute('GET','/locationview',[new locationController(),'location'])
+
+    ->addRoute('GET','/showestablishment',[new EstablishmentsController($db,$establishmentsServices ),'showestablishment']);
+
+//-----------------------

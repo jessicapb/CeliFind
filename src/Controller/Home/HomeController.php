@@ -4,16 +4,21 @@ namespace App\Controller\Home;
 
 use App\Celifind\Services\ProductServices;
 use App\Celifind\Entities\Product;
+use App\Celifind\Services\EstablishmentsServices;
 
 class HomeController{
     private $productservices;
     private $subcategoryrepository;
-    public function __construct(ProductServices $productservices) {
+    private $establishmentservices;
+
+    public function __construct(ProductServices $productservices, EstablishmentsServices $establishmentservices) {
         $this->productservices = $productservices;
+        $this->establishmentservices = $establishmentservices;
     }
     
     function home(){
         $products = $this->productservices->stateonelimit();
-        echo view('home',['products'=>$products]);
+        $allestablishments = $this->establishmentservices->showlimit();
+        echo view('home',['products'=>$products, 'allestablishments'=>$allestablishments]);
     }
 }
