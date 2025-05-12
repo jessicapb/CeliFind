@@ -202,71 +202,29 @@
                     <a href="#" class="bg-[#fcb666] text-[18px] text-white p-3 px-6 border-2 border-[#fcb666] rounded-xl hover:bg-white hover:text-[#fcb666] hover:border-2 transition duration-300 ease-in-out">Explora els nostres llocs</a>
                 </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-10 pt-10 pb-20">
-                <!--Box!-->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-10 pt-10 pb-20">
+
+            <!-- Bucle para los restaurantes
+            !--><?php  foreach ($allestablishments as $establishment) { ?>
+                <!--
                 <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="" alt="Restaurant" class="w-full h-48 object-cover">
+                <img src="" alt="Nom del lloc" class="w-full h-48 object-cover">
                     <div class="p-4 text-left">
-                        <div class="flex justify-between items-center mb-2">
-                            <h2 class="font-bold">Títol</h2>
-                            <span class="text-gray-400 font-semibold">Restaurant</span>
-                        </div>
-                        <p class="font-medium">Ubicació</p>
-                        <p class="text-sm text-gray-600 mt-2 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</p>
-                        <div class="flex justify-between items-center">
-                            <p class="text-gray-400">Ubicació</p>
-                            <a href="#" class="text-[#fcb666] border border-[#fcb666] px-4 py-1 rounded-full hover:bg-[#fcb666] hover:text-white transition duration-300">Explorar</a>
-                        </div>
+                    <div class="flex justify-between items-center mb-2">
+                        <h2 class="font-bold text-lg">Nom del Lloc</h2>
+                        <span class="text-gray-400 font-semibold">Restaurant</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-2">Descripció breu del lloc. Ex: Espai segur per menjar sense gluten amb opcions veganes.</p>
+                    <p class="font-medium"><strong>Ubicació:</strong> Carrer Exemple, 123 - Barcelona</p>
+                    <p class="font-medium"><strong>Telèfon:</strong> +34 123 456 789</p>
+                    <p class="font-medium"><strong>Horari:</strong> Dl-Dv 12:00 - 22:00</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <a href="" target="_blank" class="text-[#fcb666] underline hover:text-[#e59f42]">Visita la web</a>
+                        <a href="#" class="text-[#fcb666] border border-[#fcb666] px-4 py-1 rounded-full hover:bg-[#fcb666] hover:text-white transition duration-300">Explorar</a>
                     </div>
                 </div>
-                <!--BOX!-->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="" alt="Restaurant" class="w-full h-48 object-cover">
-                    <div class="p-4 text-left">
-                        <div class="flex justify-between items-center mb-2">
-                            <h2 class="font-bold">Títol</h2>
-                            <span class="text-gray-400 font-semibold">Restaurant</span>
-                        </div>
-                        <p class="font-medium">Ubicació</p>
-                        <p class="text-sm text-gray-600 mt-2 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</p>
-                        <div class="flex justify-between items-center">
-                            <p class="text-gray-400">Ubicació</p>
-                            <a href="#" class="text-[#fcb666] border border-[#fcb666] px-4 py-1 rounded-full hover:bg-[#fcb666] hover:text-white transition duration-300">Explorar</a>
-                        </div>
-                    </div>
-                </div>
-                <!--BOX!-->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="" alt="Restaurant" class="w-full h-48 object-cover">
-                    <div class="p-4 text-left">
-                        <div class="flex justify-between items-center mb-2">
-                            <h2 class="font-bold">Títol</h2>
-                            <span class="text-gray-400 font-semibold">Restaurant</span>
-                        </div>
-                        <p class="font-medium">Ubicació</p>
-                        <p class="text-sm text-gray-600 mt-2 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</p>
-                        <div class="flex justify-between items-center">
-                            <p class="text-gray-400">Ubicació</p>
-                            <a href="#" class="text-[#fcb666] border border-[#fcb666] px-4 py-1 rounded-full hover:bg-[#fcb666] hover:text-white transition duration-300">Explorar</a>
-                        </div>
-                    </div>
-                </div>
-                <!--BOX!-->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="" alt="Restaurant" class="w-full h-48 object-cover">
-                    <div class="p-4 text-left">
-                        <div class="flex justify-between items-center mb-2">
-                            <h2 class="font-bold">Títol</h2>
-                            <span class="text-gray-400 font-semibold">Restaurant</span>
-                        </div>
-                        <p class="font-medium">Ubicació</p>
-                        <p class="text-sm text-gray-600 mt-2 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</p>
-                        <div class="flex justify-between items-center">
-                            <p class="text-gray-400">Ubicació</p>
-                            <a href="#" class="text-[#fcb666] border border-[#fcb666] px-4 py-1 rounded-full hover:bg-[#fcb666] hover:text-white transition duration-300">Explorar</a>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
+                !-->
             </div>
         </section>
     </main>

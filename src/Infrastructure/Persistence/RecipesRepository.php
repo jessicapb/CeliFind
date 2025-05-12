@@ -123,7 +123,6 @@ class RecipesRepository{
         return $allrecipes;
     }
     
-    
     // Update
     function updateRecipes(Recipes $recipes){
         try {

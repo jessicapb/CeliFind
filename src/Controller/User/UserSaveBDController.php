@@ -35,6 +35,7 @@ class UserSaveBDController{
                     exit;
                 }
                 $this->UserRepository->save($user);
+                $_SESSION['success_add'] = true;
                 header('Location: /usersmanager');
             } catch (BuildExceptions $e) {
                 $_SESSION['error'] = $e->getMessage();

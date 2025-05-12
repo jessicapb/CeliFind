@@ -15,7 +15,7 @@ class ProductDeleteBDController{
         $this->productRepository = new ProductRepository($db);
         $this->productServices = new ProductServices($db, $this->productRepository);
     }
-
+    
     function deleteproduct(){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $id = filter_input(INPUT_POST, 'id');

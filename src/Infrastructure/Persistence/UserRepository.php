@@ -112,6 +112,26 @@ class UserRepository {
         $row = $sql->fetchAll(\PDO::FETCH_ASSOC);
         return $row;
     }
-
-    //asasasa
+    
+    //Delete
+    function deleteUser(int $id): bool {
+        $sql = $this->db->prepare("DELETE FROM users WHERE id = :id");
+        return $sql->execute([
+            ':id' => $id
+        ]);
+    }
+    
+    // Search 
+    public function searchUsersAll(?string $name): array {
+        if (empty($name)) {
+            $stmt = $this->db->prepare("SELECT * FROM users");
+            $stmt->execute();
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        }
+        
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE name LIKE :name");
+        $stmt->execute(['name' => '%' . $name . '%']);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
 }

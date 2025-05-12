@@ -43,11 +43,13 @@ use App\Controller\Recipes\RecipesUpdateBDController;
 // ViewsEstablishments
 use App\Controller\Establishments\EstablishmentsManagerController;
 use App\Controller\Establishments\EstablishmentsAddController;
+use App\Controller\Establishments\EstablishmentsViewController;
 
 //ControllerEstablishments
 use App\Controller\Establishments\EstablishmentsSaveBDController;
 use App\Controller\Establishments\EstablishmentsDeleteBDController;
 use App\Controller\Establishments\EstablishmentsSearchBDController;
+use App\Controller\Establishments\EstablishmentsController;
 
 // ControllerCategory
 use App\Controller\Category\CategoryShowBDController;
@@ -86,6 +88,8 @@ use App\Controller\User\UserAddController;
 
 // User controler
 use App\Controller\User\UserSaveBDController;
+use App\Controller\User\UserDeleteBDController;
+use App\Controller\User\UserSearchBDController;
 
 //Privacity
 use App\Controller\Privacity\privacityController;
@@ -169,12 +173,6 @@ $controllerproducttosubcategory = new ProductToSubcategoryBDController($db);
 // Show the form for update the product
 $showformupdate = new ProductUpdateController($db, $productServices);
 
-// Show a individual product
-$showindividualproduct =  new ProductIndividualController($productServices);
-
-// Show the products of home
-$homeproducts = new HomeController($productServices);
-
 // User controllers
 $userLoginController = new UserLoginController($db);
 $userRegisterController = new UserRegisterController($db);
@@ -241,6 +239,9 @@ $categoryServices = $services->getService('categoryServices');
 $services->addServices('subcategoryServices', fn() => new SubcategoryServices($db, $services->getService('subcategoryRepository')));
 $subcategoryServices = $services->getService('subcategoryServices');
 
+// Show the products of home
+$homeproducts = new HomeController($productServices, $establishmentsServices);
+
 // View the update of the category
 $formupdate = new CategoryUpdateController($db, $categoryServices);
 
@@ -261,6 +262,9 @@ $shownameproductandsubcategory = new ProductToSubcategoryController($productServ
 
 // Show the product and the of the subcategory
 $showlimitproduct = new ProductManagerController($productServices, $subcategoryServices);
+
+// Show a individual product
+$showindividualproduct =  new ProductIndividualController($productServices, $subcategoryServices);
 
 // Routes to show the views
 $router = new Router();
@@ -392,9 +396,8 @@ $router
     
     //Go to quisom pages
     ->addRoute('GET','/quisom',[new quisomController(), 'quisom'])
-        
-    //Go to informacio
     
+    //Go to informacio
     ->addRoute('GET','/informacio',[new informacioController(), 'informacio'])
     
     // Go to the login page
@@ -431,6 +434,14 @@ $router
     // Add a user
     ->addRoute('POST','/saveuser',[new UserSaveBDController($db, $userRepository),'saveuser'])
     
+    // Delete the user
+    ->addRoute('POST','/deleteuser',[new UserDeleteBDController($db, $userRepository),'deleteuser'])
+    
+    // Search the establishment
+    ->addRoute('POST', '/searchusers', [new UserSearchBDController($db, $userRepository), 'searchusers'])
+    
+    ->addRoute('GET', '/showsearchresultsusers', [new UserSearchBDController($db, $userRepository), 'showsearchresultsusers'])
+
     // Go to the manager establishments view
     ->addRoute('GET','/establishmentsmanager',[new EstablishmentsManagerController($establishmentsServices),'establishmentsmanager'])
     
@@ -446,4 +457,10 @@ $router
     // Search the establishment
     ->addRoute('POST', '/searchestablishments', [new EstablishmentsSearchBDController($db, $establishmentsServices), 'searchestablishments'])
     
-    ->addRoute('GET', '/showsearchresults', [new EstablishmentsSearchBDController($db, $establishmentsServices), 'showsearchresults']);
+    ->addRoute('GET', '/showsearchresults', [new EstablishmentsSearchBDController($db, $establishmentsServices), 'showsearchresults'])
+    
+    //Go to Locations
+    
+    ->addRoute('GET','/locationview',[new EstablishmentsViewController(),'location'])
+    
+    ->addRoute('GET','/showestablishment',[new EstablishmentsController($db,$establishmentsServices ),'showestablishment']);

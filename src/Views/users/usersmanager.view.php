@@ -20,7 +20,7 @@
             <div class="flex items-center">
                 <a href="/productmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Productes</a>
                 <a href="/recipesmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Receptes</a>
-                <a href="/category" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Establiments</a>
+                <a href="/establishmentsmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Establiments</a>
                 <a href="/category" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Categories</a>
                 <a href="/subcategory" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Subcategories</a>
                 <a href="/usersmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-bold">Usuaris</a>
@@ -32,12 +32,8 @@
                         </button>
                         <div id="dropdown-menu" class="font-inter hidden absolute left-0 mt-2 w-[90%] origin-top-center text-black bg-white border-1 shadow-lg rounded-[20px] z-10">
                             <div class="p-1 space-y-0.5">
-                                <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/editprofile">
-                                    <img class="w-[17%] h-[17%]" src="../../img/logout/editar.svg" alt="">
-                                    Editar perfil
-                                </a>
                                 <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/home">
-                                    <img class="w-[17%] h-[17%]" src="../../img/logout/home.svg" alt="">
+                                    <img class="w-[15%] h-[15%]" src="../../img/logout/home.svg" alt="">
                                     Home
                                 </a>
                                 <a class="font-inter flex items-center gap-x-2 py-1 px-2 rounded-[50px] text-[16px] text-black font-normal hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700" href="/logout">
@@ -61,8 +57,22 @@
                 <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/useradd">Afegir administrador</a>
             </div>
             
+            <!-- Modal add -->
+            <?php if (!empty($_SESSION['success_add'])): ?>
+                <div class="addmodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
+                    <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
+                        <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Administrador afegit</h2>
+                            <p class="font-inter text-black font-medium text-[16px] text-center">L'administrador s'ha afegit correctament.</p>
+                            <div class="flex justify-center">
+                                <a href="/usersmanager" class="font-inter bg-[#FCB666] mt-[10px] mr-[15px] text-[white] text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">Tancar</a>
+                            </div>
+                    </div>
+                </div>
+                <?php unset($_SESSION['success_add']); ?>
+            <?php endif; ?>
+            
             <!-- Search part -->
-            <form action="/searchrecipes" method="POST">
+            <form action="/searchusers" method="POST">
                 <div class="w-full max-w-sm min-w-[200px] mr-[15px]">
                     <div class="relative flex items-center">
                         <img class="absolute w-5 h-5 left-2.5 " src="../../img/search/search.svg" alt="search">
@@ -77,9 +87,9 @@
             <div class="searchmodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
                 <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
                     <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Sense resultats</h2>
-                    <p class="font-inter text-black font-medium text-[16px] text-center">No s'han trobat receptes amb aquest nom.</p>
+                    <p class="font-inter text-black font-medium text-[16px] text-center">No s'han trobat usuaris amb aquest nom.</p>
                     <div class="flex justify-center">
-                        <a href="/recipesmanager" class="closesearchmodal font-inter bg-[#FCB666] mt-[10px] text-white text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:bg-[#ef9b3b] focus:outline-none">
+                        <a href="/usersmanager" class="closesearchmodal font-inter bg-[#FCB666] mt-[10px] text-white text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:bg-[#ef9b3b] focus:outline-none">
                             Tancar
                         </a>
                     </div>
@@ -185,10 +195,10 @@
                             <!-- Modal delete -->
                             <div class="deletemodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50 hidden">
                                 <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
-                                    <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Vols eliminar el producte <?php echo $user["id"] ?> ?</h2>
+                                    <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Vols eliminar l'administrador <?php echo $user["name"] ?> ?</h2>
                                     <p class="font-inter text-black- font-medium text-[16px] text-center">Un cop sigui eliminat no es podrà desfer l'operació.</p>
                                     <div class="flex justify-center">
-                                        <form action="/deleteproduct" method="POST">
+                                        <form action="/deleteuser" method="POST">
                                             <input type="hidden" name="id" value="<?php echo $user["id"]; ?>">
                                             <button type="submit" class="font-inter bg-[#FCB666] mt-[10px] mr-[15px] text-[white] text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">Eliminar</button>
                                         </form>
@@ -201,9 +211,9 @@
                             <?php if (isset($_GET['deleted']) && $_GET['deleted'] == 'true'): ?>
                                 <div class="deletemodal fixed inset-0 flex justify-center items-center bg-opacity-50 z-50">
                                     <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
-                                        <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Eliminat el producte</h2>
+                                        <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Eliminat l'administrador</h2>
                                         <div class="flex justify-center">
-                                            <a href="/productmanager" class="font-inter bg-[#FCB666] mt-[10px] mr-[15px] text-[white] text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">Tancar</a>
+                                            <a href="/usersmanager" class="font-inter bg-[#FCB666] mt-[10px] mr-[15px] text-[white] text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">Tancar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -220,6 +230,9 @@
     
     <!-- File show modal search -->
     <script src="../../js/modals/searchmodal.js"></script>
+    
+    <!-- File show modal update -->
+    <script src="../../js/modals/updatemodal.js"></script>
     
     <!--Footer section!-->
     <?php include 'src/Views/parts/footer/footer.view.php'?>

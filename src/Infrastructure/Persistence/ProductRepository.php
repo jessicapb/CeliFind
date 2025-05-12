@@ -71,7 +71,6 @@ class ProductRepository{
                                     SUBSTRING(nutritionalinformation, 1, 12) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state, idsubcategory FROM products");
         $sql->execute();
         while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
-      
             $products = new Product($fila['id'], $fila['name_short'], $fila['description_short'], $fila['ingredients_short'], $nutritionalinformation, $fila['price'], $fila['brand_short'], $fila['image'], $fila['weight'], $fila['state'], $fila['idsubcategory']);
             $allproducts[] = $products;
         }
