@@ -75,6 +75,7 @@ use App\Controller\Privacity\politicprivController;
 //Pages
 use App\Controller\Pages\quisomController;
 use App\Controller\Pages\informacioController;
+use App\Controller\Pages\locationController;
 
 // Database
 use App\Infrastructure\Database\DatabaseConnection;
@@ -142,8 +143,6 @@ $controllerproducttosubcategory = new ProductToSubcategoryBDController($db);
 // Show the form for update the product
 $showformupdate = new ProductUpdateController($db);
 
-// Show a individual product
-$showindividualproduct =  new ProductIndividualController($productServices);
 
 // Show the products of home
 $homeproducts = new HomeController($productServices);
@@ -193,9 +192,13 @@ $subcategoryRepository = $services->getService('subcategoryRepository');
 $services->addServices('categoryServices', fn() => new CategoryServices($db, $services->getService('categoryRepository')));
 $categoryServices = $services->getService('categoryServices');
 
+
 // Routes SubCategory Services
 $services->addServices('subcategoryServices', fn() => new SubcategoryServices($db, $services->getService('subcategoryRepository')));
 $subcategoryServices = $services->getService('subcategoryServices');
+
+// Show a individual product
+$showindividualproduct =  new ProductIndividualController($productServices ,$subcategoryServices);
 
 // View the update of the category
 $formupdate = new CategoryUpdateController($db, $categoryServices);
@@ -274,7 +277,7 @@ $router
     ->addRoute('GET', '/showsearchresultsproductone', [new ProductSearchStateOneBDController($db, $productServices , $categoryServices ,$subcategoryServices), 'showsearchresultsproductone'])
 
     //Search specific product
-    ->addRoute('GET' , '/showspecificsubcategoriproduct', [new SpecificproductsubcatController($subcategoryServices,$categoryServices,$productServices),'showspecificsubcategoriproduct'])
+    ->addRoute('POST' , '/showspecificsubcategoriproduct', [new SpecificproductsubcatController($subcategoryServices,$categoryServices,$productServices),'showspecificsubcategoriproduct'])
 
     // Go to the manager recipes
     ->addRoute('GET','/recipesmanager',[$showlimitrecipes,'recipesmanager'])
@@ -374,4 +377,8 @@ $router
     
     //Go to informacio
     
-    ->addRoute('GET','/informacio',[new informacioController(), 'informacio']);
+    ->addRoute('GET','/informacio',[new informacioController(), 'informacio'])
+
+    //Go to Locations
+
+    ->addRoute('GET','/locationview',[new locationController(),'location']);

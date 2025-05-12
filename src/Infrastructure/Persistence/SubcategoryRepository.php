@@ -114,18 +114,18 @@ class SubcategoryRepository
     }
 
     /* Query SQL for found the subcategory by ID */
-    function findById(int $id): ?object
-    {
-        $sql = $this->db->prepare("SELECT * FROM subcategories WHERE id = :id");
-        $sql->execute([
-            ':id' => $id
-        ]);
-        $result = $sql->fetch(\PDO::FETCH_OBJ);
+    
+    public function findById(int $id): ?Subcategory {
+        $stmt = $this->db->prepare("SELECT * FROM subcategories WHERE id = :id");
+        $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
         if ($result) {
-            return $result;
-        } else {
-            return null;
+            return new Subcategory($result['id'], $result['name'], $result['description'], $result['idcategoria']);
         }
+        
+        return null;
     }
 
     // Select limit

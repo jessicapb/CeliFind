@@ -7,50 +7,53 @@ use App\Celifind\Services\CategoryServices;
 use App\Celifind\Services\ProductServices;
 
 class SpecificproductsubcatController{
+    protected SubcategoryServices $subcategoryservices;  
+    protected CategoryServices $CategoryService;        
+    protected ProductServices $Product;
 
-    protected SubcategoryServices $subcategoryservices;//call categories
-    protected CategoryServices $CategoryService;//call subcategories
-    protected ProductServices $Product;//call Products
-
-    //contructor function
+    // Constructor para inyección de dependencias
     function __construct(SubcategoryServices $subcategoryservices, CategoryServices $categoryService, ProductServices $product) {
-        
-        //variable assigamente
         $this->subcategoryservices = $subcategoryservices;
         $this->CategoryService = $categoryService;
         $this->Product = $product;
-
     }
 
-    //functions
-
-    //function to show specific product
     function showspecificsubcategoriproduct(){
-
-        //we start the session:
         session_start();
-
-        //we check if its null
-        $subcategoryId = $_GET['subcategory'] ?? null;
+        
+        $subcategoryId = $_POST['subcategory'] ?? null;
         $products = [];
-        $noResults = false;
-
+        $noResults = false; 
+        
         if (isset($_SESSION['search_results']) && isset($_SESSION['no_results'])) {
             $products = $_SESSION['search_results'];
             $noResults = $_SESSION['no_results'];
-        }else{
-            //we check if it exits
+        } else {
             if ($subcategoryId) {
-                $products = $this->Product->getBySubcategoryId((int)$subcategoryId);
+                $subcategory = $this->subcategoryservices->findById((int)$subcategoryId);
+                
+                if ($subcategory) {
+                    $products = $this->Product->getBySubcategoryId((int)$subcategoryId);
+                    if (empty($products)) {
+                        $noResults = true;
+                    }
+                } else {
+                    $noResults = true;
+                }
             } else {
-                $products = [];
+                $noResults = true;
             }
             unset($_SESSION['search_results'], $_SESSION['no_results']);
         }
-
+        
         $subcategories = $this->subcategoryservices->showallsubcategory();
         $categories = $this->CategoryService->showallcategory();
-
-        echo view('product/viewproduct', ['products' => $products, 'noResults' => $noResults, 'categories' => $categories, 'subcategories' => $subcategories]);
+        
+        echo view('product/viewproduct', [
+            'products' => $products,
+            'noResults' => $noResults,
+            'categories' => $categories,
+            'subcategories' => $subcategories,
+        ]);
     }
 }
