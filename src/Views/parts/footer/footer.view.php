@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 max-w-screen-xl mx-auto md:grid-cols-5 text-center lg:text-start md:text-start gap-8 text-sm justify-center">
         <div class="md:col-span-1 flex flex-col space-y-2">
             <a href="/">
-                    <img src="../img/logo/logo.png" alt="CeliFind logo" class="w-36">
+                <img src="../img/logo/logo.png" alt="CeliFind logo" class="w-32">
             </a>
         </div>
 

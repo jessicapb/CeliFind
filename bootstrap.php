@@ -358,6 +358,13 @@ $router
     
     ->addRoute('GET', '/subcategorysearch', [new SubcategorySearchBDController($db, $subcategoryServices, $categoryServices), 'showsearchresults'])
     
+    //Go to quisom pages
+    ->addRoute('GET','/quisom',[new quisomController(), 'quisom'])
+        
+    //Go to informacio
+    
+    ->addRoute('GET','/informacio',[new informacioController(), 'informacio'])
+    
     // Go to the login page
     ->addRoute('GET','/login',[$userLoginController,'showLogin'])
     

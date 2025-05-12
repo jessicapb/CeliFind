@@ -42,7 +42,7 @@
     </header>
     
     <section class="bg-slate-100 pb-[20px]">
-        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center pt-[26px]">Actualitzar <span class="text-[#96c368] opacity-[100%]">categoria</span></h1>
+        <h1 class="text-black font-calistoga opacity-[78%] textz-[45px] font-bold mb-6 text-center pt-[26px]">Actualitzar <span class="text-[#96c368] opacity-[100%]">categoria</span></h1>
         <form class="flex justify-center" action="/updatecategory" method="POST" enctype="multipart/form-data">
             <?php $category = $category; ?>
             <input type="hidden" name="id" value="<?= $formData['id'] ?? '' ?>">
