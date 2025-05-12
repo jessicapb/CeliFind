@@ -51,7 +51,14 @@
     </header>
     
     <section class="bg-slate-100 pb-[20px]">
+        <div class="breadcrumb-container">
+            <ul class="breadcrumb flex gap-2 pl-[20px] pt-[20px]">
+                <li><a href="/subcategory" class="breadcrumb-link underline">Gestor subcategories</a></li>              
+            </ul>
+        </div>
+        
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center pt-[26px]">Gestor <span class="text-[#96c368] opacity-[100%]">subcategories</span></h1>
+        
         <div class="mt-[20px] flex justify-between items-center">
             <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/addsubcategory">Afegir subcategories</a>
             <form action="/searchsubcategory" method="POST">

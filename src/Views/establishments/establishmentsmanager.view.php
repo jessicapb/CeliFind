@@ -50,12 +50,19 @@
     </header>
     
     <section class="bg-slate-100 pb-[20px]">
+        <div class="breadcrumb-container">
+            <ul class="breadcrumb flex gap-2 pl-[20px] pt-[20px]">
+                <li><a href="/establishmentsmanager" class="breadcrumb-link underline">Gestor establiments</a></li>                
+            </ul>
+        </div>
+        
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center font-bold pt-[26px]">Gestor <span class="text-[#96c368] opacity-[100%]">establiments</span></h1>
+        
         <div class="mt-[20px] flex justify-between items-center">
             <!-- Add product  -->
             <div class="w-[50%]">
                 <a class="font-inter bg-[#FCB666] text-white text-[16px] font-medium p-[9px] ml-[20px] mr-[5px] rounded-[9px] text-center transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" href="/establishmentsadd">Afegir establiments</a>
-                <a class="font-inter bg-[#96c368] text-[#f5f5f5] text-[16px] font-medium p-[9px]  rounded-[9px] text-center transition-all focus:shadow-none active:bg-[#88c24d] hover:focus:bg-[#88c24d]  hover:bg-[#88c24d] disabled:pointer-events-none disabled:opacity-50" href="/recipesshowimage">Veure imatges</a>
+                <a class="font-inter bg-[#96c368] text-[#f5f5f5] text-[16px] font-medium p-[9px]  rounded-[9px] text-center transition-all focus:shadow-none active:bg-[#88c24d] hover:focus:bg-[#88c24d]  hover:bg-[#88c24d] disabled:pointer-events-none disabled:opacity-50" href="/establishmentsshowimage">Veure imatges</a>
             </div>
             
             <!-- Modal edit -->

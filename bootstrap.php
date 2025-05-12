@@ -44,6 +44,7 @@ use App\Controller\Recipes\RecipesUpdateBDController;
 use App\Controller\Establishments\EstablishmentsManagerController;
 use App\Controller\Establishments\EstablishmentsAddController;
 use App\Controller\Establishments\EstablishmentsViewController;
+use App\Controller\Establishments\EstablishmentsShowImageController;
 
 //ControllerEstablishments
 use App\Controller\Establishments\EstablishmentsSaveBDController;
@@ -311,7 +312,7 @@ $router
     // Search the product
     ->addRoute('POST', '/searchproduct', [new ProductSearchBDController($db, $productServices, $subcategoryServices), 'searchproduct'])
     
-    ->addRoute('GET', '/showsearchresults', [new ProductSearchBDController($db, $productServices, $subcategoryServices), 'showsearchresults'])
+    ->addRoute('GET', '/showsearchresultsproducts', [new ProductSearchBDController($db, $productServices, $subcategoryServices), 'showsearchresultsproducts'])
     
     // Search the product with state one
     ->addRoute('POST', '/searchproductstateone', [new ProductSearchStateOneBDController($db, $productServices, $categoryServices ,$subcategoryServices), 'searchproductstateone'])
@@ -458,6 +459,9 @@ $router
     ->addRoute('POST', '/searchestablishments', [new EstablishmentsSearchBDController($db, $establishmentsServices), 'searchestablishments'])
     
     ->addRoute('GET', '/showsearchresults', [new EstablishmentsSearchBDController($db, $establishmentsServices), 'showsearchresults'])
+    
+    // Show the image of the recipes showimagerecipes
+    ->addRoute('GET', '/establishmentsshowimage', [new EstablishmentsShowImageController($establishmentsServices), 'establishmentsshowimage'])
     
     //Go to Locations
     

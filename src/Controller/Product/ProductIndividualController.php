@@ -18,20 +18,19 @@ class ProductIndividualController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
             if ($id) {
-
+                
                 $product = $this->productservices->findByIdUpdate($id);
                 $subcategori = $this->subcategoriservice->showallsubcategory();
-                
                 $subcategoryName = '';
-
+                
                 foreach ($subcategori as $subcategory) {
                     if ($subcategory['id'] === $product->idsubcategory) {
-
+                        
                         $subcategoryName = $subcategory['name'];
                         break;
                     }
                 }
-
+                
                 echo view('product/individualproducts', [
                     'product' => $product,
                     'subcategori' => $subcategori,

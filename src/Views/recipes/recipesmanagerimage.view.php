@@ -51,6 +51,14 @@
     </header>
     
     <section class="bg-slate-100 pb-[20px]">
+        <div class="breadcrumb-container">
+            <ul class="breadcrumb flex gap-2 pl-[20px] pt-[20px]">
+                <li><a href="/recipesmanager" class="breadcrumb-link underline">Gestor receptes</a></li>                
+                <li><span class="breadcrumb-separator"> / </span></li>
+                <li><a href="/recipesshowimage" class="breadcrumb-link underline">Veure imatges</a></li>
+            </ul>
+        </div>
+        
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center pt-[26px] font-bold">Veure <span class="text-[#96c368] opacity-[100%]">imatges</span></h1>
         
         <div class="flex flex-wrap gap-5 p-[50px] items-center xl:flex lg:flex md:flex sm:flex justify-center">

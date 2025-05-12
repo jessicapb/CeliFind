@@ -51,6 +51,14 @@
     </header>
     
     <section class="bg-slate-100 pb-[20px]">
+        <div class="breadcrumb-container">
+            <ul class="breadcrumb flex gap-2 pl-[20px] pt-[20px]">
+                <li><a href="/subcategory" class="breadcrumb-link underline">Gestor subcategories</a></li>  
+                <li><span class="breadcrumb-separator"> / </span></li>
+                <li><a href="/addsubcategory" class="breadcrumb-link underline">Afegir subcategoria</a></li>            
+            </ul>
+        </div>
+        
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center pt-[26px]">Afegir <span class="text-[#96c368] opacity-[100%]">subcategoria</span></h1>
         
         <form class="flex justify-center" action="/savesubcategory" method="POST" enctype="multipart/form-data">

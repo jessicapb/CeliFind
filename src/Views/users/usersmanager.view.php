@@ -50,7 +50,14 @@
     </header>
     
     <section class="bg-slate-100 pb-[20px]">
+        <div class="breadcrumb-container">
+            <ul class="breadcrumb flex gap-2 pl-[20px] pt-[20px]">
+                <li><a href="/usersmanager" class="breadcrumb-link underline">Gestor usuaris</a></li>            
+            </ul>
+        </div>
+        
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center font-bold pt-[26px]">Gestor <span class="text-[#96c368] opacity-[100%]">usuaris</span></h1>
+        
         <div class="mt-[20px] flex justify-between items-center">
             <!-- Add admin  -->
             <div class="w-[50%]">

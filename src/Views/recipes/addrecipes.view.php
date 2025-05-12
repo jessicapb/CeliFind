@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Afegir receptes</title>
+    <title>Afegir recepta</title>
     <link href="./src/output.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
@@ -51,6 +51,14 @@
     </header>
     
     <section class="bg-slate-100 pb-[20px]">
+        <div class="breadcrumb-container">
+            <ul class="breadcrumb flex gap-2 pl-[20px] pt-[20px]">
+                <li><a href="/recipesmanager" class="breadcrumb-link underline">Gestor receptes</a></li>
+                <li><span class="breadcrumb-separator"> / </span></li>
+                <li><a href="/recipesadd" class="breadcrumb-link underline">Afegir recepta</a></li>
+            </ul>
+        </div>
+        
         <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center pt-[26px]">Afegir <span class="text-[#96c368] opacity-[100%]">recepta</span></h1>
         
         <form class="flex justify-center pb-20" action="/saverecipes" method="POST" enctype="multipart/form-data">

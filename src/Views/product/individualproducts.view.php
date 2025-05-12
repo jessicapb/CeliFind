@@ -30,32 +30,38 @@
         </nav>
     </header>
     <section class="p-[30px] bg-slate-100">
-
+        
         <?php
-
             // Construimos la URL de la subcategoría
             $subcategoryId = $product->idsubcategory;
             $subcategoryName = htmlspecialchars($subcategoryName);
             $subcategoryUrl = "/showspecificsubcategoriproduct?id=" . $subcategoryId;
         ?>
-
+        
         <div class="breadcrumb-container">
             <ul class="breadcrumb flex gap-2">
                 <li><a href="/" class="breadcrumb-link underline">Home</a></li>
                 <li><span class="breadcrumb-separator"> / </span></li>
                     <li>
                         <form action="/showspecificsubcategoriproduct" method="POST" class="inline">
-                                <input type="hidden" name="subcategory" value="<?php echo htmlspecialchars($product->subcategory_id); ?>">
+                                <input type="hidden" name="subcategory" value="<?php echo htmlspecialchars($product->idsubcategory);?>">
                                 <button type="submit" class="breadcrumb-link underline bg-transparent border-none cursor-pointer text-inherit font-inherit p-0 m-0">
                                 <?php echo htmlspecialchars($subcategoryName); ?>
                             </button>
                         </form>
                     </li>
                 <li><span class="breadcrumb-separator"> / </span></li>
-                <li><a href="#" class="breadcrumb-link underline"><?php echo htmlspecialchars($product->name) ?></a></li>
+                <li>
+                    <form action="/productindividual" method="POST">
+                        <input type="hidden" name="id" value="<?php echo $product->id; ?>">
+                        <button type="submit" class="breadcrumb-link underline">
+                            <?php echo htmlspecialchars($product->name) ?>
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
-
+        
         <div class="flex flex-wrap justify-center items-center">
             <div class="mt-[25px] min-w-[500px]">
                 <!-- Name -->

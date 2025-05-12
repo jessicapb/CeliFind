@@ -1,10 +1,10 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assignar producte a subcategoria</title>
+    <title>Veure imatges</title>
     <link href="./src/output.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
@@ -19,9 +19,9 @@
                 <img class="w-32" src="../../img/logo/logo.png" alt="logoimg">
             </a>
             <div class="flex items-center">
-                <a href="/productmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-bold">Productes</a>
+                <a href="/productmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Productes</a>
                 <a href="/recipesmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Receptes</a>
-                <a href="/establishmentsmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Establiments</a>
+                <a href="/establishmentsmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-bold">Establiments</a>
                 <a href="/category" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Categories</a>
                 <a href="/subcategory" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Subcategories</a>
                 <a href="/usersmanager" class="font-inter pr-[20px] pt-[20px] text-[16px] text-black font-normal">Usuaris</a>
@@ -53,65 +53,35 @@
     <section class="bg-slate-100 pb-[20px]">
         <div class="breadcrumb-container">
             <ul class="breadcrumb flex gap-2 pl-[20px] pt-[20px]">
-                <li><a href="/productmanager" class="breadcrumb-link underline">Gestor productes</a></li>
+                <li><a href="/establishmentsmanager" class="breadcrumb-link underline">Gestor establiments</a></li>                
                 <li><span class="breadcrumb-separator"> / </span></li>
-                <li><a href="/producttocategory" class="breadcrumb-link underline">Assignar producte a subcategoria</a></li>
+                <li><a href="/establishmentsshowimage" class="breadcrumb-link underline">Veure imatges</a></li>
             </ul>
         </div>
         
-        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center pt-[26px]">Assignar producte <span class="text-[#96c368] opacity-[100%]">a subcategoria</span></h1>
+        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] text-center pt-[26px] font-bold">Veure <span class="text-[#96c368] opacity-[100%]">imatges</span></h1>
         
-        <form class="flex justify-center" action="/addProducttoSubcategory" method="POST">
-            <div class="w-[18%]">
-                <!-- Product -->
-                <div class="flex flex-col  mb-[15px]">
-                    <label for="name" class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Producte</label>
-                    <select name="product" class="bg-white border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow">
-                        <option value="">Selecciona un producte</option>
-                        <?php foreach($products as $product):?>
-                        <option value="<?php echo $product->getId(); ?>"><?php echo $product->getName(); ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]" id="error-product"></p>
+        <div class="flex flex-wrap gap-5 p-[50px] items-center xl:flex lg:flex md:flex sm:flex justify-center">
+            <?php foreach ($establishments as $establishment): ?>
+                <div class="border border-gray-300 p-5 w-[300px] h-[300px] flex flex-col items-center justify-center rounded-xl shadow-md">
+                    <div class="w-auto flex items-center justify-center mb-4">
+                        <img src="<?= $establishment->getImage() ?>" alt="Imagen del producto" class="object-contai rounded-md">
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <div class="flex">
+                            <p class="font-inter text-[19px] font-bold text-black">Id:</p>
+                            <p class="font-inter text-[19px] font-medium text-black ml-2"><?= $establishment->getId(); ?></p>
+                        </div>
+                        <div class="flex">
+                            <p class="font-inter text-[19px] font-bold text-black">Nom:</p>
+                            <p class="font-inter text-[19px] font-medium text-black ml-2"><?= $establishment->getName(); ?></p>
+                        </div>
+                    </div>
                 </div>
-                <!-- Subcategory -->
-                <div class="flex flex-col  mb-[15px]">
-                    <label for="name" class="mb-[4px] text-left text-black font-calistoga opacity-[78%] text-[20px] font-normal">Subcategoria</label>
-                    <select name="subcategory" class="bg-white border border-[#fcb666] rounded-[9px] p-[8px] placeholder:text-black font-normal text-[16px] font-inter transition duration-300 ease focus:outline-none focus:border-[#ef9b3b] hover:border-[#ef9b3b] focus:shadow">
-                        <option value="">Selecciona una subcategoria</option>
-                        <?php foreach($subcategories as $subcategory):?>
-                        <option value="<?php echo $subcategory['id']; ?>"><?php echo $subcategory['name']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <p class="text-red-500 mt-[5px] font-inter hidden text-[15px]" id="error-subcategory"></p>
-                </div>
-                <!-- Button -->
-                <div class="flex flex-col mb-[15px]">
-                    <button class="font-inter bg-[#FCB666] text-[#f5f5f5] text-[16px] font-medium p-[8px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50" type="submit">
-                            Assignar producte a subcategoria
-                    </button> 
-                </div>
-            </div>
-        </form>
+            <?php endforeach; ?>
+        </div>
     </section>
-    
-    <!-- Start the session to catch the errors -->
-    <?php
-        session_start();
-        if (!empty($_SESSION['errors'])) {
-            $serverErrors = $_SESSION['errors'];
-            unset($_SESSION['errors']);
-        } else {
-            $serverErrors = [];
-        }
-    ?>
-    
-    <script>
-        var serverErrors = <?php echo json_encode($serverErrors); ?>;
-    </script>
-    
-    <!-- File errors -->
-    <script src="../../js/product/error-product-subcategory.js"></script>
     
     <!--Footer section!-->
     <?php include 'src/Views/parts/footer/footer.view.php'?>

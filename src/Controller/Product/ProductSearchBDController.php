@@ -24,7 +24,7 @@ class ProductSearchBDController {
             if (empty($name)) {
                 $_SESSION['no_results'] = true;
                 $_SESSION['search_results'] = []; 
-                header('Location: /showsearchresults');
+                header('Location: /showsearchresultsproducts');
                 exit;
             }
             
@@ -33,7 +33,7 @@ class ProductSearchBDController {
                 $_SESSION['search_results'] = $products;
                 $_SESSION['no_results'] = empty($products); 
                 
-                header('Location: /showsearchresults');
+                header('Location: /showsearchresultsproducts');
                 exit;
             } catch (BuildExceptions $e) {
                 $_SESSION['error'] = "Error al realitzar la cerca.";
@@ -43,7 +43,7 @@ class ProductSearchBDController {
         }
     }
     
-    public function showsearchresults() {
+    public function showsearchresultsproducts() {
         session_start();
         
         $products = [];
