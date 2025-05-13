@@ -174,7 +174,7 @@
                 <h1 class="text-[46px] lg:text-[50px] font-calistoga">Descobreix llocs sense gluten</h1>
                 <p class="font-inter text-[19px]">Consulta informació detallada sobre restaurants i espais segurs per celíacs.</p>
                 <div class="mt-16">
-                <a href="/locationview" class="bg-[#fcb666] text-[18px] text-white p-3 px-6 border-2 border-[#fcb666] rounded-xl hover:bg-white hover:text-[#fcb666] transition duration-300 ease-in-out">Explora tots els llocs</a>
+                <a href="/showestablishment" class="bg-[#fcb666] text-[18px] text-white p-3 px-6 border-2 border-[#fcb666] rounded-xl hover:bg-white hover:text-[#fcb666] transition duration-300 ease-in-out">Explora tots els llocs</a>
             </div>
         </div>
 
@@ -183,26 +183,23 @@
         <!-- 
                     Bucle para los restaurantes
         !--><?php  foreach ($allestablishments as $establishment) { ?>
-            <!--
+            
             <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <img src="" alt="Nom del lloc" class="w-full h-48 object-cover">
+            <img src="<?php echo $establishment->getImage() ?>" alt="Nom del lloc" class="w-full h-48 object-cover">
                 <div class="p-4 text-left">
                 <div class="flex justify-between items-center mb-2">
-                    <h2 class="font-bold text-lg">Nom del Lloc</h2>
+                    <h2 class="font-bold text-lg"><?php echo $establishment->getName() ?></h2>
                     <span class="text-gray-400 font-semibold">Restaurant</span>
                 </div>
-                <p class="text-sm text-gray-600 mb-2">Descripció breu del lloc. Ex: Espai segur per menjar sense gluten amb opcions veganes.</p>
-                <p class="font-medium"><strong>Ubicació:</strong> Carrer Exemple, 123 - Barcelona</p>
-                <p class="font-medium"><strong>Telèfon:</strong> +34 123 456 789</p>
-                <p class="font-medium"><strong>Horari:</strong> Dl-Dv 12:00 - 22:00</p>
+                <p class="text-sm text-gray-600 mb-2"><?php echo $establishment->getDescription() ?></p>
+                <p class="font-medium"><strong>Ubicació:</strong> <?php echo $establishment->getLocation() ?></p>
+                <p class="font-medium"><strong>Telèfon:</strong> <?php echo $establishment->getPhoneNumber() ?></p>
                 <div class="flex justify-between items-center mt-4">
-                    <a href="" target="_blank" class="text-[#fcb666] underline hover:text-[#e59f42]">Visita la web</a>
+                    <a href="<?php echo $establishment->getWebsite() ?>" target="_blank" class="text-[#fcb666] underline hover:text-[#e59f42]">Visita la Web</a>
                     <a href="#" class="text-[#fcb666] border border-[#fcb666] px-4 py-1 rounded-full hover:bg-[#fcb666] hover:text-white transition duration-300">Explorar</a>
                 </div>
             </div>
             <?php } ?>
-            !-->
-        </div>
         </div>
 </section>
 

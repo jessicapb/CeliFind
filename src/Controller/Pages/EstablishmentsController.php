@@ -18,7 +18,7 @@ class EstablishmentsController {
     function showestablishment(){
 
         $allestablishments = $this->establishmentservices->showlimit();
-        echo view('home',['allestablishments'=>$allestablishments]);
+        echo view('locations/location',['allestablishments'=>$allestablishments]);
 
     }
 

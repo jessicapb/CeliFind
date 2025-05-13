@@ -398,9 +398,8 @@ $router
     ->addRoute('GET','/informacio',[new informacioController(), 'informacio'])
 
     //Go to Locations
-
     ->addRoute('GET','/locationview',[new locationController(),'location'])
 
-    ->addRoute('GET','/showestablishment',[new EstablishmentsController($db,$establishmentsServices ),'showestablishment']);
+    ->addRoute('GET','/showestablishment',[new EstablishmentsController($db,$establishmentsServices),'showestablishment']);
 
 //-----------------------
