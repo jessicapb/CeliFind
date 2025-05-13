@@ -13,9 +13,9 @@ class CategoryUpdateController{
     }
     
     public function categoryupdate() {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_start(); 
-            $id = filter_input(INPUT_GET, 'id');
+            $id = filter_input(INPUT_POST, 'id');
             
             if ($id) {
                 $fila = $this->category_services->findById($id);
@@ -42,4 +42,6 @@ class CategoryUpdateController{
             }
         }
     }
+
+    
 }

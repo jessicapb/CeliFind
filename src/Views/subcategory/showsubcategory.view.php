@@ -94,13 +94,10 @@
                             <!-- Edit button -->
                             <td class="font-inter bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
                                 <div class="flex justify-center">
-                                    <form action="/subcategoryupdate" method="GET">
-                                        <input type="hidden" name="id" value="<?php echo $subcategory->getId(); ?>">
-                                        <button type="submit" class="flex items-center">
-                                            <p class="mr-[5px]">Editar</p>
-                                            <img class="w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
-                                        </button>
-                                    </form>
+                                <button type="submit" class="flex items-center edit-subcategory-btn" data-id="<?php echo $subcategory->getId(); ?>" data-name="<?php echo $subcategory->getName(); ?>" data-description="<?php echo $subcategory->getDescription(); ?>" data-idcategoria="<?php echo $subcategory->getIdcategoria(); ?>">
+                                        <p class="mr-[5px]">Editar</p>
+                                        <img class="w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
+                                    </button>
                                 </div>
                             </td>
                             
@@ -153,6 +150,7 @@
     
     <script src="../../js/modals/deletemodal.js"></script>
     
+    <script src="../../../js/subcategory/editsubcategory.js"></script>
     <!--Dropdown section!-->
     <script src="../../js/dropdown/dropdown.js"></script>
 </body>

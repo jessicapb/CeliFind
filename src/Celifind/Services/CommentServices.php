@@ -17,12 +17,17 @@ class CommentServices
         $this->commentsRepository = $commentsRepository;
     }
 
-    public function existsComment(int $id): bool
+    public function exists(string $name): bool
     {
-        return $this->commentsRepository->exists($id);
+        return $this->commentsRepository->exists($name);
     }
 
-    function savecomment(Comments $comments)
+    public function existsComment(string $name, int $id): bool
+    {
+        return $this->commentsRepository->existsComment($name, $id);
+    }
+
+    function save(Comments $comments)
     {
         if (!$this->UserCommited($comments->getIduser(), $comments->getIdrecipes())) {
             throw new BuildExceptions("Por favor, usted ya ha comentado en esta receta.");

@@ -7,14 +7,19 @@ use App\Celifind\Exceptions\BuildExceptions;
 
 class Comments{
     protected ?int $id = null;
+    protected string $name;
     protected string $description;
     protected ?int $idrecipes = null;
     protected ?int $iduser = null; 
 
-    public function __construct(?int $id, string $description, ?int $idrecipes, ?int $iduser)
+    public function __construct(?int $id, string $name, string $description, ?int $idrecipes, ?int $iduser)
     {
         $error = 0;
         $this->id = $id;
+
+        if (($error = $this->setName($name)) != 0) {
+            $_SESSION['errors']['name'] = ChecksProduct::getErrorMessage($error);
+        }
         if (($error = $this->setDescription($description)) != 0) {
             $_SESSION['errors']['description'] = ChecksProduct::getErrorMessage($error);
         }
@@ -82,6 +87,32 @@ class Comments{
     public function setIduser(?int $iduser): int
     {
         $this->iduser = $iduser;
+        return 0;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $errorNull = ChecksProduct::minMaxLength($name, 3, 50);
+        if ($errorNull != 0) {
+            return $errorNull;
+        }
+
+        $errorWord = ChecksProduct::validateProductWords($name);
+        if ($errorWord != 0) {
+            return $errorWord;
+        }
+
+        $errorNotNumber = ChecksProduct::validateProductNotNumber($name);
+        if ($errorNotNumber != 0) {
+            return $errorNotNumber;
+        }
+
+        $this->name = $name;
         return 0;
     }
 }

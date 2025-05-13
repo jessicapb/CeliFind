@@ -21,7 +21,7 @@ class CommentsRepository{
         $sql->execute();
         $comments = $sql->fetchAll(\PDO::FETCH_ASSOC);
         foreach ($comments as $comment) {
-            $result_comments[] = new Comments($comment['id'], $comment['description'], $comment['idrecipes'], $comment['iduser']);
+            $result_comments[] = new Comments($comment['id'], $comment['name'], $comment['description'], $comment['idrecipes'], $comment['iduser']);
         }
         return $result_comments;
     }
@@ -30,9 +30,10 @@ class CommentsRepository{
     function save(Comments $comments)
     {
         try {
-            $sql = $this->db->prepare("INSERT INTO comments(id, description, idrecipes, iduser) VALUES(:id,:description, :idrecipes, :iduser)");
+            $sql = $this->db->prepare("INSERT INTO comments(id, name, description, idrecipes, iduser) VALUES(:id,:name, :description, :idrecipes, :iduser)");
             $sql->execute([
                 'id' => $comments->getId(),
+                'name' => trim($comments->getName()),
                 'description' => trim($comments->getDescription()),
                 'idrecipes' => $comments->getIdrecipes(),
                 'iduser' => $comments->getIduser(),
@@ -43,17 +44,37 @@ class CommentsRepository{
     }
 
     /* Query SQL Exists */
-    function exists(int $id): bool
+    function exists(string $name): bool
     {
         try {
-            $stmt = $this->db->prepare("SELECT * FROM comments WHERE id = :id");
-            $stmt->execute(['id' => $id]);
-            return $stmt->rowCount() > 0;
+            $stmt = $this->db->prepare("SELECT * FROM comments WHERE name = :name");
+            $stmt->execute(['name' => $name]);
+            if($stmt->rowCount() > 0){
+                return true;
+            } else {
+                return false;
+            }
         } catch (\PDOException $e) {
             throw new BuildExceptions("Error checking comment existence by ID: " . $e->getMessage());
         }
     }
 
+    /* Query SQL Comments via Name & ID */
+    function existsComment(string $name, int $id): bool
+    {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM comments WHERE name = :name AND idrecipes = :id");
+            $stmt->execute(['name' => $name, 'id' => $id]);
+            if($stmt->rowCount() > 0){
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\PDOException $e) {
+            throw new BuildExceptions("Error checking comment existence by ID: " . $e->getMessage());
+        }
+    }
+    
     /* Query SQL Found Comments of a Recipe by ID */
     function getCommentsByIdRecipe(int $idrecipe): array
     {
@@ -66,6 +87,7 @@ class CommentsRepository{
             foreach ($comments as $comment) {
                 $result_comments[] = new Comments(
                     (int)$comment['id'],
+                    $comment['name'],
                     $comment['description'],
                     (int)$comment['idrecipes'],
                     (int)$comment['iduser']

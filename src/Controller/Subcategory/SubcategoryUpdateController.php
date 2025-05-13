@@ -17,9 +17,9 @@ class SubcategoryUpdateController
     }
     
     public function subcategoryupdate() {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_start(); 
-            $id = filter_input(INPUT_GET, 'id');
+            $id = filter_input(INPUT_POST, 'id');
             
             if ($id) {
                 $fila = $this->subcategory_services->findById($id);

@@ -40,6 +40,7 @@ use App\Controller\Recipes\RecipesSearchBDController;
 use App\Controller\Recipes\RecipesSearchAllBDController;
 use App\Controller\Recipes\RecipesUpdateBDController;
 
+
 // ControllerCategory
 use App\Controller\Category\CategoryShowBDController;
 use App\Controller\Category\CategoryAddBDController;
@@ -95,6 +96,13 @@ use App\Celifind\Services\CategoryServices;
 // Subcategory Services
 use App\Celifind\Services\SubcategoryServices;
 
+// Comments Services
+use App\Celifind\Services\CommentServices;
+use App\Controller\Comments\CommentSaveBDController;
+
+// Comments Repository
+use App\Infrastructure\Persistence\CommentsRepository;
+
 // RepositoryCategory
 use App\Infrastructure\Persistence\CategoryRepository;
 
@@ -112,6 +120,7 @@ use App\Infrastructure\Persistence\UserRepository;
 
 //Routes
 use App\Infrastructure\Routing\Router;
+use Dom\Comment;
 
 // Services and connection to database
 $db=DatabaseConnection::getConnection();
@@ -169,6 +178,14 @@ $recipesRepository = $services->getService('recipesRepository');
 $services->addServices('recipesServices', fn() => new RecipesServices($db, $services->getService('recipesRepository')));
 $RecipesServices = $services->getService('recipesServices');
 
+// Part of the comments --> Repository + Service
+$services->addServices('commentsRepository', fn() => new CommentsRepository($db));
+$commentRepository = $services->getService('commentsRepository');
+
+$services->addServices('commentServices', fn() => new CommentServices($db, $services->getService('commentsRepository')));
+$commentservices = $services->getService('commentServices');
+
+
 // Save the recipes
 $saverecipes = new RecipesSaveBDController($db);
 
@@ -185,7 +202,7 @@ $deleterecipes = new RecipesDeleteBDController($db);
 $viewrecipes =  new RecipesViewController($RecipesServices);
 
 // Show the individual recipes
-$individualrecipes =  new RecipesIndividualController($RecipesServices);
+$individualrecipes =  new RecipesIndividualController($RecipesServices, $commentservices);
 
 // Show the form for update the recipes
 $showformupdaterecipes = new RecipesUpdateController($db, $RecipesServices);
@@ -219,7 +236,7 @@ $formupdatesubcategory = new SubcategoryUpdateController($subcategoryServices, $
 $controllerupdatecategory = new CategoryUpdateBDController($db, $categoryServices);
 
 // Update the subcategory
-$controllerupdatesubcategory = new SubcategoryUpdateBDController($db, $subcategoryServices);
+$controllerupdatesubcategory = new SubcategoryUpdateBDController($db, $subcategoryServices, $categoryServices);
 
 // Show the categories & subcategories in View Product
 $viewproduct = new ProductViewController($productServices, $categoryServices, $subcategoryServices);
@@ -229,6 +246,9 @@ $shownameproductandsubcategory = new ProductToSubcategoryController($productServ
 
 // Show the product and the of the subcategory
 $showlimitproduct = new ProductManagerController($productServices, $subcategoryServices);
+
+// Controller of Comments
+$showcomments = new CommentSaveBDController($db, $commentservices);
 
 // Routes to show the views
 $router = new Router();
@@ -305,7 +325,10 @@ $router
     
     // Go to the individual recipes
     ->addRoute('POST','/recipesindividual',[$individualrecipes,'recipesindividual'])
-    
+
+    // Show the comments recipes of the individual
+    ->addRoute('POST','/savecomments',[$showcomments,'savecomments'])
+
     // Search the recipes
     ->addRoute('POST', '/searchrecipes', [new RecipesSearchBDController($db, $RecipesServices), 'searchrecipes'])
     
@@ -330,8 +353,8 @@ $router
     ->addRoute('POST', '/savecategory', [new CategorySaveBDController($db, $categoryServices), 'savecategory'])
     
     ->addRoute('POST', '/deletecategory', [new CategoryDeleteBDController($db, $categoryServices), 'deletecategory'])
-    
-    ->addRoute('GET','/categoryupdate',[$formupdate,'categoryupdate'])
+        
+    ->addRoute('POST','/categoryupdate',[$formupdate,'categoryupdate'])
     
     ->addRoute('POST','/updatecategory',[$controllerupdatecategory,'updatecategory'])
     
@@ -350,7 +373,7 @@ $router
     
     ->addRoute('POST', '/deletesubcategory', [new SubcategoryDeleteBDController($db, $subcategoryServices), 'deletesubcategory'])
     
-    ->addRoute('GET','/subcategoryupdate',[$formupdatesubcategory,'subcategoryupdate'])
+    ->addRoute('POST','/subcategoryupdate',[$formupdatesubcategory,'subcategoryupdate'])
     
     ->addRoute('POST','/updatesubcategory',[$controllerupdatesubcategory,'updatesubcategory'])
     
