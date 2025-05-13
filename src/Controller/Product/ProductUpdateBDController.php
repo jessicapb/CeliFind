@@ -14,6 +14,37 @@ class ProductUpdateBDController{
         $this->productservices = $productservices;
     }
     
+    // Private function to render the form with errors
+    private function FormWithErrorsProduct($id) {
+        $fila = $this->productservices->findByIdUpdate($id);
+    
+        $errors = $_SESSION['errors'] ?? [];
+        unset($_SESSION['errors']);
+    
+        $formData = $_SESSION['formData'] ?? null;
+        unset($_SESSION['formData']);
+    
+        if (!$formData && $fila) {
+            $formData = [
+                'id' => $fila->id,
+                'name' => $fila->name,
+                'description' => $fila->description,
+                'ingredients' => $fila->ingredients,
+                'nutritionalinformation' => $fila->nutritionalinformation,
+                'price' => $fila->price,
+                'brand' => $fila->brand,
+                'image' => $fila->image,
+                'weight' => $fila->weight,
+                'state' => $fila->state,
+            ];
+        }
+    
+        echo view('product/productupdate', [
+            'formData' => $formData,
+            'errors' => $errors,
+        ]);
+    }
+    
     public function updateproduct() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Start the session
@@ -51,7 +82,7 @@ class ProductUpdateBDController{
                     $imageData = '/img/producte/imagesbd/' . $fileName;
                 } else {
                     $_SESSION['errors']['image'] = "No s'ha pogut guardar la imatge.";
-                    header('Location: /productupdates?id=' . urlencode($id));
+                    $this->FormWithErrorsProduct($id);
                     exit;
                 }
             }else{
@@ -64,7 +95,7 @@ class ProductUpdateBDController{
                 
                 if ($this->productservices->existsProduct($name, $id)) {
                     $_SESSION['errors']['name'] = 'El nom ja està registrat';
-                    header('Location: /productupdates?id=' . urlencode($id));
+                    $this->FormWithErrorsProduct($id);
                     exit;
                 }
                 
@@ -74,7 +105,7 @@ class ProductUpdateBDController{
                 header('Location: /productmanager');
             }catch (BuildExceptions $e) {
                 $_SESSION['errors']['general'] = $e->getMessage();
-                header('Location: /productupdates?id=' . urlencode($id));
+                $this->FormWithErrorsProduct($id);
                 exit;
             }
         }

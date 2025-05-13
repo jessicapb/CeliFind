@@ -17,6 +17,15 @@ class EstablishmentsDeleteBDController{
     }
     
     function deleteestablishments(){
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user']) || $_SESSION['user']['status'] != 2) {
+            header('Location: /locationview');
+            exit;
+        }
+        
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $id = filter_input(INPUT_POST, 'id');
             

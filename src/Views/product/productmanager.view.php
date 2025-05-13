@@ -187,14 +187,20 @@
                         ?>
                         <!-- Edit button -->
                         <td class="font-inter bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
-                            <div class="flex justify-center max-w-[200px]">
-                                <form action="/productupdates" method="GET">
-                                    <input type="hidden" name="id" value="<?php echo $product->getId(); ?>">
-                                    <button type="submit" class="flex items-center">
-                                        <p class="mr-[5px]">Editar</p>
-                                        <img class="w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
-                                    </button>
-                                </form>
+                            <div class="flex justify-center">
+                                <button type="submit" class="flex items-center edit-product-btn" 
+                                        data-id="<?php echo $product->getId(); ?>" 
+                                        data-name="<?php echo $product->getName(); ?>" 
+                                        data-description="<?php echo $product->getDescription(); ?>" 
+                                        data-price="<?php echo $product->getPrice(); ?>" 
+                                        data-ingredients="<?php echo $product->getIngredients(); ?>" 
+                                        data-nutritionalinformation="<?php echo $product->getNutritionalInformation(); ?>"
+                                        data-brand="<?php echo $product->getBrand(); ?>"
+                                        data-weight="<?php echo $product->getWeight(); ?>"
+                                        data-state="<?php echo $product->getState(); ?>">
+                                    <p class="mr-[5px]">Editar</p>
+                                    <img class="w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
+                                </button>
                             </div>
                         </td>
                         
@@ -278,6 +284,9 @@
     
     <!-- File show modal update -->
     <script src="../../js/modals/updatemodal.js"></script>
+    
+    <!-- File to update the product -->
+    <script src="../../js/product/editproduct.js"></script>
     
     <!--Dropdown section!-->
     <script src="../../js/dropdown/dropdown.js"></script>

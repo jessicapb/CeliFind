@@ -14,9 +14,17 @@ class ProductUpdateController{
     }
     
     function productupdates(){
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (session_status() === PHP_SESSION_NONE) {
             session_start();
-            $id = filter_input(INPUT_GET, 'id');
+        }
+        
+        if (!isset($_SESSION['user']) || $_SESSION['user']['status'] != 2) {
+            header('Location: /productview');
+            exit;
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = filter_input(INPUT_POST, 'id');
             
             if ($id) {
                 $fila = $this->productservices->findByIdUpdate($id);

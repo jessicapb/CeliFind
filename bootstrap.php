@@ -50,7 +50,6 @@ use App\Controller\Establishments\EstablishmentsShowImageController;
 use App\Controller\Establishments\EstablishmentsSaveBDController;
 use App\Controller\Establishments\EstablishmentsDeleteBDController;
 use App\Controller\Establishments\EstablishmentsSearchBDController;
-use App\Controller\Establishments\EstablishmentsController;
 
 // ControllerCategory
 use App\Controller\Category\CategoryShowBDController;
@@ -249,11 +248,17 @@ $formupdate = new CategoryUpdateController($db, $categoryServices);
 // View the update of the subcategory
 $formupdatesubcategory = new SubcategoryUpdateController($subcategoryServices, $categoryServices);
 
+// View the update of the category
+$formupdate = new CategoryUpdateController($db, $categoryServices);
+
+// View the update of the subcategory
+$formupdatesubcategory = new SubcategoryUpdateController($subcategoryServices, $categoryServices);
+
 // Update the category
 $controllerupdatecategory = new CategoryUpdateBDController($db, $categoryServices);
 
 // Update the subcategory
-$controllerupdatesubcategory = new SubcategoryUpdateBDController($db, $subcategoryServices);
+$controllerupdatesubcategory = new SubcategoryUpdateBDController($db, $subcategoryServices, $categoryServices);
 
 // Show the categories & subcategories in View Product
 $viewproduct = new ProductViewController($productServices, $categoryServices, $subcategoryServices);
@@ -298,7 +303,7 @@ $router
     ->addRoute('POST','/addProducttoSubcategory',[$controllerproducttosubcategory,'addProducttoSubcategory'])
     
     // Form to update
-    ->addRoute('GET','/productupdates',[$showformupdate,'productupdates'])
+    ->addRoute('POST','/productupdates',[$showformupdate,'productupdates'])
     
     // Update the product
     ->addRoute('POST','/updateproduct',[$controllerupdateproduct,'updateproduct'])
@@ -368,7 +373,7 @@ $router
     
     ->addRoute('POST', '/deletecategory', [new CategoryDeleteBDController($db, $categoryServices), 'deletecategory'])
     
-    ->addRoute('GET','/categoryupdate',[$formupdate,'categoryupdate'])
+    ->addRoute('POST','/categoryupdate',[$formupdate,'categoryupdate'])
     
     ->addRoute('POST','/updatecategory',[$controllerupdatecategory,'updatecategory'])
     
@@ -387,7 +392,7 @@ $router
     
     ->addRoute('POST', '/deletesubcategory', [new SubcategoryDeleteBDController($db, $subcategoryServices), 'deletesubcategory'])
     
-    ->addRoute('GET','/subcategoryupdate',[$formupdatesubcategory,'subcategoryupdate'])
+    ->addRoute('POST','/subcategoryupdate',[$formupdatesubcategory,'subcategoryupdate'])
     
     ->addRoute('POST','/updatesubcategory',[$controllerupdatesubcategory,'updatesubcategory'])
     
@@ -465,6 +470,4 @@ $router
     
     //Go to Locations
     
-    ->addRoute('GET','/locationview',[new EstablishmentsViewController(),'location'])
-    
-    ->addRoute('GET','/showestablishment',[new EstablishmentsController($db,$establishmentsServices ),'showestablishment']);
+    ->addRoute('GET','/locationview',[new EstablishmentsViewController($db, $establishmentsServices),'showestablishment']);

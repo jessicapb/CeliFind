@@ -19,6 +19,15 @@ class CategoryShowBDController {
 
     /* Function of view al the categories in the view of showcategory */
     function showcategory(){
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user']) || $_SESSION['user']['status'] != 2) {
+            header('Location: /productview');
+            exit;
+        }
+        
         $categories = $this->category_services->showallcategory();
         $view_category = [];
         foreach ($categories as $category){

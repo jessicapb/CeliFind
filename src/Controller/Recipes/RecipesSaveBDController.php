@@ -34,17 +34,18 @@ class RecipesSaveBDController{
             $instruction = filter_input(INPUT_POST, 'instruction');
             
             if (!empty($_FILES['image']['name'])) {
-                $folder = '/home/linux/CeliFind/img/recepte/imagesbd/';
-                $fileName = $_FILES['image']['name'];
-                $destination = $folder . $fileName;
+                $folder = '/img/recepte/imagesbd/';
+                $fileName = basename($_FILES['image']['name']);
+                $destination = $_SERVER['DOCUMENT_ROOT'] . $folder . $fileName;
+                
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
-                    $imageData = '/img/recepte/imagesbd/' . $fileName;
+                    $imageData = $folder . $fileName;
                 } else {
                     $_SESSION['errors']['image'] = "No s'ha pogut guardar la imatge.";
-                    header('Location: /recipesadd');
+                    header('Location: /productadd');
                     exit;
                 }
-            }else{
+            } else {
                 $imageData = '';
             }
             

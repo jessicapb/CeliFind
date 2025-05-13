@@ -17,6 +17,15 @@ class RecipesDeleteBDController{
     }
 
     function deleterecipes(){
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user']) || $_SESSION['user']['status'] != 2) {
+            header('Location: /receptes');
+            exit;
+        }
+        
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $id = filter_input(INPUT_POST, 'id');
             if($this->recipesServices->delete($id)){

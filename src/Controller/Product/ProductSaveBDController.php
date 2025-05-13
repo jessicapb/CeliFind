@@ -35,17 +35,18 @@ class ProductSaveBDController{
             $state = filter_input(INPUT_POST, 'state');
             
             if (!empty($_FILES['image']['name'])) {
-                $folder = '/home/linux/CeliFind/img/producte/imagesbd/';
-                $fileName = $_FILES['image']['name'];
-                $destination = $folder . $fileName;
+                $folder = '/img/producte/imagesbd/';
+                $fileName = basename($_FILES['image']['name']);
+                $destination = $_SERVER['DOCUMENT_ROOT'] . $folder . $fileName;
+                
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
-                    $imageData = '/img/producte/imagesbd/' . $fileName;
+                    $imageData = $folder . $fileName;
                 } else {
                     $_SESSION['errors']['image'] = "No s'ha pogut guardar la imatge.";
                     header('Location: /productadd');
                     exit;
                 }
-            }else{
+            } else {
                 $imageData = '';
             }
             

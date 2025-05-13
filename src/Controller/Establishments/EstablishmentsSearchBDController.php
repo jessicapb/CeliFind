@@ -43,6 +43,15 @@ class EstablishmentsSearchBDController{
     }
     
     public function showsearchresults() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user']) || $_SESSION['user']['status'] != 2) {
+            header('Location: /locationview');
+            exit;
+        }
+        
         session_start();
         
         $establishments = [];

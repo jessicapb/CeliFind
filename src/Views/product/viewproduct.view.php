@@ -21,14 +21,15 @@
             <div class="flex items-center">
                 <?php if (isset($_SESSION['user']) && isset($_SESSION['user']['id'])) : ?>
                     <ul class="list-none flex p-4 hidden lg:flex items-center md:flex items-center">
-                        <li class="list-none ml-8"><a href="/productview">Productes</a></li>
-                        <li class="list-none ml-8 mr-[15px]"><a href="/receptes">Receptes</a></li>
-                        <li class="list-none ml-8 mr-[15px]"><a href="/receptes">Establiments</a></li>
+                        <li class="list-none ml-8 font-bold"><a href="/productview">Productes</a></li>
+                        <li class="list-none ml-8"><a href="/receptes">Receptes</a></li>
+                        <li class="list-none ml-8"><a href="/locationview">Establiments</a></li>
                     </ul>
                 <?php else: ?>
-                    <ul class="list-none flex p-4 hidden lg:flex items-center md:flex items-center">
-                        <li class="list-none ml-8"><a href="/productview">Productes</a></li>
+                    <ul class="list-none flex p-4 hidden lg:flex items-center">
+                        <li class="list-none ml-8 font-bold"><a href="/productview">Productes</a></li>
                         <li class="list-none ml-8"><a href="/receptes">Receptes</a></li>
+                        <li class="list-none ml-8"><a href="/locationview">Establiments</a></li>
                         <li class="list-none ml-8"><a href="/quisom">Qui som ?</a></li>
                         <li class="list-none ml-8"><a href="/informacio">Informació</a></li>
                     </ul>
@@ -117,7 +118,7 @@
                         </div>
                     </div>
                 </form>
-                    
+                
                 <!-- Modal buscador -->
                 <?php if (!empty($noResults)): ?>
                     <div class="searchmodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
@@ -184,4 +185,7 @@
     
     <!--Dropdown section!-->
     <script src="../../js/dropdown/dropdown.js"></script>
+    
+    <!--Footer section!-->
+    <?php include 'src/Views/parts/footer/footer.view.php'?>
 </body>

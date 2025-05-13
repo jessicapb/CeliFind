@@ -17,9 +17,18 @@ class SubcategoryUpdateController
     }
     
     public function subcategoryupdate() {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user']) || $_SESSION['user']['status'] != 2) {
+            header('Location: /productview');
+            exit;
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_start(); 
-            $id = filter_input(INPUT_GET, 'id');
+            $id = filter_input(INPUT_POST, 'id');
             
             if ($id) {
                 $fila = $this->subcategory_services->findById($id);

@@ -14,6 +14,15 @@ class RecipesUpdateController{
     }
     
     function recipesupdates(){
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user']) || $_SESSION['user']['status'] != 2) {
+            header('Location: /receptes');
+            exit;
+        }
+        
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             session_start();
             $id = filter_input(INPUT_GET, 'id');

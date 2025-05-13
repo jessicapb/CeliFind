@@ -52,7 +52,15 @@ class SubcategorySearchBDController
     /* We loop through Category and Subcategory to convert it to OBJ */
     public function showsearchresults()
     {
-        session_start(); 
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user']) || $_SESSION['user']['status'] != 2) {
+            header('Location: /productview');
+            exit;
+        }
+        
         $subcategories_response = [];
         $noResults = false;
         

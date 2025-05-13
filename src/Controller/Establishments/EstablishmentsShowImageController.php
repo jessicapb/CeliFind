@@ -13,6 +13,15 @@ class EstablishmentsShowImageController{
     }
     
     function establishmentsshowimage(){
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user']) || $_SESSION['user']['status'] != 2) {
+            header('Location: /locationview');
+            exit;
+        }
+        
         $establishments = $this->establishmentsServices->showlimit();
         echo view('establishments/establishmentsmanagerimage',['establishments'=>$establishments]);
     }

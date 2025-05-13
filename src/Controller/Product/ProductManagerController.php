@@ -16,6 +16,15 @@ class ProductManagerController {
     }
     
     function productmanager(){
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user']) || $_SESSION['user']['status'] != 2) {
+            header('Location: /productview');
+            exit;
+        }
+        
         $products = $this->productservices->showlimit();
         $subcategories = $this->subcategoryServices->showallsubcategory();
         echo view('product/productmanager',['products'=>$products,'subcategories' => $subcategories]);

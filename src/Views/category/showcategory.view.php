@@ -121,13 +121,10 @@
                             <!-- Edit button -->
                             <td class="font-inter bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
                                 <div class="flex justify-center">
-                                    <form action="/categoryupdate" method="GET">
-                                        <input type="hidden" name="id" value="<?php echo $category->getId(); ?>">
-                                        <button type="submit" class="flex items-center">
-                                            <p class="mr-[5px]">Editar</p>
-                                            <img class="w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
-                                        </button>
-                                    </form>
+                                    <button type="submit" class="flex items-center edit-category-btn" data-id="<?php echo $category->getId(); ?>" data-name="<?php echo $category->getName(); ?>" data-description="<?php echo $category->getDescription(); ?>">
+                                        <p class="mr-[5px]">Editar</p>
+                                        <img class="w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
+                                    </button>
                                 </div>
                             </td>
                             
@@ -191,7 +188,7 @@
     <!-- File show modal search -->
     <script src="../../js/modals/searchmodal.js"></script>
     
-    <script src="../../../js/category/category.js"></script>
+    <script src="../../js/category/category.js"></script>
     
     <script src="../../../js/modals/deletemodal.js"></script>
     
@@ -200,4 +197,6 @@
     
     <!--Dropdown section!-->
     <script src="../../js/dropdown/dropdown.js"></script>
+    
+    <script src="../../../js/category/editcategory.js"></script>
 </body>

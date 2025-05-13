@@ -18,6 +18,15 @@ class CategorySearchBDController
     
     public function searchcategory()
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user']) || $_SESSION['user']['status'] != 2) {
+            header('Location: /productview');
+            exit;
+        }
+        
         session_start();
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -46,7 +55,15 @@ class CategorySearchBDController
     
     public function showsearchresults()
     {
-        session_start(); 
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user']) || $_SESSION['user']['status'] != 2) {
+            header('Location: /productview');
+            exit;
+        }
+        
         $categories = [];
         $noResults = false;
         

@@ -13,6 +13,15 @@ class ProductShowImageController {
     }
     
     function productshowimage(){
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user']) || $_SESSION['user']['status'] != 2) {
+            header('Location: /productview');
+            exit;
+        }
+        
         $products = $this->productservices->showlimit();
         echo view('product/productmanagerimage',['products'=>$products]);
     }

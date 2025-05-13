@@ -25,6 +25,15 @@ class SubcategoryShowBDController
     /* Function of view all the subcategories in the view of showsubcategory */
     function showsubcategory()
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['user']) || $_SESSION['user']['status'] != 2) {
+            header('Location: /productview');
+            exit;
+        }
+        
         $subcategories = $this->subcategory_services->showallsubcategory();
         $categories = $this->category_services->showallcategory();
         $view_subcategory = [];
