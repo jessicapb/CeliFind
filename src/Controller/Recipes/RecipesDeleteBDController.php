@@ -7,6 +7,7 @@ use App\Celifind\Services\RecipesServices;
 use App\Celifind\Entities\Recipes;
 
 class RecipesDeleteBDController{
+    private \PDO $db;
     private RecipesRepository $recipesRepository;
     private RecipesServices $recipesServices;
     

@@ -113,16 +113,17 @@
         <h2 class="font-calistoga text-[35px] text-black opacity-78 font-regular mb-4 text-center">Comentaris</h2>
 
         <form action="/savecomments" method="POST" class="bg-white p-6 rounded-lg shadow-md space-y-4">
-            <input type="hidden" name="recipe_id" value="<?= htmlspecialchars($recipes->getId()) ?>">
+            <?php $recipes = $recipes; ?>
+            <input type="hidden" name="id" value="<?= $formData['id'] ?? '' ?>">
             <div>
                 <label for="name" class="block text-[18px] font-semibold mb-2">Títol del Comentari</label>
-                <input type="text" id="name" name="name" required class="w-full border border-gray-300 rounded-md p-2">
-                <p id="error-name" class="text-red-500 mt-[5px] font-inter hidden text-[15px]"></p>
-            </div>
+                <input type="text" id="name" name="name" value="<?= $formData['name'] ?? '' ?>" required class="w-full border border-gray-300 rounded-md p-2">
+                <p class="text-red-500 mt-[5px] font-inter text-[15px]"><?= $errors['name'] ?? '' ?></p>
+                </div>
             <div>
                 <label for="description" class="block text-[18px] font-semibold mb-2">Comentari</label>
-                <textarea id="description" name="description" rows="4" required class="w-full border border-gray-300 rounded-md p-2"></textarea>
-                <p id="error-description" class="text-red-500 mt-[5px] font-inter hidden text-[15px]"></p>
+                <textarea id="description" name="description" rows="4" required class="w-full border border-gray-300 rounded-md p-2"><?= $formData['description'] ?? '' ?></textarea>
+                <p class="text-red-500 mt-[5px] font-inter text-[15px]"><?= $errors['description'] ?? '' ?></p>
             </div>
             <button type="submit" class="bg-[#fcb666] text-white px-6 py-2 rounded-full hover:bg-[#fca14c] transition duration-200">
                 Enviar Comentari

@@ -17,6 +17,11 @@ class CommentServices
         $this->commentsRepository = $commentsRepository;
     }
 
+    function findById(int $id)
+    {
+        return $this->commentsRepository->findById($id);
+    }
+    
     public function exists(string $name): bool
     {
         return $this->commentsRepository->exists($name);

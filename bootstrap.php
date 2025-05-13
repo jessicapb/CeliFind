@@ -248,7 +248,7 @@ $shownameproductandsubcategory = new ProductToSubcategoryController($productServ
 $showlimitproduct = new ProductManagerController($productServices, $subcategoryServices);
 
 // Controller of Comments
-$showcomments = new CommentSaveBDController($db, $commentservices);
+$showcomments = new CommentSaveBDController($db, $commentservices, $RecipesServices);
 
 // Routes to show the views
 $router = new Router();

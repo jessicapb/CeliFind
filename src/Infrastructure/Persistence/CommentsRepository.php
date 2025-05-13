@@ -111,4 +111,16 @@ class CommentsRepository{
             throw new BuildExceptions("Error checking if user has commented on recipe: " . $e->getMessage());
         }
     }
+    
+    /* Query SQL Found Comments by ID */
+    function findById(int $id): ?object{
+        $sql = $this->db->prepare("SELECT * FROM comments WHERE id = :id");
+        $sql->execute([':id' => $id]);
+        $comment = $sql->fetch(\PDO::FETCH_OBJ);
+        if ($comment) {
+            return $comment;
+        } else {
+            return null;
+        }
+    }
 }
