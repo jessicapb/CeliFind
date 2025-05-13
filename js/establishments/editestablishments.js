@@ -17,7 +17,7 @@ function formWithPost(url, data) {
 }
 
 // Event listener for edit category buttons
-document.querySelectorAll('.edit-recipes-btn').forEach(button => {
+document.querySelectorAll('.edit-establishments-btn').forEach(button => {
     button.addEventListener('click', () => {
         const id = button.getAttribute('data-id');
         const name = button.getAttribute('data-name');
@@ -28,7 +28,7 @@ document.querySelectorAll('.edit-recipes-btn').forEach(button => {
         const duration = button.getAttribute('data-duration');
         const instruction = button.getAttribute('data-instruction');
         
-        formWithPost('/recipesupdates', {
+        formWithPost('/establishmentsupdates', {
             id: id,
             name: name,
             description: description,

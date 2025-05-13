@@ -17,7 +17,7 @@ class EstablishmentsViewController{
 
     function showestablishment(){
 
-        $allestablishments = $this->establishmentservices->showlimit();
+        $allestablishments = $this->establishmentservices->showlimitlocation();
         echo view('establishments/location',['allestablishments'=>$allestablishments]);
 
     }

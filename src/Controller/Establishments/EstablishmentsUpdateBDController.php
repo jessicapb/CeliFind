@@ -1,22 +1,22 @@
 <?php
-namespace App\Controller\Product;
+namespace App\Controller\Establishments;
 
-use App\Celifind\Services\ProductServices;
-use App\Celifind\Entities\Product;
+use App\Celifind\Services\EstablishmentsServices;
+use App\Celifind\Entities\Establishments;
 use App\Celifind\Exceptions\BuildExceptions;
 
-class ProductUpdateBDController{
+class EstablishmentsUpdateBDController{
     private \PDO $db;
-    private ProductServices $productservices;
+    private EstablishmentsServices $establishmentsServices;
     
-    public function __construct(\PDO $db, ProductServices $productservices) {
+    public function __construct(\PDO $db, EstablishmentsServices $establishmentsServices) {
         $this->db = $db;
-        $this->productservices = $productservices;
+        $this->establishmentsServices = $establishmentsServices;
     }
     
     // Private function to render the form with errors
-    private function FormWithErrorsProduct($id) {
-        $fila = $this->productservices->findByIdUpdate($id);
+    private function FormWithErrorsEstablishments($id) {
+        $fila = $this->establishmentsServices->findByIdUpdate($id);
         
         $errors = $_SESSION['errors'] ?? [];
         unset($_SESSION['errors']);
@@ -29,23 +29,20 @@ class ProductUpdateBDController{
                 'id' => $fila->id,
                 'name' => $fila->name,
                 'description' => $fila->description,
-                'ingredients' => $fila->ingredients,
-                'nutritionalinformation' => $fila->nutritionalinformation,
-                'price' => $fila->price,
-                'brand' => $fila->brand,
-                'image' => $fila->image,
-                'weight' => $fila->weight,
-                'state' => $fila->state,
+                'location' => $fila->location,
+                'phonenumber' => $fila->phonenumber,
+                'website' => $fila->website,
+                'schedule' => $fila->schedule
             ];
         }
     
-        echo view('product/productupdate', [
+        echo view('establishments/establishmentsupdate', [
             'formData' => $formData,
             'errors' => $errors,
         ]);
     }
     
-    public function updateproduct() {
+    public function updateestablishments() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Start the session
             session_start();
@@ -55,27 +52,23 @@ class ProductUpdateBDController{
             $id = filter_input(INPUT_POST, 'id');
             $name = filter_input(INPUT_POST, 'name');
             $description = filter_input(INPUT_POST, 'description');
-            $ingredients = filter_input(INPUT_POST, 'ingredients');
-            $nutritionalinformation = filter_input(INPUT_POST, 'nutritionalinformation');
-            $price = filter_input(INPUT_POST, 'price');
-            $brand = filter_input(INPUT_POST, 'brand');
-            $weight = filter_input(INPUT_POST, 'weight');
-            $state = filter_input(INPUT_POST, 'state');
+            $location = filter_input(INPUT_POST, 'location');
+            $phonenumber = filter_input(INPUT_POST, 'phonenumber');
+            $website = filter_input(INPUT_POST, 'website');
+            $schedule = filter_input(INPUT_POST, 'schedule');
             
             $_SESSION['formData'] = [
                 'id' => $id,
                 'name' => $name,
                 'description' => $description,
-                'ingredients' => $ingredients,
-                'nutritionalinformation' => $nutritionalinformation,
-                'price' => $price,
-                'brand' => $brand,
-                'weight' => $weight,
-                'state' => $state,
+                'location' => $location,
+                'phonenumber' => $phonenumber,
+                'website' => $website,
+                'schedule' => $schedule
             ];
             
             if (!empty($_FILES['image']['name'])) {
-                $folder = '/img/producte/imagesbd/';
+                $folder = '/img/establishments/imagesbd/';
                 $fileName = basename($_FILES['image']['name']);
                 $destination = $_SERVER['DOCUMENT_ROOT'] . $folder . $fileName;
                 
@@ -83,7 +76,7 @@ class ProductUpdateBDController{
                     $imageData = $folder . $fileName;
                 } else {
                     $_SESSION['errors']['image'] = "No s'ha pogut guardar la imatge.";
-                    $this->FormWithErrorsProduct($id);
+                    $this->FormWithErrorsEstablishments($id);
                     exit;
                 }
             } else {
@@ -91,22 +84,21 @@ class ProductUpdateBDController{
             }
             
             try{
-                // Update the product
-                $product = new Product($id,$name, $description, $ingredients,$nutritionalinformation,$price, $brand, $imageData, $weight, $state);
-                
-                if ($this->productservices->existsProduct($name, $id)) {
+                // Update the establishment
+                $establishment = new Establishments($id,$name, $description, $location, $phonenumber, $website, $schedule, $imageData);
+                if ($this->establishmentsServices->existsEstablishments($name, $id)) {
                     $_SESSION['errors']['name'] = 'El nom ja està registrat';
-                    $this->FormWithErrorsProduct($id);
+                    $this->FormWithErrorsEstablishments($id);
                     exit;
                 }
                 
                 // If everything is okay, update the product.
-                $this->productservices->update($product);  
+                $this->establishmentsServices->update($establishment);  
                 $_SESSION['success_update'] = true;
-                header('Location: /productmanager');
+                header('Location: /establishmentsmanager');
             }catch (BuildExceptions $e) {
                 $_SESSION['errors']['general'] = $e->getMessage();
-                $this->FormWithErrorsProduct($id);
+                $this->FormWithErrorsEstablishments($id);
                 exit;
             }
         }

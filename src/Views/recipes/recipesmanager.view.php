@@ -153,13 +153,18 @@
                         <!-- Edit button -->
                         <td class="font-inter bg-[#FCB666] p-[9px] text-[white] text-[16px] font-medium p-[5px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
                             <div class="flex justify-center">
-                                <form action="/recipesupdates" method="GET">
-                                    <input type="hidden" name="id" value="<?php echo $recipe->getId(); ?>">
-                                    <button type="submit" class="flex items-center">
-                                        <p class="mr-[5px]">Editar</p>
-                                        <img class="w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
-                                    </button>
-                                </form>
+                                <button type="submit" class="flex items-center edit-recipes-btn" 
+                                        data-id="<?php echo $recipe->getId(); ?>" 
+                                        data-name="<?php echo $recipe->getName(); ?>" 
+                                        data-description="<?php echo $recipe->getDescription(); ?>" 
+                                        data-ingredients="<?php echo $recipe->getIngredients(); ?>" 
+                                        data-nutritionalinformation="<?php echo $recipe->getNutritionalInformation(); ?>"
+                                        data-people="<?php echo $recipe->getPeople(); ?>"
+                                        data-duration="<?php echo $recipe->getDuration(); ?>"
+                                        data-instruction="<?php echo $recipe->getInstruction(); ?>">
+                                    <p class="mr-[5px]">Editar</p>
+                                    <img class="w-[20px] h-[20px]" src="../../img/edit/edit.png" alt="edit">
+                                </button>
                             </div>
                         </td>
                         
@@ -237,6 +242,9 @@
     
     <!-- File show modal update -->
     <script src="../../js/modals/updatemodal.js"></script>
+    
+    <!-- File to update the product -->
+    <script src="../../js/recipes/editrecipes.js"></script>
     
     <!--Footer section!-->
     <?php include 'src/Views/parts/footer/footer.view.php'?>

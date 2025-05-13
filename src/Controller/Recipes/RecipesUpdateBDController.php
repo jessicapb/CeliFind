@@ -15,6 +15,36 @@ class RecipesUpdateBDController{
         $this->recipesservices = $recipesservices;
     }
     
+    // Private function to render the form with errors
+    private function FormWithErrorsRecipes($id) {
+        $fila = $this->recipesservices->findByIdUpdate($id);
+        
+        $errors = $_SESSION['errors'] ?? [];
+        unset($_SESSION['errors']);
+        
+        $formData = $_SESSION['formData'] ?? null;
+        unset($_SESSION['formData']);
+        
+        if (!$formData && $fila) {
+            $formData = [
+                'id' => $fila->id,
+                'name' => $fila->name,
+                'description' => $fila->description,
+                'ingredients' => $fila->ingredients,
+                'nutritionalinformation' => $fila->nutritionalinformation,
+                'people' => $fila->people,
+                'duration' => $fila->duration,
+                'instruction' => $fila->instruction,
+                'image' => $fila->image,
+            ];
+        }
+    
+        echo view('recipes/recipesupdate', [
+            'formData' => $formData,
+            'errors' => $errors,
+        ]);
+    }
+    
     public function updaterecipes(){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             // Start the session
@@ -43,17 +73,18 @@ class RecipesUpdateBDController{
             ];
             
             if (!empty($_FILES['image']['name'])) {
-                $folder = '/home/linux/CeliFind/img/recepte/imagesbd/';
-                $fileName = $_FILES['image']['name'];
-                $destination = $folder . $fileName;
+                $folder = '/img/recepte/imagesbd/';
+                $fileName = basename($_FILES['image']['name']);
+                $destination = $_SERVER['DOCUMENT_ROOT'] . $folder . $fileName;
+                
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
-                    $imageData = '/img/recepte/imagesbd/' . $fileName;
+                    $imageData = $folder . $fileName;
                 } else {
                     $_SESSION['errors']['image'] = "No s'ha pogut guardar la imatge.";
-                    header('Location: /recipesupdates?id=' . urlencode($id));
+                    $this->FormWithErrorsRecipes($id);
                     exit;
                 }
-            }else{
+            } else {
                 $imageData = '';
             }
             
@@ -63,7 +94,7 @@ class RecipesUpdateBDController{
                 // Validate if the name exists
                 if ($this->recipesservices->existsRecipes($name, $id)) {
                     $_SESSION['errors']['name'] = 'El nom ja està registrat';
-                    header('Location: /recipesupdates?id=' . urlencode($id));
+                    $this->FormWithErrorsRecipes($id);
                     exit;
                 }
                 // If everything is okay, update the recipes
@@ -72,7 +103,7 @@ class RecipesUpdateBDController{
                 header('Location: /recipesmanager');
             } catch (BuildExceptions $e) {
                 $_SESSION['errors']['general'] = $e->getMessage();
-                header('Location: /recipesupdates?id=' . urlencode($id));
+                $this->FormWithErrorsRecipes($id);
                 exit;
             }
         }

@@ -50,6 +50,9 @@ use App\Controller\Establishments\EstablishmentsShowImageController;
 use App\Controller\Establishments\EstablishmentsSaveBDController;
 use App\Controller\Establishments\EstablishmentsDeleteBDController;
 use App\Controller\Establishments\EstablishmentsSearchBDController;
+use App\Controller\Establishments\EstablishmentsUpdateBDController;
+use App\Controller\Establishments\EstablishmentsUpdateController;
+use App\Controller\Establishments\EstablishmentsSearchHomeBDController;
 
 // ControllerCategory
 use App\Controller\Category\CategoryShowBDController;
@@ -99,6 +102,9 @@ use App\Controller\Privacity\politicprivController;
 use App\Controller\Pages\quisomController;
 use App\Controller\Pages\informacioController;
 
+// Comments
+use App\Controller\Comments\CommentSaveBDController;
+
 // Database
 use App\Infrastructure\Database\DatabaseConnection;
 
@@ -120,6 +126,9 @@ use App\Celifind\Services\SubcategoryServices;
 // Establishments Services
 use App\Celifind\Services\EstablishmentsServices;
 
+// Comments Services
+use App\Celifind\Services\CommentServices;
+
 // RepositoryCategory
 use App\Infrastructure\Persistence\CategoryRepository;
 
@@ -138,6 +147,8 @@ use App\Infrastructure\Persistence\UserRepository;
 // RepositoryEstablishments
 use App\Infrastructure\Persistence\EstablishmentsRepository;
 
+// Comments Repository
+use App\Infrastructure\Persistence\CommentsRepository;
 //Routes
 use App\Infrastructure\Routing\Router;
 
@@ -191,6 +202,13 @@ $recipesRepository = $services->getService('recipesRepository');
 $services->addServices('recipesServices', fn() => new RecipesServices($db, $services->getService('recipesRepository')));
 $RecipesServices = $services->getService('recipesServices');
 
+// Part of the comments --> Repository + Service
+$services->addServices('commentsRepository', fn() => new CommentsRepository($db));
+$commentRepository = $services->getService('commentsRepository');
+
+$services->addServices('commentServices', fn() => new CommentServices($db, $services->getService('commentsRepository')));
+$commentservices = $services->getService('commentServices');
+
 // Save the recipes
 $saverecipes = new RecipesSaveBDController($db);
 
@@ -207,13 +225,16 @@ $deleterecipes = new RecipesDeleteBDController($db);
 $viewrecipes =  new RecipesViewController($RecipesServices);
 
 // Show the individual recipes
-$individualrecipes =  new RecipesIndividualController($RecipesServices);
+$individualrecipes =  new RecipesIndividualController($RecipesServices, $commentservices);
 
 // Show the form for update the recipes
 $showformupdaterecipes = new RecipesUpdateController($db, $RecipesServices);
 
 // Update the product
 $controllerupdaterecipes = new RecipesUpdateBDController($db, $RecipesServices);
+
+// Controller of Comments
+$showcomments = new CommentSaveBDController($db, $commentservices, $RecipesServices);
 
 // Routes Establishments Repository
 $services->addServices('establishmentsRepository', fn() => new EstablishmentsRepository($db));
@@ -348,6 +369,9 @@ $router
     // Go to the individual recipes
     ->addRoute('POST','/recipesindividual',[$individualrecipes,'recipesindividual'])
     
+    // Show the comments recipes of the individual
+    ->addRoute('POST','/savecomments',[$showcomments,'savecomments'])
+    
     // Search the recipes
     ->addRoute('POST', '/searchrecipes', [new RecipesSearchBDController($db, $RecipesServices), 'searchrecipes'])
     
@@ -359,7 +383,7 @@ $router
     ->addRoute('GET', '/showsearchresultsrecipesall', [new RecipesSearchAllBDController($db, $RecipesServices), 'showsearchresultsrecipesall'])
     
     // Form to update
-    ->addRoute('GET','/recipesupdates',[$showformupdaterecipes,'recipesupdates'])
+    ->addRoute('POST','/recipesupdates',[$showformupdaterecipes,'recipesupdates'])
     
     // Update the product
     ->addRoute('POST','/updaterecipes',[$controllerupdaterecipes,'updaterecipes'])
@@ -468,6 +492,16 @@ $router
     // Show the image of the recipes showimagerecipes
     ->addRoute('GET', '/establishmentsshowimage', [new EstablishmentsShowImageController($establishmentsServices), 'establishmentsshowimage'])
     
-    //Go to Locations
+    // Form to update
+    ->addRoute('POST','/establishmentsupdates',[new EstablishmentsUpdateController($db, $establishmentsServices),'establishmentsupdates'])
     
-    ->addRoute('GET','/locationview',[new EstablishmentsViewController($db, $establishmentsServices),'showestablishment']);
+    // Update the product
+    ->addRoute('POST','/updateestablishments',[new EstablishmentsUpdateBDController($db, $establishmentsServices),'updateestablishments'])
+    
+    //Go to Establishments    
+    ->addRoute('GET','/locationview',[new EstablishmentsViewController($db, $establishmentsServices),'showestablishment'])
+    
+    // Search the establishment in home
+    ->addRoute('POST', '/searchestablishmentshome', [new EstablishmentsSearchHomeBDController($db, $establishmentsServices), 'searchestablishmentshome'])
+    
+    ->addRoute('GET', '/showsearchresultsestablishments', [new EstablishmentsSearchHomeBDController($db, $establishmentsServices), 'showsearchresultsestablishments']);

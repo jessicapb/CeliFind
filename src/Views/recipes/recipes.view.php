@@ -28,7 +28,7 @@
                         <li class="list-none ml-8"><a href="/locationview">Establiments</a></li>
                     </ul>
                 <?php else: ?>
-                    <ul class="list-none flex p-4 hidden lg:flex items-center md:flex items-center">
+                    <ul class="list-none flex p-4 hidden lg:flex items-center">
                         <li class="list-none ml-8 "><a href="/productview">Productes</a></li>
                         <li class="list-none ml-8 font-bold"><a href="/receptes">Receptes</a></li>
                         <li class="list-none ml-8"><a href="/locationview">Establiments</a></li>
@@ -139,7 +139,7 @@
                                 
                                 <div class="w-full flex justify-center mt-auto">
                                     <form action="/recipesindividual" method="POST" class="w-[90%]">
-                                        <input type="hidden" name="id" value="<?php echo $recipe->getId(); ?>">
+                                        <input type="hidden" name="id" value="<?php echo $recipe->getId();?> ">
                                         <button type="submit" class="w-full mt-[15px] mb-[10px] text-center p-2 rounded-full bg-[#fcb666] text-white border-2 border-[#fcb666] hover:bg-white hover:text-[#fcb666] transition duration-300">
                                             Veure recepta
                                         </button>

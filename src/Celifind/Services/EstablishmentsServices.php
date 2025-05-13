@@ -18,6 +18,10 @@ class EstablishmentsServices{
         return $this->EstablishmentsRepository->exists($name);
     }
     
+    function existsEstablishments(string $name, int $id):bool{
+        return $this->EstablishmentsRepository->existsEstablishments($name, $id);
+    }
+    
     function save(Establishments $establishments){
         $recipes = $this->EstablishmentsRepository->save($establishments);
         return $establishments;
@@ -25,6 +29,14 @@ class EstablishmentsServices{
     
     function showlimit(){
         return $this->EstablishmentsRepository->showlimit();
+    }
+    
+    function showlimitlocation(){
+        return $this->EstablishmentsRepository->showlimitlocation();
+    }
+    
+    function update(Establishments $establishments){
+        return $this->EstablishmentsRepository->updateEstablishments($establishments);
     }
     
     function delete(int $id){
@@ -36,5 +48,16 @@ class EstablishmentsServices{
             return $this->EstablishmentsRepository->showlimit();
         }
         return $this->EstablishmentsRepository->searchestablishments($name);
+    }
+    
+    function search($name){
+        if(empty($name)){
+            return $this->EstablishmentsRepository->showlimitlocation();
+        }
+        return $this->EstablishmentsRepository->search($name);
+    }
+    
+    function findByIdUpdate(int $id){
+        return $this->EstablishmentsRepository->findByIdUpdate($id);
     }
 }

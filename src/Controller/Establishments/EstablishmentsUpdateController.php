@@ -1,34 +1,33 @@
 <?php
 
-namespace App\Controller\Recipes;
+namespace App\Controller\Establishments;
 
-use App\Celifind\Services\RecipesServices;
-use App\Celifind\Entities\Recipes;
+use App\Celifind\Services\EstablishmentsServices;
+use App\Celifind\Entities\Establishments;
 
-class RecipesUpdateController{
-    private $recipesservices;
+class EstablishmentsUpdateController{
+    private $establishmentsServices;
     
-    public function __construct(\PDO $db, RecipesServices $recipesservices) {
+    public function __construct(\PDO $db, EstablishmentsServices $establishmentsServices) {
         $this->db = $db;
-        $this->recipesservices = $recipesservices;
+        $this->establishmentsServices = $establishmentsServices;
     }
     
-    function recipesupdates(){
+    function establishmentsupdates(){
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
         
         if (!isset($_SESSION['user']) || $_SESSION['user']['status'] != 2) {
-            header('Location: /receptes');
+            header('Location: /locationview');
             exit;
         }
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            session_start();
             $id = filter_input(INPUT_POST, 'id');
             
             if ($id) {
-                $fila = $this->recipesservices->findByIdUpdate($id);
+                $fila = $this->establishmentsServices->findByIdUpdate($id);
                 $errors = $_SESSION['errors'] ?? [];
                 unset($_SESSION['errors']);
                 
@@ -40,16 +39,14 @@ class RecipesUpdateController{
                         'id' => $fila->id,
                         'name' => $fila->name,
                         'description' => $fila->description,
-                        'ingredients' => $fila->ingredients,
-                        'nutritionalinformation' => $fila->nutritionalinformation,
-                        'people' => $fila->people,
-                        'duration' => $fila->duration,
-                        'instruction' => $fila->instruction,
-                        'image' => $fila->image,
+                        'location' => $fila->location,
+                        'phonenumber' => $fila->phonenumber,
+                        'website' => $fila->website,
+                        'schedule' => $fila->schedule
                     ];
                 }
                 
-                echo view('recipes/recipesupdate', [
+                echo view('establishments/establishmentsupdate', [
                     'formData' => $formData,
                     'errors' => $errors,
                 ]);

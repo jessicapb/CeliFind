@@ -85,7 +85,7 @@
         <!--Localities section!-->
         <section class="bg-slate-100 py-16 px-6">
             <!-- Search part -->
-            <form action="/searchproductstateone" class="flex p-[40px]" method="POST">
+            <form action="/searchestablishmentshome" class="flex p-[40px]" method="POST">
                 <div>
                     <div class="relative flex items-center max-w-[800px]">
                         <img class="absolute w-5 h-5 left-2.5 " src="../../img/search/search.svg" alt="search">
@@ -99,9 +99,9 @@
                     <div class="searchmodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
                         <div class="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-[400px]">
                             <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Sense resultats</h2>
-                            <p class="font-inter text-black font-medium text-[16px] text-center">No s'han trobat productes amb aquest nom.</p>
+                            <p class="font-inter text-black font-medium text-[16px] text-center">No s'han trobat establiments amb aquest nom.</p>
                             <div class="flex justify-center">
-                                <a href="/productview" class="closesearchmodal font-inter bg-[#FCB666] mt-[10px] text-white text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:bg-[#ef9b3b] focus:outline-none">
+                                <a href="/locationview" class="closesearchmodal font-inter bg-[#FCB666] mt-[10px] text-white text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:bg-[#ef9b3b] focus:outline-none">
                                     Tancar
                                 </a>
                             </div>
@@ -118,7 +118,6 @@
                         <div class="p-4 text-left">
                         <div class="flex justify-between items-center mb-2">
                             <h2 class="font-bold text-lg"><?php echo $establishment->getName() ?></h2>
-                            <span class="text-gray-400 font-semibold">Restaurant</span>
                         </div>
                         <p class="text-sm text-gray-600 mb-2"><?php echo $establishment->getDescription() ?></p>
                         <p class="font-medium"><strong>Ubicació:</strong> <?php echo $establishment->getLocation() ?></p>
@@ -133,7 +132,13 @@
         </section>
     </main>
     
+    <!--Dropdown section!-->
+    <script src="../../js/dropdown/dropdown.js"></script>
+    
+    <!-- File show modal search -->
+    <script src="../../js/modals/searchmodal.js"></script>
+    
     <!--Footer section!-->
-    <?php include 'parts/footer/footer.view.php'?>
+    <?php include 'src/Views/parts/footer/footer.view.php'?>
 </body>
 </html>
