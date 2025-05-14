@@ -40,8 +40,8 @@ class CommentSaveBDController
             ];
         }
 
-        $recipe = $this->RecipesServices->findById($formData['idrecipes'] ?? null);
-        $comments = $this->CommentServices->getCommentsByIdRecipe($formData['idrecipes'] ?? null);
+        $recipe = $this->RecipesServices->findById($id);
+        $comments = $this->CommentServices->getCommentsByIdRecipe($id);
 
         echo view('recipes/individualrecipes', [
             'formData' => $formData,
@@ -96,7 +96,7 @@ class CommentSaveBDController
 
 
                 $this->CommentServices->save($comments);
-                header('Location: /recipesindividual');
+                header('Location: /receptes');
                 exit;
             } catch (BuildExceptions $e) {
                 $_SESSION['errors']['general'] = $e->getMessage();
