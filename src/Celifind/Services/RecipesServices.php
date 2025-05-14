@@ -18,8 +18,8 @@ class RecipesServices{
         return $this->RecipesRepository->exists($name);
     }
     
-    function existsRepository(string $name):bool{
-        return $this->RecipesRepository->existsRepository($name);
+    function existsRepository(string $name, int $id):bool{
+        return $this->RecipesRepository->existsRepository($name, $id);
     }
     
     function save(Recipes $recipes){
