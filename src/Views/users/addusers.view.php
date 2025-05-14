@@ -55,11 +55,11 @@
             <ul class="breadcrumb flex gap-2 pl-[20px] pt-[20px]">
                 <li><a href="/usersmanager" class="breadcrumb-link underline">Gestor usuaris</a></li>     
                 <li><span class="breadcrumb-separator"> / </span></li>
-                <li><a href="/useradd" class="breadcrumb-link underline">Afegir usuari</a></li>               
+                <li><a href="/useradd" class="breadcrumb-link underline">Afegir administrador</a></li>               
             </ul>
         </div>
         
-        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center pt-[26px]">Afegir <span class="text-[#96c368] opacity-[100%]">usuari</span></h1>
+        <h1 class="text-black font-calistoga opacity-[78%] text-[45px] font-bold mb-6 text-center pt-[26px]">Afegir <span class="text-[#96c368] opacity-[100%]">administrador</span></h1>
         
         <form class="flex justify-center pb-20" action="/saveuser" method="POST" enctype="multipart/form-data">
             <div class="w-[18%]">

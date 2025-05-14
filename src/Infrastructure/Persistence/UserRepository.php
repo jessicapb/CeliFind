@@ -134,4 +134,32 @@ class UserRepository {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
     
+    // Select with id for the update
+    public function findByIdUpdate(int $id): ?object {
+        $sql = $this->db->prepare("SELECT * FROM users WHERE id = :id");
+        $sql->bindParam(':id', $id, \PDO::PARAM_INT);
+        $sql->execute();
+        
+        $result = $sql->fetch(\PDO::FETCH_OBJ);
+        if($result){
+            return $result;
+        }else{
+            return null;
+        }
+    }
+
+    // Exists name and id
+    function existsUser(string $name, int $id): bool{
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM users WHERE name = :name AND id != :id");
+            $stmt->execute(['name' => $name, 'id' => $id]);    
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\PDOException $ex) {
+            throw new BuildExceptions("Error checking if the product exists:" . $ex->getMessage());
+        }
+    }
 }

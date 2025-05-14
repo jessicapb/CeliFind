@@ -131,8 +131,13 @@ class User
 
     public function setEmail($email)
     {
-        $this->email = $email;
-        return 0;
+        $error = ChecksUser::minMaxLength($email, 3, 1600);
+        if ($error === 0) {
+            $this->email = $email;
+            return 0;
+        } else {
+            return $error;
+        }
     }
 
     public function setCity($city)

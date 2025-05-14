@@ -18,7 +18,7 @@ class HomeController{
     
     function home() {
         $products = $this->productservices->stateonelimit();
-        $allestablishments = $this->establishmentservices->showlimit();
+        $allestablishments = $this->establishmentservices->showlimitlocation();
         echo view('home', ['products' => $products, 'allestablishments' => $allestablishments]);
     }
     

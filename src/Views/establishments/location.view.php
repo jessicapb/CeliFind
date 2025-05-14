@@ -112,19 +112,19 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-10 pt-10 pb-20">
             <!-- CARD -->
                 <?php  foreach ($allestablishments as $establishment) { ?>
-                    
                     <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="<?php echo $establishment->getImage() ?>" alt="Nom del lloc" class="w-full h-48 object-cover">
+                        <img src="<?php echo $establishment->getImage() ?>" alt="Nom del lloc" class="w-full h-48 object-cover">
                         <div class="p-4 text-left">
-                        <div class="flex justify-between items-center mb-2">
-                            <h2 class="font-bold text-lg"><?php echo $establishment->getName() ?></h2>
-                        </div>
-                        <p class="text-sm text-gray-600 mb-2"><?php echo $establishment->getDescription() ?></p>
-                        <p class="font-medium"><strong>Ubicació:</strong> <?php echo $establishment->getLocation() ?></p>
-                        <p class="font-medium"><strong>Telèfon:</strong> <?php echo $establishment->getPhoneNumber() ?></p>
-                        <div class="flex justify-between items-center mt-4">
-                            <a href="<?php echo $establishment->getWebsite() ?>" target="_blank" class="text-[#fcb666] underline hover:text-[#e59f42]">Visita la Web</a>
-                            <a href="#" class="text-[#fcb666] border border-[#fcb666] px-4 py-1 rounded-full hover:bg-[#fcb666] hover:text-white transition duration-300">Explorar</a>
+                            <div class="flex justify-between items-center mb-2">
+                                <h2 class="font-bold text-lg"><?php echo $establishment->getName() ?></h2>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2"><?php echo $establishment->getDescription() ?></p>
+                            <p class="font-medium"><strong>Ubicació:</strong> <?php echo $establishment->getLocation() ?></p>
+                            <p class="font-medium"><strong>Telèfon:</strong> <?php echo $establishment->getPhoneNumber() ?></p>
+                            <div class="flex justify-between items-center mt-4">
+                                <a href="<?php echo $establishment->getWebsite() ?>" target="_blank" class="text-[#fcb666] underline hover:text-[#e59f42]">Visita la Web</a>
+                                <a href="#" class="text-[#fcb666] border border-[#fcb666] px-4 py-1 rounded-full hover:bg-[#fcb666] hover:text-white transition duration-300">Explorar</a>
+                            </div>
                         </div>
                     </div>
                 <?php } ?>

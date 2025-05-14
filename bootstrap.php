@@ -45,13 +45,13 @@ use App\Controller\Establishments\EstablishmentsManagerController;
 use App\Controller\Establishments\EstablishmentsAddController;
 use App\Controller\Establishments\EstablishmentsViewController;
 use App\Controller\Establishments\EstablishmentsShowImageController;
+use App\Controller\Establishments\EstablishmentsUpdateController;
 
 //ControllerEstablishments
 use App\Controller\Establishments\EstablishmentsSaveBDController;
 use App\Controller\Establishments\EstablishmentsDeleteBDController;
 use App\Controller\Establishments\EstablishmentsSearchBDController;
 use App\Controller\Establishments\EstablishmentsUpdateBDController;
-use App\Controller\Establishments\EstablishmentsUpdateController;
 use App\Controller\Establishments\EstablishmentsSearchHomeBDController;
 
 // ControllerCategory
@@ -471,7 +471,7 @@ $router
     ->addRoute('POST', '/searchusers', [new UserSearchBDController($db, $userRepository), 'searchusers'])
     
     ->addRoute('GET', '/showsearchresultsusers', [new UserSearchBDController($db, $userRepository), 'showsearchresultsusers'])
-
+    
     // Go to the manager establishments view
     ->addRoute('GET','/establishmentsmanager',[new EstablishmentsManagerController($establishmentsServices),'establishmentsmanager'])
     
@@ -495,7 +495,7 @@ $router
     // Form to update
     ->addRoute('POST','/establishmentsupdates',[new EstablishmentsUpdateController($db, $establishmentsServices),'establishmentsupdates'])
     
-    // Update the product
+    // Update the establishment
     ->addRoute('POST','/updateestablishments',[new EstablishmentsUpdateBDController($db, $establishmentsServices),'updateestablishments'])
     
     //Go to Establishments    
