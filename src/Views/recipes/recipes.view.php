@@ -149,11 +149,34 @@
                         </div>
                     <?php } ?>                 
             </div>
+            
+            <!-- Modal edit -->
+            <?php if (!empty($_SESSION['success_add'])): ?>
+                <div class="updatemodal fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-50">
+                    <div class="bg-white p-6 rounded-lg shadow-lg w-[32%]">
+                        <h2 class="text-black font-calistoga text-[24px] font-bold mb-[10px] text-center">Comentari afegit</h2>
+                        <p class="font-inter text-black font-medium text-[16px] text-center">
+                            El comentari s'ha afegit correctament en
+                            <span class="font-bold"><?php echo $_SESSION['success_recipe_name']; ?></span>.
+                        </p>
+                        <div class="flex justify-center">
+                            <a href="/receptes" class="font-inter bg-[#FCB666] mt-[10px] mr-[15px] text-[white] text-[16px] font-medium p-[9px] rounded-[9px] transition-all hover:focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">Tancar</a>
+                        </div>
+                    </div>
+                </div>
+                <?php
+                    unset($_SESSION['success_add']);
+                    unset($_SESSION['success_recipe_name']);
+                ?>
+            <?php endif; ?>
         </section>
     </main>
     
     <!-- File show modal search -->
     <script src="../../js/modals/searchmodal.js"></script>
+    
+    <!-- File show modal update -->
+    <script src="../../js/modals/updatemodal.js"></script>
     
     <!--Footer section!-->
     <?php include 'src/Views/parts/footer/footer.view.php'?>

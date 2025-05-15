@@ -106,7 +106,7 @@
                 <li>
                     <form action="/productindividual" method="POST">
                         <input type="hidden" name="id" value="<?php echo $product->id; ?>">
-                        <button type="submit" class="breadcrumb-link underline">
+                        <button type="submit" class="breadcrumb-link underline font-bold">
                             <?php echo htmlspecialchars($product->name) ?>
                         </button>
                     </form>

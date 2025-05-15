@@ -32,9 +32,9 @@ class CommentServices
         return $this->commentsRepository->existsComment($name, $id);
     }
 
-    public function existsIdUser(int $iduser): bool
+    public function existsIdRecipesandIdUser(int $idrecipes, int $iduser): bool
     {
-        return $this->commentsRepository->existsIdUser($iduser);
+        return $this->commentsRepository->existsIdRecipesandIdUser($idrecipes, $iduser);
     }
 
     function save(Comments $comments)

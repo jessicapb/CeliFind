@@ -80,34 +80,35 @@ class CommentSaveBDController
             }
             
             if (empty($iduser) || empty($idrecipes)) {
-                $_SESSION['errors']['description'] = "Usuari o recepta no vàldes.";
+                $_SESSION['errors']['description'] = "Usuari o recepta no vàlides.";
                 $this->FormWithErrors($id);
                 return;
             }
             
-            if (empty($iduser) || empty($idrecipes)) {
-                $_SESSION['errors']['description'] = "Usuari o recepta no vàldes.";
+            if (empty($name) || empty($description)) {
+                $_SESSION['errors']['general'] = "Falten dades obligatòries en el formulari.";
                 $this->FormWithErrors($id);
                 return;
             }
-            
-            
             
             try {
                 $comments = new Comments($id, $name, $description, $idrecipes, $iduser);
-                if ($this->CommentServices->existsIdUser($iduser)) {
+                if ($this->CommentServices->existsIdRecipesandIdUser($idrecipes, $iduser)) {
                     $_SESSION['errors']['description'] = "Ja has comentat en aquesta recepta.";
                     $this->FormWithErrors($id);
                     return;
                 }
                 
                 if ($this->CommentServices->exists(trim($name))) {
-                    $_SESSION['errors']['name'] = "El comentari ja esta registrat.";
+                    $_SESSION['errors']['name'] = "El comentari ja està registrat.";
                     $this->FormWithErrors($id);
                     return;
                 }
                 
                 $this->CommentServices->save($comments);
+                $recipe = $this->RecipesServices->findById($idrecipes);
+                $_SESSION['success_add'] = true;
+                $_SESSION['success_recipe_name'] = $recipe->getName();                
                 header('Location: /receptes');
                 exit;
             } catch (BuildExceptions $e) {

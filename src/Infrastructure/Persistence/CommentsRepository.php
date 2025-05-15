@@ -77,11 +77,11 @@ class CommentsRepository
     }
 
     /* Query SQL Comments via Name */
-    function existsIdUser(int $iduser): bool
+    function existsIdRecipesandIdUser(int $idrecipes, int $iduser): bool
     {
         try {
-            $sql = $this->db->prepare("SELECT * FROM comments WHERE iduser = :iduser");
-            $sql->execute([':iduser' => $iduser]);
+            $sql = $this->db->prepare("SELECT * FROM comments WHERE idrecipes = :idrecipes AND iduser = :iduser" );
+            $sql->execute([':idrecipes' => $idrecipes,':iduser' => $iduser]);
             if ($sql->rowCount() > 0) {
                 return true;
             } else {
