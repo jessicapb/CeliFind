@@ -57,37 +57,38 @@ class Comments{
         return 0; 
     }
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function setId(?int $id): int
+    public function setId($id)
     {
         $this->id = $id;
-        return 0;
+
+        return $this;
     }
 
-    public function getIdrecipes(): ?int
+    public function getIdrecipes()
     {
         return $this->idrecipes;
     }
 
-    public function setIdrecipes(?int $idrecipes): int
+    public function setIdrecipes($idrecipes)
     {
         $this->idrecipes = $idrecipes;
-        return 0;
+        return $this;
     }
 
-    public function getIduser(): ?int
+    public function getIduser()
     {
         return $this->iduser;
     }
 
-    public function setIduser(?int $iduser): int
+    public function setIduser($iduser)
     {
         $this->iduser = $iduser;
-        return 0;
+        return $this;
     }
 
     public function getName()

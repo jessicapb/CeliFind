@@ -21,7 +21,7 @@ class CommentServices
     {
         return $this->commentsRepository->findById($id);
     }
-    
+
     public function exists(string $name): bool
     {
         return $this->commentsRepository->exists($name);
@@ -32,13 +32,16 @@ class CommentServices
         return $this->commentsRepository->existsComment($name, $id);
     }
 
+    public function existsIdUser(int $iduser): bool
+    {
+        return $this->commentsRepository->existsIdUser($iduser);
+    }
+
     function save(Comments $comments)
     {
-        if (!$this->UserCommited($comments->getIduser(), $comments->getIdrecipes())) {
-            throw new BuildExceptions("Por favor, usted ya ha comentado en esta receta.");
-        }
         $this->commentsRepository->save($comments);
     }
+
 
     function getallcomment(): array
     {
@@ -54,5 +57,4 @@ class CommentServices
     {
         return $this->commentsRepository->getCommentsByIdUser($iduser, $idrecipe);
     }
-
 }

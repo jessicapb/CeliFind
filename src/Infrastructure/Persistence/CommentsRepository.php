@@ -5,7 +5,8 @@ namespace App\Infrastructure\Persistence;
 use App\Celifind\Entities\Comments;
 use App\Celifind\Exceptions\BuildExceptions;
 
-class CommentsRepository{
+class CommentsRepository
+{
     private \PDO $db;
 
     function __construct(\PDO $db)
@@ -25,7 +26,7 @@ class CommentsRepository{
         }
         return $result_comments;
     }
-    
+
     /* Query SQL Save */
     function save(Comments $comments)
     {
@@ -49,7 +50,7 @@ class CommentsRepository{
         try {
             $stmt = $this->db->prepare("SELECT * FROM comments WHERE name = :name");
             $stmt->execute(['name' => $name]);
-            if($stmt->rowCount() > 0){
+            if ($stmt->rowCount() > 0) {
                 return true;
             } else {
                 return false;
@@ -65,7 +66,7 @@ class CommentsRepository{
         try {
             $stmt = $this->db->prepare("SELECT * FROM comments WHERE name = :name AND idrecipes = :id");
             $stmt->execute(['name' => $name, 'id' => $id]);
-            if($stmt->rowCount() > 0){
+            if ($stmt->rowCount() > 0) {
                 return true;
             } else {
                 return false;
@@ -74,31 +75,43 @@ class CommentsRepository{
             throw new BuildExceptions("Error checking comment existence by ID: " . $e->getMessage());
         }
     }
-    
+
+    /* Query SQL Comments via Name */
+    function existsIdUser(int $iduser): bool
+    {
+        try {
+            $sql = $this->db->prepare("SELECT * FROM comments WHERE iduser = :iduser");
+            $sql->execute([':iduser' => $iduser]);
+            if ($sql->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\PDOException $e) {
+            throw new BuildExceptions("Error checking comment existence by ID: " . $e->getMessage());
+        }
+    }
+
     /* Query SQL Found Comments of a Recipe by ID */
     function getCommentsByIdRecipe(int $idrecipe): array
     {
         try {
-            $stmt = $this->db->prepare("SELECT * FROM comments WHERE idrecipes = :idrecipes");
+            $stmt = $this->db->prepare("
+                SELECT c.id, c.name, c.description, c.idrecipes, c.iduser,
+                    u.name AS user_name
+                FROM comments c
+                JOIN users u ON c.iduser = u.id
+                WHERE c.idrecipes = :idrecipes
+            ");
             $stmt->execute(['idrecipes' => $idrecipe]);
             $comments = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-            $result_comments = [];
-            foreach ($comments as $comment) {
-                $result_comments[] = new Comments(
-                    (int)$comment['id'],
-                    $comment['name'],
-                    $comment['description'],
-                    (int)$comment['idrecipes'],
-                    (int)$comment['iduser']
-                );
-            }
-            return $result_comments;
-
+            return $comments;
         } catch (\PDOException $e) {
-            throw new BuildExceptions("Error fetching comments by recipe ID:" . $e->getMessage());
+            throw new BuildExceptions("Error fetching comments by recipe ID: " . $e->getMessage());
         }
     }
+
 
     /* Query SQL Limit User Comments */
     function getCommentsByIdUser(int $iduser, int $idrecipe): bool
@@ -106,14 +119,15 @@ class CommentsRepository{
         try {
             $stmt = $this->db->prepare("SELECT * FROM comments WHERE iduser = :iduser AND idrecipes = :idrecipes");
             $stmt->execute(['iduser' => $iduser, 'idrecipes' => $idrecipe]);
-            return $stmt->rowCount() > 0; 
+            return $stmt->rowCount() > 0;
         } catch (\PDOException $e) {
             throw new BuildExceptions("Error checking if user has commented on recipe: " . $e->getMessage());
         }
     }
-    
+
     /* Query SQL Found Comments by ID */
-    function findById(int $id): ?object{
+    function findById(int $id): ?object
+    {
         $sql = $this->db->prepare("SELECT * FROM comments WHERE id = :id");
         $sql->execute([':id' => $id]);
         $comment = $sql->fetch(\PDO::FETCH_OBJ);

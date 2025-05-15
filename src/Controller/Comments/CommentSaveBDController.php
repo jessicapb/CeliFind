@@ -7,100 +7,113 @@ use App\Celifind\Entities\Comments;
 use App\Celifind\Exceptions\BuildExceptions;
 use App\Celifind\Services\RecipesServices;
 
-class CommentSaveBDController {
+class CommentSaveBDController
+{
     private \PDO $db;
     private CommentServices $CommentServices;
     private RecipesServices $RecipesServices;
 
-    public function __construct(\PDO $db, CommentServices $CommentServices, RecipesServices $RecipesServices) {
+    public function __construct(\PDO $db, CommentServices $CommentServices, RecipesServices $RecipesServices)
+    {
         $this->db = $db;
         $this->CommentServices = $CommentServices;
         $this->RecipesServices = $RecipesServices;
     }
 
-    /* Function private to render error for the form of comments */
-    private function FormWithErrors($id) {
-        $fila = $this->CommentServices->findById($id);
+    private function FormWithErrors($id)
+    {
+        $fila = $this->CommentServices->findById((int)$id);
 
         $errors = $_SESSION['errors'] ?? [];
         unset($_SESSION['errors']);
-        
+
         $formData = $_SESSION['formData'] ?? null;
         unset($_SESSION['formData']);
-        
-        $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-        $name = filter_input(INPUT_POST, 'name');
-        $description = filter_input(INPUT_POST, 'description');
-        $iduser = filter_input(INPUT_POST, 'iduser');
-        $idrecipe = filter_input(INPUT_POST, 'idrecipe');
-        
-        $_SESSION['formData'] = [
-            'id' => $id,
-            'name' => $name,
-            'description' => $description,
-            'iduser' => $iduser,
-            'idrecipe' => $idrecipe,
-        ];
-        
+
         if (!$formData && $fila) {
             $formData = [
                 'id' => $fila->id,
                 'name' => $fila->name,
                 'description' => $fila->description,
-                'iduser' => $fila->iduser,
                 'idrecipes' => $fila->idrecipes,
+                'iduser' => $fila->iduser,
             ];
         }
-        
-        if ($id) {
-            $recipes = $this->RecipesServices->findById($id);
-            if ($recipes) {
-                $formData['idrecipe'] = $recipes->getId();
-                $formData['iduser'] = $_SESSION['user']['id'];
-            }
-        }
-        
+
+        $recipe = $this->RecipesServices->findById($formData['idrecipes'] ?? null);
+        $comments = $this->CommentServices->getCommentsByIdRecipe($formData['idrecipes'] ?? null);
+
         echo view('recipes/individualrecipes', [
             'formData' => $formData,
             'errors' => $errors,
-            'recipes' => $recipes
+            'recipes' => $recipe,
+            'comments' => $comments,
         ]);
     }
 
-    public function savecomments() {
+
+    public function savecomments()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_start();
             $_SESSION['errors'] = [];
 
-            $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+            $id = filter_input(INPUT_POST, 'id');
+            $id = ($id !== null && $id !== '' && is_numeric($id)) ? (int) $id : null;
             $name = filter_input(INPUT_POST, 'name');
             $description = filter_input(INPUT_POST, 'description');
             $iduser = filter_input(INPUT_POST, 'iduser');
-            $idrecipe = filter_input(INPUT_POST, 'idrecipe');
-            dd($idrecipe);
-            if (!$iduser || !$idrecipe) {
-                $_SESSION['errors']['global'] = "Error en processar el comentari. Usuari o recepta no vàlida.";
+            $idrecipes = filter_input(INPUT_POST, 'idrecipes');
+
+            $_SESSION['formData'] = [
+                'id' => $id,
+                'name' => $name,
+                'description' => $description,
+                'idrecipes' => $idrecipes,
+                'iduser' => $iduser,
+            ];
+            
+            if (empty($iduser)) {
+                $_SESSION['errors']['description'] = "Registra't o iniciar sessió per escriure comentaris.";
                 $this->FormWithErrors($id);
-                exit;
+                return;
             }
             
-            try {
-                $recipefind = $this->RecipesServices->findById($idrecipe);
-                $comments = new Comments($id, $name, $description, $recipefind, $iduser);
-                if ($this->CommentServices->exists(trim($name))) {
-                    $_SESSION['errors']['name'] = "El comentari ja està registrat.";
-                    $this->FormWithErrors($id);
-                    exit;
-                }
-
-                $this->CommentServices->save($comments);
-                header('Location: /recipesindividual');
-                exit;
-
-            } catch (BuildExceptions $e) {
-                $_SESSION['errors'] = json_decode($e->getMessage(), true);
+            if (empty($iduser) || empty($idrecipes)) {
+                $_SESSION['errors']['description'] = "Usuari o recepta no vàldes.";
                 $this->FormWithErrors($id);
+                return;
+            }
+            
+            if (empty($iduser) || empty($idrecipes)) {
+                $_SESSION['errors']['description'] = "Usuari o recepta no vàldes.";
+                $this->FormWithErrors($id);
+                return;
+            }
+            
+            
+            
+            try {
+                $comments = new Comments($id, $name, $description, $idrecipes, $iduser);
+                if ($this->CommentServices->existsIdUser($iduser)) {
+                    $_SESSION['errors']['description'] = "Ja has comentat en aquesta recepta.";
+                    $this->FormWithErrors($id);
+                    return;
+                }
+                
+                if ($this->CommentServices->exists(trim($name))) {
+                    $_SESSION['errors']['name'] = "El comentari ja esta registrat.";
+                    $this->FormWithErrors($id);
+                    return;
+                }
+                
+                $this->CommentServices->save($comments);
+                header('Location: /receptes');
                 exit;
+            } catch (BuildExceptions $e) {
+                $_SESSION['errors']['general'] = $e->getMessage();
+                $this->FormWithErrors($id);
+                return;
             }
         }
     }
