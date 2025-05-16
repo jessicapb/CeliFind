@@ -11,7 +11,8 @@
             <h4 class="font-semibold mb-2">Serveis i Productes</h4>
             <ul class="space-y-1 text-gray-600">
                 <li><a href="/productview">Productes</a></li>
-                <li><a href="#">Receptes</a></li>
+                <li><a href="/receptes">Receptes</a></li>
+                <li><a href="/locationview">Establiments</a></li>
                 <li><a href="/quisom">Qui som</a></li>
                 <li><a href="/informacio">Informació</a></li>
             </ul>
@@ -27,8 +28,8 @@
         <div>
             <h4 class="font-semibold mb-2">Política de privacitat</h4>
             <ul class="space-y-1 text-gray-600">
-                <li><a href="/privacity">Avís Legal</a></li>
-                <li><a href="/politicpriv">Política de Cookies</a></li>
+                <li><a href="#">Avís Legal</a></li>
+                <li><a href="#">Política de Cookies</a></li>
             </ul>
         </div>
 

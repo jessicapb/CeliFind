@@ -55,7 +55,7 @@
             <ul class="breadcrumb flex gap-2 pl-[20px] pt-[20px]">
                 <li><a href="/category" class="breadcrumb-link underline">Gestor categories</a></li>     
                 <li><span class="breadcrumb-separator"> / </span></li>
-                <li><a href="/categoryshowimage" class="breadcrumb-link underline">Veure imatges</a></li>           
+                <li><a href="/categoryshowimage" class="breadcrumb-link underline font-bold">Veure imatges</a></li>           
             </ul>
         </div>
         

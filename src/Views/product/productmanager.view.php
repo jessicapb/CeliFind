@@ -52,7 +52,7 @@
     <section class="bg-slate-100 pb-[20px]">
         <div class="breadcrumb-container">
             <ul class="breadcrumb flex pl-[20px] pt-[20px]">
-                <li><a href="/productmanager" class="breadcrumb-link underline">Gestor productes</a></li>
+                <li><a href="/productmanager" class="breadcrumb-link underline font-bold">Gestor productes</a></li>
             </ul>
         </div>
         

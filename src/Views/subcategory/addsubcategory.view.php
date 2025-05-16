@@ -55,7 +55,7 @@
             <ul class="breadcrumb flex gap-2 pl-[20px] pt-[20px]">
                 <li><a href="/subcategory" class="breadcrumb-link underline">Gestor subcategories</a></li>  
                 <li><span class="breadcrumb-separator"> / </span></li>
-                <li><a href="/addsubcategory" class="breadcrumb-link underline">Afegir subcategoria</a></li>            
+                <li><a href="/addsubcategory" class="breadcrumb-link underline font-bold">Afegir subcategoria</a></li>            
             </ul>
         </div>
         

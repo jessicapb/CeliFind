@@ -53,7 +53,7 @@
     <section class="bg-slate-100 pb-[20px]">
         <div class="breadcrumb-container">
             <ul class="breadcrumb flex gap-2 pl-[20px] pt-[20px]">
-                <li><a href="/subcategory" class="breadcrumb-link underline">Gestor subcategories</a></li>              
+                <li><a href="/subcategory" class="breadcrumb-link underline font-bold">Gestor subcategories</a></li>              
             </ul>
         </div>
         

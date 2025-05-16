@@ -55,7 +55,7 @@
             <ul class="breadcrumb flex gap-2 pl-[20px] pt-[20px]">
                 <li><a href="/recipesmanager" class="breadcrumb-link underline">Gestor receptes</a></li>                
                 <li><span class="breadcrumb-separator"> / </span></li>
-                <li><a href="#" class="breadcrumb-link underline">Actualitzar recepta</a></li>
+                <li><a href="#" class="breadcrumb-link underline font-bold">Actualitzar recepta</a></li>
             </ul>
         </div>
         

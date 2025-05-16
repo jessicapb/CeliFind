@@ -55,7 +55,7 @@
             <ul class="breadcrumb flex gap-2 pl-[20px] pt-[20px]">
                 <li><a href="/establishmentsmanager" class="breadcrumb-link underline">Gestor establiments</a></li>                
                 <li><span class="breadcrumb-separator"> / </span></li>
-                <li><a href="/establishmentsadd" class="breadcrumb-link underline">Afegir establiment</a></li>
+                <li><a href="/establishmentsadd" class="breadcrumb-link underline font-bold">Afegir establiment</a></li>
             </ul>
         </div>
         

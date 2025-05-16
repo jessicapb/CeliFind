@@ -35,18 +35,18 @@ class ProductToSubcategoryBDController{
             $subcategory_id = (int) filter_input(INPUT_POST, 'subcategory');
             
             if (empty($product_id)) {
-                $_SESSION['errors']['product'] = "Producte és obligatori.";
+                $errorporudct = $_SESSION['errors']['product'] = "Producte és obligatori.";
+
             }
             
             if (empty($subcategory_id)) {
-                $_SESSION['errors']['subcategory'] = "Subcategoria és obligatòria.";
+                $errosub = $_SESSION['errors']['subcategory'] = "Subcategoria és obligatòria.";
+
             }
-            
             if (!empty($_SESSION['errors'])) {
                 header('Location: /producttocategory');
                 exit;
             }
-            
             try {
                 $product = $this->productservices->findById($product_id);
                 if ($product === null) {
@@ -66,7 +66,7 @@ class ProductToSubcategoryBDController{
                 header('Location: /productmanager');
             } catch (BuildExceptions $e) {
                 $e->getMessage();
-                $_SESSION['errors'] = $e->getMessage();
+                $_SESSION['errors'] = $e->getErrors();
                 header('Location: /producttocategory');
                 exit;
             }

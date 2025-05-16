@@ -55,7 +55,7 @@
             <ul class="breadcrumb flex gap-2 pl-[20px] pt-[20px]">
                 <li><a href="/usersmanager" class="breadcrumb-link underline">Gestor usuaris</a></li>     
                 <li><span class="breadcrumb-separator"> / </span></li>
-                <li><a href="/useradd" class="breadcrumb-link underline">Afegir administrador</a></li>               
+                <li><a href="/useradd" class="breadcrumb-link underline font-bold">Afegir administrador</a></li>               
             </ul>
         </div>
         
@@ -106,7 +106,7 @@
                 <!-- Button -->
                 <div class="flex flex-col mb-[15px]">
                     <button class="font-inter bg-[#FCB666] text-[#f5f5f5] text-[16px] font-medium p-[8px] rounded-[9px] transition-all hover: focus:bg-[#ef9b3b] focus:shadow-none active:bg-[#ef9b3b] hover:bg-[#ef9b3b] disabled:pointer-events-none disabled:opacity-50">
-                        Afegir usuari
+                        Afegir administrador
                     </button> 
                 </div>
             </div>

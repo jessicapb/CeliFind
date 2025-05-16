@@ -66,16 +66,22 @@ class ProductRepository{
     
     // Select limit
     function showlimit(){
-        $allproducts = [];
-        $sql = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
-                                    SUBSTRING(nutritionalinformation, 1, 12) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state, idsubcategory FROM products");
-        $sql->execute();
-        while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
-            $products = new Product($fila['id'], $fila['name_short'], $fila['description_short'], $fila['ingredients_short'], $nutritionalinformation, $fila['price'], $fila['brand_short'], $fila['image'], $fila['weight'], $fila['state'], $fila['idsubcategory']);
-            $allproducts[] = $products;
+    $allproducts = [];
+    $sql = $this->db->prepare("SELECT id, SUBSTRING(name, 1, 15) AS name_short, SUBSTRING(description, 1, 12) AS description_short, SUBSTRING(ingredients, 1, 13) AS ingredients_short, 
+                                SUBSTRING(nutritionalinformation, 1, 12) AS nutritionalinformation_short, price, SUBSTRING(brand, 1, 12) AS brand_short, image, weight, state, idsubcategory FROM products");
+    $sql->execute();
+    while($fila = $sql->fetch(\PDO::FETCH_ASSOC)){
+        if (empty($fila['nutritionalinformation_short'])) {
+            $nutritionalinformation = null;
+        } else {
+            $nutritionalinformation = $fila['nutritionalinformation_short'];
         }
-        return $allproducts;
+        $products = new Product($fila['id'], $fila['name_short'], $fila['description_short'], $fila['ingredients_short'], $nutritionalinformation, $fila['price'], $fila['brand_short'], $fila['image'], $fila['weight'], $fila['state'], $fila['idsubcategory']);
+        $allproducts[] = $products;
     }
+    return $allproducts;
+}
+
     
     // Select with state 1
     function stateone(){

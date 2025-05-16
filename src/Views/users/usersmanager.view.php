@@ -52,7 +52,7 @@
     <section class="bg-slate-100 pb-[20px]">
         <div class="breadcrumb-container">
             <ul class="breadcrumb flex gap-2 pl-[20px] pt-[20px]">
-                <li><a href="/usersmanager" class="breadcrumb-link underline">Gestor usuaris</a></li>            
+                <li><a href="/usersmanager" class="breadcrumb-link underline font-bold">Gestor usuaris</a></li>            
             </ul>
         </div>
         

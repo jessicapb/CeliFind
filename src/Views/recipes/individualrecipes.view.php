@@ -86,6 +86,8 @@
             <ul class="breadcrumb flex gap-2">
                 <li><a href="/" class="breadcrumb-link underline">Home</a></li>
                 <li><span class="breadcrumb-separator"> / </span></li>
+                <li><a href="/receptes" class="breadcrumb-link underline">Receptes</a></li>
+                <li><span class="breadcrumb-separator"> / </span></li>
                 <li>
                     <form action="/recipesindividual" method="POST">
                         <input type="hidden" name="id" value="<?php echo $recipes->getId(); ?>">

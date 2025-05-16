@@ -55,7 +55,7 @@
             <ul class="breadcrumb flex gap-2 pl-[20px] pt-[20px]">
                 <li><a href="/productmanager" class="breadcrumb-link underline">Gestor productes</a></li>
                 <li><span class="breadcrumb-separator"> / </span></li>
-                <li><a href="/producttocategory" class="breadcrumb-link underline">Assignar producte a subcategoria</a></li>
+                <li><a href="/producttocategory" class="breadcrumb-link underline font-bold">Assignar producte a subcategoria</a></li>
             </ul>
         </div>
         
@@ -97,7 +97,6 @@
     
     <!-- Start the session to catch the errors -->
     <?php
-        session_start();
         if (!empty($_SESSION['errors'])) {
             $serverErrors = $_SESSION['errors'];
             unset($_SESSION['errors']);
@@ -107,7 +106,7 @@
     ?>
     
     <script>
-        var serverErrors = <?php echo json_encode($serverErrors); ?>;
+        var serverErrors = <?php echo json_encode($serverErrors);?>;
     </script>
     
     <!-- File errors -->

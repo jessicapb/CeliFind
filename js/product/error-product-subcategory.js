@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof serverErrors !== 'undefined' && serverErrors) {
+        console.log('serverErrors:', serverErrors);
+
         if (serverErrors) {
             let errorProduct = document.getElementById('error-product');
             let errorSubcategory = document.getElementById('error-subcategory');
