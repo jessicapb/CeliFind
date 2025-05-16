@@ -56,15 +56,16 @@ class CategoryUpdateBDController{
             ];
             
             if (!empty($_FILES['image']['name'])) {
-                $folder = '/home/linux/CeliFind/img/categoria/imagesbd/';
-                $fileName = $_FILES['image']['name'];
-                $destination = $folder . $fileName;
+                $folder = '/img/categoria/imagesbd/';
+                $fileName = basename($_FILES['image']['name']);
+                $destination = $_SERVER['DOCUMENT_ROOT'] . $folder . $fileName;
+                
                 if (move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
-                    $imageData = '/img/categoria/imagesbd/' . $fileName;
+                    $imageData = $folder . $fileName;
                 } else {
-                    $_SESSION['errors']['image'] = 'Error al penjar la imatge';
-                    $this->FormWithErrors($id);
-                    return;
+                    $_SESSION['errors']['image'] = "No s'ha pogut guardar la imatge.";
+                    header('Location: /categoryadd');
+                    exit;
                 }
             } else {
                 $imageData = '';
