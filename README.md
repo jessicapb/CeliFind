@@ -2,7 +2,7 @@
 
 <div display="flex">
   <img src="https://img.shields.io/badge/release date-march-green">
-  <img src="https://img.shields.io/badge/status-in%20development-blue">
+  <img src="https://img.shields.io/badge/status-in production-blue">
 </div>
 
 <h2>📖 Description of the project</h2>
