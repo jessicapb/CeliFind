@@ -9,7 +9,7 @@
 <p>CeliFind is a page for celiacs where we highlight restaurants, products and recipes. It also has an information section and who we are.</p>
 
 <h2>📁 Project access</h2>
-<p></p>
+<a href="https://nervous-visvesvaraya.195-20-230-201.plesk.page" decoration="none">Access to the page</a>
 
 <h2>💻 Technologies used</h2>
 • PHP
