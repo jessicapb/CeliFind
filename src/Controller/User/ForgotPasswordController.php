@@ -38,10 +38,10 @@ class ForgotPasswordController
         $expiry = date('Y-m-d H:i:s', strtotime('+1 hour'));
         $this->userRepository->setResetToken($email, $token, $expiry);
         
-            if($SERVER_NAME == "localhost"){
+            if($_SERVER['SERVER_NAME'] == "localhost"){
                 $resetLink = "http://localhost:8000/resetpassword?token=$token";
             }else{
-                $resetLink = "https://celifind.com/resetpassword?token=$token";
+                $resetLink = "https://nervous-visvesvaraya.195-20-230-201.plesk.page/resetpassword?token=$token";
             }
         //$resetLink =  . "/resetpassword?token=$token";
         $body = '<div style="font-family: Arial, sans-serif; background-color: #f9fafb; text-wrap: pretty; padding: 32px; max-width: 480px; margin: 0 auto; border-radius: 18px; border: 2px solid #fcb666;">

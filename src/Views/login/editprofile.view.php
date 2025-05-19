@@ -20,11 +20,11 @@
             <a href="/">
                 <img class="w-32" src="../img/logo/logo.png" alt="">
             </a>
-            <div class="flex">
-                <ul class="list-none p-4m hidden lg:flex items-center">
-                    <li class="ml-8"><a href="/productview">Productes</a></li>
-                    <li class="ml-8 mr-[15px]"><a href="/receptes">Receptes</a></li>
-                    
+            <div class="flex items-center">
+                <ul class="list-none flex p-4 hidden lg:flex items-center md:flex items-center">
+                        <li class="list-none ml-8 font-bold"><a href="/productview">Productes</a></li>
+                        <li class="list-none ml-8"><a href="/receptes">Receptes</a></li>
+                        <li class="list-none ml-8"><a href="/locationview">Establiments</a></li>
                 </ul>
                 <div class="relative inline-block text-left">
                     <?php if (isset($_SESSION['user']) && $_SESSION['user']['status'] == 1) : ?>
